@@ -1,0 +1,8 @@
+\vspace {12pt}\noindent APPENDIX \par 
+\contentsline {chapter}{\hspace {2em} A. \uppercase {Abbreviations and Notation} }{1}{appendix.A}% 
+\contentsline {section}{\hspace {3em}A.1 Abbreviations}{1}{section.A.1}% 
+\contentsline {section}{\hspace {3em}A.2 Mathematic Notation}{1}{section.A.2}% 
+\contentsline {subsection}{\hspace {5em}A.2.1 General Notation}{1}{subsection.A.2.1}% 
+\contentsline {subsection}{\hspace {5em}A.2.2 Sets}{2}{subsection.A.2.2}% 
+\contentsline {subsection}{\hspace {5em}A.2.3 Statistical Distributions}{2}{subsection.A.2.3}% 
+\contentsline {chapter}{\hspace {2em} B. \uppercase {Appendix Header}}{3}{appendix.B}% 
