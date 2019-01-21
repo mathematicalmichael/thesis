@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.13)  13 JAN 2019 18:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.13)  21 JAN 2019 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1034,22 +1034,11 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
 (lastpage)             ! on input line 79.
 
-! Undefined control sequence.
-<argument> \@authorFirst {}\ \@authorMiddle 
-                                            {}\ \@authorLast {}
-l.79 \begin{document}
-                     
-? 
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-! Undefined control sequence.
-\makecommitteepage ...uthorFirst \ \@authorMiddle 
-                                                  \ \@authorLast \\ has been...
-l.79 \begin{document}
-                     
-? 
 LaTeX Font Info:    Try loading font information for U+msa on input line 79.
+
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1062,14 +1051,8 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 79.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) [2]
-! Undefined control sequence.
-\makeprefacepage ...authorFirst {} \@authorMiddle 
-                                                  {} (Ph.D., \@program ) \\ ...
-l.79 \begin{document}
-                     
-? 
-[3] [4] [5]
+) [2] [3]
+[4] [5]
 \tf@toc=\write4
 \openout4 = `dissertation.toc'.
 
@@ -1126,7 +1109,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 162.
 Here is how much of TeX's memory you used:
  21121 strings out of 492616
  356799 string characters out of 6128967
- 708951 words of memory out of 5000000
+ 708953 words of memory out of 5000000
  24766 multiletter control sequences out of 15000+600000
  539589 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
