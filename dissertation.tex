@@ -54,18 +54,18 @@ Dr.~Jan Mandel \\
 Dr.~Jimmy Lee Kim 
 }
 
-% acknowledgement - this is optional
-\acknowledgements{ 
-  Thank you to someone for something.
-  \lipsum[1]
-}
-
 % dedication - this is also optional
-\dedication{For a super special and Imporant person or persons.}
+\dedication{To Jacob and Anna Ratman.}
 
 % preface
 \preface{
-  \lipsum[3]
+\input{abstract.tex}
+}
+
+
+% acknowledgement - this is optional
+\acknowledgements{ 
+  Thank you to Troy Butler, whose patient guidance got me through this grueling process.
 }
 
 \usepackage{array}
@@ -77,6 +77,7 @@ Dr.~Jimmy Lee Kim
 % ---------------------------------------------------------------------------- %
 % Begin Document 
 \begin{document}
+\input{outline.tex}
 
 %\input{chapter01.tex}
 %\input{chapter02.tex}
@@ -104,17 +105,15 @@ Dr.~Jimmy Lee Kim
 \section{Abbreviations}
 
 \begin{description}[leftmargin=!,labelwidth=0.5in,font=\normalfont]
-  \item[CNR]  Control net reduction.
-  \item[CPR]  Control polygon reduction.
-  \item[CRAN] The Comprehensive \proglang{R} Archive Network.
-  \item[DHS]  Daily Hormone Study, a sub-study of SWAN.
-  \item[DLT]  Day of Luteal Transition.
-  \item[PDG]  Prognanediol-glucuronid, is the urine metabolite of progesterone.
-  \item[SWAN] The Study of Women's Health Across the Nation.  
-  \item[TTM]  Time-to-menopause
+	\item 
 \end{description}
 
-\section{Mathematic Notation}
+
+\section{Mathematical Notation}
+\begin{description}[leftmargin=!,labelwidth=0.5in,font=\normalfont]
+	\item 
+\end{description}
+
 
 \subsection{General Notation}
 
@@ -131,8 +130,8 @@ Dr.~Jimmy Lee Kim
   \item[$\bs{1}_n$] an column vector of $n$ $1$s
   \item[$\bs{I}$] the identity matrix
   \item[$\bs{I}_n$] the $n \times n$ identity matrix
-  \item[$\bs{X}^{-1}$] the inverse matrix, that is, $\bs{X}^{-1} \bs{X} = \bs{I}.$
-  \item[$\bs{X}^{T}$] transpose
+  \item[$\bs{X}^{-1}$] the inverse matrix, i.e., the operator satisfying $\bs{X}^{-1} \bs{X} = \bs{X} \bs{X}^{-1} = \bs{I}.$
+  \item[$\bs{X}^{T}$] transpose, i.e. the operator satisfying $T_{i,j} = T_{j, i} \; \forall \; i,j \in \mathbb{N}$
   \item[$\otimes$] Kronecker product
   \item[$\odot$] element-wise multiplication
 \end{description}
