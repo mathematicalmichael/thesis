@@ -6,10 +6,33 @@
 \section{Set-Based Inversion for Measures}
 
 \
-\section{Sample-Based Inversion for Measures}
+\section{Sample-Based Inversion for Measures \label{sec:ch02:sample}}
 
 \
 \section{Software Contributions}
+
+\subsection{Background and Motivation}
+The open-source software package BET was developed actively from 2012-2015 as part of research performed under grant [TK grant-DOE].
+It was originally written in Python 2.7 and is administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github]. 
+The purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems. 
+
+In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several submodules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]). 
+Since the last major release [TK - cite latest release], the Python community announced the end of long-term support for Python 2 [TK - cite announcement]. 
+Several of the dependendencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
+
+The work summarized in Section~\ref{sec:ch02:sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
+Since that code was used for many of the results that constituted the preliminary results for this work, it made very litle sense to re-implement them in Python 2 for BET given the recent trends in community development. 
+With funding made available through NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice. 
+
+The upgrade to Python 3.6 began in January 2019 as a first step to incorporate the new sample-based method into BET.
+Major release [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version. 
+Future installation specifications would not limit the versions of some core dependencies in order to provide backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}) since this would likely downgrade previously installed software for end-users. 
+
+Since unit-testing with {\tt nose} was always a priority for the developers of BET, tests for plotting were removed from the release since these were most likely to break with upgrades to {\tt matplotlib}.
+Basic plotting functionality is demonstrated in iPython notebooks, which have seen an exponential growth rate on GitHub, which can be edited by the end-user to work with different plotting library versions and backends.
+This is in contrast to the previous releases, which packages plotting as a sub-module that was subject to passing tests.   
+
+
 
 
 \
