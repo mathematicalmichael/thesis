@@ -13,6 +13,5 @@ dissertation-coadvisors.pdf: dissertation-coadvisors.tex $(CHAPTERS) $(APPENDIX)
 
 clean:
 	latexmk -c dissertation.tex 
-	latexmk -c dissertation-coadvisors.tex 
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
