@@ -1,44 +1,34 @@
 \chapter{\uppercase{Second Publishable Paper} \label{chapter:03}}
 
-\section{Summary}
-Abstract from second publishable paper.
+\section{Skewness and Information Content}
+Review.
 
-\section{Intro}
+\
+\section{Skewness and Accuracy of Set-Based Inversion}
 
-Hey, remember in Chapter~\ref{chapter:02} when I said you'll have to repeat
-yourself?  Well, \eqref{eq:chap2_example_eq} and \eqref{eq:chap3_example_eq}
-should look the same, but have different \LaTeX\ labels an be referenced
-correctly.
 
-\begin{equation}
-\label{eq:chap3_example_eq}
-  \omega_{jk}\left(x\right) =
-  \begin{cases}
-  \hfil 0                                        & \hfil x \leq \xi_{j} \\
-  \frac{x - \xi_{j}} {\xi_{j + k - 1} - \xi_{j}} & \xi_{j} < x < \xi_{j+ k - 1} \\
-  \hfil 1                                        & \hfil \xi_{j + k - 1} \leq x
-  \end{cases}.
-\end{equation}
+\
+\section{Skewness and Accuracy of Sample-Based Inversion}
 
-\section{Details}
-\lipsum
- 
-\begin{figure}
-\centering
-  \begin{subfigure}[t]{0.48\linewidth}
-  \includegraphics[width=\linewidth]{figures/c}
-  \caption{\label{fig:graphic_c}}
-  \end{subfigure}
-  ~
-  \begin{subfigure}[t]{0.48\linewidth}
-  \includegraphics[width=\linewidth]{figures/d}
-  \caption{\label{fig:graphic_d}}
-  \end{subfigure}
-  \caption[Another short caption for List of Figures]{Long Caption with lots of details
-  \ldots \label{fig:chap3_graphic}}
-\end{figure}
+How does the new approach compare? What role does the KDE play in the error?
+Focus on linear problems. One or two examples (perhaps use that skew-map with 1 and 2 and 4).
 
-\section{Discussion}
-\lipsum
+\
+\section{Software Contributions}
 
+Talk about the BET module that computes metrics.
+Discuss testing, show sample of usage (disconnected from skewness, high-level).
+
+\
+\section{Numerical Results and Analysis}
+
+Pick an ODE problem and show how the results look like (assimilating as many data points as inputs, if using time-series model). 
+
+Our goal in this section is to provide a set of examples that demonstrate these two approaches, their ``solutions.''
+Exponential Decay, uncertain initial condition and rate. Fix two measurement times. No OED discussion.
+
+Show visualization of solution on voronoi-mesh vs. 2D density. 
+
+This is going to set up the stage nicely.
+What if we had more measurements to incorporate? Discuss how the distributions we imposed as our observed were kind of a little disingenuous since they were based on single measurements. Well, rather, they represent the answer to a different question.
 

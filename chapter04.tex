@@ -1,16 +1,30 @@
-\chapter{\uppercase{Third Publishable Paper} \label{chapter:04}}
+\chapter{\uppercase{Data-Driven Maps and Consistent Inversion} \label{chapter:04}}
 
-\section{Summary}
-You can do this\ldots
+Going off the previous chapter, we may be interested in a different question, and may be in situations where we can collect data easily (or it has already been collected for us).
+What are the other types of questions we can ask? Parameter Identification. 
 
-\section{Details}
-\lipsum[1]
+We focus on extending the DCI framework to situations where we want to answer a different question.
 
-\subsection{Details Part 1}
-\lipsum
+\
+\section{A Generalized Stochastic Map Framework}
 
-\subsection{Details Part 2}
-\lipsum
+Set stage with the work Troy has been doing lately.
 
-\section{Discussion}
-\lipsum
+\
+\section{Data-Driven Maps}
+
+More material from the paper, including sensitivity analysis with number of data points.
+
+\
+\section{Software Contributions}
+
+Module into BET (started off as CBayes, make footnote or include in appendix) that transforms time-series into QoI and performs data-consistent inversion.
+
+\
+\section{Numerical Results and Analysis}
+
+Take the exponential decay problem and show what happens as we increase the number of data points.
+
+First, in fixed-time window (say, [1,2]), then at fixed frequency, go up to 100 measurements. Show results.
+
+Show a problem with repeated observations (so, slightly different context, but similar question, and now in a position to compare the measure and density approaches). Use example that was presented at SIAM AN18, except re-formulated as measuring the weight and volume of a liquid. 

@@ -1,12 +1,10 @@
 % ---------------------------------------------------------------------------- %
 % file: disseration-coadvisors.tex
-% author: Peter DeWitt
+% author: Michael Pilosov
 %
 % LaTeX based on work by Sarah Kreidler and Peter DeWitt
 % (github.com/dewittpe/ucd-dissertation-template)
 %
-% This is an example with Co-Advisors.  See dissertation.tex if you have a
-% single advisor.
 %
 % ---------------------------------------------------------------------------- %
 
@@ -21,10 +19,8 @@
 \renewcommand{\floatpagefraction}{0.7}%
 
 % Draft and Time stamp in the header and footer.
-% \usepackage{fancyhdr}
-% \usepackage{datetime}
-% \lhead{\color{red} DRAFT: \today; \currenttime}
-% \rfoot{\color{red} DRAFT: \today; \currenttime}
+\usepackage{fancyhdr}
+\usepackage{datetime}
 
 % \doublespacing
    
@@ -77,13 +73,16 @@ Dr.~Jimmy Lee Kim
 % ---------------------------------------------------------------------------- %
 % Begin Document 
 \begin{document}
+\chead{\color{red} DRAFT. Last compiled at \currenttime \ on \today }
+\cfoot{\color{red} DRAFT. Last compiled at \currenttime \ on \today}
+
 \input{outline.tex}
 
-%\input{chapter01.tex}
-%\input{chapter02.tex}
-%\input{chapter03.tex}
-%\input{chapter04.tex}
-%\input{chapter05.tex}
+\input{chapter01.tex}
+\input{chapter02.tex}
+\input{chapter03.tex}
+\input{chapter04.tex}
+\input{chapter05.tex}
 
 % ---------------------------------------------------------------------------- %
 \renewcommand\bibname{REFERENCES}
@@ -104,7 +103,7 @@ Dr.~Jimmy Lee Kim
 
 % ---------------------------------------------------------------------------- %
 % additional appendices
-\input{appendix01}
+\input{appendix01.tex}
 
 % ---------------------------------------------------------------------------- %
 \end{document}
