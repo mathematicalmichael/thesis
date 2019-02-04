@@ -23,18 +23,42 @@
 % Math Operators
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
-\DeclareMathOperator{\logit}{logit}
-\DeclareMathOperator{\invlogit}{logit^{-1}}
-\DeclareMathOperator{\E}{E}
 
-% commands defined for Journal of Statistical Software, if not already defined
-\makeatletter
-\@ifundefined{proglang}{%
-  \let\proglang=\textsf
-  \newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
-  \newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
-  \def\@codex#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
-}
-\makeatother
+% Standard Probability
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator*{\P}{\mathbb{P}}
+
+% Data-Consistent Inversion Framework
+
+
+% Parameter Space
+
+\DeclareMathOperator*{\param}{\lambda}
+\DeclareMathOperator*{\pspace}{\Lambda}
+\newcommand{\pmeas}{\mu_{\pspace}}
+\newcommand{\pborel}{\mathcal{B}_{\pspace}}
+
+\DeclareMathOperator*{\initialP}{\P_{\text{in}}}
+\DeclareMathOperator*{\initial}{\pi_{\text{in}}}
+\DeclareMathOperator*{\updatedP}{\P_{\text{up}}}
+\DeclareMathOperator*{\updated}{\pi_{\text{up}}}
+
+\DeclareMathOperator*{\data}{\boldsymbol{d}}
+\DeclareMathOperator*{\dspace}{\mathcal{D}}
+\newcommand{\dmeas}{\mu_{\dspace}}
+\newcommand{\dborel}{\mathcal{B}_{\dspace}}
+
+\DeclareMathOperator*{\q}{Q\left (\param \right )}
+\DeclareMathOperator*{\M}{\mathcal{M}}
+
+\DeclareMathOperator*{\obsP}{\P_{\text{ob}}}
+\DeclareMathOperator*{\obs}{\pi_{\text{ob}}}
+\DeclareMathOperator*{\predP}{\P_{\text{pr}}}
+\DeclareMathOperator*{\pred}{\pi_{\text{pr}}}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 
