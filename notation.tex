@@ -1,4 +1,4 @@
-\chapter{\uppercase{Abbreviations and Notation} \label{appendix-notation}}
+\chapter*{\uppercase{Abbreviations and Notation} \label{appendix-notation}}
 
 \section{Abbreviations}
 
@@ -15,6 +15,7 @@
 
 \subsection{General Notation}
 
+% EDIT BELOW AND REMOVE WHAT YOU DO NOT NEED
 \begin{description}[leftmargin=!, labelwidth=0.7in]
   \item[$x$]             italicized, Roman or Greek letter, denotes a scalar values 
   \item[$\bs{x}$]        italicized, bold, lowercase Roman or Greek letter, denotes a column vector or set.
@@ -50,3 +51,15 @@
   \item[$\mathcal{N} \left( \bs{\mu}, \bs{\Sigma} \right)$] the multi-variable Gaussian distribution with mean vector $\bs{\mu}$ and variance-covariance matrix $\bs{\Sigma}.$
   \item[$\phi(x)$] The standard Gaussian density function.
 \end{description}
+
+\subsection{Specialized Notation}
+This notation refers to values defined explicitly in the context of this thesis.
+
+\begin{itemize}
+\itembox{$\M$} A model that takes input parameters to an (observable) state space.
+\itembox{$u$} An observable state space from which data is to be collected.
+\itembox{$\param$} A (model) parameter into model $\M$.
+\itembox{$\obs$} A Parameter-to-Observables (PtO) map, denoted $\obs( u\lam )$ or $\obs\lam$, each component of which is a functional on the observable state, $\obs_i: u\lam \to \RR$. This map represents performing an individual experiment, which may consist of one or more observations (either in space or time). Arranging observational data into a vector defines the map.
+\itembox{$\qoi$} A Quantity of Interest (QoI) map, denoted $\qoi$, which acts on observable data to transform the data into a scalar or vector quantity. For example, it may be the average of measurements encompassed in $\obs$. Technically, this map encompasses the following set of compositions: $Q(\obs(u\lam))$.
+\itembox{$\data$} Data. This symbol is used to represent the output of a QoI map, i.e. $\qoi = \data$.
+\end{itemize}

@@ -56,6 +56,8 @@ Dr.~Jimmy Lee Kim
 % preface
 \preface{
 \input{abstract.tex}
+\input{notation.tex}
+\input{outline.tex}
 }
 
 
@@ -64,6 +66,7 @@ Dr.~Jimmy Lee Kim
   Thank you to Troy Butler, whose patient guidance got me through this grueling process.
 }
 
+\usepackage{mathtools} % for \xmapsto
 \usepackage{array}
 \renewcommand\arraystretch{0.5}
 
@@ -75,8 +78,6 @@ Dr.~Jimmy Lee Kim
 \begin{document}
 \chead{\color{red} DRAFT. Last compiled at \currenttime \ on \today }
 \cfoot{\color{red} DRAFT. Last compiled at \currenttime \ on \today}
-
-\input{outline.tex}
 
 \input{chapter01.tex}
 \input{chapter02.tex}
@@ -90,7 +91,7 @@ Dr.~Jimmy Lee Kim
 
 \nocite{*}
 \bibliographystyle{ucdDissertation}
-\bibliography{references,code-references}
+\bibliography{references,references-code}
 
 \doublespacing
 

@@ -7,6 +7,13 @@ We focus on extending the DCI framework to situations where we want to answer a 
 
 \
 \section{A Generalized Stochastic Map Framework}
+%% EDIT THE FOLLOWING BELOW!
+Such observable values of $u\lam$ are mathematically modeled by functionals of the solution, denoted $\obs_i: u\lam \to \RR$.
+The collection of such functionals into a vector defines a {\em Parameter-to-Observables} (PtO) map, denoted $\obs( u\lam )$ or $\obs\lam\in\RS$ for short. 
+
+The observable data is then naturally denoted as $\obs(\pspace)$, and any subsequent transformation of this vector (e.g. averaging, sub-selecting) is captured by the definition of a {\em Quantity of Interest} (QoI) map, denoted $\qoi$.
+
+Since the solution to the model, $u\lam$, depends on $\param$, so do the QoI, and we adopt the notation that $$\qlam := \qoi(\obs(u\lam))$$ to make this dependence on model parameters explicit.
 
 Set stage with the work Troy has been doing lately.
 

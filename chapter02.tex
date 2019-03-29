@@ -2,22 +2,130 @@
 
 \section{Notation, Terminology, and Assumptions}
 
-\begin{itemize}
-\itembox{\M} A model that takes input parameters to an (observable) state space
-\itembox{\p} (model) parameter
-\itembox{\d} data, Quantity of Interest $\q$
+We begin by assuming that a (deterministic) model, denoted by $$\M (u, \param) = 0,$$ is specified to relate observable state variables $u$ to model inputs ({\em parameters}) denoted by the vector $\param\in\RP$.
+The components $\param_i$ of $\param$ may include parameters in either the model operator (e.g. a diffusion coefficient) or input data (e.g. the frequency of a sinusoidal source, initial, or boundary information).
+We allow $\pspace$ to denote the set of all possible input parameters.
+The solution operator of the model $\M$ then defines a map taking $\param \in \pspace$ to a solution denoted $u\lam$ which is assumed to be unique. 
 
-\end{itemize}
+However, in real experimental settings we are often unable to observe $u\lam$, instead having access to some finite set of observable scalar quantities. 
+For example, in experiments involving the diffusion of heat, we can typically only record the temperature at some small number of pre-specified points in space-time where measurement devices can be positioned.
+
+Such observable values of $u\lam$ are mathematically modeled by functionals of the solution, denoted $\qoi_i: u\lam \to \RR$.
+The collection of such functionals into a vector defines a {\em Quantity of Interest} (QoI) map. 
+Since the solution to the model depends on $\param$, so do the QoI, which motivates the adoption of notation 
+$$\qlam := \qoi( u\lam ) \in\RD,$$
+to make this dependence on model parameters explicit.
+Furthermore, this convention captures a realistic limitation of an experimental setting, where we may be able to control $\param$ in order to observe $\qoi\lam$, but lack the ability to observe $u\lam$ directly.
+The outputs of the QoI map $\qoi = \data$ are what we refer to as the \emph{data}. Similarly, the range of the QoI defines the \emph{data space} $\dspace$, i.e. $$\dspace = \qoi(\pspace).$$
+
+We let $\qspace$ denote the set of possible QoI maps for which it is possible to collect experimental data.
+For example, suppose we may record only a single temperature measurement at any of ten locations in space-time.
+Then $\qspace$ is defined by ten possible QoI maps. 
+If we can record any two such measurements, then $\qspace$ is defined by $\binom{10}{2} = 45$ possible maps.
+Note that $\qspace$ could easily be uncountable, for example if we were not limited to the spatial locations (or time) at which we could record temperature measurements.
+However, for simplicity, we will only discuss problems where $\qspace$ is finite.
+In the event that we are comparing maps, we use $\dspace_{\qoi}$ to emphasize that the data space depends on the choice of QoI map $\qoi$, otherwise we drop the subscript when the context is clear.
 
 \begin{equation}
-\dup = \din \frac{\dob}{\duf}
+\updatedP = \initialP \frac{\observedP}{\predictedP}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\dci\\
+\dciP\\
+\dciD
+\end{split}
 \end{equation}
 
 \
 \section{Set-Based Inversion for Measures}
 
+To properly summarize the stochastic inverse problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme}\----borrowed from \cite{BM17}\----in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
+For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, \cite{BET+14}, and \cite{BM17}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+\begin{equation}
+\underbrace{
+\underbrace{
+\overbrace{ 
+ \Pspace \xmapsto{\  Q \ } \Dspace
+  \xmapsto{\ \PP_\dspace \ } (\dspace, \dborel, \PP_\dspace)
+ }^{
+ \text{(S1): Stochastic Inverse Problem (SIP)}
+ }
+ \xmapsto{\ Q^{-1} \ } (\pspace, \mathcal{C}_\pspace, \PP_\pspace)
+ }_{
+ \text{(S2): Solution to SIP Satisfying Eq. \eqref{eq:dataspace_pushforward_measure}}} 
+ \xmapsto{\ \set{\PP_\ell}_{\ell\in\mathcal{L}} \ } (\pspace, \pborel, \PP_\pspace)
+ }
+ _{
+ \text{(S3): Unique Solution to SIP by Eq.~\eqref{eq:disintegration_measure} and Ansatz}
+ }
+\end{equation}
+\caption{The first step (S1) defines (i)~the formulation of the SIP by specification of the model, (ii)~the measure spaces of parameters and (iii)~observable outputs, and (iv)~the probability measure on the latter. The second step (S2) defines a unique solution to the SIP on the space $\pspace$ equipped with the contour $\sa$ $\mathcal{C}_\pspace$ using the definition of the push-forward measure. In (S3), the Disintegration Theorem and and Ansatz are applied to define a unique solution on the space of interest $(\pspace, \pborel)$ equipped with a probability measure $\PP_\pspace$.}
+\label{fig:scheme}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+The initial measure/probability spaces involved in the formulation of the SIP are summarized in step (S1) of Fig.~\ref{fig:scheme}. 
+We assume $\pspace\subset \RR^n$ is equipped a (volume) measure, $\pmeas$, on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
+Assume that $Q$ is at least piecewise-differentiable, which implies the measurability of the QoI map, and that the space $\dspace$ induced by $Q$ is equipped with the Borel $\sa$ $\dborel$.
+The ``push-forward'' measure $\dmeas$ on ${(\dspace, \dborel)}$ is defined as 
+
+\begin{equation}\label{eq:dataspace_pushforward_measure}
+\dmeas (A) = \int_A \, d\dmeas = \int_{Q^{-1}(A)} \, d\pmeas = \pmeas \left (Q^{-1}(A) \right ) \quad \forall \;  A\in\dborel
+\end{equation}
+
+This defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
+
+Specifying a probability measure $\PP_\dspace$ on ${(\dspace, \dborel)}$ to model the uncertainty in data\----the final step in (S1)\----leads to the following SIP: determine a probability measure $\PP_\pspace$ on ${(\pspace, \pborel)}$ such that the push-forward measure of $\PP_\pspace$ matches $\PP_\dspace$. 
+In other words, determine a $P_\pspace$ satisfying
+\begin{equation}\label{eq:inverse_measure}
+P_\pspace \left ( Q^{-1}(E)\right ) = P_{\dspace}(E) \; \forall \, E \in \dborel.
+\end{equation}
+
+We call any such solution $\PP_\pspace$ to Eq.~\eqref{eq:inverse_measure} a (measure-theoretic) solution to the SIP.
+This equation implies that any solution is uniquely determined on the induced contour $\sa$ 
+\begin{equation}\label{eq:contour_sa}
+\CC_\pspace = \set{Q^{-1}(E) : E \in \dborel } \subset \pborel,
+\end{equation}
+This is summarized as step (S2) of Fig.~\ref{fig:scheme}. 
+
+
+%However, for sets $A \in \BBB_\Lambda \setminus \CC_\Lambda$, more information is required than is provided in Eq.~\eqref{eq:inverse_measure} in order to determine $P_\Lambda (A)$. 
+%By the Implicit Function Theorem, if $Q \in C^1 (\Lambda)$ and we let $q\in\DDD$ be a fixed datum, $Q^{-1}(q)$ exists as a $(n-d)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}. 
+%These generalized contours can be indexed by a manifold (possibly piecewise-defined) of dimension $d$ called a \emph{transverse parameterization} that intersects each contour once and only once. 
+%Transverse parameterizations exist but are in general not unique \cite{BET+14}.
+%We let $\LL$ denote any particular transverse parameterization. 
+%Each $\ell\in\LL$ corresponds to a unique generalized contour $\CC_\ell \in \Lambda$ and each point $\lambda \in \Lambda$ belongs to a unique $\CC_\ell \in \Lambda$.
+%Thus, a transverse parameterization defines a bijection between the manifold $\LL$ and the partitioning of $\Lambda$ into generalized contours. 
+%
+%The induced $\sa$ $\CC_\Lambda$ and this bijection can then be used to define the measurable space $(\LL, \BBB_\LL)$. 
+%We denote the projection map $\pi_\LL :\Lambda \to \LL$, and $\sett{\CC_\ell}{\ell\in\LL}{}$ denotes the family of generalized contours indexed by $\LL$.
+%It is then possible to define the associated family of measurable spaces $\sett{\left ( \CC_\ell, \BBB_{\CC_\ell} \right )}{\ell\in\LL}{}$. 
+%A Disintegration Theorem (cite) is then leveraged to define a unique decomposition for any $P_\Lambda$ defined on $(\Lambda, \BBB_\Lambda)$ as a (marginal) probability measure $P_\LL$ on $(\LL, \BBB_\LL)$ and a family of (conditional) probability measures $\sett{P_\ell}{\ell\in\LL}{}$ on $\sett{\left ( \CC_\ell, \BBB_{\CC_\ell} \right )}{\ell\in\LL}{}$ such that 
+%\begin{equation}\label{eq:disintegration_measure}
+%P_\Lambda (A) = \int_{\pi_\LL(A)} \left ( \int_{\pi_{\LL}^{-1} (\ell) \cap A}\, dP_\ell(\lambda) \right )\, dP_\LL (\ell), \; \forall \; A \in \BBB_\Lambda 
+%\end{equation}
+%
+%The uniqueness of a probability measure $P_\Lambda$ on ${(\Lambda, \CC_\Lambda)}$ satisfying Eq.~\eqref{eq:inverse_measure} implies that the marginal $P_\LL$ is unique for any particular specification of $P_\DDD$ on ${(\DDD, \BBB_\DDD)}$. 
+%The disintegration of Eq.~\eqref{eq:disintegration_measure} implies that a specification of a family of conditional probability measures $\sett{P_\ell}{\ell\in\LL}{}$ gives us a unique solution to the SIP on ${(\CC_\ell, \BBB_{\CC_\ell})}$. 
+%However, the conditional measures cannot be determined by observations of $q\in \DDD$. 
+%We follow the work of \cite{BET+14} and adopt the \emph{standard ansatz} determined by the disintegration of the volume measure $\mu_\Lambda$ to compute probabilities of events contained within contour events. 
+%The standard ansatz is given by 
+%\begin{equation}\label{eq:standard_ansatz}
+%P_\ell = \mu_{\CC_\ell} / \mu_{\CC_\ell}(\CC_\ell), \; \forall \; \ell \in \LL,
+%\end{equation}
+%where $\mu_{\CC_\ell}$ is the disintegrated volume measure on generalized contour $\CC_\ell$.
+%Thus, we have defined a unique solution to the SIP on ${(\Lambda, \BBB_\Lambda)}$, completing step (S3) in Fig.~\ref{fig:scheme}. 
+
+
 \
-\section{Sample-Based Inversion for Measures \label{sec:ch02:sample}}
+\section{Sample-Based Inversion for Measures}\label{sec:ch02-sample}
+[TK - Words]
 
 \
 \section{Software Contributions}
@@ -27,21 +135,20 @@ The open-source software package BET was developed actively from 2012-2015 as pa
 It was originally written in Python 2.7 and is administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github]. 
 The purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems. 
 
-In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several submodules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]). 
+In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]). 
 Since the last major release [TK - cite latest release], the Python community announced the end of long-term support for Python 2 [TK - cite announcement]. 
-Several of the dependendencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
+Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
 
-The work summarized in Section~\ref{sec:ch02:sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
+The work summarized in Section~\ref{sec:ch02-sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
 Since that code was used for many of the results that constituted the preliminary results for this work, it made very litle sense to re-implement them in Python 2 for BET given the recent trends in community development. 
 With funding made available through NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice. 
 
-The upgrade to Python 3.6 began in January 2019 as a first step to incorporate the new sample-based method into BET.
-Major release [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version. 
+The upgrade to Python 3.6 began in January 2019 as a first step to incorporate the new sample-based method into BET. 
+It was completed in late February. 
+Major release 2.1.0 [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version. 
 Future installation specifications would not limit the versions of some core dependencies in order to provide backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}) since this would likely downgrade previously installed software for end-users. 
 
-Since unit-testing with {\tt nose} was always a priority for the developers of BET, tests for plotting were removed from the release since these were most likely to break with upgrades to {\tt matplotlib}.
-Basic plotting functionality is demonstrated in iPython notebooks, which have seen an exponential growth rate on GitHub, which can be edited by the end-user to work with different plotting library versions and backends.
-This is in contrast to the previous releases, which packages plotting as a sub-module that was subject to passing tests.   
+Basic plotting functionality is demonstrated in iPython notebooks, which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
 
 
 

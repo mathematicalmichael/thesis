@@ -8,7 +8,7 @@
 % renders as
 % * CNR   The Control net reduction
 % * A     Another item
-\newcommand{\itembox}[1]{\item {\makebox[0.80in]{#1 \hfill}}}
+\newcommand{\itembox}[1]{\item {\makebox[0.25in]{#1 \hfill}}}
 
 % Abbreviations 
 \newcommand{\ie}{{\itshape i.e.}}
@@ -19,6 +19,7 @@
 
 % Cardinality
 \newcommand{\card}[1]{n\left(#1\right)} %{\left|#1\right|}
+\newcommand{\set}[1]{\left\{#1\right\}}
 
 % Math Operators
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -26,38 +27,51 @@
 
 % Standard Probability
 \DeclareMathOperator{\E}{\mathbb{E}}
-\DeclareMathOperator*{\P}{\mathbb{P}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\RP}{\mathbb{R}^P}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\RS}{\mathbb{R}^S}
+\newcommand{\RD}{\mathbb{R}^D}
+\newcommand{\sa}{\sigma\text{-algebra}}
+
+
 
 % Data-Consistent Inversion Framework
 
-
-% Parameter Space
-
-\DeclareMathOperator*{\param}{\lambda}
-\DeclareMathOperator*{\pspace}{\Lambda}
+\newcommand{\param}{\lambda}
+\newcommand{\pspace}{\Lambda}
 \newcommand{\pmeas}{\mu_{\pspace}}
 \newcommand{\pborel}{\mathcal{B}_{\pspace}}
+\newcommand{\Pspace}{(\pspace, \pborel, \pmeas)}
 
-\DeclareMathOperator*{\initialP}{\P_{\text{in}}}
-\DeclareMathOperator*{\initial}{\pi_{\text{in}}}
-\DeclareMathOperator*{\updatedP}{\P_{\text{up}}}
-\DeclareMathOperator*{\updated}{\pi_{\text{up}}}
+\DeclareMathOperator*{\initialP}{\PP_{in}}
+\DeclareMathOperator*{\initial}{\pi_{in}}
+\DeclareMathOperator*{\updatedP}{\PP_{up}}
+\DeclareMathOperator*{\updated}{\pi_{up}}
 
+\DeclareMathOperator*{\obs}{\boldsymbol{o}}
 \DeclareMathOperator*{\data}{\boldsymbol{d}}
-\DeclareMathOperator*{\dspace}{\mathcal{D}}
+\newcommand{\dspace}{\mathcal{D}}
 \newcommand{\dmeas}{\mu_{\dspace}}
 \newcommand{\dborel}{\mathcal{B}_{\dspace}}
+\newcommand{\Dspace}{(\dspace, \dborel, \dmeas)}
 
-\DeclareMathOperator*{\q}{Q\left (\param \right )}
+
+\newcommand{\qspace}{\mathcal{Q}}
+\DeclareMathOperator*{\lam}{\left ( \param \right ) }
+\DeclareMathOperator*{\qoi}{Q}
+\DeclareMathOperator*{\qlam}{\qoi\lam}
 \DeclareMathOperator*{\M}{\mathcal{M}}
 
-\DeclareMathOperator*{\obsP}{\P_{\text{ob}}}
-\DeclareMathOperator*{\obs}{\pi_{\text{ob}}}
-\DeclareMathOperator*{\predP}{\P_{\text{pr}}}
-\DeclareMathOperator*{\pred}{\pi_{\text{pr}}}
+\DeclareMathOperator*{\observedP}{\PP_{ob}}
+\DeclareMathOperator*{\observed}{\pi_{ob}}
+\DeclareMathOperator*{\predictedP}{\PP_{pr}}
+\DeclareMathOperator*{\predicted}{\pi_{pr}}
 
-
-
+\DeclareMathOperator*{\dciP}{\updatedP = \initialP \frac{\observedP}{\predictedP}}
+\DeclareMathOperator*{\dciD}{\updated = \initial \frac{\observed}{\predicted}}
+\DeclareMathOperator*{\dci}{\updated\lam = \initial\lam \frac{\observed\qlam}{\predicted\qlam}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
