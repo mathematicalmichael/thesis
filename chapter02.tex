@@ -3,8 +3,9 @@
 \section{Notation, Terminology, and Assumptions}
 
 We begin by assuming that a (deterministic) model, denoted by $$\M (u, \param) = 0,$$ is specified to relate observable state variables $u$ to model inputs ({\em parameters}) denoted by the vector $\param\in\RP$.
-The components $\param_i$ of $\param$ may include parameters in either the model operator (e.g. a diffusion coefficient) or input data (e.g. the frequency of a sinusoidal source, initial, or boundary information).
-We allow $\pspace$ to denote the set of all possible input parameters.
+The components $\param_i$ may include parameters in either the model operator (e.g. a diffusion coefficient) or input data (e.g. the frequency of a sinusoidal source, initial, or boundary information).
+We allow $\pspace$ to denote the set of all possible input parameters. 
+We assume $\pspace\subset \RR^n$ is equipped a (volume) measure, $\pmeas$ on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
 The solution operator of the model $\M$ then defines a map taking $\param \in \pspace$ to a solution denoted $u\lam$ which is assumed to be unique. 
 
 However, in real experimental settings we are often unable to observe $u\lam$, instead having access to some finite set of observable scalar quantities. 
@@ -12,36 +13,39 @@ For example, in experiments involving the diffusion of heat, we can typically on
 
 Such observable values of $u\lam$ are mathematically modeled by functionals of the solution, denoted $\qoi_i: u\lam \to \RR$.
 The collection of such functionals into a vector defines a {\em Quantity of Interest} (QoI) map. 
-Since the solution to the model depends on $\param$, so do the QoI, which motivates the adoption of notation 
+Since the solution to the model depends on $\param$, so do the QoI, which motivates the notation 
 $$\qlam := \qoi( u\lam ) \in\RD,$$
 to make this dependence on model parameters explicit.
-Furthermore, this convention captures a realistic limitation of an experimental setting, where we may be able to control $\param$ in order to observe $\qoi\lam$, but lack the ability to observe $u\lam$ directly.
-The outputs of the QoI map $\qoi = \data$ are what we refer to as the \emph{data}. Similarly, the range of the QoI defines the \emph{data space} $\dspace$, i.e. $$\dspace = \qoi(\pspace).$$
+Furthermore, this convention captures a realistic limitation of an experimental setting, where we may be able to control $\param$ in order to observe $\qlam$, but lack the ability to observe $u\lam$ directly.
+The outputs of the QoI map $\qlam = \data$ are what we refer to as the \emph{data}. 
+Similarly, the range of the QoI defines the \emph{data space} $\dspace$, i.e. 
+$$\dspace = \qoi(\pspace) \subset \RD$$
 
 We let $\qspace$ denote the set of possible QoI maps for which it is possible to collect experimental data.
 For example, suppose we may record only a single temperature measurement at any of ten locations in space-time.
 Then $\qspace$ is defined by ten possible QoI maps. 
 If we can record any two such measurements, then $\qspace$ is defined by $\binom{10}{2} = 45$ possible maps.
-Note that $\qspace$ could easily be uncountable, for example if we were not limited to the spatial locations (or time) at which we could record temperature measurements.
+Observe that $\qspace$ could easily be uncountable, for example if we were not limited to the spatial locations (or time) at which we could record temperature measurements.
 However, for simplicity, we will only discuss problems where $\qspace$ is finite.
-In the event that we are comparing maps, we use $\dspace_{\qoi}$ to emphasize that the data space depends on the choice of QoI map $\qoi$, otherwise we drop the subscript when the context is clear.
+In the event that we need to compare maps, we adopt the notation $\dspace_{\qoi}$ to emphasize that the data space depends on the choice of QoI map $\qoi$; when the context is clear, we drop the subscript.
+The only assumption on $\qoi$ that we impose throughout this work is of piecewise-differentiability.
 
-\begin{equation}
-\updatedP = \initialP \frac{\observedP}{\predictedP}
-\end{equation}
-
-\begin{equation}
-\begin{split}
-\dci\\
-\dciP\\
-\dciD
-\end{split}
-\end{equation}
+%\begin{equation}
+%\updatedP = \initialP \frac{\observedP}{\predictedP}
+%\end{equation}
+%
+%\begin{equation}
+%\begin{split}
+%\dci\\
+%\dciP\\
+%\dciD
+%\end{split}
+%\end{equation}
 
 \
 \section{Set-Based Inversion for Measures}
 
-To properly summarize the stochastic inverse problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme}\----borrowed from \cite{BM17}\----in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
+To properly summarize the Stochastic Inverse Problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme}\----borrowed from \cite{BM17}\----in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
 For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, \cite{BET+14}, and \cite{BM17}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,64 +72,175 @@ For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, 
 \label{fig:scheme}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
 
-The initial measure/probability spaces involved in the formulation of the SIP are summarized in step (S1) of Fig.~\ref{fig:scheme}. 
-We assume $\pspace\subset \RR^n$ is equipped a (volume) measure, $\pmeas$, on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
-Assume that $Q$ is at least piecewise-differentiable, which implies the measurability of the QoI map, and that the space $\dspace$ induced by $Q$ is equipped with the Borel $\sa$ $\dborel$.
+The initial measure/probability spaces involved in the formulation of the SIP are summarized in step (S1) of Fig.~\ref{fig:scheme}, starting with measure space $\Pspace$.
+
+The assumption that $\qoi$ is at least piecewise-differentiable implies the measurability of the QoI map, so that the space $\dspace$ induced by $\qoi$ is equipped with the Borel $\sa$ $\dborel$ [TK - cite textbook].
 The ``push-forward'' measure $\dmeas$ on ${(\dspace, \dborel)}$ is defined as 
-
 \begin{equation}\label{eq:dataspace_pushforward_measure}
-\dmeas (A) = \int_A \, d\dmeas = \int_{Q^{-1}(A)} \, d\pmeas = \pmeas \left (Q^{-1}(A) \right ) \quad \forall \;  A\in\dborel
+\dmeas (A) = \int_A \, d\dmeas = \int_{\qoi^{-1}(A)} \, d\pmeas = \pmeas \left (\qoi^{-1}(A) \right ) \quad \forall \;  A\in\dborel,
 \end{equation}
+which defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
+The push-forward distribution $\partial \PP_\dspace / \partial \mu_D$ is referred to as the \emph{predicted} distribution and is given by the Radon-Nikodym derivative with respect to (the Lebesgue) volume measure $\mu_D$ on ${(\dspace, \dborel)}$ 
 
-This defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
+The final step in (S1) involves the specification of a probability measure $\PP_\dspace$ on ${(\dspace, \dborel)}$ to model the uncertainty in data. 
+We colloquially refer to the distribution (given by the Radon-Nikodym derivative $\partial \PP_\dspace / \partial \pmeas$) as the \emph{observed} distribution, where $\pmeas$ is taken to be the (Lebesgue) volume measure on ${(\pspace, \pborel)}$. 
+This leads to the following SIP: determine a probability measure $\PP_\pspace$ on ${(\pspace, \pborel)}$ such that the push-forward measure of $\PP_\pspace$ matches $\PP_\dspace$. 
 
-Specifying a probability measure $\PP_\dspace$ on ${(\dspace, \dborel)}$ to model the uncertainty in data\----the final step in (S1)\----leads to the following SIP: determine a probability measure $\PP_\pspace$ on ${(\pspace, \pborel)}$ such that the push-forward measure of $\PP_\pspace$ matches $\PP_\dspace$. 
-In other words, determine a $P_\pspace$ satisfying
+In other words, determine a $\PP_\pspace$ satisfying
 \begin{equation}\label{eq:inverse_measure}
-P_\pspace \left ( Q^{-1}(E)\right ) = P_{\dspace}(E) \; \forall \, E \in \dborel.
+\PP_\pspace \left ( \qoi^{-1}(E)\right ) = \PP_{\dspace}(E) \; \forall \, E \in \dborel.
 \end{equation}
 
 We call any such solution $\PP_\pspace$ to Eq.~\eqref{eq:inverse_measure} a (measure-theoretic) solution to the SIP.
 This equation implies that any solution is uniquely determined on the induced contour $\sa$ 
 \begin{equation}\label{eq:contour_sa}
-\CC_\pspace = \set{Q^{-1}(E) : E \in \dborel } \subset \pborel,
+\CC_\pspace = \set{\qoi^{-1}(E) : E \in \dborel } \subset \pborel,
 \end{equation}
 This is summarized as step (S2) of Fig.~\ref{fig:scheme}. 
 
+However, for sets $A \in \pborel \setminus \CC_\pspace$, more information is required than is provided in Eq.~\eqref{eq:inverse_measure} in order to determine $\PP_\pspace (A)$. 
+By the Implicit Function Theorem, if $\data \in C^1 (\pspace)$ and we let $\data\in\dspace$ be a fixed datum, $\qoi^{-1}(q)$ exists as a $(P-D)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}. 
+These generalized contours can be indexed by a manifold (also possibly piecewise-defined) of dimension $D$ called a \emph{transverse parameterization} that intersects each contour once and only once. 
+In \cite{BET+14}, it is shown that transverse parameterizations are guaranteed to exist but are in general not unique.
 
-%However, for sets $A \in \BBB_\Lambda \setminus \CC_\Lambda$, more information is required than is provided in Eq.~\eqref{eq:inverse_measure} in order to determine $P_\Lambda (A)$. 
-%By the Implicit Function Theorem, if $Q \in C^1 (\Lambda)$ and we let $q\in\DDD$ be a fixed datum, $Q^{-1}(q)$ exists as a $(n-d)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}. 
-%These generalized contours can be indexed by a manifold (possibly piecewise-defined) of dimension $d$ called a \emph{transverse parameterization} that intersects each contour once and only once. 
-%Transverse parameterizations exist but are in general not unique \cite{BET+14}.
-%We let $\LL$ denote any particular transverse parameterization. 
-%Each $\ell\in\LL$ corresponds to a unique generalized contour $\CC_\ell \in \Lambda$ and each point $\lambda \in \Lambda$ belongs to a unique $\CC_\ell \in \Lambda$.
-%Thus, a transverse parameterization defines a bijection between the manifold $\LL$ and the partitioning of $\Lambda$ into generalized contours. 
-%
-%The induced $\sa$ $\CC_\Lambda$ and this bijection can then be used to define the measurable space $(\LL, \BBB_\LL)$. 
-%We denote the projection map $\pi_\LL :\Lambda \to \LL$, and $\sett{\CC_\ell}{\ell\in\LL}{}$ denotes the family of generalized contours indexed by $\LL$.
-%It is then possible to define the associated family of measurable spaces $\sett{\left ( \CC_\ell, \BBB_{\CC_\ell} \right )}{\ell\in\LL}{}$. 
-%A Disintegration Theorem (cite) is then leveraged to define a unique decomposition for any $P_\Lambda$ defined on $(\Lambda, \BBB_\Lambda)$ as a (marginal) probability measure $P_\LL$ on $(\LL, \BBB_\LL)$ and a family of (conditional) probability measures $\sett{P_\ell}{\ell\in\LL}{}$ on $\sett{\left ( \CC_\ell, \BBB_{\CC_\ell} \right )}{\ell\in\LL}{}$ such that 
-%\begin{equation}\label{eq:disintegration_measure}
-%P_\Lambda (A) = \int_{\pi_\LL(A)} \left ( \int_{\pi_{\LL}^{-1} (\ell) \cap A}\, dP_\ell(\lambda) \right )\, dP_\LL (\ell), \; \forall \; A \in \BBB_\Lambda 
-%\end{equation}
-%
-%The uniqueness of a probability measure $P_\Lambda$ on ${(\Lambda, \CC_\Lambda)}$ satisfying Eq.~\eqref{eq:inverse_measure} implies that the marginal $P_\LL$ is unique for any particular specification of $P_\DDD$ on ${(\DDD, \BBB_\DDD)}$. 
-%The disintegration of Eq.~\eqref{eq:disintegration_measure} implies that a specification of a family of conditional probability measures $\sett{P_\ell}{\ell\in\LL}{}$ gives us a unique solution to the SIP on ${(\CC_\ell, \BBB_{\CC_\ell})}$. 
-%However, the conditional measures cannot be determined by observations of $q\in \DDD$. 
-%We follow the work of \cite{BET+14} and adopt the \emph{standard ansatz} determined by the disintegration of the volume measure $\mu_\Lambda$ to compute probabilities of events contained within contour events. 
-%The standard ansatz is given by 
-%\begin{equation}\label{eq:standard_ansatz}
-%P_\ell = \mu_{\CC_\ell} / \mu_{\CC_\ell}(\CC_\ell), \; \forall \; \ell \in \LL,
-%\end{equation}
-%where $\mu_{\CC_\ell}$ is the disintegrated volume measure on generalized contour $\CC_\ell$.
-%Thus, we have defined a unique solution to the SIP on ${(\Lambda, \BBB_\Lambda)}$, completing step (S3) in Fig.~\ref{fig:scheme}. 
+We let $\LL$ denote any particular transverse parameterization. 
+Each $\ell\in\LL$ corresponds to a unique generalized contour $\CC_\ell \in \pspace$ and each point $\param\in\pspace$ belongs to a unique $\CC_\ell\in\pspace$.
+Thus, a transverse parameterization defines a bijection between the manifold $\LL$ and the partitioning of $\pspace$ into generalized contours. 
+The induced $\sa$ $\CC_\pspace$ and this bijection can then be used to define the measurable space $(\LL, \BB_\LL)$. 
+
+We denote the projection map $P_\LL :\pspace \to \LL$, and let $\set{\CC_\ell}_{\ell\in\LL}$ represent the family of generalized contours indexed by $\LL$, yielding the associated family of measurable spaces $\set{\left ( \CC_\ell, \BB_{\CC_\ell} \right )}_{\ell\in\LL}{}$. 
+A Disintegration Theorem [TK - cite] is then leveraged to define a unique decomposition for any $\PP_\pspace$ defined on $(\pspace, \pborel)$ as a (marginal) probability measure $\PP_\LL$ on $(\LL, \BB_\LL)$ and a family of (conditional) probability measures $\set{\PP_\ell}_{\ell\in\LL}$ on $\set{\left ( \CC_\ell, \BB_{\CC_\ell} \right )}_{\ell\in\LL}$ such that 
+\begin{equation}\label{eq:disintegration_measure}
+\PP_\pspace (A) = \int_{P_\LL(A)} \left ( \int_{P_{\LL}^{-1} (\ell) \cap A}\, d\PP_\ell(\param) \right )\, d\PP_\LL (\ell), \; \forall \; A \in \pborel 
+\end{equation}
+
+
+The uniqueness of a probability measure $\PP_\pspace$ on ${(\pspace, \CC_\pspace)}$ satisfying Eq.~\eqref{eq:inverse_measure} implies the uniqueness of the marginal probability measures $\PP_\LL$ for any particular specification of $\PP_\dspace$ on ${(\dspace, \dborel)}$. 
+The disintegration of Eq.~\eqref{eq:disintegration_measure} implies that a specification of a family of conditional probability measures $\set{P_\ell}_{\ell\in\LL}$ gives us a unique solution to the SIP on ${(\CC_\ell, \BB_{\CC_\ell})}$.
+ 
+However, the conditional measures cannot be determined by solely by the specification of $\data\in\dspace$. 
+We follow the work of \cite{BET+14} and adopt the \emph{standard ansatz} determined by the disintegration of the volume measure $\pmeas$ to compute probabilities of sets contained within contour events. 
+The standard ansatz is given by 
+\begin{equation}\label{eq:standard_ansatz}
+\PP_\ell = \mu_{\CC_\ell} / \mu_{\CC_\ell}(\CC_\ell), \; \forall \; \ell \in \LL,
+\end{equation}
+where $\mu_{\CC_\ell}$ is the disintegrated volume measure on generalized contour $\CC_\ell$.
+Thus, we have defined a unique solution to the SIP on ${(\pspace, \pborel)}$, completing step (S3) in Fig.~\ref{fig:scheme}. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Numerical Approximation and Analysis}\label{sec:numericalapprox}
+In the \emph{set-based} inversion framework, there are two primary sources of approximation error: (1) partitioning the parameter space $\pspace$ to approximate events in $\CC_\pspace$, and $\pborel$, and (2) partitioning the data space $\dspace$ to approximate events in $\BB_\dspace$.
+In practice, we must rely on a finite numerical approximation of the (often uncountable) events in the $\sa$s $\BB_\dspace$, $\CC_\pspace$, and $\pborel$.
+Owing to the inclusion $\CC_\pspace \subset \pborel$, it is possible to approximate events in both of these $\sa$s simultaneously. 
+
+Assume we fix some collection of sets $\set{D_i}_{i=1}^{M} \subset \dborel$ to partition $\dspace$ (independent of any specification of $\qoi$), and that we partition $\pspace$ with $\set{\VV_j}_{j=1}^{N}$, where $\Nu_j \in \pborel$. 
+Both sets yield implicitly-defined Voronoi-cell partitions given by a finite sampling of each space.
+In order to approximate $\PP_\pspace(\VV_j)$ for $j=1,\hdots,N$, we must determine which collection of $\VV_j$'s approximate $\qoi^{-1}(D_i)$ for each $i=1,\hdots,M$, and then apply the ansatz on this approximation of the contour event with known probability $\PP_\dspace(D_k)$.
+Asymptotically, the discretizations of $\pspace$ and $\dspace$, Algorithm~\ref{alg:inv_density} was proven to converge to the solution $\PP_\pspace$ with respect to ${N \text{ and } M}$, respectively in \cite{BET+14-arxiv}. 
+
+
+
+\subsubsection{Algorithm}\label{sec:algorithm}
+We present a non-intrusive algorithm based on Monte-Carlo sampling\---initially introduced in \cite{BET+14} and further analyzed in \cite{BET+14-arxiv}\---that is structured in four stages (written as four independent for-loops) that are linked to the stages in Fig.~\ref{fig:scheme}. 
+We direct the interested reader to \cite{BET+14-arxiv} for more detailed information and analysis of this algorithm, e.g., on the requirement of a sampler being ``$\pborel$-consistent'' to ensure convergence. 
+
+
+\begin{algorithm}[hbtp]
+\DontPrintSemicolon
+Choose a discretization partition $\set{D_i}_{i=1}^{M}$ of $\dspace$.\\
+	\For{$i = 1, \hdots, M$}{
+			Compute $p_{\dspace, i} = \PP_\dspace(D_i)$.
+	}
+	Choose samples $\set{\pspace^{(j)}}_{j=1}^{N} \subset \pspace$, which implicitly defines a Voronoi-cell partition $\set{\VV_j}_{j=1}^{N}$ of $\pspace$.\\
+	\For{$j = 1, \hdots, N$}{
+	Compute quantity of interest vectors $\qoi_j = \qoi(\pspace^{(j)})$.\\
+	Bin $\qoi_j$ in the partition $\set{D_i}_{i=1}^{M}$ and let $\OO_j = \set{i: \qoi_j \in D_i}$.\\
+	Compute approximations $V_j \approx \pmeas (\VV_j)$.
+	}
+	\For{$i = 1, \hdots, M$}{
+	Compute $\CC_i = \set{j:Q_j \in D_i}$.
+	}
+	\For{$j = 1, \hdots, N$}{
+	Compute $p_{\pspace, j} = \left ( V_j / \sum_{k\in \CC_{\OO_j} } V_k \right ) p_{\dspace, \OO_j}$.
+	}
+	For any $A\in \pborel$, compute 
+	\begin{equation}
+	\PP_{\pspace, M, N} (A) = \sum_{j=1}^N p_{\pspace, j} \Chi_{\VV_j} (A) 
+	\end{equation}
+ \caption{Numerical Approximation of the Inverse Density}
+ \label{alg:inv_density}
+\end{algorithm}
+\FloatBarrier
+
+The first two stages correspond to formulating the discretized version of the SIP given in step (S1) in Fig.~\ref{fig:scheme}. 
+We first discretize the probability space $(\dspace, \dborel, \PP_\dspace)$.
+Then, we simultaneously discretize the measure space $(\pspace, \pborel, \pmeas)$ and construct a simple-function approximation to the map $\qoi$.
+These stages introduce the primary sources of error, and the third and fourth stages may be thought of as solving the discretized SIP exactly.
+
+The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events defined by $Q^{-1}(D_i)$ for $i=1,\hdots,M$. This allows us to formulate the consistent solution to the SIP on $(\pspace, \CC_\pspace, P_\pspace)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}. 
+Finally, the fourth stage constructs a discretized approximation to step (S3) in Fig.~\ref{fig:scheme} and uses a discrete version of the ansatz to approximate the probability of $\VV_j$ for $j=1,\dots,N$. 
+This results in an approximate probability measure $P_{\pspace, M, N}$ which produces the same probability estimates for events $A$ and $A\setminus \set{ \pspace^{(j)} }_{j=1}^{N}$, which are identical almost everywhere with respect to $\pmeas$. 
+
+Note that Algorithm~\ref{alg:inv_density} is independent of the methods by which the samples $\set{ \pspace^{(j)} }_{j=1}^{N}$ were generated or sets in $\set{D_i}_{i=1}^{M}$ are chosen.  
+A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ below. 
+
+
+
+\subsubsection{Descriptions of Error}\label{sec:error}
+We begin by assuming that $\PP_\dspace$ is absolutely continuous with respect to $\dmeas$, which allows us to describe $\PP_\dspace$ with a density $\rho_\dspace$. Then, for any partition $\set{D_i}_{i=1}^{M}$ of $\dspace$, 
+\[
+\PP_\dspace (D_i) = \int_{D_i} \rho_\dspace \, \dmeas, \quad \text{ for } i = 1, \hdots, M.
+\]
+
+We often use Monte Carlo approximations to compute the approximations $p_{\dspace, i}=\PP_\dspace(D_i)$ in the first for-loop in Algorithm~\ref{alg:inv_density}. 
+These samples are generated on $\dspace$ and do not require numerical solutions to the model. 
+We therefore assume that for any discretization of $\dspace$, these approximations can be made sufficiently accurate and neglect the error in this computation. 
+We denote the exact solution to the SIP associated with this partitioning of $\dspace$ by $\PP_{\pspace, M}$. 
+Approximate solutions to the SIP given in the final for-loop of Algorithm~\ref{alg:inv_density} are denoted by $\PP_{\pspace, M, N, h}$.
+Here, the $h$ is in reference to a mesh or other numerical parameter that determines the accuracy of the numerical solution $u_h(\param^{(j)})\approx u(\param^{(j)})$, and subsequently the accuracy in the computations of $\qoi_j = \qoi(\pspace^{(j)})$ in Algorithm~\ref{alg:inv_density}.
+ 
+We assume that $h$ is tunable so that
+\[
+\lim\limits_{h \downarrow 0} \PP_{\pspace, M, N, h} = \PP_{\pspace, M, N}.
+\]
+In \cite{BM17}, the focus was on proving the convergence of $\PP_{\pspace, M, N, h} (A) \to \PP_{\pspace} (A)$ for some $A\in \pborel$ and on estimating the error in $P_{\pspace, M, N, h}(A)$.
+There, as well as in \cite{BGE+15}, adjoint-based a posteriori estimates in the computed QoI are combined with a statistical analysis to both estimate and bound the error in $\PP_{\pspace, M, N, h} (A)$.
+In \cite{BM17}, adjoints were used to compute both error and derivative estimates of $\qoi(\pspace^{(j)})$ to improve the accuracy in $\PP_{\pspace, M, N, h} (A)$.
+However, no work has to date fully explored the \emph{convergence rates} of Algorithm \ref{alg:inv_density}.
+Furthermore, no work has yet to establish that these rates are independent of the choice of QoI map despite other studies establishing that the absolute error is very much affected by the geometric properties of the QoI maps \cite{BE13}.
+
+In order to study convergence, we need to define a notion of distance on the space of probability measures on $\pspace$, which we denote by $\PP_\pspace$. 
+% There are many choices available to us and we discuss several useful metrics on $\PP_\pspace$ in Section~\ref{sec:metrics}. 
+However, for now, let $d$ represent a metric on $\PP_\pspace$.
+
+Then, we have by repeated application of the triangle inequality that
+\begin{equation}
+\label{eq:triangleineq}
+d(P_{\pspace, M, N, h}, P_\pspace) \leq 
+\underset{ \text{(E1)} }{\underbrace{d(P_{\pspace, M, N, h},\PP_{\pspace, M, N})}} + 
+\underset{ \text{(E2)} }{\underbrace{d(P_{\pspace, M, N}, \PP_{\pspace, M}) }}+ 
+\underset{ \text{(E3)} }{\underbrace{d(P_{\pspace, M}, \PP_\pspace) }}.
+\end{equation}
+
+The term (E1) describes the effect of the error in the numerically evaluated $\qoi_j$ on the solution to the SIP. 
+The term (E2) describes the effect of finite sampling error in $\pspace$ on the solution to the SIP and (E3) describes the effect of discretization error of $\PP_\dspace$ on the solution to the SIP. 
+
+
+
+%%%%%%%%%%%%%%%%%%
+
 
 
 \
 \section{Sample-Based Inversion for Measures}\label{sec:ch02-sample}
 [TK - Words]
+
+In place of the ansatz, we have an initial distribution.
+
 
 \
 \section{Software Contributions}

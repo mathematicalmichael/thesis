@@ -24,6 +24,7 @@
 % Math Operators
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+%\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 
 % Standard Probability
 \DeclareMathOperator{\E}{\mathbb{E}}
@@ -31,18 +32,25 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\RP}{\mathbb{R}^P}
 \newcommand{\CC}{\mathcal{C}}
+\newcommand{\OO}{\mathcal{O}}
+\renewcommand{\LL}{\mathcal{L}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\BB}{\mathcal{B}}
 \newcommand{\RS}{\mathbb{R}^S}
 \newcommand{\RD}{\mathbb{R}^D}
 \newcommand{\sa}{\sigma\text{-algebra}}
+\newcommand{\Chi}{\mbox{\LARGE$\chi$}}
 
+\newcommand{\Rho}{\mbox{\LARGE$\rho$}}
+\newcommand{\Nu}{\mbox{\Large$\nu$}}
 
 
 % Data-Consistent Inversion Framework
 
 \newcommand{\param}{\lambda}
-\newcommand{\pspace}{\Lambda}
+\newcommand{\pspace}{{\Lambda}}
 \newcommand{\pmeas}{\mu_{\pspace}}
-\newcommand{\pborel}{\mathcal{B}_{\pspace}}
+\newcommand{\pborel}{\BB_{\pspace}}
 \newcommand{\Pspace}{(\pspace, \pborel, \pmeas)}
 
 \DeclareMathOperator*{\initialP}{\PP_{in}}
@@ -54,14 +62,14 @@
 \DeclareMathOperator*{\data}{\boldsymbol{d}}
 \newcommand{\dspace}{\mathcal{D}}
 \newcommand{\dmeas}{\mu_{\dspace}}
-\newcommand{\dborel}{\mathcal{B}_{\dspace}}
+\newcommand{\dborel}{\BB_{\dspace}}
 \newcommand{\Dspace}{(\dspace, \dborel, \dmeas)}
 
 
 \newcommand{\qspace}{\mathcal{Q}}
-\DeclareMathOperator*{\lam}{\left ( \param \right ) }
-\DeclareMathOperator*{\qoi}{Q}
-\DeclareMathOperator*{\qlam}{\qoi\lam}
+\newcommand{\lam}{\left ( \param \right ) }
+\newcommand{\qoi}{Q}
+\newcommand{\qlam}{\qoi\lam}
 \DeclareMathOperator*{\M}{\mathcal{M}}
 
 \DeclareMathOperator*{\observedP}{\PP_{ob}}
@@ -75,4 +83,3 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- 
