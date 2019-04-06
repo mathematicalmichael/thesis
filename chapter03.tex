@@ -7,33 +7,34 @@ However, the results hold for any attempt to approximate densities defined on se
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected. 
 
 
+
 \subsection{Skewness and Accuracy}\label{subsec:skewness}
-In \cite{BGE+15}, the concept of skewness in a QoI map $Q$ was introduced, quantified, and related to the accuracy in solving the SIP with a finite number of samples.
-Essentially, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\BBB_\DDD$ are transformed by $Q^{-1}$. 
-An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\Lambda$ required to approximate the $\mu_\Lambda$-measure of $Q^{-1}(E)$ to a desired level of accuracy was proportional to the skewness of $Q$ raised to the ($d-1$) power where $d$ is the dimension of $\DDD$.
+In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ was introduced, quantified, and related to the accuracy in solving the SIP with a finite number of samples.
+Essentially, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$. 
+An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\PP_\pspace$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy was proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
 This is a version of the so-called curse-of-dimension.
-Since the numerical solution of the SIP relies fundamentally on the approximation of such $Q^{-1}(E)$, it was assumed that skewness impacted the probability measure computed using Algorithm~\ref{alg:inv_density} in a similar way.
+Since the numerical solution of the SIP relies fundamentally on the approximation of such $\qoi^{-1}(E)$, it was assumed that skewness impacted the probability measure computed using Algorithm~\ref{alg:inv_density} in a similar way.
 
 Skewness was explored further in \cite{BPW17} in the context of optimal experimental design.
-There, an additional geometric property of $Q$ related to the {\em precision} in the solution of the associated SIP was introduced and quantified. 
-Under the same assumption that skewness impacted accuracy of the numerical solution to the SIP, a multi-criteria optimization problem was formulated and solved to determine a $Q\in\QQQ$ that balanced accuracy and precision in the SIP solution.
+There, an additional geometric property of $\qoi$ related to the {\em precision} in the solution of the associated SIP was introduced and quantified. 
+Under the same assumption that skewness impacted accuracy of the numerical solution to the SIP, a multi-criteria optimization problem was formulated and solved to determine a $\qoi\in\qspace$ that balanced accuracy and precision in the SIP solution.
 
 Since no previous study has considered the numerical convergence rates of Algorithm~\ref{alg:inv_density}, the impact of skewness on such rates is unclear.
-Moreover, it is not clear that skewness causes errors to pollute the entire numerical solution of the SIP since local approximation errors in the $\mu_\Lambda$-measure of contour events have a tendency to cancel out over $\Lambda$. 
+Moreover, it is not clear that skewness causes errors to pollute the entire numerical solution of the SIP since local approximation errors in the $\PP_\pspace$-measure of contour events have a tendency to cancel out over $\pspace$. 
 This is the primary focus of the numerical results in Section~\ref{sec:results}. 
 Here, for completeness, we define skewness below and refer the interested reader to \cite{BGE+15, BPW17} for more details.
 
 
 \begin{defn}
-For any $Q\in\QQQ$, $\lambda \in \Lambda$, and a specified row vector $\bf{j}_k$ of the Jacobian $J_{\lambda, Q}$, we define
+For any $\qoi\in\qspace$, $\param \in \pspace$, and a specified row vector $\bf{j}_k$ of the Jacobian $J_{\param, Q}$, we define
 \begin{equation}
-S_Q(J_{\lambda,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
+S_Q(J_{\param,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
 \label{eq:skewness}
 \end{equation}
 
-We define the \textbf{local skewness} of a map $Q$ at a point $\lambda$ as 
+We define the \textbf{local skewness} of a map $\qoi$ at a point $\param$ as 
 \begin{equation}
-S_Q(\lambda) = \max_{1\leq k \leq d} S_Q(J_{\lambda,Q}, \bf{j}_k).
+S_Q(\param) = \max_{1\leq k \leq d} S_Q(J_{\param,Q}, \bf{j}_k).
 \label{eq:localskewness}
 \end{equation}
 \end{defn}
@@ -41,22 +42,22 @@ S_Q(\lambda) = \max_{1\leq k \leq d} S_Q(J_{\lambda,Q}, \bf{j}_k).
 \begin{defn}
 The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined as
 \begin{equation}
-\overline{S_Q} = \frac{1}{\mu_{\Lambda}(\Lambda)} \int_\Lambda S_Q (\lambda) \, d\mu_{\Lambda}
+\overline{S_Q} = \frac{1}{\mu_{\pspace}(\pspace)} \int_\pspace S_Q (\param) \, d\mu_{\pspace}
 \label{eq:avgskew}
 \end{equation}
 \end{defn}
 
-In \cite{BPW17}, it was shown that $S_Q(\lambda)$ can be efficiently computed using a singular value decomposition of the Jacobian $J_{\lambda,Q}$. 
+In \cite{BPW17}, it was shown that $S_Q(\param)$ can be efficiently computed using a singular value decomposition of the Jacobian $J_{\param,Q}$. 
 In general, we approximate $\overline{S_Q}$ with Monte-Carlo approximations.
 
 
 %%%% discussion of convergence 
 
-Second, and perhaps most importantly, since the spaces $\Lambda$ we are considering are generally bounded and finite, the Hellinger metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
-The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\Lambda$. 
+Second, and perhaps most importantly, since the spaces $\pspace$ we are considering are generally bounded and finite, the Hellinger metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
+The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$. 
 Thus, convergence of a sequence of probability measures under the Hellinger metric implies that the QoI's will also converge component-wise in $\RR$. 
 In other words, convergence in the Hellinger metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure. 
-In other words, if $P_{\Lambda,M,N,h}$ converges to either $P_{\Lambda,M,N}$, $P_{\Lambda,M}$, or $P_\Lambda$ using the Hellinger metric, this implies that the error converged to zero in the numerically computed $Q(\lambda^{(j)})$.
+In other words, if $\PP_{\pspace,M,N,h}$ converges to either $\PP_{\pspace,M,N}$, $\PP_{\pspace,M}$, or $P_\pspace$ using the Hellinger metric, this implies that the error converged to zero in the numerically computed $Q(\param^{(j)})$.
 Thus, convergence in the Hellinger metric implies, in a sense, convergence of the numerical method used to construct the QoI map. 
 Furthermore, recall that weak convergence $P_n \to P$ is defined to mean 
 \[
@@ -65,9 +66,9 @@ Furthermore, recall that weak convergence $P_n \to P$ is defined to mean
 for bounded Lipschitz functions $f$. 
 Taking $f = \Chi_A$, this leads to the following implication:  
 \[
-P_{\Lambda, M, N} \to P_\Lambda \implies P_{\Lambda, M, N} (A) \to P_\Lambda (A) \quad \forall{A\in\BBB_\Lambda}.
+\PP_{\pspace, M, N} \to P_\pspace \implies \PP_{\pspace, M, N} (A) \to P_\pspace (A) \quad \forall{A\in\pborel}.
 \]
-%provided we rigorously define $P_{\Lambda, M, N}$ to measure sets in $\BBB_\Lambda$, which we proceed to do in the following section\footnote{\bf{I know this is clumsy, but I'm not exactly sure how to phrase this correctly, because it almost seems like this would be true for all $A\in\Lambda$ instead. I suppose the omission of the differential operator above is intentionally vague to gloss over this detail. Can we sharpen this up?}}
+%provided we rigorously define $\P\PP_{\pspace, M, N}$ to measure sets in $\BBB_\pspace$, which we proceed to do in the following section\footnote{\bf{I know this is clumsy, but I'm not exactly sure how to phrase this correctly, because it almost seems like this would be true for all $A\in\pspace$ instead. I suppose the omission of the differential operator above is intentionally vague to gloss over this detail. Can we sharpen this up?}}
 It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Hellinger distance as the metric used in the numerical results of Section \ref{sec:results}.
 
 
@@ -79,18 +80,18 @@ It is a combination of computational ease of implementation and theoretical impl
 
 
 %
-%The measures computed from Algorithm~\ref{alg:inv_density} are defined on a set of samples $S = \sett{\lambda^{(j)}}{j=1}{N}$ which implicitly define a Voronoi-cell partition $\sett{\VVV^{(j)}}{j=1}{N}$ of the parameter space $\Lambda$. 
-%We let $\BBB_{\Lambda, N}$ denote the \emph{computational algebra} generated by $\sett{\VVV^{(j)}}{j=1}{N}$, i.e., using standard measure theory notation, 
+%The measures computed from Algorithm~\ref{alg:inv_density} are defined on a set of samples $S = \sett{\param^{(j)}}{j=1}{N}$ which implicitly define a Voronoi-cell partition $\sett{\VVV^{(j)}}{j=1}{N}$ of the parameter space $\pspace$. 
+%We let $\BBB_{\pspace, N}$ denote the \emph{computational algebra} generated by $\sett{\VVV^{(j)}}{j=1}{N}$, i.e., using standard measure theory notation, 
 %$$
-%	\BBB_{\Lambda,N} = \sigma\left(\sett{\VVV^{(j)}}{j=1}{N}\right).
+%	\BBB_{\pspace,N} = \sigma\left(\sett{\VVV^{(j)}}{j=1}{N}\right).
 %$$
-%Clearly, $\BBB_{\Lambda, N}\subset \BBB_\Lambda$ and the events $A\in B_{\Lambda, N}$ represent the $A\in\BBB_\Lambda$ for which we can ``easily'' compute probabilities and make inferences.
-%While Algorithm~\ref{alg:inv_density} ultimately defines a probability measure implicitly on $(\Lambda,\BBB_\Lambda)$, computationally this is almost never done and the measures are only interrogated on the computational algebra associated with the set of samples. 
+%Clearly, $\BBB_{\pspace, N}\subset \BBB_\pspace$ and the events $A\in B_{\pspace, N}$ represent the $A\in\BBB_\pspace$ for which we can ``easily'' compute probabilities and make inferences.
+%While Algorithm~\ref{alg:inv_density} ultimately defines a probability measure implicitly on $(\pspace,\BBB_\pspace)$, computationally this is almost never done and the measures are only interrogated on the computational algebra associated with the set of samples. 
 %
-%Different sets $S_k = \sett{\lambda^{(i)}}{i=1}{N_k}$, where the $\lambda^{(i)}$'s and $N_k$'s may be completely different for each $k$, will lead to different measures computed from Algorithm~\ref{alg:inv_density}. 
-%Each $S_k$ induces a computational algebra which we index using the notation $\BBB_{k}$ for simplicity, where it is understood that $\BBB_k = \BBB_{\Lambda, N_k}$. 
+%Different sets $S_k = \sett{\param^{(i)}}{i=1}{N_k}$, where the $\param^{(i)}$'s and $N_k$'s may be completely different for each $k$, will lead to different measures computed from Algorithm~\ref{alg:inv_density}. 
+%Each $S_k$ induces a computational algebra which we index using the notation $\BBB_{k}$ for simplicity, where it is understood that $\BBB_k = \BBB_{\pspace, N_k}$. 
 %
-%This poses an immediate problem with respect to a computational approach to computing $d_H$: how do we compare measures $P_{\Lambda, M, N_1}$ and $P_{\Lambda, M, N_2}$ which may be defined on completely different computational algebras (even if $N_1=N_2$)?
+%This poses an immediate problem with respect to a computational approach to computing $d_H$: how do we compare measures $\PP_{\pspace, M, N_1}$ and $\PP_{\pspace, M, N_2}$ which may be defined on completely different computational algebras (even if $N_1=N_2$)?
 %See Figure~\ref{fig:voronoi_issues} for an illustration of such a scenario.
 %
 %\begin{figure}[h]
@@ -115,58 +116,58 @@ It is a combination of computational ease of implementation and theoretical impl
 %The proof of the following Lemma describes how to ``computationally extend'' {\em any} probability measure defined on a computational algebra to a full $\sa$ $\BBB$, which we exploit in Algorithm~\ref{alg:hellinger_disc}.
 %\begin{lem}
 %\label{lem:measuresets}
-%Let $\mu$ be a measure on $(\Lambda, \BBB_\Lambda)$, $\sett{\VVV^{(j)}}{j=1}{N}$ be a partition of $\Lambda$, and $\BBB_{\Lambda, N}$ the computational algebra generated by $\sett{\VVV^{(j)}}{j=1}{N}$. 
+%Let $\mu$ be a measure on $(\pspace, \BBB_\pspace)$, $\sett{\VVV^{(j)}}{j=1}{N}$ be a partition of $\pspace$, and $\BBB_{\pspace, N}$ the computational algebra generated by $\sett{\VVV^{(j)}}{j=1}{N}$. 
 %Assume $\mu (\VVV^{(j)}) > 0 \; \forall \; j=1,\hdots, N$. 
-%Then, there exists a probability measure $\eta$ on $(\Lambda, \BBB_\Lambda)$ such that $\eta(A) = \eta_N(A) \; \forall \; A\in\BBB_{\Lambda, N}$. 
+%Then, there exists a probability measure $\eta$ on $(\pspace, \BBB_\pspace)$ such that $\eta(A) = \eta_N(A) \; \forall \; A\in\BBB_{\pspace, N}$. 
 %\end{lem}
 %In the proof below, we use $\eta_N$ and $\mu$ to construct a type of ``discrete'' Radon-Nikodym derivative of $\eta$. 
 %This is motivated by the formal structure of solutions given by Algorithm~\ref{alg:inv_density}.
 %\begin{proof}
 %Let
 %\begin{equation}\label{eq:finiteradon}
-%f_N (\lambda) = \sum_{j=1}^{N} \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \Chi_{\VVV^{(j)}} (\lambda).
+%f_N (\param) = \sum_{j=1}^{N} \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \Chi_{\VVV^{(j)}} (\param).
 %\end{equation}
-%Then, for any $A\in\BBB_\Lambda$, define
+%Then, for any $A\in\BBB_\pspace$, define
 %\begin{equation}\label{eq:approxmeasure}
-%\eta (A) = \int_A f_N (\lambda) \, d\mu.
+%\eta (A) = \int_A f_N (\param) \, d\mu.
 %\end{equation}
-%We verify that $\eta$ is a probability measure on $(\Lambda, \BBB_\Lambda)$ and that $\eta(A) = \eta_N(A) \; \forall \; A\in\BBB_{\Lambda, N}$ below:
+%We verify that $\eta$ is a probability measure on $(\pspace, \BBB_\pspace)$ and that $\eta(A) = \eta_N(A) \; \forall \; A\in\BBB_{\pspace, N}$ below:
 %\begin{itemize}
 %\item[(i)][Positive]
-%Let $A\in \BBB_{\Lambda}$.
+%Let $A\in \BBB_{\pspace}$.
 %\begin{equation*}
 %\begin{split}
-%\eta (A) &= \int_A f_N (\lambda) \, d\mu \\
-%&=  \int \Chi_A \sum_{j=1}^{N} \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \Chi_{\VVV^{(j)}} (\lambda) \, d\mu \\
-%&= \sum_{j=1}^{N} \left ( \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \int \Chi_{A\cap\VVV^{(j)}} (\lambda) \, d\mu \right ) \\
+%\eta (A) &= \int_A f_N (\param) \, d\mu \\
+%&=  \int \Chi_A \sum_{j=1}^{N} \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \Chi_{\VVV^{(j)}} (\param) \, d\mu \\
+%&= \sum_{j=1}^{N} \left ( \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \int \Chi_{A\cap\VVV^{(j)}} (\param) \, d\mu \right ) \\
 %&= \sum_{j=1}^{N} \left ( \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \mu\left (A\cap\VVV^{(j)}\right ) \right ) \geq 0
 %\end{split}
 %\end{equation*}
 %
 %\item[(ii)][Definite]
 %\begin{equation*}
-%\eta (\nullset) = \int_\nullset f_N (\lambda) \, d\mu =\int \Chi_\nullset f_N (\lambda) \, d\mu = \mu(\nullset) = 0
+%\eta (\nullset) = \int_\nullset f_N (\param) \, d\mu =\int \Chi_\nullset f_N (\param) \, d\mu = \mu(\nullset) = 0
 %\end{equation*}
 %
 %\item[(iii)][Countably Additive]
-%Let $\sett{A_k}{k=1}{\infty} \subset \BBB_{\Lambda}$.
+%Let $\sett{A_k}{k=1}{\infty} \subset \BBB_{\pspace}$.
 %\begin{equation*}
 %\begin{split}
-%\eta (\cup_k A_k) &= \int_{\cup_k A_k} f_N (\lambda) \, d\mu 
-%= \int \Chi_{\cup_k A_k} f_N (\lambda) \, d\mu \\
-%&= \int \left( \sum_k \Chi_{A_k} \right ) f_N (\lambda) \, d\mu
-%=   \sum_k \int \Chi_{A_k} f_N (\lambda) \, d\mu \\
-%&=   \sum_k \int_{A_k} f_N (\lambda) \, d\mu = \sum_k \eta(A_k)
+%\eta (\cup_k A_k) &= \int_{\cup_k A_k} f_N (\param) \, d\mu 
+%= \int \Chi_{\cup_k A_k} f_N (\param) \, d\mu \\
+%&= \int \left( \sum_k \Chi_{A_k} \right ) f_N (\param) \, d\mu
+%=   \sum_k \int \Chi_{A_k} f_N (\param) \, d\mu \\
+%&=   \sum_k \int_{A_k} f_N (\param) \, d\mu = \sum_k \eta(A_k)
 %\end{split}
 %\end{equation*}
 %
 %
-%\noindent Finally, let $A\in\BBB_{\Lambda, N}\subset \BBB_\Lambda$. 
+%\noindent Finally, let $A\in\BBB_{\pspace, N}\subset \BBB_\pspace$. 
 %Then there exists some $j^* \in \set{1,2, \cdots, N}$ such that $\VVV^{(j^*)} = A$. 
 %We have that
 %\begin{equation*}
 %\begin{split}
-%\eta (A) &= \int_A f_N (\lambda) \, d\mu
+%\eta (A) &= \int_A f_N (\param) \, d\mu
 %=  \int \sum_{j=1}^{N} \left ( \frac{\eta_N (\VVV^{(j)}) }{\mu (\VVV^{(j)})} \Chi_{\VVV^{(j)}}\right ) \Chi_{\VVV^{(j^*)}} \, d\mu \\
 %&= \int \frac{\eta_N (\VVV^{(j^*)}) }{\mu (\VVV^{(j^*)})} \Chi_{\VVV^{(j^*)}} \, d\mu
 %= \frac{\eta_N (\VVV^{(j^*)}) }{\mu (\VVV^{(j^*)})} \mu (\VVV^{(j^*)}) \\
@@ -177,21 +178,21 @@ It is a combination of computational ease of implementation and theoretical impl
 %\end{itemize}
 %\end{proof}
 %
-%We note that in practice, $\Chi_{\VVV^{(j)}} (\lambda)$ requires the use of nearest-neighbor computations, but otherwise evaluation of Eq.~\eqref{eq:finiteradon} is straightforward to compute.
+%We note that in practice, $\Chi_{\VVV^{(j)}} (\param)$ requires the use of nearest-neighbor computations, but otherwise evaluation of Eq.~\eqref{eq:finiteradon} is straightforward to compute.
 %
 %\begin{algorithm}
 %\DontPrintSemicolon
 %\caption{Hellinger Discretization}
 %\label{alg:hellinger_disc}
-%Let $(\Lambda, B_{\Lambda, N_1}, \eta_{N_1} )$ and $(\Lambda, B_{\Lambda, N_2}, \eta_{N_2} )$ be given.\\
+%Let $(\pspace, B_{\pspace, N_1}, \eta_{N_1} )$ and $(\pspace, B_{\pspace, N_2}, \eta_{N_2} )$ be given.\\
 % 
 %Construct $f_{N_1}$ and $f_{N_2}$ and corresponding $\eta_1, \eta_2$ using Eq.~\eqref{eq:finiteradon} and Eq.~\eqref{eq:approxmeasure}, respectively.
 %
 %Use Monte Carlo sampling to approximate
-%$$ d^2_H(\eta_1, \eta_2) = \int_\Lambda \sqrt{f_{N_1}(\lambda}) - \sqrt{f_{N_2}(\lambda)} \, d\mu $$.
+%$$ d^2_H(\eta_1, \eta_2) = \int_\pspace \sqrt{f_{N_1}(\param}) - \sqrt{f_{N_2}(\param)} \, d\mu $$.
 %\end{algorithm}
 %
-%Since we now have a way to extend probability measures defined on $(\Lambda, \BBB_{\Lambda, N})$ to  probability measure on $(\Lambda, \BBB_{\Lambda})$, we can use simple Monte-Carlo approximation schemes to the Hellinger distance between two probability measures defined on two separate computational algebras. 
+%Since we now have a way to extend probability measures defined on $(\pspace, \BBB_{\pspace, N})$ to  probability measure on $(\pspace, \BBB_{\pspace})$, we can use simple Monte-Carlo approximation schemes to the Hellinger distance between two probability measures defined on two separate computational algebras. 
 %This is demonstrated in Algorithm~\ref{alg:hellinger_disc}.
 
 
