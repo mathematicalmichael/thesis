@@ -190,8 +190,8 @@ A thorough discussion of the choices involved in making such decisions is beyond
 
 
 
-\subsubsection{Descriptions of Error}\label{sec:error}
-We begin by assuming that $\PP_\dspace$ is absolutely continuous with respect to $\dmeas$, which allows us to describe $\PP_\dspace$ with a density $\rho_\dspace$. Then, for any partition $\set{D_i}_{i=1}^{M}$ of $\dspace$, 
+\subsection{Descriptions of Error}\label{sec:error}
+Recall that we assumed $\PP_\dspace$ is absolutely continuous with respect to $\dmeas$, which allows us to describe $\PP_\dspace$ with a density $\rho_\dspace$. Then, for any partition $\set{D_i}_{i=1}^{M}$ of $\dspace$, 
 \[
 \PP_\dspace (D_i) = \int_{D_i} \rho_\dspace \, \dmeas, \quad \text{ for } i = 1, \hdots, M.
 \]
@@ -270,5 +270,40 @@ Basic plotting functionality is demonstrated in iPython notebooks, which have se
 
 \
 \section{Illustrative Examples}
+
+%Then, we have by repeated application of the triangle inequality that
+%\begin{equation}
+%\label{eq:triangleineq}
+%d(P_{\Lambda, M, N, h}, P_\Lambda) \leq 
+%\underset{ \text{(E1)} }{\underbrace{d(P_{\Lambda, M, N, h}, P_{\Lambda, M, N})}} + 
+%\underset{ \text{(E2)} }{\underbrace{d(P_{\Lambda, M, N}, P_{\Lambda, M}) }}+ 
+%\underset{ \text{(E3)} }{\underbrace{d(P_{\Lambda, M}, P_\Lambda) }}.
+%\end{equation}
+%The term (E1) describes the effect of the error in the numerically evaluated $Q_j$ on the solution to the SIP. 
+%The term (E2) describes the effect of finite sampling error in $\Lambda$ on the solution to the SIP and (E3) describes the effect of discretization error of $P_\DDD$ on the solution to the SIP. 
+
+
+%In our examples, we do not work with any model and make observations $Q$ directly on the parameter space $\Lambda$, so term (E1) in Eq.~\eqref{eq:triangleineq} is identically zero for the examples we present in Section \ref{sec:results}.
+%Furthermore, since the probabilities we introduce on $\DDD$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function and so the solution to the SIP $P_\Lambda$ can be given exactly by a change of variables formula, which we present later. 
+%Generally, what we assume is that $M$ is chosen without respect to $N$ so that (E3) = $d(P_{\Lambda, M}, P_\Lambda)$ has been made sufficiently small. 
+%This effectively amounts to saying that the decision about how to discretize the uncertainty in $\DDD$ is made a priori to cater top some problem specifications. 
+%
+%Therefore, we focus our attention on the source of error introduced by $d(P_{\Lambda, M, N}, P_{\Lambda, M} )$, the primary contribution of error in Eq.~\eqref{eq:triangleineq}, which is given by the term $d(P_{\Lambda, M, N}, P_{\Lambda, M})$.
+%We have an interest in understanding what values of $N$ would be appropriate provided we want to resolve $d(P_{\Lambda, M, N}, P_{\Lambda, M})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
+%\begin{equation}\label{eq:newobjective}
+%d(P_{\Lambda, M, N}, P_{\Lambda,M}) < \tau,
+%\end{equation}
+%where $\tau$ is some designated tolerance.
+%
+%Recall that this discussion of error is in reference to some fixed $Q\in\QQQ$ to which Algorithm~\ref{alg:inv_density} is applied. 
+%The inequality presented in Eq.~\eqref{eq:triangleineq} holds for probability measures induced by any map in $\QQQ$, though we obscure the dependence on $Q$ for the time being. 
+%To this end, we introduce notation of the form $P_{\Lambda, M, N}^{Q}$ when we want to distinguish between measures constructed from inverting a particular map $Q\in\QQQ$. 
+%
+%The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $Q$ will influence the number of model solutions necessary to accurately solve the SIP. 
+%Different choices for $Q$ may lead to radically different values for $N$ in order to achieve the same bound on $d(P_{\Lambda, M, N}, P_{\Lambda, M})$, and it is the goal of this work to explore this relationship.
+%
+%The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\BBB_\Lambda$. 
+%By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
+%We investigate these differences in Section~\ref{sec:results} for some illustrative collection of linear maps $\QQQ$, but first we present a brief overview of the factors that influence our practical ability to accurately approximate $P_\Lambda$ using finite sampling.
 
 
