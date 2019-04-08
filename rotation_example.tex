@@ -1,0 +1,45 @@
+\subsection{Rotational Invariance}\label{ex:rotation}
+This example shows that if $\qoiA$ is defined by a rotation of $\qoiB$, then the accuracy and convergence rates of $\PP^{(a)}_{\pspace, M, N}$ are identical to $\PP^{(b)}_{\pspace, M, N}$. 
+We expect this to be true since skewness is rotationally invariant, as we summarize in the following Proposition. 
+\begin{prop}
+The quantity $S_Q(\param)$ is invariant under rotations performed on $\qoi$ for any $\param$. \\
+\label{prop:rot_invariance}
+\end{prop}
+\begin{proof}
+If we apply a rotation $Q$, then the $J_{Q, \param}$ are also subject to the same rotation at each $\param$. 
+Since rotations are unitary operators, the norms given in Eq.~\eqref{eq:skewness} used to define skewness are unaffected.
+\end{proof}
+
+To demonstrate this, we define the space of QoI maps $\qspace = \set{ \qoiA , \qoiB, \qoiC }$, where all three are linear maps with the same local skewness $S_Q (\param) = 1 \; \forall \param \in \pspace$. 
+The map $\qoiA$ is the identity and the other two, $\qoiB$ and $\qoiC$ are rotations of $\qoiA$ by randomly chosen angles.
+Following the algorithmic outline above, we perform a convergence study to $\PP_{\pspace,\bar{N}}$ with results summarized in Figure~\ref{fig:M1orth}.
+The convergence rates and expected errors in the SIPs associated with each of these maps are virtually indistinguishable. 
+Thus, it appears that in light of Proposition~\ref{prop:rot_invariance} and these numerical results, the accuracy of the numerical solution to the SIP is invariant under rotations to the QoI map.
+
+\begin{figure}[h]
+\begin{minipage}{.5\textwidth}
+\begin{table}[H]
+\begin{tabular}{ c | c | c | c }
+N & $\qoiA$ & $\qoiB$ & $\qoiC$\\ \hline \hline
+$200$ & $1.34E-01$ & $1.35E-01$ & $1.40E-01$\\ \hline 
+ 
+$400$ & $9.40E-02$ & $1.00E-01$ & $1.00E-01$\\ \hline 
+ 
+$800$ & $7.30E-02$ & $7.36E-02$ & $7.11E-02$\\ \hline 
+ 
+$1600$ & $5.08E-02$ & $5.13E-02$ & $4.96E-02$\\ \hline 
+ 
+$3200$ & $3.48E-02$ & $3.50E-02$ & $3.54E-02$\\ \hline 
+ 
+$6400$ & $2.56E-02$ & $2.53E-02$ & $2.51E-02$\\ \hline 
+\end{tabular}
+\end{table}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./images/Plot-orth-reg_BigN_40000_reg_M_1_rand_I_100000}
+\end{minipage}
+\caption{The results of $d^2_H(\PP_{\pspace, M, N}, \PP_{\pspace, \bar{N}})$.}
+\label{fig:M1orth}
+\end{figure}
+
+

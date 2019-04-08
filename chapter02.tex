@@ -42,8 +42,12 @@ The only assumption on $\qoi$ that we impose throughout this work is of piecewis
 %\end{split}
 %\end{equation}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \
-\section{Set-Based Inversion for Measures}
+\section{Set-Based Inversion for Measures}\label{sec:ch02-set}
 
 To properly summarize the Stochastic Inverse Problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme}\----borrowed from \cite{BM17}\----in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
 For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, \cite{BET+14}, and \cite{BM17}. 
@@ -229,9 +233,11 @@ d(P_{\pspace, M, N, h}, P_\pspace) \leq
 The term (E1) describes the effect of the error in the numerically evaluated $\qoi_j$ on the solution to the SIP. 
 The term (E2) describes the effect of finite sampling error in $\pspace$ on the solution to the SIP and (E3) describes the effect of discretization error of $\PP_\dspace$ on the solution to the SIP. 
 
+\subsection{Examples}
+\input{experimental_setup.tex}
+\input{rotation_example.tex}
 
-
-%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -241,6 +247,7 @@ The term (E2) describes the effect of finite sampling error in $\pspace$ on the 
 
 In place of the ansatz, we have an initial distribution.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \
 \section{Software Contributions}
