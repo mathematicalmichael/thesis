@@ -9,7 +9,7 @@ We focus on extending the DCI framework to situations where we want to answer a 
 \section{A Generalized Stochastic Map Framework}
 %% EDIT THE FOLLOWING BELOW!
 Such observable values of $u\lam$ are mathematically modeled by functionals of the solution, denoted $\obs_i: u\lam \to \RR$.
-The collection of such functionals into a vector defines a {\em Parameter-to-Observables} (PtO) map, denoted $\obs( u\lam )$ or $\obs\lam\in\RS$ for short. 
+The collection of such functionals into a vector defines a {\em Parameter-to-Observables} (PtO) map, denoted $\obs( u\lam )$ or $\obs\lam\in\RO$ for short. 
 
 The observable data is then naturally denoted as $\obs(\pspace)$, and any subsequent transformation of this vector (e.g. averaging, sub-selecting) is captured by the definition of a {\em Quantity of Interest} (QoI) map, denoted $\qoi$.
 
@@ -22,15 +22,35 @@ Set stage with the work Troy has been doing lately.
 
 More material from the paper, including sensitivity analysis with number of data points.
 
+\subsection{Numerical Approximations and Analysis}
+
+\subsection{Descriptions of Error}
+
+\subsection{Examples}
+
+Identity map that is growing. 
+
 \
 \section{Software Contributions}
 
 Module into BET (started off as CBayes, make footnote or include in appendix) that transforms time-series into QoI and performs data-consistent inversion.
+This is implemented as a ``mode'' in BET that can be triggered. 
+May or may not auto-detect when to use it? 
+
+How might ``the user'' interact with these sorts of problems where there is a large matrix of output data?
 
 \
 \section{Numerical Results and Analysis}
 
+\subsection{Parameter Estimation and Precision with Time-Series Models}
 Take the exponential decay problem and show what happens as we increase the number of data points.
+
+\subsubsection{Fixed-Time}
+NOTE: third column of the CSE poster goes here as one example (fixed interval of time).
+
+\subsubsection{Fixed-Frequency}
+Next example has fixed measurement frequency.
+
 
 First, in fixed-time window (say, [1,2]), then at fixed frequency, go up to 100 measurements. Show results.
 

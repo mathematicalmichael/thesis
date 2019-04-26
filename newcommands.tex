@@ -32,15 +32,41 @@
 % Standard Probability
 \DeclareMathOperator{\E}{\mathbb{E}}
 \newcommand{\PP}{\mathbb{P}}
+\newcommand{\PPspace}{\mathcal{P}}
+
+% Sets/Spaces
 \newcommand{\RR}{\mathbb{R}}
-\newcommand{\RP}{\mathbb{R}^P}
-\newcommand{\CC}{\mathcal{C}}
-\newcommand{\OO}{\mathcal{O}}
-\renewcommand{\LL}{\mathcal{L}}
-\newcommand{\VV}{\mathcal{V}}
+\newcommand{\OO}{\mathcal{O}} % sets of indices for set-based inversion alg
+\renewcommand{\LL}{\mathcal{L}} % transverse parameterization
+\newcommand{\VV}{\mathcal{V}} % voronoi
 \newcommand{\BB}{\mathcal{B}} % borel
-\newcommand{\RS}{\mathbb{R}^S}
-\newcommand{\RD}{\mathbb{R}^D}
+
+\newcommand{\CC}{\mathcal{C}} % contour symbol
+\newcommand{\cborel}{\CC_{\pspace}} % contour sigma algebra
+\DeclareMathOperator*{\contourP}{\PP_{\cborel}}
+
+\DeclareMathOperator*{\paramP}{\PP_{\pspace}}
+\DeclareMathOperator*{\dataP}{\PP_{\dspace}}
+
+\newcommand{\nparams}{P}
+\newcommand{\RP}{\RR^\nparams} % parameter space dimensions
+\newcommand{\iparam}{i} % index into parameter space
+\newcommand{\nsamps}{N} % num samples 
+
+\newcommand{\ndata}{D} % num data points collected for each observable
+\newcommand{\RD}{\RR^\ndata} % data space dimensions
+\newcommand{\idata}{j} % index into data
+
+% Sample-Based
+\newcommand{\nobs}{O} % number of observables
+\newcommand{\iobs}{k} % index into QoI
+\newcommand{\RO}{\RR^\nobs} % qoi data space dimensions
+
+% Set-Based
+\newcommand{\ndiscs}{M} % number of cells used to discretize data space
+\newcommand{\idisc}{k} % index into it
+
+
 \newcommand{\sa}{\sigma\text{-algebra}}
 \newcommand{\Chi}{\mbox{\LARGE$\chi$}}
 
@@ -68,6 +94,7 @@
 \newcommand{\dmeas}{\mu_{\dspace}}
 \newcommand{\dborel}{\BB_{\dspace}}
 \newcommand{\Dspace}{(\dspace, \dborel, \dmeas)}
+
 
 % Labeled QoI maps
 \newcommand{\qoiA}{\qoi^{(a)}}

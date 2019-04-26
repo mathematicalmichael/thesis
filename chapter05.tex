@@ -1,3 +1,29 @@
 \chapter{\uppercase{Research Directions} \label{chapter:05}}
 
 Summary of NSF project, some OED stuff perhaps, functional assimilation.
+
+\section{Addressing Model Assumptions}\label{sec:ch05-variance}
+
+What if we don't know the variance? How does mis-estimating it affect our solutions? 
+
+Multiplicative noise - handled in a straightforward way, maybe put an example here and leave it at that? Put it in appendix? 
+
+
+\section{Leveraging Data in Different Ways}\label{sec:ch05-data}
+
+This section is effectively addressing how to use more data in different ways.
+
+Would be nice to see a data-driven map done with the set-based framework first as an example.
+May be appropriate in example for Ch 4. 
+
+\section{Optimal Experimental Design}\label{sec:ch05-oed}
+
+Algorithm for sequentially choosing QoI, brief discussion of tradeoffs of accuracy/precision.
+
+\section{Sequential Inversion}\label{sec:ch05-sequential}
+
+Outline the idea, maybe demonstrate an example. One in set-based, one in sample-based, with the quintic map???
+
+\section{Machine-Learning Enhancements}\label{sec:ch05-ml}
+
+how can we automate this process? Some mixture of sequential (how can we incorporate a new data point? start over? re-solve the problem? what's the cost?) approximations, maybe switching between the two approaches (set-based to reduce the parameter space, use that as the new initial). 

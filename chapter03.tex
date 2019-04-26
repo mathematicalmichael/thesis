@@ -6,7 +6,7 @@ However, the results hold for any attempt to approximate densities defined on se
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected. 
 
 
-\subsection{Skewness and Information Content}\label{sec:skewness}
+\section{Skewness and Information Content}\label{sec:skewness}
 In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ was introduced, quantified, and related to the accuracy in solving the SIP with a finite number of samples.
 Essentially, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$. 
 An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\PP_\pspace$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy was proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
@@ -120,63 +120,21 @@ Then, there exists a probability measure $\eta$ on $(\pspace, \BB_\pspace)$ such
 \end{lem}
 In the proof below, we use $\eta_N$ and $\mu$ to construct a type of ``discrete'' Radon-Nikodym derivative of $\eta$. 
 This is motivated by the formal structure of solutions given by Algorithm~\ref{alg:inv_density}.
-\begin{proof}
-Let
+The proof of Lemma~\ref{lem:measuresets} can be found in Appendix~\ref{app:measuresets}, but the two key equations involved are reproduced here for later reference:
+
 \begin{equation}\label{eq:finiteradon}
 f_N (\param) = \sum_{j=1}^{N} \frac{\eta_N (\VV^{(j)}) }{\mu (\VV^{(j)})} \Chi_{\VV^{(j)}} (\param).
 \end{equation}
+
 Then, for any $A\in\BB_\pspace$, define
+
 \begin{equation}\label{eq:approxmeasure}
 \eta (A) = \int_A f_N (\param) \, d\mu.
 \end{equation}
-We verify that $\eta$ is a probability measure on $(\pspace, \BB_\pspace)$ and that $\eta(A) = \eta_N(A) \; \forall \; A\in\BB_{\pspace, N}$ below:
-\begin{itemize}
-\item[(i)][Positive]
-Let $A\in \BB_{\pspace}$.
-\begin{equation*}
-\begin{split}
-\eta (A) &= \int_A f_N (\param) \, d\mu \\
-&=  \int \Chi_A \sum_{j=1}^{N} \frac{\eta_N (\VV^{(j)}) }{\mu (\VV^{(j)})} \Chi_{\VV^{(j)}} (\param) \, d\mu \\
-&= \sum_{j=1}^{N} \left ( \frac{\eta_N (\VV^{(j)}) }{\mu (\VV^{(j)})} \int \Chi_{A\cap\VV^{(j)}} (\param) \, d\mu \right ) \\
-&= \sum_{j=1}^{N} \left ( \frac{\eta_N (\VV^{(j)}) }{\mu (\VV^{(j)})} \mu\left (A\cap\VV^{(j)}\right ) \right ) \geq 0
-\end{split}
-\end{equation*}
-
-\item[(ii)][Definite]
-\begin{equation*}
-\eta (\nullset) = \int_\nullset f_N (\param) \, d\mu =\int \Chi_\nullset f_N (\param) \, d\mu = \mu(\nullset) = 0
-\end{equation*}
-
-\item[(iii)][Countably Additive]
-Let $\set{A_k}_{k=1}^{\infty} \subset \BB_{\pspace}$.
-\begin{equation*}
-\begin{split}
-\eta (\cup_k A_k) &= \int_{\cup_k A_k} f_N (\param) \, d\mu 
-= \int \Chi_{\cup_k A_k} f_N (\param) \, d\mu \\
-&= \int \left( \sum_k \Chi_{A_k} \right ) f_N (\param) \, d\mu
-=   \sum_k \int \Chi_{A_k} f_N (\param) \, d\mu \\
-&=   \sum_k \int_{A_k} f_N (\param) \, d\mu = \sum_k \eta(A_k)
-\end{split}
-\end{equation*}
-
-
-\noindent Finally, let $A\in\BB_{\pspace, N}\subset \BB_\pspace$. 
-Then there exists some $j^* \in \set{1,2, \cdots, N}$ such that $\VV^{(j^*)} = A$. 
-We have that
-\begin{equation*}
-\begin{split}
-\eta (A) &= \int_A f_N (\param) \, d\mu
-=  \int \sum_{j=1}^{N} \left ( \frac{\eta_N (\VV^{(j)}) }{\mu (\VV^{(j)})} \Chi_{\VV^{(j)}}\right ) \Chi_{\VV^{(j^*)}} \, d\mu \\
-&= \int \frac{\eta_N (\VV^{(j^*)}) }{\mu (\VV^{(j^*)})} \Chi_{\VV^{(j^*)}} \, d\mu
-= \frac{\eta_N (\VV^{(j^*)}) }{\mu (\VV^{(j^*)})} \mu (\VV^{(j^*)}) \\
-&= \eta_N (\VV^{(j^*)}) = \eta_N (A). 
-\end{split}
-\end{equation*}
-
-\end{itemize}
-\end{proof}
 
 We note that in practice, $\Chi_{\VV^{(j)}} (\param)$ requires the use of nearest-neighbor computations, but otherwise evaluation of Eq.~\eqref{eq:finiteradon} is straightforward to compute.
+With that established, we now present the algorithm used for approximating the distances between pairs of measures (with the computational implementation discussed in \ref{sec:ch03-software}.
+
 
 \begin{algorithm}
 \DontPrintSemicolon
@@ -194,6 +152,10 @@ Since we now have a way to extend probability measures defined on $(\pspace, \BB
 This is demonstrated in Algorithm~\ref{alg:hellinger_disc}.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{experimental_setup.tex}
+
+\input{rotation_example.tex}
 \input{skew_example.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,18 +171,27 @@ Focus on linear problems. One or two examples (perhaps use that skew-map with 1 
 \subsection{A Sample-Based Solution}\label{eq:sampleskew}
 
 Here we solve the problems in Examples~\ref{ex:skewness} and~\ref{ex:3dmap}, except in the framework of the Sample-Based Inversion outlined in \ref{sec:ch02-sample}.
+Effect of Skewness appears to be mitigated.
 \vfill{10in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \
-\section{Software Contributions}
+\section{Software Contributions}\label{sec:ch03-software}
 
 Talk about the BET module that computes metrics.
 Discuss testing, show sample of usage (disconnected from skewness, high-level).
 
 \
-\section{Numerical Results and Analysis}
+\section{Numerical Results and Analysis}\label{sec:ch03-approx}
+
+\subsection{Convergence with Repeated Observations}
+2D but with repeated data, show how the measures converge. Should be identical to the differences in the observed densities. 
+
+\subsection{Nonlinear Example}
+Maybe heatrod here?
+
+%%%%%%%%%%%%%%
 
 Pick an ODE problem and show how the results look like (assimilating as many data points as inputs, if using time-series model). 
 
