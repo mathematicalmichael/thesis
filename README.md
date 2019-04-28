@@ -4,5 +4,5 @@
 Template based on [this repository](github.com/dewittpe/ucd-dissertation-template).
 
 Once cloned, run `make dissertation.tex` to build the PDF.
-Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `View PDF Preview`(as per usual, it may take several builds for all citations and references to link properly). 
+Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `Show LaTeX Preview`(as per usual, it may take several builds for all citations and references to link properly). 
 
