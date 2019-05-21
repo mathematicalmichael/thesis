@@ -22,7 +22,23 @@ Set stage with the work Troy has been doing lately.
 
 More material from the paper, including sensitivity analysis with number of data points.
 
+Theory... TK - closed form in 1D
+
+
+\subsection{Extension to Multiple Quantities of Interest}
+
+This kind of brings us back around to the topic of skewness and OED. Don't get too involved, but do mention it and follow up in the OED discussion in later chapter.
+
+For now, here is basically what needs to be the takeaway: 
+
+TK - when you have more than 1 QoI, you can just collapse all the information into one. This doesn't really respect units or differences in information sources, requires minor modification wherein you divide by each variance.
+
+TK - The other option is to iterate between them and converge towards an intersection. What happens when we have error is that the intersection of any pair may be in different places. Less error = less variability in this regard. Algorithmically, we bounce around in that region, trading off precision (each step loses accuracy in prior directions in favor of increased accuracy of another). 
+
 \subsection{Numerical Approximations and Analysis}
+
+
+TK - If you do not know the variance of your data, then you can approximate it. The theory that comes from this is 
 
 \subsection{Descriptions of Error}
 
