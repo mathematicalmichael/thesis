@@ -274,7 +274,7 @@ d(\PP_{\pspace, \ndiscs, \nsamps, h}, \paramP) \leq
 \end{equation}
 
 Talk more about it.
- 
+
 \vspace{2in}
 
 \subsection{Example}\label{sec:sample-example}
@@ -311,28 +311,28 @@ Basic plotting functionality is demonstrated in iPython notebooks, which have se
 
 \
 \section{Illustrative Examples}\label{sec:ch02-examples}
-%In our examples, we do not work with any model and make observations $Q$ directly on the parameter space $\pspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:results}.
-%Furthermore, since the probabilities we introduce on $\DDD$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function and so the solution to the SIP $\paramP$ can be given exactly by a change of variables formula, which we present later. 
-%Generally, what we assume is that $M$ is chosen without respect to $N$ so that (E3) = $d(P_{\pspace, M}, P_\pspace)$ has been made sufficiently small. 
-%This effectively amounts to saying that the decision about how to discretize the uncertainty in $\DDD$ is made a priori to cater top some problem specifications. 
-%
-%Therefore, we focus our attention on the source of error introduced by $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, M} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, M})$.
-%We have an interest in understanding what values of $N$ would be appropriate provided we want to resolve $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, M})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
-%\begin{equation}\label{eq:newobjective}
-%d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace,M}) < \tau,
-%\end{equation}
-%where $\tau$ is some designated tolerance.
-%
-%Recall that this discussion of error is in reference to some fixed $Q\in\QQQ$ to which Algorithm~\ref{alg:inv_density} is applied. 
-%The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\QQQ$, though we obscure the dependence on $Q$ for the time being. 
-%To this end, we introduce notation of the form $P_{\pspace, \ndiscs, \nsamps}^{Q}$ when we want to distinguish between measures constructed from inverting a particular map $Q\in\QQQ$. 
-%
-%The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $Q$ will influence the number of model solutions necessary to accurately solve the SIP. 
-%Different choices for $Q$ may lead to radically different values for $N$ in order to achieve the same bound on $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, M})$, and it is the goal of this work to explore this relationship.
-%
-%The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\BBB_\pspace$. 
-%By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
-%We investigate these differences in Section~\ref{sec:results} for some illustrative collection of linear maps $\QQ$, but first we present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ using finite sampling.
+In our examples, we do not work with any model and make observations $\qoi$ directly on the parameter space $\pspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:results}.
+Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function and so the solution to the SIP $\paramP$ can be given exactly by a change of variables formula, which we present later. 
+Generally, what we assume is that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(P_{\pspace, \ndiscs}, P_\pspace)$ has been made sufficiently small. 
+This effectively amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater top some problem specifications. 
+
+Therefore, we focus our attention on the source of error introduced by $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$.
+We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
+\begin{equation}\label{eq:newobjective}
+d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace,\ndiscs}) < \tau,
+\end{equation}
+where $\tau$ is some designated tolerance.
+
+Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied. 
+The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being. 
+To this end, we introduce notation of the form $P_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$. 
+
+The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP. 
+Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
+
+The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$. 
+By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
+We investigate these differences in Section~\ref{sec:results} for some illustrative collection of linear maps $\qoi$, but first we present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ using finite sampling.
 
 \input{exponential_decay}
 \input{nonlinear_example}
