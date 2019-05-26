@@ -13,7 +13,7 @@ If using [Atom](https://atom.io/), here are the packages I installed in order to
   - atom-latex [0.8.5]
   - language-latex [1.2.0]
 
-The following were simply for visual purposes (bold = highly recommend):
+The following were simply for visual purposes (italics = highly recommend):
   - *minimap*
   - *minimap-highlight-selected*
   - minimap-selection
