@@ -18,6 +18,7 @@ The following were simply for visual purposes (bold = highly recommend):
   - *minimap-highlight-selected*
   - minimap-selection
   - minimap-autohide
+  - minimap-lens
   - *highlight-selected*
   - highlight-line
   - *multi-cursor*
