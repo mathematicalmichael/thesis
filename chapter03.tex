@@ -92,20 +92,16 @@ Each $S_k$ induces a computational algebra which we index using the notation $\B
 This poses an immediate problem with respect to a computational approach to computing $d_H$: how do we compare measures $\PP_{\pspace, M, N_1}$ and $\PP_{\pspace, M, N_2}$ which may be defined on completely different computational algebras (even if $N_1=N_2$)?
 See Figure~\ref{fig:voronoi_issues} for an illustration of such a scenario.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 	\begin{minipage}{.4875\textwidth}
 		\includegraphics[width=\linewidth]{./images/voronoi_diagram_N25_r0}
 	\end{minipage}
-%	\begin{minipage}{.3\textwidth}
-%		\includegraphics[width=\linewidth]{./images/voronoi_diagram_N500_r50}
-%	\end{minipage}
 		\begin{minipage}{.4875\textwidth}
 		\includegraphics[width=\linewidth]{./images/voronoi_diagram_N25_r10}
 	\end{minipage}
 \caption{
-Two different Voronoi partitions induced by $N_1 = N_2 = 25 $ uniform i.i.d.~random samples. 
-%Center:  A possibly over-resolved reference generated using $N_2 = 500$. We want the ability to seamlessly compare measures defined on any such two discretizations as inputs to a metric.
+Two different Voronoi partitions induced by $\nsamps_1 = \nsamps_2 = 25 $ uniform i.i.d.~random samples. 
 }
 \label{fig:voronoi_issues}
 \end{figure}
