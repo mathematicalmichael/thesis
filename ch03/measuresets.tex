@@ -1,0 +1,56 @@
+\section{Proof of Lemma~\ref{lem:measuresets}}\label{app:measuresets}
+\begin{proof}
+Let
+\begin{equation}
+f_\nsamps (\param) = \sum_{\iparam=1}^{\nsamps} \frac{\eta_\nsamps (\VV^{(\iparam)}) }{\mu (\VV^{(\iparam)})} \Chi_{\VV^{(\iparam)}} (\param).
+\end{equation}
+Then, for any $A\in\BB_\pspace$, define
+\begin{equation}
+\eta (A) = \int_A f_\nsamps (\param) \, d\mu.
+\end{equation}
+We verify that $\eta$ is a probability measure on $(\pspace, \BB_\pspace)$ and that $\eta(A) = \eta_\nsamps(A) \; \forall \; A\in\BB_{\pspace, \nsamps}$ below:
+\begin{itemize}
+\item[(i)][Positive]
+Let $A\in \BB_{\pspace}$.
+\begin{equation*}
+\begin{split}
+\eta (A) &= \int_A f_\nsamps (\param) \, d\mu \\
+&=  \int \Chi_A \sum_{\iparam=1}^{\nsamps} \frac{\eta_\nsamps (\VV^{(\iparam)}) }{\mu (\VV^{(\iparam)})} \Chi_{\VV^{(\iparam)}} (\param) \, d\mu \\
+&= \sum_{\iparam=1}^{\nsamps} \left ( \frac{\eta_\nsamps (\VV^{(\iparam)}) }{\mu (\VV^{(\iparam)})} \int \Chi_{A\cap\VV^{(\iparam)}} (\param) \, d\mu \right ) \\
+&= \sum_{\iparam=1}^{\nsamps} \left ( \frac{\eta_\nsamps (\VV^{(\iparam)}) }{\mu (\VV^{(\iparam)})} \mu\left (A\cap\VV^{(\iparam)}\right ) \right ) \geq 0
+\end{split}
+\end{equation*}
+
+\item[(ii)][Definite]
+\begin{equation*}
+\eta (\nullset) = \int_\nullset f_\nsamps (\param) \, d\mu =\int \Chi_\nullset f_\nsamps (\param) \, d\mu = \mu(\nullset) = 0
+\end{equation*}
+
+\item[(iii)][Countably Additive]
+Let $\set{A_k}_{k=1}^{\infty} \subset \BB_{\pspace}$.
+\begin{equation*}
+\begin{split}
+\eta (\cup_k A_k) &= \int_{\cup_k A_k} f_\nsamps (\param) \, d\mu
+= \int \Chi_{\cup_k A_k} f_\nsamps (\param) \, d\mu \\
+&= \int \left( \sum_k \Chi_{A_k} \right ) f_\nsamps (\param) \, d\mu
+=   \sum_k \int \Chi_{A_k} f_\nsamps (\param) \, d\mu \\
+&=   \sum_k \int_{A_k} f_\nsamps (\param) \, d\mu = \sum_k \eta(A_k)
+\end{split}
+\end{equation*}
+
+
+\noindent Finally, let $A\in\BB_{\pspace, \nsamps}\subset \BB_\pspace$.
+Then there exists some $\iparam^* \in \set{1,2, \cdots, \nsamps}$ such that $\VV^{(\iparam^*)} = A$.
+We have that
+\begin{equation*}
+\begin{split}
+\eta (A) &= \int_A f_\nsamps (\param) \, d\mu
+=  \int \sum_{\iparam=1}^{\nsamps} \left ( \frac{\eta_\nsamps (\VV^{(\iparam)}) }{\mu (\VV^{(\iparam)})} \Chi_{\VV^{(\iparam)}}\right ) \Chi_{\VV^{(\iparam^*)}} \, d\mu \\
+&= \int \frac{\eta_\nsamps (\VV^{(\iparam^*)}) }{\mu (\VV^{(\iparam^*)})} \Chi_{\VV^{(\iparam^*)}} \, d\mu
+= \frac{\eta_\nsamps (\VV^{(\iparam^*)}) }{\mu (\VV^{(\iparam^*)})} \mu (\VV^{(\iparam^*)}) \\
+&= \eta_\nsamps (\VV^{(\iparam^*)}) = \eta_\nsamps (A).
+\end{split}
+\end{equation*}
+
+\end{itemize}
+\end{proof}

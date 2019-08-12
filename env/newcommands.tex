@@ -10,7 +10,7 @@
 % * A     Another item
 \newcommand{\itembox}[1]{\item {\makebox[0.25in]{#1 \hfill}}}
 
-% Abbreviations 
+% Abbreviations
 \newcommand{\ie}{{\itshape i.e.}}
 \newcommand{\eg}{{\itshape e.g.}}
 
@@ -34,6 +34,14 @@
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\PPspace}{\mathcal{P}}
 
+
+% indices into sets/spaces
+\newcommand{\iparam}{i} % index into parameter space (num samples)
+\newcommand{\imesh}{h} % index into mesh/model refinement sequence
+\newcommand{\iobs}{k} % index into QoI
+\newcommand{\idisc}{k} % index into output discretization
+\newcommand{\idata}{j} % index into data (target)
+
 % Sets/Spaces
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\OO}{\mathcal{O}} % sets of indices for set-based inversion alg
@@ -50,28 +58,24 @@
 
 \newcommand{\nparams}{P}
 \newcommand{\RP}{\RR^\nparams} % parameter space dimensions
-\newcommand{\iparam}{i} % index into parameter space
-\newcommand{\nsamps}{N} % num samples 
+\newcommand{\nsamps}{N} % num samples
 
 \newcommand{\ndata}{D} % num data points collected for each observable
 \newcommand{\RD}{\RR^\ndata} % data space dimensions
-\newcommand{\idata}{j} % index into data
 
 % Sample-Based
 \newcommand{\nobs}{O} % number of observables
-\newcommand{\iobs}{k} % index into QoI
 \newcommand{\RO}{\RR^\nobs} % qoi data space dimensions
 
 % Set-Based
 \newcommand{\ndiscs}{M} % number of cells used to discretize data space
-\newcommand{\idisc}{k} % index into it
-
 
 \newcommand{\sa}{\sigma\text{-algebra}}
 \newcommand{\Chi}{\mbox{\LARGE$\chi$}}
 
 \newcommand{\Rho}{\mbox{\LARGE$\rho$}}
 \newcommand{\Nu}{\mbox{\Large$\nu$}}
+
 
 % Data-Consistent Inversion Framework
 \newcommand{\dimP}{P}
@@ -107,7 +111,7 @@
 \newcommand{\lam}{\left ( \param \right ) }
 \newcommand{\qoi}{Q}
 \newcommand{\qlam}{\qoi\lam}
-\DeclareMathOperator*{\M}{\mathcal{M}}
+\newcommand{\M}{\mathcal{M}}
 
 \DeclareMathOperator*{\observedP}{\PP_{ob}}
 \DeclareMathOperator*{\observed}{\pi_{ob}}
