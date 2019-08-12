@@ -10,7 +10,7 @@ import argparse
 # parameter domain
 lam_domain= np.array([[0.0, 1.0],
                       [0.0, 1.0]])
-                      
+
 label_fsize = 24
 tick_fsize = 16
 num_ticks = 5
@@ -110,20 +110,20 @@ def voronoi_finite_polygons_2d(vor, radius=None):
 
 ############################################################
 
-def voronoi_diagram(num_samples=25, r_seed=10, 
+def voronoi_diagram(num_samples=25, r_seed=10,
                     png=False, show_labels=True):
     np.random.seed(r_seed)
     # labels, plots, etc. assume dimension = 2.
     samples = np.random.random([num_samples, 2])
     plt.figure()
-    
+
     vor = Voronoi(samples)
     regions, vertices = voronoi_finite_polygons_2d(vor)
-    
+
     for i in range(samples.shape[0]):
         polygon = vertices[regions[i]]
         plt.fill(*zip(*polygon), alpha=0.075, color='k')
-        
+
     #plt.xlim(vor.min_bound[0], vor.max_bound[0])
     #plt.ylim(vor.min_bound[1], vor.max_bound[1])
     plt.xlim(lam_domain[0,0], lam_domain[0,1])
@@ -145,16 +145,19 @@ def voronoi_diagram(num_samples=25, r_seed=10,
     plt.tight_layout()
 
     if png:
-        plt.savefig('voronoi_diagram_N%d_r%d%s.png'%(num_samples, r_seed, labels), dpi=600)
+        savename = 'voronoi_diagram_N%d_r%d%s.png'%(num_samples, r_seed, labels)
+        plt.savefig(savename, dpi=600, bbox_inches='tight')
     else:
-        plt.savefig('voronoi_diagram_N%d_r%d%s.pdf'%(num_samples, r_seed, labels), bbox_inches='tight')
-    
+        savename = 'voronoi_diagram_N%d_r%d%s.pdf'%(num_samples, r_seed, labels)
+        plt.savefig(savename, bbox_inches='tight')
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--num', default=25)
-    parser.add_argument('--seed', default=0)
-    parser.add_argument('--png', action='store_true')
-    parser.add_argument('--nolabel', action='store_false')
+    desc = 'Make voronoi-cell diagrams with uniform random samples in a 2D unit domain.'
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('-n','--num', default=25, help='Set number of cells (default: 25)')
+    parser.add_argument('-s','--seed', default=21, help='Set random seed (default: 21).')
+    parser.add_argument('--png', action='store_true', help='Store as png instead of pdf.')
+    parser.add_argument('--nolabel', action='store_false', help='Strip figures of labels.')
     args = parser.parse_args()
     num_samples, r_seed = int(args.num), int(args.seed)
     png, show_label = args.png, args.nolabel
