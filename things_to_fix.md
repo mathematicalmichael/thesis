@@ -80,6 +80,7 @@
 - [ ] missing pretty much everything. can start filling in theory based on the poster content.
 
 # other
+- [ ] find the table-generating scripts
 - [ ] measuresets.tex (proof of Lemma about computational sa)
 - [ ] skew_example_3d.tex (dependence on dimension)
   - [ ] needs notational changes
