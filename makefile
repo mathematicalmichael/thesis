@@ -6,10 +6,10 @@ REFS = $(shell find . -type f -name 'references*.bib')
 
 all: dissertation.pdf
 
-dissertation.pdf: dissertation.tex *.tex $(CHAPTERS) $(APPENDIX) $(REFS) newcommands.tex outline.tex ucdenver-dissertation.cls
+dissertation.pdf: dissertation.tex *.tex $(CHAPTERS) $(APPENDIX) $(REFS) ucdenver-dissertation.cls
 	latexmk -gg -pdf -bibtex dissertation.tex
 
 clean:
-	latexmk -c dissertation.tex 
+	latexmk -c dissertation.tex
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
