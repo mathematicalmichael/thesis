@@ -80,5 +80,13 @@
 - [ ] missing pretty much everything. can start filling in theory based on the poster content.
 
 # other
-- [ ] measuresets.tex and dependence on dimension (skew_example_3d.tex)
-- [ ] need notational change
+- [ ] measuresets.tex (proof of Lemma about computational sa)
+- [ ] skew_example_3d.tex (dependence on dimension)
+  - [ ] needs notational changes
+- [ ] rotation_example.tex (move, update)
+- [ ] skew_example.tex (move, update)
+- [ ] clean up notation.tex
+- [X] heat_1drod_set_vs_sample.tex (remove extra)
+- [ ] experimental_setup.tex
+- [ ] usepackages.tex (move stuff into it?)
+- [ ] abstract.tex
