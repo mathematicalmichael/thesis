@@ -1,7 +1,7 @@
 *.bbl
 *.blg
 *.aux
-*.pdf
+dissertation.pdf
 *.fdb_latexmk
 *.lot
 *.lof
