@@ -82,19 +82,19 @@ Dr.~Jimmy Lee Kim
 \begin{document}
 \chead{\color{red} DRAFT. Last compiled at \currenttime \ on \today }
 
-\input{chapter01.tex}
-\input{chapter02.tex}
-\input{chapter03.tex}
-\input{chapter04.tex}
-\input{chapter05.tex}
+\input{chapter01}
+\input{chapter02}
+\input{chapter03}
+\input{chapter04}
+\input{chapter05}
 
 % ---------------------------------------------------------------------------- %
 \renewcommand\bibname{REFERENCES}
 \singlespacing
 
 \nocite{*}
-\bibliographystyle{ucdDissertation}
-\bibliography{references,references-code}
+\bibliographystyle{ref/ucdDissertation}
+\bibliography{ref/references,ref/references-code}
 
 \doublespacing
 
@@ -107,17 +107,11 @@ Dr.~Jimmy Lee Kim
 
 % ---------------------------------------------------------------------------- %
 % additional appendices
-%\input{appendix01.tex}
-
-%\input{appendix02.tex}
-
-%\input{appendix03.tex}
-\input{measuresets.tex}
-\input{skew_example_3d.tex}
-
-%\input{appendix04.tex}
-
-%\input{appendix05.tex}
+\input{ch01/appendix01}
+\input{ch02/appendix02}
+\input{ch03/appendix03}
+\input{ch04/appendix04}
+\input{ch05/appendix05}
 
 % ---------------------------------------------------------------------------- %
 \end{document}
