@@ -127,8 +127,8 @@ Thus, we have defined a unique solution to the SIP on ${(\pspace, \pborel)}$, co
 \subsection{Numerical Approximation and Analysis}\label{sec:set-approx}
 In the \emph{set-based} inversion framework, there are two primary sources of approximation error:
 \begin{description}[leftmargin=!, labelwidth=0.7in]
-  \item[(1)] partitioning the parameter space $\pspace$ to approximate events in $\cborel$ and $\pborel$, and
-  \item[(2)]  partitioning the data space $\dspace$ to approximate events in $\dborel$.
+  \item[(1)] partitioning the parameter space $\pspace$ to approximate events in $\cborel$ (and consequently, $\pborel$), and
+  \item[(2)] partitioning the data space $\dspace$ to approximate events in $\dborel$.
 \end{description}
 In practice, we must rely on a finite numerical approximation of the (often uncountable) events in the $\sa$s $\dborel$, $\cborel$, and $\pborel$.
 Owing to the inclusion $\cborel \subset \pborel$, it is possible to approximate events in both of these $\sa$s simultaneously.
@@ -201,11 +201,11 @@ Here, the $h$ is in reference to a mesh or other numerical parameter that determ
 
 We assume that $h$ is tunable so that
 \[
-\lim\limits_{h \downarrow 0} \PP_{\pspace, \ndiscs, \nsamps, h} = \PP_{\pspace, \ndiscs, \nsamps}.
+\lim\limits_{h \downarrow 0} \PP_{\pspace, \ndiscs, \nsamps, \imesh} = \PP_{\pspace, \ndiscs, \nsamps}.
 \]
-In \cite{BM17}, the focus was on proving the convergence of $\PP_{\pspace, \ndiscs, \nsamps, h} (A) \to \paramP (A)$ for some $A\in \pborel$ and on estimating the error in $\PP_{\pspace, \ndiscs, \nsamps, h}(A)$.
-There, as well as in \cite{BGE+15}, adjoint-based a posteriori estimates in the computed QoI are combined with a statistical analysis to both estimate and bound the error in $\PP_{\pspace, \ndiscs, \nsamps, h} (A)$.
-In \cite{BM17}, adjoints were used to compute both error and derivative estimates of $\qoi(\param^{(\iparam)})$ to improve the accuracy in $\PP_{\pspace, \ndiscs, \nsamps, h} (A)$.
+In \cite{BM17}, the focus was on proving the convergence of $\PP_{\pspace, \ndiscs, \nsamps, \imesh} (A) \to \paramP (A)$ for some $A\in \pborel$ and on estimating the error in $\PP_{\pspace, \ndiscs, \nsamps, h}(A)$.
+There, as well as in \cite{BGE+15}, adjoint-based a posteriori estimates in the computed QoI are combined with a statistical analysis to both estimate and bound the error in $\PP_{\pspace, \ndiscs, \nsamps, \imesh} (A)$.
+In \cite{BM17}, adjoints were used to compute both error and derivative estimates of $\qoi(\param^{(\iparam)})$ to improve the accuracy in $\PP_{\pspace, \ndiscs, \nsamps, \imesh} (A)$.
 However, no work has to date fully explored the \emph{convergence rates} of Algorithm \ref{alg:inv_density}.
 Furthermore, no work has yet to establish that these rates are independent of the choice of QoI map despite other studies establishing that the absolute error is very much affected by the geometric properties of the QoI maps \cite{BE13}.
 
@@ -229,10 +229,11 @@ The term (E2) describes the effect of finite sampling error in $\pspace$ on the 
 
 2D identity map, known observed (square in center with area 1/100, i.e. density value of 100).
 
+Been working on this example ... except for sample-based. make an analogous one for set-based.
+
 \vspace{3in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 \
@@ -279,7 +280,8 @@ Talk more about it.
 
 \subsection{Example}\label{sec:sample-example}
 Identity Map in two dimensions
-\vspace{3in}
+
+\input{ch02/identity_sampling}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -294,7 +296,7 @@ The purpose of this open-source software package was to implement the methods fi
 
 In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]).
 
-\subsection{Upgrades and Updates}
+\subsection{Upgrades, Updates, and Features}
 Since the last major release [TK - cite latest release], the Python community announced the end of long-term support for Python 2 [TK - cite announcement].
 Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
 
@@ -302,14 +304,23 @@ The work summarized in Section~\ref{sec:ch02-sample} was implemented in Python 3
 Since that code was used for many of the results that constituted the preliminary results for this work, it made very litle sense to re-implement them in Python 2 for BET given the recent trends in community development.
 With funding made available through NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice.
 
+\subsubsection{Version 2.1.0}
 The upgrade to Python 3.4+ began in January 2019 as a first step to incorporate the new sample-based method into BET.
 It was completed in late February.
-Major release 2.1.0 [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version.
+Major (minor? version? TK) release 2.1.0 [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version.
 Future installations (starting in 2020) will not limit the versions of some core dependencies in order to accomodate backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}), since this would likely downgrade previously installed software for end-users.
 
-\subsection{New Features}
-Several releases of BET after 2.1.0 incorporated developments that will be discussed herein.
+\subsubsection{Version 2.2.0}
+Several releases of BET (after the upgrade to Python 3 in v2.1.0), incorporated developments that will be discussed herein.
 For
+
+\subsubsection{Version 2.2.1}
+Major bugfix for parallel testing allowed tests to pass for more than 2 processors.
+For some tests, this involved changing the setup parameters to ensure the problem was large enough to break up onto up to 8 processors.
+For others, siginficant changes had to be made to structure to allow for proper saving and loading of files in parallel.
+
+\subsubsection{Version 2.3.0}
+This release incorporated the sampling-based approach first dicussed in Section~\ref{sec:ch02-sec:ch02-sample}.
 
 \subsection{Examples in BET}
 Basic plotting functionality of BET is demonstrated in iPython notebooks [TK - some kind of citation here], which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
