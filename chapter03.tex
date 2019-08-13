@@ -179,10 +179,29 @@ Discuss testing, show sample of usage (disconnected from skewness, high-level).
 
 
 \
-\section{Numerical Results and Analysis}\label{sec:ch03-approx}
+\section{Numerical Results and Analysis}\label{sec:ch03-examples}
+
+
+We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
+\begin{equation}\label{eq:newobjective}
+d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
+\end{equation}
+where $\tau$ is some designated tolerance.
+
+Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
+The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
+To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
+
+The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
+Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
+
+The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
+By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
+
 
 \subsection{Convergence with Repeated Observations}
-2D but with repeated data, show how the measures converge. Should be identical to the differences in the observed densities.
+2D but with repeated data, show how the measures converge. Should be identical to the differences in the observed densities (in metric).
+use linear maps here
 
 \subsection{Nonlinear Example}
 Maybe heatrod here?
@@ -194,7 +213,6 @@ Pick an ODE problem and show how the results look like (assimilating as many dat
 Our goal in this section is to provide a set of examples that demonstrate these two approaches, their ``solutions.''
 Exponential Decay, uncertain initial condition and rate. Fix two measurement times. No OED discussion.
 
-Show visualization of solution on voronoi-mesh vs. 2D density.
 
 This is going to set up the stage nicely.
 What if we had more measurements to incorporate? Discuss how the distributions we imposed as our observed were kind of a little disingenuous since they were based on single measurements. Well, rather, they represent the answer to a different question.
