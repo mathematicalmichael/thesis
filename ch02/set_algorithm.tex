@@ -1,0 +1,43 @@
+\subsubsection{Algorithm}\label{sec:set-algorithm}
+We present a non-intrusive algorithm based on Monte-Carlo sampling\---initially introduced in \cite{BET+14} and further analyzed in \cite{BET+14-arxiv}\---that is structured in four stages (written as four independent for-loops) that are linked to the stages in Fig.~\ref{fig:scheme}.
+We direct the interested reader to \cite{BET+14-arxiv} for more detailed information and analysis of this algorithm, e.g., on the requirement of a sampler being ``$\pborel$-consistent'' to ensure convergence.
+
+
+\begin{algorithm}[hbtp]
+\DontPrintSemicolon
+Choose a discretization partition $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ of $\dspace$.\\
+	\For{$\idisc = 1, \hdots, \ndiscs$}{
+			Compute $p_{\dspace, \idisc} = \dataP(D_\idisc)$.
+	}
+	Choose samples $\set{\param^{(\iparam)}}_{\iparam=1}^{\nsamps} \subset \pspace$, which implicitly defines a Voronoi-cell partition $\set{\VV_\iparam}_{\iparam=1}^{\nsamps}$ of $\pspace$.\\
+	\For{$\iparam = 1, \hdots, \nsamps$}{
+	Compute quantity of interest vectors $\qoi_\iparam = \qoi(\param^{(\iparam)})$.\\
+	Bin $\qoi_\iparam$ in the partition $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ and let $\OO_\iparam = \set{i: \qoi_\iparam \in D_\idisc}$.\\
+	Compute approximations $V_\iparam \approx \pmeas (\VV_\iparam)$.
+	}
+	\For{$\idisc = 1, \hdots, \ndiscs$}{
+	Compute $\CC_\idisc = \set{\iparam:Q_\iparam \in D_\idisc}$.
+	}
+	\For{$\iparam = 1, \hdots, \nsamps$}{
+	Compute $p_{\pspace, \iparam} = \left ( V_\iparam / \sum_{j\in \CC_{\OO_\iparam} } V_j \right ) p_{\dspace, \OO_\iparam}$.
+	}
+	For any $A\in \pborel$, compute
+	\begin{equation}
+	\PP_{\pspace, \ndiscs, \nsamps} (A) = \sum_{\iparam=1}^\nsamps p_{\pspace, \iparam} \Chi_{\VV_\iparam} (A)
+	\end{equation}
+ \caption{Numerical Approximation of the Inverse Density}
+ \label{alg:inv_density}
+\end{algorithm}
+\FloatBarrier
+
+The first two stages correspond to formulating the discretized version of the SIP given in step (S1) in Fig.~\ref{fig:scheme}.
+We first discretize the probability space $(\dspace, \dborel, \dataP)$.
+Then, we simultaneously discretize the measure space $(\pspace, \pborel, \pmeas)$ and construct a simple-function approximation to the map $\qoi$.
+These stages introduce the primary sources of error, and the third and fourth stages may be thought of as solving the discretized SIP exactly.
+
+The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events defined by $\qoi^{-1}(D_\idisc)$ for $\idisc=1,\hdots,\ndiscs$. This allows us to formulate the consistent solution to the SIP on $(\pspace, \cborel, \paramP)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}.
+Finally, the fourth stage constructs a discretized approximation to step (S3) in Fig.~\ref{fig:scheme} and uses a discrete version of the ansatz to approximate the probability of $\VV_\iparam$ for $\iparam=1,\dots,\nsamps$.
+This results in an approximate probability measure $\PP_{\pspace, \ndiscs, \nsamps}$ which produces the same probability estimates for events $A$ and $A\setminus \set{ \pspace^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
+
+Note that Algorithm~\ref{alg:inv_density} is independent of the methods by which the samples $\set{ \pspace^{(\iparam)} }_{\iparam=1}^{\nsamps}$ were generated or sets in $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ are chosen.
+A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ below.

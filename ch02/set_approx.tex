@@ -1,0 +1,14 @@
+\subsection{Numerical Approximation and Analysis}\label{sec:set-approx}
+In the \emph{set-based} inversion framework, there are two primary sources of approximation error:
+\begin{description}[leftmargin=!, labelwidth=0.7in]
+  \item[(1)] partitioning the parameter space $\pspace$ to approximate events in $\cborel$ (and consequently, $\pborel$), and
+  \item[(2)] partitioning the data space $\dspace$ to approximate events in $\dborel$.
+\end{description}
+In practice, we must rely on a finite numerical approximation of the (often uncountable) events in the $\sa$s $\dborel$, $\cborel$, and $\pborel$.
+Owing to the inclusion $\cborel \subset \pborel$, it is possible to approximate events in both of these $\sa$s simultaneously.
+
+Assume we fix some collection of sets $\set{D_\idisc}_{\idisc=1}^{\ndiscs} \subset \dborel$ to partition $\dspace$ (independent of any specification of $\qoi$), and that we partition $\pspace$ with $\set{\VV_\iparam}_{\iparam=1}^{\nsamps}$, where $\VV_\iparam \in \pborel$.
+Both sets yield implicitly-defined Voronoi-cell partitions given by a finite sampling of each space.
+
+In order to approximate $\paramP(\VV_\iparam)$ for $\iparam=1,\hdots,\nsamps$, we must determine which collection of $\VV_\iparam$'s approximate $\qoi^{-1}(D_\idisc)$ for each $\idisc=1,\hdots,\ndiscs$, and then apply the ansatz on this approximation of the contour event with known probability $\dataP(D_\idisc)$.
+Algorithm~\ref{alg:inv_density} was proven to converge to the solution $\paramP$ in \cite{BET+14-arxiv} as the discretizations of $\pspace$ and $\dspace$ (as ${\nsamps \text{ and } \ndiscs}$ tend to $\infty$, respectively.
