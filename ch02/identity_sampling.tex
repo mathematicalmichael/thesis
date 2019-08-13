@@ -55,16 +55,12 @@ nbins = 50
 xmn, xmx = 0.25, 0.75
 ymn, ymx = 0.25, 0.75
 xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
-
 # plotting functions call .get_updated(), which re-computes
 # the pushforward distribution on a regular grid of samples
 plot_2d_comparison(xi, yi, disc, disc_a, '$N=$100', 'Analytical')
 plot_2d_comparison(xi, yi, disc_b, disc_c, '$N=$1,000', '$N=$10,000')
-
 for d in [disc, disc_b, disc_c]:
-    udpated_pdf_conditional_comparison(d, num=100,
-                                       condition_on=0.5,
-                                       label='approx')
+    udpated_pdf_conditional_comparison(d, num=100, condition_on=0.5, label='approx')
 \end{python}
 
 \begin{figure}[ht]
