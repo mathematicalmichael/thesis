@@ -229,7 +229,7 @@ The term (E2) describes the effect of finite sampling error in $\pspace$ on the 
 
 2D identity map, known observed (square in center with area 1/100, i.e. density value of 100).
 
-Been working on this example ... except for sample-based. make an analogous one for set-based.
+\input{ch02/identity_set}
 
 \vspace{3in}
 
@@ -332,28 +332,22 @@ Several of these notebooks were adapted from the example code in this thesis rep
 
 \
 \section{Illustrative Examples}\label{sec:ch02-examples}
-In our examples, we do not work with any model and make observations $\qoi$ directly on the parameter space $\pspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:results}.
-Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function and so the solution to the SIP $\paramP$ can be given exactly by a change of variables formula, which we present later.
-Generally, what we assume is that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ has been made sufficiently small.
-This effectively amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater top some problem specifications.
+In some examples, we do not work with any model $\M$ and make observations $\qoi$ directly on the data space $\dspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:ch02-examples}.
+Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function.
+In this event, the solution $\paramP$ to the SIP can be given exactly by a change of variables formula, so the inverse set can be known exactly.
+When we invert characteristic functions, our solutions will also be members of this same family if the choice of \emph{ansatz} (or \emph{initial density}) is taken to be uniform over $\pspace$.
+These examples allow us to study the DCI method for a class of functions for which a solution is readily available, and serves as a requisite testing ground before advancing to more nuanced problem definitions.
+We present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ and $\udpated$ using finite sampling.
 
-Therefore, we focus our attention on the source of error introduced by $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
-We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
-\begin{equation}\label{eq:newobjective}
-d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
-\end{equation}
-where $\tau$ is some designated tolerance.
+For the set-based approach discussed in \ref{sec:ch02-set}, it is desirable that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} has been made sufficiently small or eliminated entirely.
+This amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater to some problem specifications.
+We choose to impose uniform distributions on $\dspace$ so that the set-valued analog to $\observed$ is perfectly described with $\ndiscs=1$.
+Therefore, we focus our attention on the source of error introduced by $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term (E2) = $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
 
-Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
-The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
-To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
+Since there is no error introduced from discretizing $\pspace$ in the sample-based approach from \ref{sec:ch02-sample}, the term (E2) is not what contributes to error in the sample-based approach.
+As discussed in \ref{sec:sample-error}, the impact of $\nsamps$ is on our ability to characterize $\dspace$.
+In situations where an analytical $\predicted$ is not known, we must rely on some form of density estimation.
 
-The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
-Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
-
-The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
-By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
-We investigate these differences in Section~\ref{sec:results} for some illustrative collection of linear maps $\qoi$, but first we present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ using finite sampling.
 
 \input{ch02/exponential_decay_set_vs_sample}
 \input{ch02/heat_1drod_set_vs_sample}
