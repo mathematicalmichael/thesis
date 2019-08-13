@@ -178,7 +178,7 @@ These stages introduce the primary sources of error, and the third and fourth st
 
 The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events defined by $\qoi^{-1}(D_\idisc)$ for $\idisc=1,\hdots,\ndiscs$. This allows us to formulate the consistent solution to the SIP on $(\pspace, \cborel, \paramP)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}.
 Finally, the fourth stage constructs a discretized approximation to step (S3) in Fig.~\ref{fig:scheme} and uses a discrete version of the ansatz to approximate the probability of $\VV_\iparam$ for $\iparam=1,\dots,\nsamps$.
-This results in an approximate probability measure $P_{\pspace, \ndiscs, \nsamps}$ which produces the same probability estimates for events $A$ and $A\setminus \set{ \pspace^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
+This results in an approximate probability measure $\PP_{\pspace, \ndiscs, \nsamps}$ which produces the same probability estimates for events $A$ and $A\setminus \set{ \pspace^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
 
 Note that Algorithm~\ref{alg:inv_density} is independent of the methods by which the samples $\set{ \pspace^{(\iparam)} }_{\iparam=1}^{\nsamps}$ were generated or sets in $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ are chosen.
 A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ below.
@@ -203,7 +203,7 @@ We assume that $h$ is tunable so that
 \[
 \lim\limits_{h \downarrow 0} \PP_{\pspace, \ndiscs, \nsamps, h} = \PP_{\pspace, \ndiscs, \nsamps}.
 \]
-In \cite{BM17}, the focus was on proving the convergence of $\PP_{\pspace, \ndiscs, \nsamps, h} (A) \to \paramP (A)$ for some $A\in \pborel$ and on estimating the error in $P_{\pspace, \ndiscs, \nsamps, h}(A)$.
+In \cite{BM17}, the focus was on proving the convergence of $\PP_{\pspace, \ndiscs, \nsamps, h} (A) \to \paramP (A)$ for some $A\in \pborel$ and on estimating the error in $\PP_{\pspace, \ndiscs, \nsamps, h}(A)$.
 There, as well as in \cite{BGE+15}, adjoint-based a posteriori estimates in the computed QoI are combined with a statistical analysis to both estimate and bound the error in $\PP_{\pspace, \ndiscs, \nsamps, h} (A)$.
 In \cite{BM17}, adjoints were used to compute both error and derivative estimates of $\qoi(\param^{(\iparam)})$ to improve the accuracy in $\PP_{\pspace, \ndiscs, \nsamps, h} (A)$.
 However, no work has to date fully explored the \emph{convergence rates} of Algorithm \ref{alg:inv_density}.
@@ -312,10 +312,10 @@ Several releases of BET after 2.1.0 incorporated developments that will be discu
 For
 
 \subsection{Examples in BET}
-Basic plotting functionality of BET is demonstrated in iPython notebooks, which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
+Basic plotting functionality of BET is demonstrated in iPython notebooks [TK - some kind of citation here], which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
 These notebooks were originally created to reflect the example suite in BET (which were {\tt .py} files), but later they were migrated into a separate repository BET-examples to allow for better organization.
-In the new framework, each notebook would function as an independent example.
-
+In the new framework, each notebook functions as an independent example.
+Several of these notebooks were adapted from the example code in this thesis repository.
 
 
 
@@ -323,22 +323,22 @@ In the new framework, each notebook would function as an independent example.
 \section{Illustrative Examples}\label{sec:ch02-examples}
 In our examples, we do not work with any model and make observations $\qoi$ directly on the parameter space $\pspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:results}.
 Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function and so the solution to the SIP $\paramP$ can be given exactly by a change of variables formula, which we present later.
-Generally, what we assume is that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(P_{\pspace, \ndiscs}, P_\pspace)$ has been made sufficiently small.
+Generally, what we assume is that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ has been made sufficiently small.
 This effectively amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater top some problem specifications.
 
-Therefore, we focus our attention on the source of error introduced by $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$.
-We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
+Therefore, we focus our attention on the source of error introduced by $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
+We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
 \begin{equation}\label{eq:newobjective}
-d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace,\ndiscs}) < \tau,
+d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
 \end{equation}
 where $\tau$ is some designated tolerance.
 
 Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
 The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
-To this end, we introduce notation of the form $P_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
+To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
 
 The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
-Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(P_{\pspace, \ndiscs, \nsamps}, P_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
+Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
 
 The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
 By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
