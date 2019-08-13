@@ -1,13 +1,15 @@
+
+
 # chapter_02.tex
 - [ ] sec:results (314)
 - [ ] eq:objective (320)
 - [ ] sec:metrics (334)
 - [ ] sec:results (335)
 - [ ] [TK - cite]
-- [ ] Example: 2D example with 1/10 sidelength in center, identity map.
+- [X] Example: 2D example with 1/10 sidelength in center, identity map.
   - [ ] just showcase the effect of finite approximation
   - [ ] write singular script to make this example and all the tables for it,
-    set up a directory for it
+    set up a directory for it (no tables, in progress with notebook.)
 - [ ] Sampling Section
   - [ ] discuss sample-based inversion for measures (2.3)
   - [ ] numerical approximation and analysis
@@ -17,7 +19,7 @@
   - [ ] flesh out (break up into subsections)
 - [ ] Examples Section
   - [ ] citations and sections messed up
-  - [ ] hellinger references need to be removed
+  - [X] hellinger references need to be removed
   - [ ] exponential decay with sampling and set-based (no parameter ID)
   - [ ] heat rod (where is the code for this?)
       - [ ] recreate figures
@@ -37,7 +39,7 @@
   - [X] python file that writes images to file, bigger labels
 
   - [ ] algorithm 2: get rid of hellinger
-
+  - [ ] get rid of hellinger everywhere.
   - [ ] Examples:
       - [ ] rotational invariance
           - [ ] file to generate data, figures, etc.
