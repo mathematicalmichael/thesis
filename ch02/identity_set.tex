@@ -13,7 +13,6 @@ import bet.calculateP.simpleFunP as simpleFunP
 import bet.calculateP.calculateP as calculateP
 import numpy as np
 import scipy.stats as sstats
-
 # define input space parameters and model to instantiate sampler object
 dimension = 2
 numSamples = 100
@@ -21,13 +20,11 @@ I = np.eye(dimension)
 def model(input_samples):
         return (I@input_samples.T).T
 sampler = bsam.sampler(model)
-
 # instantiate objects that hold input/output samples
 # default random sample set is uniform over unit domain (normalized space)
 input_set = input_samples = bsam.random_sample_set('r',input_obj=dimension, num_samples=numSamples)
 param_ref = np.array([0.5, 0.5])
 input_set.set_reference_value(param_ref)
-
 # Estimate volumes of Voronoi cells associated with the parameter samples
 if MC_assumption is False:
     input_samples.estimate_volume(n_mc_points=5E4)
@@ -38,21 +35,18 @@ else:
 disc = sampler.compute_QoI_and_create_discretization(input_sample_set=input_set)
 Qref = disc.get_output().get_reference_value()
 print('Reference Value:', param_ref, 'maps to', Qref)
-
 # define inverse problem
 disc_1 = disc.copy()
 simpleFunP.regular_partition_uniform_distribution_rectangle_size(
         data_set=disc_1, Q_ref=Qref, rect_size=0.2,
         cells_per_dimension = 1)
 calculateP.prob(disc_1)
-
 # compare with higher-fidelity discretization of output space
 disc_2 = disc.copy()
 simpleFunP.regular_partition_uniform_distribution_rectangle_size(
         data_set=disc_2, Q_ref=Qref, rect_size=0.2,
         cells_per_dimension = 2)
 calculateP.prob(disc_2)
-
 \end{python}
 
 Note that there is no need to explictly call {\tt disc.compute\_pushforward()}, (or \pythoninline{disc.compute_predicted()}) since it is computed automatically if none have been previously constructed.
@@ -70,7 +64,6 @@ nbins = 50
 xmn, xmx = 0.25, 0.75
 ymn, ymx = 0.25, 0.75
 xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
-
 # plotting functions computes nearest-neighbors to
 # the regular grid of samples.
 plot_2d_comparison(xi, yi, disc_1, disc_2,
