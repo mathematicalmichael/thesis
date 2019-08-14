@@ -80,6 +80,8 @@
 
 # chapter 4 data driven Maps
 - [ ] missing pretty much everything. can start filling in theory based on the poster content.
+- [X] stochastic framework figure
+- [ ] start a rant about the figure
 
 # other
 - [ ] find the table-generating scripts
