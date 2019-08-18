@@ -33,13 +33,29 @@ The only assumption on $\qoi$ that we impose throughout this work is that of pie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \pagebreak
 \section{Set-Based Inversion for Measures}\label{sec:ch02-set}
+% Intro
 \input{ch02/set_derivation}
+% Numerical Approximation
+\input{ch02/set_algorithm}
+% Descriptions of Error
 \input{ch02/set_error}
+% Example
 \input{ch02/identity_set}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Sample-Based Inversion for Measures}\label{sec:ch02-sample}
+
+% Intro
+\input{ch02/sample_derivation}
+% Numerical Approximation
+\input{ch02/sample_algorithm}
+% Descriptions of Error
+\input{ch02/sample_error}
+% Example
+Identity Map in two dimensions
+\input{ch02/identity_sample}
+
 [TK - Words]
 
 \begin{equation}
@@ -56,84 +72,11 @@ The only assumption on $\qoi$ that we impose throughout this work is that of pie
 
 In place of the ansatz, we have an initial distribution.
 
-\subsection{Numerical Approximation and Analysis}\label{sec:sample-approx}
-
-
-\vspace{2in}
-
-\subsection{Descriptions of Error}\label{sec:sample-error}
-
-KDE is now the primary source, show relevant triangle inequality here.
-Summarize Troy and Tim's work on the sensitivity analysis of everything.
-
-
-Then, we have by repeated application of the triangle inequality that
-\begin{equation}
-\label{eq:sample-triangleineq}
-d(\PP_{\pspace, \ndiscs, \nsamps, h}, \paramP) \leq
-\underset{ \text{(E1)} }{\underbrace{d(\PP_{\pspace, \ndiscs, \nsamps, h},\PP_{\pspace, \ndiscs, \nsamps})}} +
-\underset{ \text{(E2)} }{\underbrace{d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs}) }}+
-\underset{ \text{(E3)} }{\underbrace{d(\PP_{\pspace, \ndiscs}, \paramP) }}.
-\end{equation}
-
-Talk more about it.
-
-\vspace{2in}
-
-\subsection{Example}\label{sec:sample-example}
-Identity Map in two dimensions
-
-\input{ch02/identity_sampling}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\
 \section{Software Contributions}\label{sec:ch02-software}
-
-\subsection{Background and Motivation}
-The open-source software package BET was developed actively from 2012-2015 as part of research performed under grant [TK grant-DOE].
-It was originally written in Python 2.7 and is administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github].
-The purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems.
-
-In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]).
-
-
-\subsection{Upgrades, Updates, and Features}
-Since the last major release [TK - cite latest release], the Python community announced the end of long-term support for Python 2 [TK - cite announcement].
-Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
-
-The work summarized in Section~\ref{sec:ch02-sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
-Since that code was used for many of the results that constituted the preliminary results for this work, it made very litle sense to re-implement them in Python 2 for BET given the recent trends in community development.
-With funding made available through NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice.
-
-
-\subsubsection{Version 2.1.0}
-The upgrade to Python 3.4+ began in January 2019 as a first step to incorporate the new sample-based method into BET.
-It was completed in late February.
-Major (minor? version? TK) release 2.1.0 [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version.
-Future installations (starting in 2020) will not limit the versions of some core dependencies in order to accomodate backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}), since this would likely downgrade previously installed software for end-users.
-
-
-\subsubsection{Version 2.2.0}
-Several releases of BET (after the upgrade to Python 3 in v2.1.0), incorporated developments that will be discussed herein.
-For
-
-
-\subsubsection{Version 2.2.1}
-Major bugfix for parallel testing allowed tests to pass for more than 2 processors.
-For some tests, this involved changing the setup parameters to ensure the problem was large enough to break up onto up to 8 processors.
-For others, siginficant changes had to be made to structure to allow for proper saving and loading of files in parallel.
-
-
-\subsubsection{Version 2.3.0}
-This release incorporated the sampling-based approach first dicussed in Section~\ref{sec:ch02-sec:ch02-sample}.
-
-
-\subsection{Examples in BET}
-Basic plotting functionality of BET is demonstrated in iPython notebooks [TK - some kind of citation here], which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
-These notebooks were originally created to reflect the example suite in BET (which were {\tt .py} files), but later they were migrated into a separate repository BET-examples to allow for better organization.
-In the new framework, each notebook functions as an independent example.
-Several of these notebooks were adapted from the example code in this thesis repository.
+\input{ch02/software}
 
 
 \section{Illustrative Examples}\label{sec:ch02-examples}
