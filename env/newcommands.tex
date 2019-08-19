@@ -76,12 +76,12 @@
 \newcommand{\Rho}{\mbox{\LARGE$\rho$}}
 \newcommand{\Nu}{\mbox{\Large$\nu$}}
 
-
+\newcommand{\true}{\dagger}
 % Data-Consistent Inversion Framework
 \newcommand{\dimP}{P}
 \newcommand{\dimD}{D}
 \newcommand{\param}{\lambda}
-\newcommand{\paramref}{\param^\dagger}
+\newcommand{\paramref}{\param^\true}
 \newcommand{\pspace}{{\Lambda}}
 \newcommand{\pmeas}{\mu_{\pspace}}
 \newcommand{\pborel}{\BB_{\pspace}}
@@ -152,4 +152,10 @@
 \newcommand{\supp}{\text{supp}}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\mbf}[1]{\mathbf{#1}}
+
+\newcommand{\updatedPxN}{\PP_{\pspace,\nsamps}^\true}
+\newcommand{\updatedPxNN}{\PP_{\pspace,\bar{\nsamps}}^\true}
+\newcommand{\updatedPxM}{\PP_{\pspace,\ndiscs}^\true}
+\newcommand{\updatedPxNM}{\PP_{\pspace,\nsamps,\ndiscs}^\true}
+\newcommand{\updatedPxNMh}{\PP_{\pspace,\nsamps,\ndiscs,\imesh}^\true}
 

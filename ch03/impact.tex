@@ -1,0 +1,41 @@
+\subsection{Impact of QoI on Solution Quality }\label{sec:impact}
+
+In the explicit approach, a finite numerical approximation of (often uncountably many) events in $\sa$s is required.
+Thus, there are two primary sources of approximation error: (1) partitioning the parameter space $\pspace$ to approximate events in $\pborel$, and (2) partitioning the data space $\dspace$ to approximate events in $\dborel$.
+ 
+A non-intrusive sample-based algorithm is initially introduced in \cite{BET+14} and further analyzed in \cite{BET+14-arxiv}. 
+We direct the interested reader to \cite{BET+14-arxiv} for more detailed information and analysis of this algorithm, in which $\dspace$ is discretized by $M$ samples and $\pspace$ is discretized by $N$ samples. 
+If $\updatedP$ represents the updated probability measure, then we let $\updatedPxM$ be the exact solution to the approximate inverse problem using the discretization of $\predictedP$ by $M$ samples.
+Finally, let $\updatedPxNM$ denote the approximate solution to the approximate problem under both aforementioned discretizations, so 
+\[
+\updatedP = \lim\limits_{M\to\infty} \updatedPxM = \lim\limits_{M\to\infty} \lim\limits_{N\to\infty} \updatedPxNM.
+\]
+
+If numerical error in the evaluation of the QoI map $\qoi$ is inherent (e.g. owing to a mesh choice, surrogate model, or solution basis order), in the $N$ evaluations of samples in $\pspace$, then we let $\updatedPxNMh$ denote the approximate solution given the model discrepancy, and we have
+\[
+\updatedPxNM= \lim\limits_{h \downarrow 0} \updatedPxNMh.
+\]
+
+Here, the $h$ refers to a mesh or other numerical parameter that determines the accuracy of the numerical solution evaluation of the QoI map.
+ 
+
+In \cite{BM17}, the focus is on proving the convergence of $\updatedPxNMh(A) \to \PP_{\pspace} (A)$ for some $A\in \pborel$ and on estimating the error in $\updatedPxNMh(A)$.
+There, as well as in \cite{JWW17}, adjoint-based a posteriori estimates in the computed QoI are combined with a statistical analysis to both estimate and bound the error in $\updatedPxNMh (A)$.
+In \cite{BM17}, adjoints are used to compute both error and derivative estimates of the QoI map to improve the accuracy in $\updatedPxNMh (A)$.
+%However, no work has to date fully explored the \emph{convergence rates} of Algorithm \ref{alg:inv_density}.
+%Furthermore, no work has yet to establish that these rates are independent of the choice of QoI map despite other studies establishing that the absolute error is very much affected by the geometric properties of the QoI maps \cite{BE13}.
+
+As mentioned earlier, stability results are with respect to the Total Variation metric, which we use to study convergence as well.
+Repeated application of the triangle inequality yields
+\begin{equation}
+\label{eq:triangleineq}
+d_{\text{TV}}(\updatedPxNMh, \updatedP) \leq 
+\underset{ \text{(E1)} }{\underbrace{ d_{\text{TV}}(\updatedPxNMh, \updatedPxNM)}} + 
+\underset{ \text{(E2)} }{\underbrace{ d_{\text{TV}}(\updatedPxNM, \updatedPxM) }}+ 
+\underset{ \text{(E3)} }{\underbrace{ d_{\text{TV}}(\updatedPxM, \updatedP) }}.
+\end{equation}
+The term (E1) describes the effect of the error in the numerically evaluated $Q_j$ on the solution to the stochastic inverse problem. 
+The term (E2) describes the effect of finite sampling error in $\pspace$, and (E3) describes the effect of discretization error of $\predictedP$ on the solution to the stochastic inverse problem. 
+In our experience, terms (E1) and (E3) are more easily controlled.
+Thus, we limit our focus to (E2), where certain geometric properties of the QoI map are known to significantly impact this term, as we show below. 
+
