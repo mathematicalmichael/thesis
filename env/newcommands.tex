@@ -111,6 +111,7 @@
 \newcommand{\lam}{\left ( \param \right ) }
 \newcommand{\qoi}{Q}
 \newcommand{\qlam}{\qoi\lam}
+\newcommand{\q}{\left ( \qlam \right )}
 \newcommand{\M}{\mathcal{M}}
 
 \DeclareMathOperator*{\observedP}{\PP_{ob}}
@@ -131,11 +132,20 @@
 \newtheorem{prop}{Proposition}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
-%\theoremstyle{remark}
+\newtheorem{assumption}{Assumption}[section]
+\theoremstyle{remark}
 \newtheorem{rem}{Remark}
-%\theoremstyle{definition}
+\theoremstyle{definition}
 \newtheorem{ex}{Example}
 \numberwithin{equation}{section}
 \newtheorem{prob}{Problem}
 \numberwithin{equation}{section}
 %
+
+
+%%% stuff from proposal to sort out later %%%
+\newcommand{\sett}[3]{\left\{#1\right\}_{#2}^{#3}}
+\newcommand{\supp}{\text{supp}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+

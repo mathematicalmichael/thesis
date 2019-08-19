@@ -1,0 +1,31 @@
+
+%%%%%%%%% Section 2.2
+\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
+The stochastic inverse problem is defined as finding a measure $\updatedP$ such that the push-forward of it matched $\observed$.
+The following assumption guarantees a solution to the stochastic inverse problem. 
+It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the prior beliefs. 
+
+\begin{assumption}[Predictability Assumption]\label{as:pred}
+The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
+\end{assumption}
+
+If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and prior) have a priori ruled that almost surely these events should not occur. 
+Therefore, either prior beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation. 
+
+
+The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
+\begin{equation}\label{eq:pred}
+\exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
+\end{equation}
+where it is understood that $d = \qlam$ for some $\param \in \pspace$.
+Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18}:
+
+%%%
+
+%Any probability measure that satisfies Equation~\ref{eq:inv} is considered a consistent solution to the stochastic inverse problem.
+%In the event that the map $\qoi$ is a bijection, then the consistency condition (\ref{defn:consistency}) defines a unique measure $P$ on $\pspace$ given the specification of an observed density.
+%However, there are many applications of interest where the quantitiy of interest map $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both. 
+%To address this, we present the following summary of work done in \cite{BE13, BJW18} on two approaches for defining a unique solution if the properties of the map or spaces under consideration prohibit one from existing.
+
+%%%
+%\input{setval}
