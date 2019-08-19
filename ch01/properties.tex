@@ -29,3 +29,150 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
 
 %%%
 %\input{setval}
+
+\begin{thm}[Existence and Uniqueness]
+For any set $A\in \pborel$, the solution $\updatedP$ given defined by
+\begin{equation}\label{eq:cb_sol}
+\updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
+\end{equation} 
+is a consistent solution to the stochastic inverse problem given in (\ref{eq:inv}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+\end{thm}
+
+This updated density \eqref{eq:update} appearing within the iterated integral in \eqref{eq:cb_sol} has no normalization constant (it already integrates to one), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
+\begin{cor}\label{cor:int}
+$\updatedP(\pspace) = 1$.
+\end{cor}
+
+Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Stability of the Consistent Solution}\label{sec:stability}
+We first recall the Total Variation (TV) metric, defined as 
+\begin{equation}\label{eq:tv}
+d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
+\end{equation}
+where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $P_f, P_g$, respectively.
+The stability results below are all with respect to the TV metric, which is widely used in the literature and is also known as \emph{statistical distance}~\cite{GS02, Smith, Silverman}.
+We first define stability with respect to perturbations in the data.
+
+\begin{defn}[Stability of Updated Densities I]\label{defn:stableobs}
+Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}. 
+Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
+We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
+\begin{equation}
+d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+\end{equation}
+\end{defn}
+
+In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, which immediately proves the following:
+
+\begin{thm}
+$\updatedP$ is stable with respect to perturbations in $\observedP$.
+\label{thm:stableobs}
+\end{thm}
+
+This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the assumptions.
+
+\begin{defn}[Stability of Updated Densities II]\label{defn:stableprior}
+Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
+Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
+Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
+We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
+\begin{equation}\label{eq:stableprior}
+d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+\end{equation}
+\end{defn}
+
+\begin{thm}
+$\updatedP$ is stable with respect to perturbations in the prior.
+\label{thm:stableprior}
+\end{thm}
+
+Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
+Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
+If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density, then the conditional densities from the disintegration theorem are given as
+\[
+\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }.
+\]
+In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the prior.
+
+
+
+%%%%%%%%% Section 2.3
+\subsection{Numerical Approximation and Sampling}\label{sec:approx}
+%Since we are given $\initial$ and $\observed$, the computation of $\predicted$ is the only aspect of the Consistent Bayesian framework that needs to be approximated. 
+%Since there are few restrictions on the structure of the map $\qoi$ that defines $\predicted$, there is in general no explicit expression from which we can generate samples, so we use a numerical approximation to the probability density function. 
+%
+%For simplicity, we simply propagate Monte-Carlo samples from the prior and use a kernel density estimate (usually Gaussian\footnote{In this proposal, all results are generated using this kernel, though six kernels common to density estimation are implemented in the ConsistentBayes Python package [TK - cite Silverman and your github].}).
+%
+%We summarize this in the following algorithm:
+%
+%\begin{algorithm}[hbtp]
+%\DontPrintSemicolon
+%Generate a set of samples $\sett{\param_i}{i=1}{N}$
+%	\For{$i = 1, \hdots, N$}{
+%			Propagate sample $\param_i$ through the QoI map. Set $d_i = \qoi(\param_i)$.
+%	}
+%Use $\sett{d_i}{i=1}{N}$ and a density estimation method to approximate $\predicted$.
+%	\label{alg:sample}
+%\caption{Numerical Approximation of the Push-forward of the Prior Density}
+%\end{algorithm}
+%
+
+
+%The computational object associated with $\predicted$ is stored for re-use and can be evaluated at locations in $\dspace$ other than $\sett{d_i}{i=1}{N}$. 
+%This procedure should be thought of as a characterization of the data space given the prior assumptions encoded in $\initial$.
+
+
+Using the previous notation, we let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated density $\updated$.
+As before, we assume the following for the approximation of the push-forward of the prior density:
+\begin{assumption}\label{as:predx}
+There exists some $C>0$ such that
+\[
+\observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
+\]
+\end{assumption}
+
+If this assumption is satisfied, we can prove the following theorem from \cite{BJW18}:
+\begin{thm}
+The error in the approximate updated density is:
+\begin{equation}\label{eq:predicted_bound}
+d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
+\end{equation}
+where the $C$ is the constant taken from \eqref{as:predx}. 
+\end{thm}
+
+In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
+Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$. 
+We leverage the re-use of samples in the results herein extensively.
+
+In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior.}
+Throughout this proposal, we utilize a Gaussian KDE, which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$.
+
+%For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:cb_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
+%We let
+%\[
+%\updated\lam = \initial \lam r\q, \text{ where } r\q = \frac{\observed\q}{\predicted\q}
+%\]
+%
+%Many standard calculations about the updated density involve integrals of functions of $r\q$ with respect to the prior.
+%For any measurable function $f$, we establish the connection of calculating quantities over $\pspace$ with those over $\dspace$ by leveraging the following identity from measure theory:
+%\[
+%\int_\pspace f\left( r\q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
+%\]
+%
+%We use several throughout this proposal, including the integral of the updated density:
+%\[
+%I(\updated ) = \int_\pspace r\q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
+%\]
+%which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated. 
+%
+%Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
+%\begin{equation}\label{eq:KLdiv}
+%\text{KL}(\initial : \updated ) = \int_\pspace r\q \log r\q \, d\initialP = \text{KL}(\observed : \predicted ),
+%\end{equation}
+%i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
+
