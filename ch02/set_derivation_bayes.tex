@@ -1,0 +1,43 @@
+\subsubsection{Alternative Derivation Using Bayes' Rule}\label{sec:set_bayes}
+In the measure-theoretic approach studied in~\cite{BBE11, BET+14}, Voronoi-cell discretizations of $\pspace$ are used to construct set-valued approximations of the updated measure directly, so we refer to it as the \emph{explicit} approach.
+By contrast, sampling from densities is an \emph{implicit} approach, and is discussed in greater detail in \ref{sec:ch02-sample}.
+Here, we provide a ``set-based'' derivation of the updated measure to more easily compare to the explicit approximation of the solution given measure in~\cite{BET+14}.
+
+First, we start by observing that if $A, B \subset \pspace$ such that $A = \qoi^{-1}(\qoi(B))$, then we have that $B\subset A$ (the inclusion may be proper).
+Therefore, for any probability measure $P$ on $(\pspace, \pborel)$, 
+\[
+P(B) = P(B|A) \, P(A).
+\]
+If $P$ is intended to solve the inverse problem, then we are motivated to take
+\[
+P(A) = \observed (\qoi(A)) = \observed (B),
+\]
+in the above formula.
+
+We must now determine how to properly define $P(B|A)$. 
+We leverage Bayes' Theorem~\cite{Smith} in order to utilize the prior density on contour events.
+In other words, we use the prior $\initialP$ on $(\pspace, \pborel)$ and Bayes' Theorem to get
+\begin{equation}\label{eq:bayes_full}
+P(B|A) = \initialP(B|A) = \frac{ \initialP(A|B) \initialP(B) }{ \initialP(A) },
+\end{equation}
+and since $B \subset A$, $\initialP(A|B) = 1$, \eqref{eq:bayes_full} simplifies to
+
+\begin{equation}\label{eq:bayes}
+\initialP(B|A) = \frac{ \initialP(B) }{ \initialP(A) }.
+\end{equation}
+
+Recall from \eqref{eq:predicted} that $\predictedP$ is the push-forward of the prior, giving $\initialP(A) = \predictedP (\qoi(A)) = \predictedP \left (\qoi(B)\right )$, which then gives the following set-valued ``solution'' to the stochastic inverse problem:
+\begin{equation}\label{eq:sip_sol_cont}
+\updatedP(B) := \begin{cases}
+\initialP(B) \frac{ \observed(B) }{ \predictedP \left (\qoi(B)\right ) ) } & \text{ if } \initialP(B) > 0,\\
+0 & \text{ otherwise}.
+\end{cases}
+\end{equation}
+
+This set-valued update is only a solution on certain (sub-)$\sigma$-algebras of $\pborel$. 
+Nonetheless, we can form explicit approximations to the update, e.g. as done in~\cite{BET+14, BES12, BBE11}. 
+In other words, an Ansatz is used in place of the prior; it serves the same purpose to distribute probabilities in directions not informed by the QoI map.
+
+However, such an explicit approach requires an approximation of \emph{events in $\pborel$}. 
+This is in direct contrast to the numerical approximation of the density $\updated$ that only requires approximation of $\predicted$.
+Since we often expect the dimension of $\dspace$ to be less than the dimension of $\pspace$, this can prove to be a significant numerical advantage for the ``implicit'' approximation given by the updated probability density function. 
