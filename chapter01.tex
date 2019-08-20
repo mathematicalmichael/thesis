@@ -1,18 +1,56 @@
 \chapter{\uppercase{Introduction}} \label{chapter:01}
 
 \section{Preliminaries}
+Talk about the collection of noisy data, the types of inferences one may be interested in making from them.
+Roughly breaks down into 
+\begin{itemize}
+  \item Parameter Identification
+  \item Distribution Estimation
+\end{itemize}
 
-\
-\section{Motivations}
+Motivations break down by
 
+\begin{itemize}
+  \item Direct inference on something of interest
+  \item Inference for the purpose of prediction
+  \item Description of uncertainty around either of the aforementioned
+\end{itemize}
+
+\section{Motivations}\label{sec:motivations}
+In some respects, the practice of writing software has diverged from the motivations of an academic researcher.
+The latter seeks to generate new knowledge and may write a set of example scripts/programs to demonstrate some novel idea or method.
+By contrast, the motivations of a software engineer are related to resiliency.
+Not only must they ensure the code works as expected given a myriad of ways users may interact with it, but it is necessary to write the code in a manner compatible with maintaining it into the future.
+Much of the work of writing ``good software'' is concerned with writing appropriate documentation to express the intended usage and logic underlying architectural decisions.
+There are many ways to write a functioning program to demonstrate a proof-of-concept, but creating something that is \emph{user-friendly}, guaranteed to be free of mistakes, and scales across different computational environments/resources requires a completely different approach.
+
+Decisions made early in the software design cycle have lasting impacts on future features and functionality.
+Rigor is added to libraries through the writing of \emph{unit tests}, and use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible. 
+Code that only runs on the computer of the author is impractical since any thorough critique requires independent verification.
+Without proper context and architecture, new ideas that are implemented in programs are unlikely to be adopted.
+
+\subsection{Reproducibility}
+To this end, this thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data\---it also serves to document the process of ensuring that the work herein is \textbf{fully reproducible}.
+In mathematics, reproducibility is ensured through the use of proofs, which motivate the original work presented here.
+However, much of the focus is actually on the implications of implementation of the novel research into Data Consistent Inversion, studying the impact of using computers to perform the task of making conclusions based on data.
+The implementation of mathematics on computers is done through software, and so we are concerned with ensuring the expected functionality of that software since as mathematicians, we care deeply about making sure things are rigorous. 
+
+In short, we want to make sure that theory aligns with practice, and that both live up to high standards of intellectual scrutiny. 
+Every computational result, illustrative figure, table, plot, etc. will have associated with it scripts that generate them, and will be included in the  repository for this document [TK - cite]. 
+It is written in \LaTeX\, (which is itself a programming language), and presents its own software dependencies in addition to those required to run the scripts to generate the images and tables. 
+To address this concern, the author will leverage \emph{Travis}, a continuous integration service [TK-cite], to ensure that all figures can be generated and the \LaTeX\, document compiles into a PDF.
+
+The same care is taken to ensure the reproducibility of all results in this thesis as was put into ensuring that the mathematics was implemented correctly as software. 
+Additionally, an \emph{image} that contains a fully pre-built Linux softare environment within which someone can compile the thesis and run the code will be available through the Docker Cloud registry [TK -cite]. 
+The latter enables the ability to generate this thesis document in its entirety on any software platform that supports Docker (Windows, MacOS, Linux).
 
 \section{Framework}
 \input{ch01/framework}
 \input{ch01/properties}
 \input{ch01/comparison}
 
-\section{Software Contributions}
-Everything in this thesis has been incorporated into open-source software.
+\section{Software Contributions}\label[sec:ch01-software]
+As discussed in \ref{sec:motivations}, the entirety of the mathematical content herein has been incorporated into freely available open-source software.
 The novel mathematical developments that have gone into the work herein are all reflected in various modules and sub-modules as part of the BET python package.
 This software suite follows a number of industry best-practices for code-coverage and continuous integration, i.e. the code is well-tested.
 
@@ -21,12 +59,13 @@ As new ideas sprang up, our research group found itself coding and re-coding the
 Over the years, the software fell behind the state-of-the-art in research, and previous maintainers of code had moved on from their academic positions.
 The author spent most of 2019 bringing the software in-line with the latest developments in Data-Consistent Inversion.
 
-\subsection{Architecture}
+\subsection{Architecture}\label{sec:architecture}
 Having learned a lot about software reproducibility along the way, the author made the decision to treat this thesis as a software project in its own right.
 Every example, figure, table, plot will be generated by a combination of Python and Bash scripts contained inside of an public Github repository (www.github.com/mathematicalmichael/thesis).
 All the requisite LaTeX dependencies are contained in {\tt apt.txt}, and a Jupyterlab environment usable by Binder (which can compile the document and run every example) is configured in the {\tt binder/} directory of the repository.
 
-Special care will be taken to ensure that every file herein is well-documented. When appropriate, functions and classes will be used in such a way that several examples can be generated from the same file.
+Special care will be taken to ensure that every file herein is well-documented.
+When appropriate, functions and classes will be used in such a way that several examples can be generated from the same file.
 The parameters required can be passed as optional arguments, and bash scripts containing the exact syntax to generate each figure will be included.
 
 For example, to visually demonstrate the implicitly-defined sets of nearest-neighbors in two-dimensional unit domain, we rely on Voronoi-cell diagrams (figures).
