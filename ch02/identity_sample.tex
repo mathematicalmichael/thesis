@@ -88,17 +88,25 @@ There is no signficant error in estimating the support of the distribution, only
 
 \begin{figure}[ht]
 \centering
-	\begin{minipage}{.315\textwidth}
-		\includegraphics[width=\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
-	\end{minipage}
-	\begin{minipage}{.315\textwidth}
-		\includegraphics[width=\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
-	\end{minipage}
-  \begin{minipage}{.315\textwidth}
-		\includegraphics[width=\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
-	\end{minipage}
+% N = 1E2
+\begin{minipage}{.975\textwidth}
+		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
+    \includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
+\end{minipage}
+% N = 1E3 
+\begin{minipage}{.975\textwidth}
+		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
+		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
+\end{minipage}
+% N = 1E4 
+\begin{minipage}{.975\textwidth}
+		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
+		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
+\end{minipage}
 \caption{
-(Left to right, respectively): Conditionals passing through $(0.5, 0.5)$ for $\predicted$'s generated with $\nsamps=1E2, 1E3, \text{ and } 1E4$ random samples.
+(Left): $\param_1=0.5$ conditional.
+(Right): $\param_2=0.5$ conditional.
+(Top to Bottom): Conditional for $\updated$ solutions for  $\nsamps=1E2, 1E3, \text{and} 1E4$ random samples.
 }
 \label{fig:identity_sampling_conditionals}
 \end{figure}
