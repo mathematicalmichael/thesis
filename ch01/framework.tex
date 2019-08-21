@@ -28,7 +28,7 @@ This now brings us to our central definition:
 \begin{defn}[Inverse Problem]\label{defn:consistency}
 Given a probability measure $\observed$ on $(\dspace, \dborel)$, absolutely continuous with respect to $\dmeas$, the \emph{inverse problem} is to determine a probability measure $\updatedP$ on $(\pspace, \pborel)$, absolutely continuous with respect to $\pmeas$, 
 
-\begin{equation}\label{eq:inv}
+\begin{equation}\label{eq:inverse-problem}
 \updatedP(\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \updated \lam \, d\pmeas = \int_E \observed \q \, d\dmeas = \observed(E), \; \forall \; E \in \mathcal{B}_\dspace.
 \end{equation} 
 
@@ -72,7 +72,7 @@ These definitions are combined to form the \emph{updated density}, originally de
 \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \param \in \pspace.
 \end{equation}
 
-Any probability measure that satisfies Equation~\ref{eq:inv} is considered a consistent solution to the stochastic inverse problem.
+Any probability measure that satisfies Equation~\ref{eq:inverse-problem} is considered a consistent solution to the stochastic inverse problem.
 
 In the event that the map $Q$ is a bijection, then the consistency condition (\ref{defn:consistency}) defines a unique measure $\PP$ on $\pspace$ given the specification of an observed density.
 However, there are many applications of interest where the quantitiy of interest map $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both. 
