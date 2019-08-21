@@ -1,16 +1,11 @@
 
 %%%%%%%%% Section 2.4
-\subsection{Comparison to Other Methods}\label{sec:othermethods}
+\subsection{Comparison to Bayesian Inference}\label{sec:othermethods}
 We establish two comparisons: first to Bayesian inversion \cite{Walpole, Berger, Complete, Smith}, the second to a measure-theoretic approach studied in \cite{BET+14, BE13}. 
 
-
-\subsubsection{Statistical Bayesian Approach}
-
-%If the quantity of interest is a single measurement, then the likelihoods and observed densities are identical.
-%However, the quantity of interest may not necessarily just be the uncertainty in the measurement data, as we will see in later discussions. 
 %For completeness, we define the alternative solution to the SIP below and compare the two frameworks under a simple linear map.
 
-The Bayesian formulation gives a updated density as:
+The Bayesian formulation gives a posterior density as:
 
 \begin{equation}\label{eq:sb_post}
     \pp\lam := \initial\lam \frac{L_\dspace (d | \param)}{ C },
@@ -24,6 +19,8 @@ C = \int_\pspace \initial\lam L_\dspace(d | \param) \, d\param.
 
 Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
 We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
+If the quantity of interest is a single measurement, then the likelihoods and observed densities will be identical.
+However, the quantity of interest may not necessarily just be the uncertainty in the measurement data, as we will see in later discussions. 
 
 It is important to note that the Bayesian framework poses a different question for which a different answer is sought.
 Specifically, the problem analyzed by the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \cite{Smith, Concrete, Complete}.
