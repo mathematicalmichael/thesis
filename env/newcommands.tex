@@ -31,7 +31,11 @@
 
 % Standard Probability
 \DeclareMathOperator{\E}{\mathbb{E}}
+% Measure
 \newcommand{\PP}{\mathbb{P}}
+% Density
+\newcommand{\pp}{\pi}
+% Space of measures/solutions
 \newcommand{\PPspace}{\mathcal{P}}
 
 
@@ -88,9 +92,9 @@
 \newcommand{\Pspace}{(\pspace, \pborel, \pmeas)}
 
 \DeclareMathOperator*{\initialP}{\PP_{in}}
-\DeclareMathOperator*{\initial}{\pi_{in}}
+\DeclareMathOperator*{\initial}{\pp_{in}}
 \DeclareMathOperator*{\updatedP}{\PP_{up}}
-\DeclareMathOperator*{\updated}{\pi_{up}}
+\DeclareMathOperator*{\updated}{\pp_{up}}
 
 \DeclareMathOperator*{\obs}{\boldsymbol{o}}
 \DeclareMathOperator*{\data}{\boldsymbol{d}}
@@ -115,9 +119,9 @@
 \newcommand{\M}{\mathcal{M}}
 
 \DeclareMathOperator*{\observedP}{\PP_{ob}}
-\DeclareMathOperator*{\observed}{\pi_{ob}}
+\DeclareMathOperator*{\observed}{\pp_{ob}}
 \DeclareMathOperator*{\predictedP}{\PP_{pr}}
-\DeclareMathOperator*{\predicted}{\pi_{pr}}
+\DeclareMathOperator*{\predicted}{\pp_{pr}}
 
 \DeclareMathOperator*{\dciP}{\updatedP = \initialP \frac{\observedP}{\predictedP}}
 \DeclareMathOperator*{\dciD}{\updated = \initial \frac{\observed}{\predicted}}

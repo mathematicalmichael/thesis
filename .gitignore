@@ -7,6 +7,7 @@ dissertation.pdf
 *.lof
 *.fls
 *.gz
+*.gz(busy)
 *.log
 *.out
 *.toc
