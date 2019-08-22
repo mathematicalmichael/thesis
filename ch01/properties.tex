@@ -1,16 +1,16 @@
 
 %%%%%%%%% Section 2.2
 \subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
-The stochastic inverse problem is defined as finding a measure $\updatedP$ such that the push-forward of it matched $\observed$.
+The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ such that the push-forward of it matched $\observedP$.
 The following assumption guarantees a solution to the stochastic inverse problem. 
 It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the prior beliefs. 
 
 \begin{assumption}[Predictability Assumption]\label{as:pred}
-The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
+The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
 \end{assumption}
 
 If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and prior) have a priori ruled that almost surely these events should not occur. 
-Therefore, either prior beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation. 
+Therefore, either prior beliefs ($\initial$), the model under consideration ($\qoi$), or the description of uncertainty encoded in $\observed$ should be subjected to a critical reevaluation. 
 
 
 The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
@@ -22,7 +22,7 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
 
 %%%
 
-%Any probability measure that satisfies Equation~\ref{eq:inverse-problem} is considered a consistent solution to the stochastic inverse problem.
+%Any probability measure that satisfies Equation~\eqref{eq:inverse-problem} is considered a consistent solution to the stochastic inverse problem.
 %In the event that the map $\qoi$ is a bijection, then the consistency condition (\ref{defn:consistency}) defines a unique measure $P$ on $\pspace$ given the specification of an observed density.
 %However, there are many applications of interest where the quantitiy of interest map $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both. 
 %To address this, we present the following summary of work done in \cite{BE13, BJW18} on two approaches for defining a unique solution if the properties of the map or spaces under consideration prohibit one from existing.
@@ -32,10 +32,10 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
 
 \begin{thm}[Existence and Uniqueness]
 For any set $A\in \pborel$, the solution $\updatedP$ given defined by
-\begin{equation}\label{eq:cb_sol}
+\begin{equation}\label{eq:updated-measure}
 \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
 \end{equation} 
-is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+is a consistent solution to the stochastic inverse problem given in (\eqref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $\initialP$ on $(\pspace, \pborel)$.
 \end{thm}
 
 This updated density \eqref{eq:update} appearing within the iterated integral in \eqref{eq:cb_sol} has no normalization constant (it already integrates to one), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
@@ -43,7 +43,7 @@ This updated density \eqref{eq:update} appearing within the iterated integral in
 $\updatedP(\pspace) = 1$.
 \end{cor}
 
-Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
+Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we briefly discuss in Section~\ref{sec:othermethods}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -69,14 +69,14 @@ d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}}
 In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, which immediately proves the following:
 
 \begin{thm}
-$\updatedP$ is stable with respect to perturbations in $\observedP$.
+$\updatedP$ is stable with respect to perturbations to the observed, $\observedP$.
 \label{thm:stableobs}
 \end{thm}
 
 This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the assumptions.
 
 \begin{defn}[Stability of Updated Densities II]\label{defn:stableprior}
-Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
+Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred} (the push-forwards of both are dominating measures for the given $\observedP$). 
 Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
 Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
 We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
@@ -86,18 +86,25 @@ d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d
 \end{defn}
 
 \begin{thm}
-$\updatedP$ is stable with respect to perturbations in the prior.
+$\updatedP$ is stable with respect to perturbations to the initial, $\initialP$.
 \label{thm:stableprior}
 \end{thm}
 
-Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
-Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
-However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
-If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density, then the conditional densities from the disintegration theorem are given as
+Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying $\initialP$. 
+Given that specifying the definition of a ``true'' initial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion
+\footnote{
+Throughout this work, we treat $\initialP$ as a basic description of feasible inputs to the model.
+For simplicity, we often rely on normalized domains to allow for uniform initial densities on unit hypercubes.
+This amounts to an implied pre-processsing of $\pspace$ wherein scaling is performed to normalize the parameter domain. 
+To this end, units of measurement are effectively removed, and so they are not present on figure labels.
+One can quickly make qualitative inferences based on the support of $\updated$ relative to a unit-domain to get a sense for the proportionate reduction of uncertainty.
+}.
+However, generating samples from $\updated$ requires a numerical approximation to $\predicted$, which introduces additional errors in $\updated$.
+If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density, then the conditional densities from the disintegration theorem are given as
 \[
-\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }.
+\frac{\widehat{d\PP_{\text{up}, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }.
 \]
-In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the prior.
+In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the initial.
 
 
 
@@ -128,7 +135,7 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 
 
 Using the previous notation, we let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated density $\updated$.
-As before, we assume the following for the approximation of the push-forward of the prior density:
+As before, we assume the following for the approximation of the push-forward of the initial density $\initial$:
 \begin{assumption}\label{as:predx}
 There exists some $C>0$ such that
 \[
@@ -147,10 +154,10 @@ where the $C$ is the constant taken from \eqref{as:predx}.
 
 In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
 Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$. 
-We leverage the re-use of samples in the results herein extensively.
+We leverage the re-use of samples in the results and examples herein extensively.
 
-In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior.}
-Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$.
+In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial density.}
+Throughout this work, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$.
 
 %For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:cb_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
 %We let
