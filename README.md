@@ -1,4 +1,4 @@
-![[Binder-Dockerfile](https://mybinder.org/badge_logo.svg)](https://gke.mybinder.org/v2/gh/mathematicalmichael/thesis/binder?urlpath=urlpath=git-pull?repo=https://github.com/mathematicalmichael/thesis/)
+[![Binder-Dockerfile](https://mybinder.org/badge_logo.svg)](https://gke.mybinder.org/v2/gh/mathematicalmichael/thesis/binder?urlpath=urlpath=git-pull?repo=https://github.com/mathematicalmichael/thesis/)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mathematicalmichael/thesis.git/master?urlpath=lab/tree/dissertation.tex)
 
