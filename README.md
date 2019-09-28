@@ -9,6 +9,12 @@ cd thesis; make; make clean
 This will run the makefile that calls LaTeXMake to fully compile the thesis with the bibliography and references.
 You can then use the File-Browser on the left-hand side to navigate to `thesis/dissertation.pdf` and open a preview PDF in the JupyterLab web-app.
 
+# Docker
+
+Clone the repo and `cd` into the folder, then you can build the PDF with:
+
+`docker run --rm -v $(pwd):/tmp --workdir /tmp mathematicalmichael/math-user:thesis make`
+
 ---
 
 # Michael Pilosov's Dissertation
