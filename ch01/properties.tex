@@ -142,7 +142,7 @@ The error in the approximate updated density is:
 \begin{equation}\label{eq:predicted_bound}
 d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
 \end{equation}
-where the $C$ is the constant taken from \eqref{as:predx}. 
+where the $C$ is the constant taken from Assumption \ref{as:predx}. 
 \end{thm}
 
 In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
@@ -150,7 +150,7 @@ Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cos
 We leverage the re-use of samples in the results herein extensively.
 
 In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior.}
-Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$.
+Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
 
 %For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:cb_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
 %We let
@@ -177,4 +177,4 @@ Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate
 %i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
 
 
-In some cases, when it is possible to specify $\predicted$ analytically, we will do so for purposes of demonstration (especially for comparing numerical solutions to their ``true'' ones). 
+Where possible, we express $\predicted$ analytically for purposes of demonstration (especially for comparing numerical solutions to the exact solutions). 
