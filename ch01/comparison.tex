@@ -17,15 +17,22 @@ The Bayesian formulation gives a updated density as:
 \end{equation}
 
 where we use $\pp$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
+
+Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
+We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
+
+
 $L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a \emph{normalizing constant}, chosen so that the updated density integrates to one, namely
 \[
 C = \int_\pspace \initial\lam L_\dspace(d | \param) \, d\param.
 \]
 
-Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
-We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
+Note that the likelihood function is not necessarily a density.
+In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\initial(\param) L_\dspace (d | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
+In other words, $L_\dspace (d | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data. 
+An interpretation of $L_\dspace (d | \param)$ is the relative likelihood that a single parameter $\param\in\pspace$ explains the observed data, whereas $\observed(\qlam)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
 
-It is important to note that the Bayesian framework poses a different question for which a different answer is sought, which is based on the presence of $L_\dspace(d | \param)$ in place of $\observed\left(\qlam\right)$.
+It is important to note that the Bayesian framework poses a different question for which a different answer is sought, which is based on the presence of $L_\dspace(d | \param)$ in place of $\observed(\qlam)$.
 Specifically, the problem analyzed by the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \cite{Smith, Concrete, Complete}.
 In this framework, there is a different notion of consistency, referring to certain asymptotic properties of $\updated$ in the limit of infinite data \cite{Barron, Silverman}.
 The philosophical underpinnings of Bayesian inference\---the underlying question being asked\---is akin to the following:
