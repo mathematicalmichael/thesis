@@ -7,4 +7,4 @@ RUN pip install --no-cache --upgrade pip && \
 
 RUN jupyter serverextension enable --py nbgitpuller --sys-prefix
 
-WORKDIR /home/jovyan/thesis
+WORKDIR /home/jovyan/
