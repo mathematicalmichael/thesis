@@ -15,15 +15,18 @@ You can then use the File-Browser on the left-hand side to navigate to `thesis/d
 
 Template based on [this repository](github.com/dewittpe/ucd-dissertation-template).
 
-## Building
+## Building from Source.
 
-Once cloned, run `make dissertation.tex` to build the PDF.
+Clone the repository, `cd thesis`, and run `make dissertation.tex` to build the PDF.
 
-Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `Show LaTeX Preview` (as per usual, it may take several builds for all citations and references to link properly).
+Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `Show LaTeX Preview` (as per usual, it may take several builds for all citations and references to link properly). 
+Using `make` in Terminal is the _proper_ workflow, but `jupyterlab-latex` can technically be configured to run `latekmk` the same way the makefile does.
+
+## Alternative Building Options
+Assuming you have a local LaTeX installation (including `latekmk`), you can use an editor to accomplish a very comfortable environment on your local machine in your favorite editor. Mine is Atom, so here are those instructions (with two-way SyncTeX):
 
 If using [Atom](https://atom.io/), here are the packages I installed in order to get things working (make sure the packages in `/binder/apt.txt` are also installed on your computer first since these are the LaTeX dependencies on which we rely).
   - atom-latex [0.8.10]
-  -~~language-latex [1.2.0]~~
 
 The following were simply for visual purposes (italics = highly recommend):
   - *minimap*
