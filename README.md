@@ -13,7 +13,6 @@ When it launches:
 ```sh
 cd thesis; make; make clean
 ```
-(`make` defaults to `make dissertation.pdf`)
 
 > You can then use the File-Browser on the left-hand side to navigate to `thesis/dissertation.pdf` and open a preview PDF in the JupyterLab web-app.
 
@@ -26,10 +25,12 @@ Template based on [this repository](github.com/dewittpe/ucd-dissertation-templat
 
 ## Building from Source.
 
-Clone the repository, `cd thesis`, and run `make dissertation.tex` to build the PDF.
+Clone the repository, `cd thesis`, and execute `make; make clean` to build the PDF, then open with your favorite viewer (a web-browser works). 
 
-Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `Show LaTeX Preview` (as per usual, it may take several builds for all citations and references to link properly). 
-Using `make` in Terminal is the _proper_ workflow, but `jupyterlab-latex` can technically be configured to run `latekmk` the same way the makefile does.
+Note that `make` [defaults to](https://github.com/mathematicalmichael/thesis/blob/master/makefile#L7) `make dissertation.pdf`.
+
+> Alternatively, click the binder badge above, which will launch a Jupyterlab interface that has [jupyterlab-latex](https://github.com/jupyterlab/jupyterlab-latex) pre-installed, so you can right-click on the opened `dissertation.tex` file to `Show LaTeX Preview` (as per usual, it may take several builds for all citations and references to link properly). 
+Using `make` in Terminal is the _proper_ workflow, but `jupyterlab-latex` can technically be configured to run `latekmk` the same way the makefile does. 
 
 
 ## Docker
