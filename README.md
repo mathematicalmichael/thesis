@@ -1,5 +1,13 @@
-From `binder` using `nbgitpuller`
+Launch an interactive editor using Binder pointing to the `binder` branch and using `nbgitpuller` to sync latest changes from master
 [![Binder](https://mybinder.org/badge_logo.svg)](https://gke.mybinder.org/v2/gh/mathematicalmichael/thesis/binder?urlpath=git-pull?repo=https://github.com/mathematicalmichael/thesis)
+
+When it launches, change `/tree/thesis` to `/lab/`, open the Terminal and enter the following commands:
+```sh
+cd thesis; make; make clean
+```
+
+This will run the makefile that calls LaTeXMake to fully compile the thesis with the bibliography and references.
+You can then use the File-Browser on the left-hand side to navigate to `thesis/dissertation.pdf` and open a preview PDF in the JupyterLab web-app.
 
 ---
 
