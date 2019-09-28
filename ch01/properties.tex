@@ -32,18 +32,19 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
 
 \begin{thm}[Existence and Uniqueness]
 For any set $A\in \pborel$, the solution $\updatedP$ given defined by
-\begin{equation}\label{eq:cb_sol}
+\begin{equation}\label{eq:dci_sol}
 \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
 \end{equation} 
 is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
 \end{thm}
 
-This updated density \eqref{eq:update} appearing within the iterated integral in \eqref{eq:cb_sol} has no normalization constant (it already integrates to one), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
+The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_sol} has no normalization constant because it is in fact a density (i.e., it integrates to $1$), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
 \begin{cor}\label{cor:int}
 $\updatedP(\pspace) = 1$.
 \end{cor}
 
 Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
+Moreover, this Corollary provides the basis for a useful numerical diagnostic that informs us about the quality of a solution based on finite sampling and density estimatation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -73,7 +74,7 @@ $\updatedP$ is stable with respect to perturbations in $\observedP$.
 \label{thm:stableobs}
 \end{thm}
 
-This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the assumptions.
+This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the prior beliefs.
 
 \begin{defn}[Stability of Updated Densities II]\label{defn:stableprior}
 Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
@@ -93,10 +94,11 @@ $\updatedP$ is stable with respect to perturbations in the prior.
 Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
 Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
-If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density, then the conditional densities from the disintegration theorem are given as
+If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
 \[
-\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }.
+\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} },
 \]
+where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\updatedP}$.
 In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the prior.
 
 
@@ -136,9 +138,9 @@ There exists some $C>0$ such that
 \]
 \end{assumption}
 
-If this assumption is satisfied, we can prove the following theorem from \cite{BJW18}:
+If this assumption is satisfied, we have the following theorem from \cite{BJW18}:
 \begin{thm}
-The error in the approximate updated density is:
+The error in the approximate updated density is bounded above:
 \begin{equation}\label{eq:predicted_bound}
 d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
 \end{equation}
@@ -152,7 +154,7 @@ We leverage the re-use of samples in the results herein extensively.
 In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior.}
 Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
 
-%For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:cb_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
+%For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
 %We let
 %\[
 %\updated\lam = \initial \lam r\q, \text{ where } r\q = \frac{\observed\q}{\predicted\q}
