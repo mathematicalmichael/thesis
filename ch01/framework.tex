@@ -1,28 +1,33 @@
 We provide a summary of the notation, definitions, problem-formulation, and assumptions considered in this proposal. 
 For more details,  we refer the interested reader to \cite{BES12, BE13, BET+14}. 
 
-Let $u$ be the solution to a model, perhaps of a physical system such as the amount of contaminant in a subsurface. 
+Let $u$ be the solution to a model $\M(u, \param) = 0$, perhaps of a physical system such as the amount of contaminant in a subsurface. 
 Let $\param$ represent a parameter into such a model, e.g. the permeability of the medium in the subsurface through which a contaminant is spreading.
-Such parameters are often uncertain and we begin the quantification of uncertainty by identifying a set of possible parameters $\pspace$.
-Since different $\param \in \pspace$ can lead to different model solutions, we write $u\lam$ to make this dependence explicit.
+Such parameters are often uncertain and we begin the quantification of uncertainty by identifying the set of all physically plausible parameters denoted by $\pspace\subset\RR^\dimP$.
+Since different choices of $\param \in \pspace$ often lead to different model solutions, we write $u\lam$ to make this dependence explicit.
 
-Generally, we cannot observe the entire solution $u(\param)$, and instead are able to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. the contaminant levels at a specific well at a particular time).
+However, we cannot in general observe the entire solution $u(\param)$.
+Instead, we are often limited in our ability to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. the contaminant levels at a specific well at a particular time).
 We let $\qoi$ denote the QoI map from the solution space of the model to the space of observable data. 
-Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI data predicted by the model.
+Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI datum predicted by the model.
 Clearly, the QoI map depends on $\param$ through the dependency of $u$ on $\param$, so we write $\qlam$ to simplify our notation.
 We assume this map is at least piece-wise differentiable.	
 The data space $\dspace \subset \RR^d$ is defined as the range of the QoI map $\qoi$, i.e. 
 \[
 \dspace = \qoi(\pspace).
 \]
+In other words, we use $\dspace$ to denote the space of all physically plausible data for the QoI that the model can predict.
+
 
 Let $\pborel$ and $\dborel$ denote (the Borel) $\sigma$-algebras on $\pspace$ and $\dspace$, respectively.
 The map $\qoi$ between measurable spaces $(\pspace, \pborel)$ and $(\dspace, \dborel)$ is immediately measurable by the smoothness assumption. 
-Then, equipping $\pspace$ and $\dspace$ with (volume) measures $\pmeas$ and $\dmeas$, respectively, is the final ingredient for defining probability density functions (pdfs) on the measure spaces $(\pspace, \pborel, \pmeas)$ and $(\dspace, \dborel, \dmeas)$.
+Then, equipping $\pspace$ and $\dspace$ with (dominating) measures $\pmeas$ and $\dmeas$, respectively, is the final ingredient for defining probability density functions (pdfs) on the measure spaces $(\pspace, \pborel, \pmeas)$ and $(\dspace, \dborel, \dmeas)$.
 In practice, $\pmeas$ and $\dmeas$ are often taken to be Lebesgue volume measures when $\pspace$ and $\dspace$ are finite-dimensional~\cite{BET+14, BJW18}.
+In general, these measure allow for the description of probability measures as probability density functions defined by Radon-Nikodym derivatives.
 
 
 \subsection{Problem Formulation and Solution}
+
 We begin with defining the types of forward and inverse problems considered in this thesis.
 
 \begin{defn}[Forward Problem]\label{defn:forward-problem}
