@@ -2,7 +2,7 @@
 
 \section{Preliminaries}
 Talk about the collection of noisy data, the types of inferences one may be interested in making from them.
-Roughly breaks down into 
+Roughly breaks down into
 \begin{itemize}
   \item Parameter Identification
   \item Distribution Estimation
@@ -25,89 +25,103 @@ Much of the work of writing ``good software'' is concerned with writing appropri
 There are many ways to write a functioning program to demonstrate a proof-of-concept, but creating something that is \emph{user-friendly}, guaranteed to be free of mistakes, and scales across different computational environments/resources requires a completely different approach.
 
 Decisions made early in the software design cycle have lasting impacts on future features and functionality.
-Rigor is added to libraries through the writing of \emph{unit tests}, and use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible. 
+Rigor is added to libraries through the writing of \emph{unit tests}, and use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible.
 Code that only runs on the computer of the author is impractical since any thorough critique requires independent verification.
 Without proper context and architecture, new ideas that are implemented in programs are unlikely to be adopted.
 
 \subsection{Reproducibility}
-To this end, this thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data\---it also serves to document the process of ensuring that the work herein is \textbf{fully reproducible}.
+This thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data in a novel Data-Consistent framework\---it also serves to document the process of ensuring that the work herein is \textbf{fully reproducible}.
 In mathematics, reproducibility is ensured through the use of proofs, which motivate the original work presented here.
-However, much of the focus is actually on the implications of implementation of the novel research into Data Consistent Inversion, studying the impact of using computers to perform the task of making conclusions based on data.
-The implementation of mathematics on computers is done through software, and so we are concerned with ensuring the expected functionality of that software since as mathematicians, we care deeply about making sure things are rigorous. 
+However, as the title of this thesis suggests, much of the focus is actually on the computational implementation of the novel research into Data Consistent Inversion, studying the impact of using computers to perform the task of making conclusions based on data.
+The implementation of mathematics on computers is done through software.
+We are therefore concerned with ensuring the expected functionality of that software, which aligns with our training as mathematicians; we care deeply about making sure things are rigorous.
 
-In short, we want to make sure that theory aligns with practice, and that both live up to high standards of intellectual scrutiny. 
-Every computational result, illustrative figure, table, plot, etc. will have associated with it scripts that generate them, and will be included in the  repository for this document [TK - cite]. 
-It is written in \LaTeX\, (which is itself a programming language), and presents its own software dependencies in addition to those required to run the scripts to generate the images and tables. 
-To address this concern, the author will leverage \emph{Travis}, a continuous integration service [TK-cite], to ensure that all figures can be generated and the \LaTeX\, document compiles into a PDF.
+In short, we want to make sure that theory aligns with practice, and that both live up to high standards of intellectual scrutiny.
+Every computational result, illustrative figure, table, plot, etc. presented in this thesis is associated with the scripts that generate them, and are included in the  repository for this document [TK - cite].
+It is written in \LaTeX~(which is itself a programming language), and presents its own software dependencies in addition to those required to run the scripts to generate the images and tables.
+To address this concern, we leverage \emph{Travis}, a continuous integration service [TK-cite], to ensure that all figures can be generated and the \LaTeX\, document compiles into a PDF.
 
-The same care is taken to ensure the reproducibility of all results in this thesis as was put into ensuring that the mathematics was implemented correctly as software. 
-Additionally, an \emph{image} that contains a fully pre-built Linux software environment within which someone can compile the thesis and run the code will be available through the Docker Cloud registry [TK -cite]. 
+The same care is taken to ensure the reproducibility of all numerical results based on software.
+An \emph{image} that contains a fully pre-built Linux software environment within which one can compile the thesis and run the code is available through the Docker Cloud registry [TK -cite].
 The latter enables the ability to generate this thesis document in its entirety on any software platform that supports Docker (Windows, MacOS, Linux).
+A cloud service called Binder [ TK - cite mybinder.org] allows one-click deployments in any web-browser, removing the need for any installation whatsoever for anyone wanting to reproduce the contents of this document. 
 
 \section{Framework}\label{sec:framework}
+
 \input{ch01/framework}
 \input{ch01/properties}
 \input{ch01/comparison}
 
+
 \section{Software Contributions}\label{sec:ch01-software}
+
 As discussed in \ref{sec:motivations}, the entirety of the mathematical content herein has been incorporated into freely available open-source software, including this work itself.
 The novel mathematical developments that have gone into the work herein are all reflected in various modules and sub-modules as part of the BET Python package.
 This software suite follows a number of industry best-practices for code-coverage (\ref{sec:code-coverage}) and continuous integration (\ref{sec:continuous-integration}), i.e. the code is well-tested (\ref{sec:unit-testing}).
 
 A significant proportion of the effort involved in the writing of this thesis revolved around learning about the art and practice of modern (open-source) software development.
-As new ideas sprang up, our research group found itself coding and re-coding the same methods that had yet to be incorporated into user-friednly, computationally efficient, and properly-parallelized libraries.
+As new ideas sprang up, our research group found itself coding and re-coding the same methods that had yet to be incorporated into user-friendly, computationally efficient, and properly-parallelized libraries.
 Over the years, the software fell behind the state-of-the-art in research, and previous maintainers of code had moved on from their academic positions.
 The author spent most of 2019 bringing the software in-line with the latest developments in Data-Consistent Inversion.
 
+
 \subsection{Software Design and Architecture}\label{sec:architecture}
+
 Having learned a lot about software reproducibility along the way, the author made the decision to treat this thesis as a software project in its own right.
-Every example, figure, table, and plot will be generated by a combination of Python and Bash scripts contained inside of a public Github repository (www.github.com/mathematicalmichael/thesis).
+Every example, figure, table, and plot is generated by a combination of Python and Bash scripts contained inside of a public Github repository (www.github.com/mathematicalmichael/thesis).
 
-By hosting this work on Github, corrections can be submitted as Issues, and the document can serve as a reference point for a thorough introduction on the topic of Data-Consistnt Inversion.
-All the requisite \LaTeX dependencies are contained in {\tt apt.txt}, and a Jupyterlab environment usable by Binder (which can compile the document and run every example) is configured in the {\tt binder/} directory of the repository.
+By hosting this work on Github, corrections can be submitted as Issues, and the document can serve as a reference point for a thorough introduction on the topic of Data-Consistent Inversion.
+All the requisite \LaTeX~dependencies are contained in {\tt apt.txt}, and a Jupyterlab environment usable by Binder (which can compile the document and run every example) is configured in the {\tt binder/} directory of the repository (on the binder branch).
 
-Special care will be taken to ensure that every file herein is well-documented.
-When appropriate, functions and classes will be used in such a way that several examples can be generated from the same file.
-The parameters required can be passed as optional arguments, and bash scripts containing the exact syntax to generate each figure will be included.
+Special care is taken to ensure that every file herein is well-documented.
+When appropriate, functions and classes are used in such a way that the same file generates several examples generated.
+The parameters required are passed as optional arguments, and bash scripts containing the exact syntax to generate each figure are included.
 
-For example, to visually demonstrate the implicitly-defined sets of nearest-neighbors in two-dimensional unit domain, we rely on Voronoi-cell diagrams (figures).
+For example, to visually demonstrate the implicitly-defined sets of nearest-neighbors in two-dimensional unit domain, we rely on Voronoi-cell diagrams.
 One python file (\bashinline{images/voronoi_unit_domain.py}) contains the methods required to draw a single figure/illustration.
-Some plots require labels, and others do not, and at one point we want to demonstrate the impact of random sampling on the geometry of the induced computational equivalent of a $\sa$.
+Some plots require labels, and others do not, and at one point we demonstrate the impact of random sampling on the geometry of the induced computational equivalent of a $\sa$.
 To accommodate the need for different variations of similar plots, we utilize the argument-parsing package \pythoninline{argparse}, part of the Python standard library, to enable command-line positional and optional arguments \footnote{We equip each function with default values so that the syntax \bashinline{python example.py} without any additional arguments will work, but specific examples rely on optional arguments to be passed accordingly.}.
-We include an associated (wrapper) files with descriptive names, such as \bashinline{images/make_voronoi_diagrams.sh} that repeatedly call the relevant python file(s) and passes arguments (such as {\tt num} for ``number of samples''). 
+We include associated (wrapper) files with descriptive names, such as \bashinline{images/make_voronoi_diagrams.sh} that repeatedly call the relevant python file(s) and passes arguments (such as {\tt num} for ``number of samples'').
 We refer the inquisitive reader to  Figure~\ref{fig:voronoi_cells} or \ref{fig:voronoi_issues} to see the Voronoi-cell diagrams generated by the following script\footnote{A \LaTeX macro has been written to allow for Python and Bash files to be displayed contextually to avoid the need to update them in two places. What is shown here is exactly what gets run. When scripts are long, important sections of code may be interspersed within the text, with the full script available in the appendix associated with the chapter.}:
 
-\bashexternal{images/make_voronoi_diagrams.sh}.
+\bashexternal{images/make_voronoi_diagrams.sh}
+
 
 These wrappers are called by other Bash scripts which are each responsible for generating figures in different sections or specific models (QoI maps).
 This builds something akin to a ``tool chain,'' a series of calls to hierarchies of scripts in order to generate the pictorial content in this work.
 
+
 \subsubsection{Continuous Integration}\label{sec:continuous-integration}
-These outer-level scripts that call others will be leveraged by \emph{Travis}, a continuous-integration (CI) service that runs a series of commands on behalf of the user, automating the process of testing functionality. 
+
+These outer-level scripts that call others are leveraged by \emph{Travis}, a continuous-integration (CI) service that runs a series of commands on behalf of the user, automating the process of testing functionality.
 The familiarity with this technology was introduced as a consequence of working on BET \cite{pyBET}, the software library that originally implemented the set-based approach discussed in \ref{sec:ch02-set}.
 The use of CI in BET is similar to that of most software packages written in Python, unit tests are run in some framework (\pythoninline{nose} for BET, alternatively \pythoninline{pytest}), and a successful run triggers a webhook that communicates with the software repository host (Github) to validate changes.
 
-\subsubsection{Unit Testing}\label{sec:unit-testing}
-The aforementioned \emph{unit tests} are a framework for ensuring code runs as its author intended.
+\subsubsection{Testing}\label{sec:unit-testing}
+The aforementioned \emph{unit tests} are a framework for guaranteeing the behavior of programs or individual methods when instructions are followed.
+\emph{Functional tests} encompass more complicated behavior, stringing together several methods/modules to ensure code runs as its author intended, and are usually included when referring to unit testing.
 ``How to write a test'' is a question that depends highly on the particular functionality, but the premise is always the same.
 
-[TK - maybe show a really basic example of a set/get method and the test for that?] 
+[TK - maybe show a really basic example of a set/get method and the test for that?]
 
 
 \subsubsection{Code Coverage}\label{sec:code-coverage}
-Code coverage refers to the proportion of lines of code that have been written that were run during the process of unit-testing. 
-The goal is not to achieve 100\% coverage, but rather to make sure that the most crucial use-cases are checked.
+
+Code coverage refers to the proportion of lines of code that were run during the process of testing (consisting of unit and functional tests).
+The goal is not necessarily to achieve 100\% coverage, but rather to make sure that the most crucial use-cases are checked.
 Generally speaking, coverage in the 75-85\% range is industry-standard.
 
-[TK - flesh out a bit more, talk about Codecov, the specific service we use, how it won't be used for the scripts in this thesis]. 
+[TK - flesh out a bit more, talk about Codecov, the specific service we use, how it won't be used for the scripts in this thesis].
+
 
 \subsubsection{BET Architecture}\label{sec:bet-architecture-overview}
+
 The fundamental class in the BET implementation of Data-Consistent Inversion is the \pythoninline{discretization} object, which holds the representation of an inverse problem.
 
 The parameter space $\pspace$ is represented as an \pythoninline{input_sample_set} attribute to the \pythoninline{discretization} instance.
-Similarly, $\dspace$ is associated with a \pythoninline{output_sample_set}. 
+Similarly, $\dspace$ is associated with a \pythoninline{output_sample_set}.
 The measure/density $\observedP$ (or $\PP_\dspace$) that is imposed on $\Dspace$ is held as an \pythoninline{output_probability_set} attribute.
-Each of these is an instance of a \pythoninline{bet.sample_set} class. 
+Each of these is an instance of a \pythoninline{bet.sample_set} class.
 
-[TK - talk about a few of the core properties of these classes, but perhaps save the diagrams for Ch2]. 
-More details will follow in \ref{sec:ch02-software}, as is an overview of the development timeline. 
+[TK - talk about a few of the core properties of these classes, but perhaps save the diagrams for Ch2].
+More details will follow in \ref{sec:ch02-software}, as is an overview of the development timeline.
