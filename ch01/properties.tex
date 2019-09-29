@@ -1,7 +1,25 @@
-
-%%%%%%%%% Section 2.2
 \subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
-The stochastic inverse problem is defined as finding a measure $\updatedP$ such that the push-forward of it matched $\observed$.
+
+To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data. 
+
+\begin{defn}[Initial Distribution]\label{defn:initial}
+  The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{prior density}.
+\end{defn}
+
+To construct $\updated$, we ``push-forward'' the prior beliefs using the QoI map to compare to the evidence provided by $\observed$. 
+In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem. 
+To make this precise, we use the following:
+
+\begin{defn}[Predicted Distribution]\label{defn:predicted}
+  The push-forward density of $\initial$ under the map $\qoi$ is denoted simply as $\predicted$. 
+  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure defined by 
+  \begin{equation}\label{eq:predicted}
+    \predictedP (E) = P_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
+  \end{equation}
+\end{defn}
+
+
+The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ such that the push-forward of it matched $\observed$.
 The following assumption guarantees a solution to the stochastic inverse problem. 
 It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the prior beliefs. 
 
@@ -18,17 +36,8 @@ The requirement given in Assumption~\ref{as:pred} is guaranteed if the following
 \exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
 \end{equation}
 where it is understood that $d = \qlam$ for some $\param \in \pspace$.
-Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18}:
+Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18} based upon the disintegration of measures:
 
-%%%
-
-%Any probability measure that satisfies Equation~\ref{eq:inverse-problem} is considered a consistent solution to the stochastic inverse problem.
-%In the event that the map $\qoi$ is a bijection, then the consistency condition (\ref{defn:consistency}) defines a unique measure $P$ on $\pspace$ given the specification of an observed density.
-%However, there are many applications of interest where the quantitiy of interest map $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both. 
-%To address this, we present the following summary of work done in \cite{BE13, BJW18} on two approaches for defining a unique solution if the properties of the map or spaces under consideration prohibit one from existing.
-
-%%%
-%\input{setval}
 
 \begin{thm}[Existence and Uniqueness]
 For any set $A\in \pborel$, the solution $\updatedP$ given defined by
@@ -36,12 +45,22 @@ For any set $A\in \pborel$, the solution $\updatedP$ given defined by
 \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
 \end{equation} 
 is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
 
 The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_sol} has no normalization constant because it is in fact a density (i.e., it integrates to $1$), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
 \begin{cor}\label{cor:int}
 $\updatedP(\pspace) = 1$.
 \end{cor}
+
+These definitions are combined to form the \emph{updated density}, originally derived in \cite{BJW18}:
+
+\begin{defn}[Updated Distribution]\label{defn:updated}
+A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivate, 
+  \begin{equation}\label{eq:update}
+    \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \forall \; \param \in \pspace.
+  \end{equation}
+\end{defn}
 
 Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
 Moreover, this Corollary provides the basis for a useful numerical diagnostic that informs us about the quality of a solution based on finite sampling and density estimatation.
