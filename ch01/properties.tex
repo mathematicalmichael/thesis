@@ -27,7 +27,7 @@ The following assumption guarantees a solution to the stochastic inverse problem
 It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the prior beliefs. 
 
 \begin{assumption}[Predictability Assumption]\label{as:pred}
-The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
+  The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
 \end{assumption}
 
 If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and prior) have a priori ruled that almost surely these events should not occur. 
@@ -36,19 +36,19 @@ Therefore, either prior beliefs, the model under consideration, or the descripti
 
 The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
 \begin{equation}\label{eq:pred}
-\exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
+  \exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
 \end{equation}
 where it is understood that $d = \qlam$ for some $\param \in \pspace$.
 Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18} based upon the disintegration of measures:
 
 
 \begin{thm}[Existence and Uniqueness]
-For any set $A\in \pborel$, the solution $\updatedP$ given defined by
-\begin{equation}\label{eq:dci_sol}
-\updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
-\end{equation} 
-is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
-Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
+  For any set $A\in \pborel$, the solution $\updatedP$ given defined by
+  \begin{equation}\label{eq:dci_sol}
+    \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
+  \end{equation} 
+  is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+  Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
 
 The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_sol} has no normalization constant because it is in fact a density (i.e., it integrates to $1$), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
@@ -59,7 +59,7 @@ $\updatedP(\pspace) = 1$.
 These definitions are combined to form the \emph{updated density}, originally derived in \cite{BJW18}:
 
 \begin{defn}[Updated Distribution]\label{defn:updated}
-A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivate, 
+  A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivative, 
   \begin{equation}\label{eq:update}
     \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \forall \; \param \in \pspace.
   \end{equation}
@@ -72,6 +72,7 @@ Moreover, this Corollary provides the basis for a useful numerical diagnostic th
 
 
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
+
 We first recall the Total Variation (TV) metric, defined as 
 \begin{equation}\label{eq:tv}
 d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
@@ -81,36 +82,36 @@ The stability results below are all with respect to the TV metric, which is wide
 We first define stability with respect to perturbations in the data.
 
 \begin{defn}[Stability of Updated Densities I]\label{defn:stableobs}
-Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}. 
-Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
-We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
-\begin{equation}
-d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
-\end{equation}
+  Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}. 
+  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
+  We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
+  \begin{equation}
+    d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+  \end{equation}
 \end{defn}
 
 In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, which immediately proves the following:
 
 \begin{thm}
-$\updatedP$ is stable with respect to perturbations in $\observedP$.
-\label{thm:stableobs}
+  $\updatedP$ is stable with respect to perturbations in $\observedP$.
+  \label{thm:stableobs}
 \end{thm}
 
 This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the prior beliefs.
 
 \begin{defn}[Stability of Updated Densities II]\label{defn:stableprior}
-Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
-Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
-Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
-We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
-\begin{equation}\label{eq:stableprior}
-d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
-\end{equation}
+  Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
+  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
+  Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
+  We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
+  \begin{equation}\label{eq:stableprior}
+    d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+  \end{equation}
 \end{defn}
 
 \begin{thm}
-$\updatedP$ is stable with respect to perturbations in the prior.
-\label{thm:stableprior}
+  $\updatedP$ is stable with respect to perturbations in the prior.
+  \label{thm:stableprior}
 \end{thm}
 
 Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
@@ -162,11 +163,11 @@ There exists some $C>0$ such that
 
 If this assumption is satisfied, we have the following theorem from \cite{BJW18}:
 \begin{thm}
-The error in the approximate updated density is bounded above:
-\begin{equation}\label{eq:predicted_bound}
-d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
-\end{equation}
-where the $C$ is the constant taken from Assumption \ref{as:predx}. 
+  The error in the approximate updated density is bounded above:
+  \begin{equation}\label{eq:predicted_bound}
+    d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
+  \end{equation}
+  where the $C$ is the constant taken from Assumption \ref{as:predx}. 
 \end{thm}
 
 In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
