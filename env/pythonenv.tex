@@ -36,9 +36,9 @@ showstringspaces=false            %
 {}
 
 % Python for external files
-\newcommand\pythonexternal[2][]{{
+\newcommand\pythonexternal[2][]{{\hbox{
 \pythonstyle
-\lstinputlisting[#1]{#2}}}
+\lstinputlisting[#1]{#2}}\vspace{0.25in}}}
 
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}

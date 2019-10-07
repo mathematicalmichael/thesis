@@ -13,7 +13,7 @@
 
 \usepackage{listings}
 
-% Python style for highlighting
+% Bash style for highlighting
 \newcommand\bashstyle{\lstset{
 language=Bash,
 basicstyle=\ttmm,
@@ -27,7 +27,7 @@ showstringspaces=false            %
 }}
 
 
-% Python environment
+% Bash environment
 \lstnewenvironment{bash}[1][]
 {
 \bashstyle
@@ -35,10 +35,10 @@ showstringspaces=false            %
 }
 {}
 
-% Python for external files
-\newcommand\bashexternal[2][]{{
+% Bash for external files
+\newcommand\bashexternal[2][]{{\hbox{
 \bashstyle
-\lstinputlisting[#1]{#2}}}
+\lstinputlisting[#1]{#2}}\vspace{0.25in}}}
 
-% Python for inline
+% Bash for inline
 \newcommand\bashinline[1]{{\bashstyle\lstinline!#1!}}
