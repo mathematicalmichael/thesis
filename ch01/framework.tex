@@ -1,5 +1,5 @@
-We provide a summary of the notation, definitions, problem-formulation, and assumptions considered in this proposal. 
-For more details,  we refer the interested reader to \cite{BES12, BE13, BET+14}. 
+We provide a summary of the notation, definitions, problem-formulation, and assumptions that reoccur throughout this work. 
+For more details on the original sources and derivations,  we refer the interested reader to \cite{BES12, BE13, BET+14}. 
 
 Let $u$ be the solution to a model $\M(u, \param) = 0$, perhaps of a physical system such as the amount of contaminant in a subsurface. 
 Let $\param$ represent a parameter into such a model, e.g. the permeability of the medium in the subsurface through which a contaminant is spreading.
@@ -11,7 +11,7 @@ Instead, we are often limited in our ability to observe data related to some qua
 We let $\qoi$ denote the QoI map from the solution space of the model to the space of observable data. 
 Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI datum predicted by the model.
 Clearly, the QoI map depends on $\param$ through the dependency of $u$ on $\param$, so we write $\qlam$ to simplify our notation.
-We assume this map is at least piece-wise differentiable.	
+We assume this map is at least piecewise-differentiable.	
 The data space $\dspace \subset \RR^d$ is defined as the range of the QoI map $\qoi$, i.e. 
 \[
 \dspace = \qoi(\pspace).
@@ -53,8 +53,8 @@ We begin with defining the types of forward and inverse problems considered in t
   Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
 \end{defn}
 
-In measure-theoretic terms, $\updatedP$ is a pull-back measure of $\observed$.
-From the perspective of a forward problem, we seek $\updatedP$ such that its push-forward measure is equivalent to $\observed$. 
+In measure-theoretic terms, $\PP_\pspace$ is a pull-back measure of $\observedP$.
+From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\observedP$. 
 In other words, the solution we seek to the inverse problem is constrained by a forward problem. 
 Below, we formalize some of the vocabulary involved in the formulation and solution of the stochastic inverse problem.
 
