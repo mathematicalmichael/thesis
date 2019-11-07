@@ -1,12 +1,11 @@
 CHAPTERS = $(shell find . -type f -name 'chapter*.tex')
 APPENDIX = $(shell find . -type f -name 'appendix*.tex')
+IMAGES = $(shell find . -type f -name '*.png')
 REFS = $(shell find . -type f -name 'references*.bib')
 
-.PHONY: all clean
+all: dissertation.pdf clean
 
-all: dissertation.pdf
-
-dissertation.pdf: dissertation.tex *.tex $(CHAPTERS) $(APPENDIX) $(REFS) ucdenver-dissertation.cls
+dissertation.pdf: dissertation.tex *.tex $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) ucdenver-dissertation.cls
 	latexmk -gg -pdf -bibtex dissertation.tex
 
 clean:
