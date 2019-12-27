@@ -91,21 +91,25 @@ In place of the ansatz, we have an initial distribution.
 
 
 \section{Illustrative Examples}\label{sec:ch02-examples}
-In some examples, we do not work with any model $\M$ and make observations $\qoi$ directly on the data space $\dspace$, so term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero for the examples we present in Section \ref{sec:ch02-examples}.
+In some examples, an analytic, closed-form expression for the QoI map is used.
+In these examples, term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero.
 Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function.
-In this event, the solution $\paramP$ to the SIP can be given exactly by a change of variables formula, so the inverse set can be known exactly.
-When we invert characteristic functions, our solutions will also be members of this same family if the choice of \emph{ansatz} (or \emph{initial density}) is taken to be uniform over $\pspace$.
-These examples allow us to study the DCI method for a class of functions for which a solution is readily available, and serves as a requisite testing ground before advancing to more nuanced problem definitions.
+In this event, the solution $\paramP$ to the SIP is given exactly by a change of variables formula and it's support can be specified exactly.
+By inverting characteristic functions, the solutions are also be members of this same family of functions if the choice of \emph{ansatz} (or \emph{initial density}) is taken to be uniform over $\pspace$.
+
+Such simplifications in the examples considered here allow us to study the DCI method for a class of functions for which a solution is readily available, and serves as a requisite testing ground before advancing to more nuanced problem definitions.
+In a sense, these are both ``unit'' (and ``regression'') tests for various aspects of the computational algorithms (and entire algorithms, respectively).
+
 We present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ and $\updated$ using finite sampling.
 
-For the set-based approach discussed in \ref{sec:ch02-set}, it is desirable that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} has been made sufficiently small or eliminated entirely.
+For the set-based approach discussed in \ref{sec:ch02-set}, it is desirable that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} is sufficiently small or eliminated entirely.
 This amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater to some problem specifications.
 We choose to impose uniform distributions on $\dspace$ so that the set-valued analog to $\observed$ is perfectly described with $\ndiscs=1$.
-Therefore, we focus our attention on the source of error introduced by $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs} )$, the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}, which is given by the term (E2) = $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
+This allows for a better comparison between the set- and sample-based approaches by eliminating this variable. 
+Therefore, we focus our attention on the source of error introduced by the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}:  discretizing the parameter space, which is represented by the term (E2) = $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
+The number of samples fundamentally limits the characterization of events due to the resulting simple-function approximation of the density $d\paramP / d\pmeas$, which we compare to $\updated$ from the sample-based approach.
 
-Since there is no error introduced from discretizing $\pspace$ in the sample-based approach from \ref{sec:ch02-sample}, the term (E2) is not what contributes to error in the sample-based approach.
-As discussed in \ref{sec:sample-error}, the impact of $\nsamps$ is on our ability to characterize $\dspace$.
-In situations where an analytical $\predicted$ is not known, we must rely on some form of density estimation.
+Since there is no error introduced from discretizing $\pspace$ in the sample-based approach from \ref{sec:ch02-sample}, the primary contribution of error in this approach comes from approximating the push-forward density in situations where an analytical $\predicted$ is not known.
 
 \input{ch02/decay_set_vs_sample}
 

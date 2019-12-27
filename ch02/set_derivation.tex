@@ -37,16 +37,15 @@ The ``push-forward'' measure $\dmeas$ on ${(\dspace, \dborel)}$ is defined as
 \end{equation}
 
 \noindent which defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
-The pushforward measure $\predictedP$ is characterized by the \emph{predicted density} $\predicted$, which is given by the Radon-Nikodym derivative of $\predictedP$ with respect to measure $\mu_\dspace$ on ${(\dspace, \dborel)}$.
-In practice, when $\predictedP$ is absolutely continuous with respect to the $\dimD$--dimensional Lebesgue measure $\mu_\dspace$, we substitute this Lebesgue measure for $\predictedP$.
 
-The final step in (S1) involves the specification of a probability measure $\dataP$ on ${(\dspace, \dborel)}$ to model the uncertainty in data.
-We colloquially refer to the density (given by the Radon-Nikodym derivative $d\dataP / d\mu_\dspace$) as the \emph{observed density}, where $\pmeas$ is taken to be the (Lebesgue) volume measure on ${(\pspace, \pborel)}$.
+In practice, when $\dmeas$ is absolutely continuous with respect to the $\dimD$--dimensional Lebesgue measure, we substitute the Lebesgue measure for $\dmeas$.
+
+The final step in (S1) involves the specification of a probability measure $\dataP$ (absolutely continuous with respect to $\dmeas$) on ${(\dspace, \dborel)}$ to model the uncertainty in data.
 This leads to the following SIP: determine a probability measure $\paramP$ on ${(\pspace, \pborel)}$ such that the push-forward measure of $\paramP$ matches $\dataP$.
 
 In other words, determine a $\paramP$ satisfying
 \begin{equation}\label{eq:inverse_measure}
-\paramP \left ( \qoi^{-1}(E)\right ) = \dataP(E) \quad \forall \, E \in \dborel.
+\paramP \left ( \qoi^{-1}(E)\right ) = \dataP(E) \; \forall \; E \in \dborel.
 \end{equation}
 
 We call any such solution $\paramP$ to Eq.~\eqref{eq:inverse_measure} a (measure-theoretic) solution to the SIP.
@@ -76,11 +75,19 @@ A Disintegration Theorem [TK - cite] is then leveraged to define a unique decomp
 The uniqueness of a probability measure $\paramP$ on ${(\pspace, \cborel)}$ satisfying Eq.~\eqref{eq:inverse_measure} implies the uniqueness of the marginal probability measures $\PP_\LL$ for any particular specification of $\dataP$ on ${(\dspace, \dborel)}$.
 The disintegration of Eq.~\eqref{eq:disintegration_measure} implies that a specification of a family of conditional probability measures $\set{P_\ell}_{\ell\in\LL}$ gives us a unique solution to the SIP on ${(\CC_\ell, \BB_{\CC_\ell})}$.
 
-However, the conditional measures cannot be determined by solely by the specification of $\data\in\dspace$.
-We follow the work of \cite{BET+14} and adopt the \emph{standard ansatz} determined by the disintegration of the volume measure $\pmeas$ to compute probabilities of sets contained within contour events.
+However, the conditional measures cannot be determined solely by the specification of $\dataP$.
+We follow the work of \cite{BET+14} and adopt the \emph{standard ansatz} determined by the disintegration of the measure $\pmeas$ to compute probabilities of sets contained within contour events whenever $\pmeas(\pspace) < \infty$, e.g. when $\pmeas$ is the $\dimP$--dimensional Lebesgue measure and $\pspace \in \RP$ is precompact.
 The standard ansatz is given by
+
 \begin{equation}\label{eq:standard_ansatz}
 \PP_\ell = \mu_{\CC_\ell} / \mu_{\CC_\ell}(\CC_\ell), \; \forall \; \ell \in \LL,
 \end{equation}
-where $\mu_{\CC_\ell}$ is the disintegrated volume measure on generalized contour $\CC_\ell$.
+
+\noindent where $\mu_{\CC_\ell}$ is the disintegrated volume measure on generalized contour $\CC_\ell$.
 Thus, we have defined a unique solution to the SIP on ${(\pspace, \pborel)}$, completing step (S3) in Fig.~\ref{fig:scheme}.
+
+In the absence of other information about differences in relative likelihoods of parameters, the standard ansatz effectively implies a uniform distribution describing the initial state of uncertainty about the input parameters\footnote{In the event that $\pspace$ is compact.}.
+In this context, the measure $\paramP$ can be viewed as updating an initial uniform distribution on $\pspace$ in directions informed by the Quantity of Interest map, given uncertain data characterized by $\dataP$.
+We will begin to use $\updatedP$ to denote $\paramP$ going forward with this understanding.
+
+\vfill
