@@ -58,8 +58,8 @@
 \newcommand{\cborel}{\CC_{\pspace}} % contour sigma algebra
 \DeclareMathOperator*{\contourP}{\PP_{\cborel}}
 
-\DeclareMathOperator*{\paramP}{\PP_{\pspace}}
-\DeclareMathOperator*{\dataP}{\PP_{\dspace}}
+\newcommand{\paramP}{\updatedP}
+\newcommand{\dataP}{\observedP}
 
 \newcommand{\nparams}{P}
 \newcommand{\RP}{\RR^\nparams} % parameter space dimensions
@@ -100,9 +100,11 @@
 \DeclareMathOperator*{\obs}{\boldsymbol{o}}
 \DeclareMathOperator*{\data}{\boldsymbol{d}}
 \newcommand{\dspace}{\mathcal{D}}
-\newcommand{\dmeas}{\mu_{\dspace}}
+% \newcommand{\dmeas}{\mu_{\dspace}}
+\newcommand{\dmeas}{\predictedP}
 \newcommand{\dborel}{\BB_{\dspace}}
 \newcommand{\Dspace}{(\dspace, \dborel, \dmeas)}
+\newcommand{\Ospace}{(\dspace, \dborel, \dataP)}
 
 
 % Labeled QoI maps

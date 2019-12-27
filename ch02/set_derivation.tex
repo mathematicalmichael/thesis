@@ -1,5 +1,6 @@
-To properly summarize the Stochastic Inverse Problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme}\---borrowed from \cite{BM17}\---in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
-For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, \cite{BET+14}, and \cite{BM17}.
+To properly summarize the Stochastic Inverse Problem (SIP) and desired solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme} in order to illustrate the steps and spaces required in the formulation and solution of the SIPs we consider herein.
+For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, and \cite{BET+14}.
+Additional background and extensions of this theory are available in the PhD theses of Lindley Graham (UT Austin), Scott Walsh (CUD), Lei Yang (CSU) [TK - cite 3].
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
@@ -8,7 +9,7 @@ For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, 
 \underbrace{
 \overbrace{
  \Pspace \xmapsto{\  \qoi \ } \Dspace
-  \xmapsto{\ \dataP \ } (\dspace, \dborel, \dataP)
+  \xmapsto{\ \observedP \ } \Ospace
  }^{
  \text{(S1): Stochastic Inverse Problem (SIP)}
  }
@@ -35,16 +36,17 @@ The ``push-forward'' measure $\dmeas$ on ${(\dspace, \dborel)}$ is defined as
 \dmeas (A) = \int_A \, d\dmeas := \int_{\qoi^{-1}(A)} \, d\pmeas = \pmeas \left (\qoi^{-1}(A) \right ) \quad \forall \;  A\in\dborel,
 \end{equation}
 
-which defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
-The density $\partial \dataP / \partial \mu_D$ characterizing the pushforward measure $\dataP$ is referred to as the \emph{predicted} distribution $\predicted$, and is given by the Radon-Nikodym derivative with respect to (the Lebesgue) volume measure $\mu_D$ on ${(\dspace, \dborel)}$
+\noindent which defines the measure space $\Dspace$\footnote{When referring to properties of the data space that are not unique to the choice of map used to induce $\dspace$, we will drop the subscript notation and assume the dependence is understood, as expressed in Fig.~\ref{fig:scheme}.}.
+The pushforward measure $\predictedP$ is characterized by the \emph{predicted density} $\predicted$, which is given by the Radon-Nikodym derivative of $\predictedP$ with respect to measure $\mu_\dspace$ on ${(\dspace, \dborel)}$.
+In practice, when $\predictedP$ is absolutely continuous with respect to the $\dimD$--dimensional Lebesgue measure $\mu_\dspace$, we substitute this Lebesgue measure for $\predictedP$.
 
 The final step in (S1) involves the specification of a probability measure $\dataP$ on ${(\dspace, \dborel)}$ to model the uncertainty in data.
-We colloquially refer to the distribution (given by the Radon-Nikodym derivative $\partial \dataP / \partial \pmeas$) as the \emph{observed} distribution, where $\pmeas$ is taken to be the (Lebesgue) volume measure on ${(\pspace, \pborel)}$.
+We colloquially refer to the density (given by the Radon-Nikodym derivative $d\dataP / d\mu_\dspace$) as the \emph{observed density}, where $\pmeas$ is taken to be the (Lebesgue) volume measure on ${(\pspace, \pborel)}$.
 This leads to the following SIP: determine a probability measure $\paramP$ on ${(\pspace, \pborel)}$ such that the push-forward measure of $\paramP$ matches $\dataP$.
 
 In other words, determine a $\paramP$ satisfying
 \begin{equation}\label{eq:inverse_measure}
-\paramP \left ( \qoi^{-1}(E)\right ) = \PP_{\dspace}(E) \; \forall \, E \in \dborel.
+\paramP \left ( \qoi^{-1}(E)\right ) = \dataP(E) \quad \forall \, E \in \dborel.
 \end{equation}
 
 We call any such solution $\paramP$ to Eq.~\eqref{eq:inverse_measure} a (measure-theoretic) solution to the SIP.
@@ -55,13 +57,14 @@ This equation implies that any solution is uniquely determined on the induced co
 which is summarized as step (S2) of Fig.~\ref{fig:scheme}.
 
 However, for sets $A \in \pborel \setminus \cborel$, more information is required than is provided in Eq.~\eqref{eq:inverse_measure} in order to determine $\paramP (A)$.
-By the Implicit Function Theorem, if $\data \in C^1 (\pspace)$ and we let $\data\in\dspace$ be a fixed datum, $\qoi^{-1}(q)$ exists as a $(\nparams-\ndata)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}.
-These generalized contours can be indexed by a manifold (also possibly piecewise-defined) of dimension $\ndata$ called a \emph{transverse parameterization} that intersects each contour once and only once.
-In \cite{BET+14}, it is shown that transverse parameterizations are guaranteed to exist but are in general not unique.
+By the Implicit Function Theorem, if $\qlam \in C^1 (\pspace)$ and we let $\data\in\dspace$ be a fixed datum, $\qoi^{-1}(q)$ exists as a $(\nparams-\ndata)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}.
+These generalized contours can be indexed by a $\dimD$--dimensional manifold (also possibly piecewise-defined) of dimension $\ndata$ called a \emph{transverse parameterization} that intersects each contour once and only once.
+In \cite{BET+14}, it is shown that transverse parameterizations are guaranteed to exist and can be approximated by a finite number of $\dimD$---dimensional hyperplanes when $\pspace$ is compact.
+In general, the transverse parameterization is not unique. 
 
 We let $\LL$ denote any particular transverse parameterization.
 Each $\ell\in\LL$ corresponds to a unique generalized contour $\CC_\ell \in \pspace$ and each point $\param\in\pspace$ belongs to a unique $\CC_\ell\in\pspace$.
-Thus, a transverse parameterization defines a bijection between the manifold $\LL$ and the partitioning of $\pspace$ into generalized contours.
+Thus, a transverse parameterization defines a bijection between the manifold $\LL$ and the partitioning of $\pspace$ into generalized contours that decomposes $\pspace$ in terms of equivalence classes.
 The induced $\sa$ $\cborel$ and this bijection can then be used to define the measurable space $(\LL, \BB_\LL)$.
 
 We denote the projection map $P_\LL : \pspace \to \LL$, and let $\set{\CC_\ell}_{\ell\in\LL}$ represent the family of generalized contours indexed by $\LL$, yielding the associated family of measurable spaces $\set{\left ( \CC_\ell, \BB_{\CC_\ell} \right )}_{\ell\in\LL}{}$.
