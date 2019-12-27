@@ -48,7 +48,7 @@ Voronoi-cell discretization (partition) induced by $\nsamps = 25 $ uniform i.i.d
 \label{fig:voronoi_cells}
 \end{figure}
 
-The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events in $\cborel$ defined by $\qoi^{-1}(D_\idisc)$ for $\idisc=1,\hdots,\ndiscs$. This allows us to formulate the consistent solution to the discretized SIP on $(\pspace, \cborel, \paramP)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}.
+The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events in $\cborel$ defined by $\qoi^{-1}(D_\idisc)$ for $\idisc=1,\hdots,\ndiscs$. This allows us to formulate the consistent solution to the discretized SIP on $(\pspace, \cborel, \contourP)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}.
 Finally, the fourth stage\---associated with step (S3) in Fig.~\ref{fig:scheme}\---uses a discrete version of the ansatz to approximate the probability of $\VV_\iparam$ for $\iparam=1,\dots,\nsamps$.
 This results in an approximate probability measure, denoted by $\PP_{\pspace, \ndiscs, \nsamps}$, which produces the same probability estimates for events $A$ and $A\setminus \set{ \param^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
 
