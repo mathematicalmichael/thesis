@@ -18,7 +18,7 @@ To make this precise, we use the following:
     \predictedP (E) = P_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
   \end{equation}
   which should be recognizable from the definition of the forward problem. 
-  In other words, $\predictedP$ is the solution to the push-forward problem given $initialP$.
+  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
 \end{defn}
 
 
@@ -110,12 +110,12 @@ This next definition and result are useful in analyzing the sensitivity of the u
 \end{defn}
 
 \begin{thm}
-  $\updatedP$ is stable with respect to perturbations in the prior.
+  $\updatedP$ is stable with respect to perturbations in the initial distribution.
   \label{thm:stableprior}
 \end{thm}
 
-Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
-Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$. 
+Given that specifying the definition of a ``true'' intitial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
 If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
 \[
