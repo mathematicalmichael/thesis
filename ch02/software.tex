@@ -1,7 +1,7 @@
 \subsection{Background and Motivation}
-The open-source software package BET was developed actively from 2012-2015 as part of research performed under grant [TK grant-DOE].
+The open-source software package BET was developed actively from 2012-2015 as part of research performed under grant [TK grant-NSF+DOE].
 It was originally written in Python 2.7 and is administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github].
-The purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems.
+The initial purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems summarized in Section~\ref{sec:ch02-set}.
 
 In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]).
 
@@ -11,15 +11,15 @@ Since the last major release [TK - cite latest release], the Python community an
 Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
 
 The work summarized in Section~\ref{sec:ch02-sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
-Since that code was used for many of the results that constituted the preliminary results for this work, it made very litle sense to re-implement them in Python 2 for BET given the recent trends in community development.
-With funding made available through NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice.
+Since that code was used for many of the preliminary results for this work, it made very little sense to re-implement them in Python 2 for BET given the recent trends in community development.
+With funding made available through the NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice.
 
 
 \subsubsection{Version 2.1.0}
 The upgrade to Python 3.4+ began in January 2019 as a first step to incorporate the new sample-based method into BET.
 It was completed in late February.
 Major (minor? version? TK) release 2.1.0 [TK - put in release] was designed to provide backwards-compatibility with the Python 2.7 version.
-Future installations (starting in 2020) will not limit the versions of some core dependencies in order to accomodate backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}), since this would likely downgrade previously installed software for end-users.
+Future installations (starting in 2020) will not limit the versions of some core dependencies in order to accommodate backwards-compatibility with Python 2 (e.g. {\tt numpy}, {\tt scipy}), since this would likely downgrade previously installed software for end-users.
 
 
 \subsubsection{Version 2.2.0}
@@ -34,7 +34,7 @@ For others, siginficant changes had to be made to structure to allow for proper 
 
 
 \subsubsection{Version 2.3.0}
-This release incorporated the sampling-based approach first dicussed in Section~\ref{sec:ch02-sec:ch02-sample}.
+This release incorporated the sampling-based approach discussed in Section~\ref{sec:ch02-sample}.
 
 
 \subsection{Examples in BET}
