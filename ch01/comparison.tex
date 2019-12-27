@@ -20,9 +20,9 @@ where we use $\pp$ to distinguish the \emph{posterior} from the updated density 
 
 Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
 We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
+We compare the Bayesian posterior to our updated density, but temporarily abuse notation for the sake of comparison and use $\updated$ to refer to both, with $\pp$ representing the posterior when the distinction needs to be made. 
 
-
-$L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a \emph{normalizing constant}, chosen so that the updated density integrates to one, namely
+$L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a normalizing constant, known as the \emph{evidence} \cite{Smith}, ensures the posterior density integrates to one:
 \[
 C = \int_\pspace \initial\lam L_\dspace(d | \param) \, d\param.
 \]

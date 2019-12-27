@@ -1,4 +1,4 @@
-\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
+stableinitial\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
 
 To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data. 
 
@@ -7,7 +7,7 @@ To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we ad
   It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$. 
 \end{defn}
 
-To construct $\updated$, we ``push-forward'' the prior beliefs using the QoI map to compare to the evidence provided by $\observed$. 
+To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$. 
 In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem. 
 To make this precise, we use the following:
 
@@ -18,20 +18,20 @@ To make this precise, we use the following:
     \predictedP (E) = P_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
   \end{equation}
   which should be recognizable from the definition of the forward problem. 
-  In other words, $\predictedP$ is the solution to the push-forward problem given $initialP$.
+  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
 \end{defn}
 
 
 The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ such that the push-forward of it matched $\observedP$.
 The following assumption guarantees a solution to the stochastic inverse problem. 
-It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the prior beliefs. 
+It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the initial beliefs. 
 
 \begin{assumption}[Predictability Assumption]\label{as:pred}
   The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
 \end{assumption}
 
-If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and prior) have a priori ruled that almost surely these events should not occur. 
-Therefore, either prior beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation. 
+If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial) have a priori ruled that almost surely these events should not occur. 
+Therefore, either initial beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation. 
 
 
 The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
@@ -47,7 +47,7 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
   \begin{equation}\label{eq:dci_sol}
     \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
   \end{equation} 
-  is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+  is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior (initial) probability measure $P_\pspace$ on $(\pspace, \pborel)$.
   Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
 
@@ -93,36 +93,36 @@ We first define stability with respect to perturbations in the data.
 In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, which immediately proves the following:
 
 \begin{thm}
-  $\updatedP$ is stable with respect to perturbations in $\observedP$.
+  $\updatedP$ is stable with respect to perturbations to $\observedP$.
   \label{thm:stableobs}
 \end{thm}
 
-This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the prior beliefs.
+This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the initial beliefs.
 
-\begin{defn}[Stability of Updated Densities II]\label{defn:stableprior}
+\begin{defn}[Stability of Updated Densities II]\label{defn:stableinitial}
   Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
   Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
   Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
   We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
-  \begin{equation}\label{eq:stableprior}
+  \begin{equation}\label{eq:stableinitial}
     d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
   \end{equation}
 \end{defn}
 
 \begin{thm}
-  $\updatedP$ is stable with respect to perturbations in the prior.
-  \label{thm:stableprior}
+  $\updatedP$ is stable with respect to perturbations to $\initialP$
+  \label{thm:stableinitial}
 \end{thm}
 
-Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions. 
-Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$. 
+Given that specifying the definition of a ``true'' initial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
-If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
+If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
 \[
 \frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} },
 \]
 where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\updatedP}$.
-In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the prior.
+In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the initial.
 
 
 
@@ -153,7 +153,7 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 
 
 Using the previous notation, we let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated density $\updated$.
-As before, we assume the following for the approximation of the push-forward of the prior density:
+As before, we assume the following for the approximation of the push-forward of the initial density:
 \begin{assumption}\label{as:predx}
 There exists some $C>0$ such that
 \[
@@ -174,7 +174,7 @@ In practice, we perform a forward propagation of samples from $\pspace$ to $\dsp
 Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$. 
 We leverage the re-use of samples in the results herein extensively.
 
-In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior.}
+In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.}
 Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
 
 %For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
