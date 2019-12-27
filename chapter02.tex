@@ -4,11 +4,12 @@
 \subsection{Models and Parameters}
 We begin by assuming that a (deterministic) model, denoted by $$\M (u, \param) = 0,$$ is specified to relate observable state variables $u$ to model inputs ({\em parameters}) denoted by the vector $\param\in\RP$.
 The components $\param_\iparam$ may include parameters in either the model operator (e.g. a diffusion coefficient) or input data (e.g. the frequency of a sinusoidal source, initial, or boundary information).
-We allow $\pspace$ to denote the set of all possible input parameters.
-We assume $\pspace\subset\RP$ is equipped a (volume) measure, $\pmeas$ on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
-The solution operator of the model $\M$ then defines a map taking $\param\in\pspace$ to a solution denoted $u\lam$ which is assumed to be unique.
+We let $\pspace$ denote the set of all possible input parameters.
+We assume $\pspace\subset\RP$ is equipped with a (dominating) measure, $\pmeas$ on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
+The solution operator of the model $\M$ then defines a map taking $\param\in\pspace$ to a solution, denoted $u\lam$, to make explicit the dependence on $\param$, which is assumed to be unique.
 
-However, in real experimental settings we are often unable to observe $u\lam$, instead having access to some finite set of observable scalar quantities.
+However, in real experimental settings we are often unable to fully observe $u\lam$. 
+Instead, we often only have access to some finite set of observable scalar quantities.
 For example, in experiments involving the diffusion of heat, we can typically only record the temperature at some small number of pre-specified points in space-time where measurement devices can be positioned.
 
 \subsection{Quantities of Interest}
@@ -32,12 +33,12 @@ In the event that we need to compare maps, we adopt the notation $\dspace_{\qoi}
 The only assumption on $\qoi$ that we impose throughout this work is that of piecewise-differentiability.
 
 \subsection{Chapter Outline}
-First, we discuss set-based inversion to respect the order in which these results were researched and developed, despite the reality that in more recent practice, the approach based on sampling has proven more desirable.
-In the interest of clarity of exposition, we have adapted the notation of the latter approach in order to express the construction of the former.
+First, to respect the order in which these results were researched and developed, we discuss set-based inversion.
+In the interest of clarity of exposition, we have adapted the notation of a sample-based approach developed later to express the construction of the former.
 Consequently, the references cited may require some work translating. Similarities and differences between the two approaches has heretofore avoided formal documentation, and this work serves to lay the groundwork for such a comparison. 
 
-In this chapter, we discuss the issues that arise from the need to numerically approximate the solutions to our inverse problems but study the implications in \ref{sec:set-sec:set-error} and \ref{sec:sample-error}.
-Discussion of the impact of sample size are kept to a minimum in \ref{chapter:02} in the interest of restricting the scope of \ref{chapter:03} to the implications for convergence of (consistent) solutions to \eqref{eq:inverse-problem}.
+In this chapter, we discuss the issues that arise from the need to numerically approximate the solutions to our inverse problems but study the implications in \ref{sec:set-error} and \ref{sec:sample-error}.
+Discussion of the impact of sample size are kept to a minimum in this chapter in the interest of restricting the scope of chapter \ref{chapter:03} to the implications for convergence of (consistent) solutions to \eqref{eq:inverse-problem}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
