@@ -3,19 +3,37 @@ REQUIRED_BINS := latexmk
 $(foreach bin,$(REQUIRED_BINS),\
     $(if $(shell command -v $(bin) 2> /dev/null),$(info Found `$(bin)`),$(error Please install `$(bin)`)))
 
-# find all files required to compile
+# find all files required to compile / files that should trigger an update
 CHAPTERS = $(shell find . -type f -name 'chapter*.tex')
 APPENDIX = $(shell find . -type f -name 'appendix*.tex')
-IMAGES = $(shell find . -type f -name '*.png')
+# changes to images/figures: add/edit this line to reflect your file types
+# if you create a new variable (perhaps to track a folder), add it to target 
+IMAGES = $(shell find . -type f -name '*.png') 
+FIGURES = $(shell find . -type f -name '*.pdf' | grep 'figures')
+
 REFS = $(shell find . -type f -name 'references*.bib')
+# custom latex environment/styles for python, bash, etc. (syntax highlighting)
+ENVS = $(shell find . -type f -name '*env.tex') 
 
 # file name (without .tex)
 FILENAME = dissertation
 
-#.PHONY: all clean
+# dependency list: if changes detected in dependency, rebuild target
+TEXS = $(FILENAME).tex abstract.tex notation.tex env/newcommands.tex env/usepackages.tex
+
+# style-file dependendencies (unlikely to change these, but just in case)
+DEPS = ref/ucdDissertation.bst ucdenver-dissertation.cls 
+
+# targets that are labeled as PHONY are treated as always needing an update
+# a file doesn't actually need to exist for it to run
+.PHONY: all clean
+
+# the first real target is the one used when no other arguments are passed to `make`
+# by creating a dependency on the pdf, we trigger a compilation by default.
 all: $(FILENAME).pdf
 
-$(FILENAME).pdf: $(FILENAME).tex *.tex $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) ucdenver-dissertation.cls
+# our main target
+$(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS)
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 clean:
