@@ -19,10 +19,20 @@ ENVS = $(shell find . -type f -name '*env.tex')
 FILENAME = dissertation
 
 # dependency list: if changes detected in dependency, rebuild target
-TEXS = $(FILENAME).tex abstract.tex notation.tex env/newcommands.tex env/usepackages.tex
+TEXFILES := \
+	$(FILENAME) \
+	abstract \
+	notation \
+	env/newcommands \
+	env/usepackages \
+
+# adds .tex to path name
+TEXS = $(patsubst %, %.tex, $(TEXFILES))
 
 # style-file dependendencies (unlikely to change these, but just in case)
-DEPS = ref/ucdDissertation.bst ucdenver-dissertation.cls 
+DEPS := \
+	ref/ucdDissertation.bst \
+	ucdenver-dissertation.cls \
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
