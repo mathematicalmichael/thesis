@@ -1,0 +1,3 @@
+#!/bin/sh
+IMAGE=mathematicalmichael/latex
+docker run --rm -v $(pwd):/tmp -w /tmp --name latex-temp $(IMAGE) latexmk $@
