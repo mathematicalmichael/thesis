@@ -14,3 +14,4 @@ dissertation.pdf
 *.toc
 *.swp
 *.swo
+.DS_Store
