@@ -7,16 +7,25 @@ plt.rcParams['figure.figsize'] = 20, 20
 from mpl_toolkits.mplot3d import Axes3D
 
 def stochastic_framework_figure(fsize=52, png=False,
-                                nolabel=False, showfig=False):
+                                showLabel=True, showFig=False):
+    """
+    Creates figure to demonstrate relationship between measure spaces.
+    Saves figure `stochastic_framework.[png|pdf]` to disk.
+
+    Parameters
+    ----------
+    fsize : float, optional, default=52
+        Font size for labels in figure
+    png : bool, optional, default=False
+        Save as png instead of pdf.
+    showLabel : bool, optional, default=True
+        Show annotations (English) on figure
+    showFig : bool, optional, default=False
+        Call `plt.show()` after saving, before exit
+
+    """
     fig3d = plt.figure()
     ax = fig3d.add_subplot(111, projection='3d')
-
-    # xx, zz = np.meshgrid(np.linspace(0,1,10), np.linspace(0,1,10))
-    # point = np.array([0.5, 0.5, 0.5])
-    # normal = np.array([0, 1, 0])
-    # d = -point.dot(normal)
-    # y = (-normal[0] * xx - normal[1] * zz - d)*1./normal[1]
-    # ax.plot_surface(xx, yy, z, alpha=0.2)
 
     ax = plt.subplot(projection='3d')
     ax.grid(False)
@@ -46,7 +55,7 @@ def stochastic_framework_figure(fsize=52, png=False,
     ax.plot_surface(xx, zz*0 + 0.5, zz, alpha = 0.10, color='xkcd:blue')
     ax.quiver(0,0.5,0, 1,0,0, arrow_length_ratio=0, color='xkcd:blue')
 
-    if not nolabel:
+    if showLabel:
         ax.text(0.475,0.85,0, "Possible\nObservations", fontsize=fsize/1.5)
         ax.text(1.05,0.65,0, "Computable\nPushforward", fontsize=fsize/1.5)
     ax.quiver(0.5,0,0, 0,1,0, arrow_length_ratio=0, color='xkcd:blood red')
@@ -61,7 +70,7 @@ def stochastic_framework_figure(fsize=52, png=False,
         plt.savefig('stochastic_framework.png', dpi=600)
     else:
         plt.savefig('stochastic_framework.pdf')
-    if showfig:
+    if showFig:
         plt.show()
 
 
@@ -69,7 +78,7 @@ if __name__ == "__main__":
     desc = 'Make figure for demonstration of stochastic framework.'
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('--fsize', default=52,
-                        help='Store as png instead of pdf.')
+                        help='Figure font size.')
     parser.add_argument('--png', action='store_true',
                         help='Store as png instead of pdf.')
     parser.add_argument('--nolabel', action='store_false',
@@ -79,8 +88,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     size, save_png, = args.fsize, args.png
-    show_label, show_plot = args.nolabel, args.preview
+    no_label, show_plot = args.nolabel, args.preview
     print("Plotting surface...")
     stochastic_framework_figure(fsize=size, png=save_png,
-                                nolabel=show_label, showfig=show_plot)
+                                showLabel=no_label, showFig=show_plot)
     print("Done.")
