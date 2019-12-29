@@ -33,7 +33,7 @@ def plot_2d(xi, yi, disc, label='Approx', num_levels=10, max_ht=None, annotate='
 
     # plt.tight_layout()
     # TODO: better savename
-    savename = '%s_N%d.pdf'%(label+'-'+annotate, disc.check_nums())
+    savename = 'examples/%s_N%d.png'%(label+'-'+annotate, disc.check_nums())
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     plt.show()

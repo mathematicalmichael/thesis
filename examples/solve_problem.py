@@ -1,9 +1,10 @@
 import numpy as np
-from helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
-from plot_examples import plot_2d
+from examples.helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
+from examples.plot_examples import plot_2d
+
 
 # can choose model from here
-from models import makeMatrixModel as make_model
+from examples.models import makeMatrixModel as make_model
 # from models import makeDecayModel as make_model
 
 np.random.seed(11)
