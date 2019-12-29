@@ -1,7 +1,6 @@
 import numpy as np
-from examples.helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
-
-from examples.models import makeMatrixModel, makeSkewModel, makeDecayModel
+from helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
+from models import makeMatrixModel, makeSkewModel, makeDecayModel
 
 # define problem dimensions
 inputDim, outputDim = 2, 2
@@ -82,6 +81,13 @@ if __name__ == "__main__":
                         Assumes square aspect ratio.
                     """)
 
+    # which problem type to solve?
+    parser.add_argument('--set', action='store_true',
+                        help='Only do set-based solution.')
+
+    parser.add_argument('--sample', action='store_true',
+                    help='Only do sample-based solution.')
+
     # model- specific arguments
     parser.add_argument('--skew', default=1.0, type=float,
                     help='Sets skew if `--model=\'skew\'` (default: 1.0).')
@@ -143,7 +149,10 @@ if __name__ == "__main__":
         I = np.eye(inputDim)
         myModel = makeMatrixModel(I)
 
-    disc, disc_set, disc_samp = comparison_wrapper(model=myModel,
+    if not args.set and not args.sample:  # if both false, set both to true.
+        args.set, args.sample = True, True
+        print("Solving using both methods.")
+        disc, disc_set, disc_samp = comparison_wrapper(model=myModel,
                                                    num_samples=numSamples,
                                                    input_dim=inputDim,
                                                    param_ref=refParam,
@@ -152,13 +161,33 @@ if __name__ == "__main__":
                                                    input_cpd=cpd_input,
                                                    n_mc_points=n_mc_points)
 
+    else:  # only do one or the other.
+        # Create baseline discretization
+        disc = baseline_discretization(model=myModel,
+                                       num_samples=numSamples,
+                                       input_dim=inputDim,
+                                       param_ref=refParam,
+                                       input_cpd=None,
+                                       n_mc_points=None)
 
+        if args.sample:
+            print("Solving only with sample-based approach.")
+            # Set up sample-based approach
+            disc_samp = solve_sample_based(discretization=disc,
+                                         rect_size=uncert_rect_size)
+        elif args.set:
+            print("Solving only with set-based approach.")
+            # Set up set-based approach
+            disc_set = solve_set_based(discretization=disc,
+                                         rect_size=uncert_rect_size,
+                                         obs_cpd=cpd_observed)
+            
     ### STEP 4 ###
     # plot results
     if args.plot:
         import matplotlib.pyplot as plt
         import matplotlib.cm as cm
-        from examples.plot_examples import plot_2d
+        from plot_examples import plot_2d
         plt.rcParams['font.size'] = args.fontsize
         plt.rcParams['figure.figsize'] = args.figsize, args.figsize  # square ratio
 
@@ -180,27 +209,14 @@ if __name__ == "__main__":
         model_title = model_choice.capitalize() + ' Model'
         numLevels = 10
         # label keyword defaults to approx
-        plot_2d(xi, yi, disc_set, num_levels=numLevels, label='approx', annotate='set', title=model_title)
-        plot_2d(xi, yi, disc_samp, num_levels=numLevels, label='approx', annotate='sample', title=model_title)
+        if args.set:
+            print("\tPlotting set-based.")
+            plot_2d(xi, yi, disc_set, num_levels=numLevels, label='approx', annotate='set', title=model_title)
+            
+        if args.sample:
+            print("\tPlotting sample-based.")
+            plot_2d(xi, yi, disc_samp, num_levels=numLevels, label='approx', annotate='sample', title=model_title)
+    
 
-
-### STEP 1 ###
-# Create baseline discretization
-# disc = baseline_discretization(model=myModel,
-#                                num_samples=numSamples,
-#                                input_dim=inputDim,
-#                                param_ref=refParam,
-#                                input_cpd=None,
-#                                n_mc_points=None)
-
-# ### STEP 2 ###
-# # Set up set-based approach
-# disc_set = solve_set_based(discretization=disc,
-#                              rect_size=uncert_rect_size,
-#                              obs_cpd=cpd_observed)
-
-# ### STEP 3 ### 
-# # Set up sample-based approach
-# disc_samp = solve_sample_based(discretization=disc,
-#                              rect_size=uncert_rect_size)
+    print("Done.")
 
