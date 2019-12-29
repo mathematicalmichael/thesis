@@ -39,6 +39,7 @@ refParam = np.array([0.5]*inputDim)
 
 # define width of sidelengths of support of observed
 uncert_rect_size = 0.2
+
 # regular-grid discretization of set (set-based approach): 
 # cpd = cells per dimension
 cpd_observed = 1
@@ -86,7 +87,6 @@ import matplotlib.cm as cm
 
 plt.rcParams['font.size'] = 16
 plt.rcParams['figure.figsize'] = 5,5
-
 
 
 ### MISC ###
