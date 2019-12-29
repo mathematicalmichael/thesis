@@ -4,7 +4,7 @@ from examples.plot_examples import plot_2d
 from examples.models import makeMatrixModel, makeSkewModel, makeDecayModel
 
 inputDim, outputDim = 2, 2
-model_choice = 'rand'
+model_choice = 'random'
 
 if model_choice == 'skew':
     # can be list for higher-dimensional outputs.
@@ -14,13 +14,13 @@ elif model_choice == 'decay':
     # times to evaluate define the QoI map
     eval_times = [1, 2]
     myModel = makeDecayModel(eval_times)
-elif model_choice == 'rand':
+elif model_choice == 'random':
     A = np.random.randn(outputDim,inputDim)
     myModel = makeMatrixModel(A)
-elif model_choice == 'eye':
+elif model_choice == 'identity':
     I = np.eye(inputDim)
     myModel = makeMatrixModel(I)
-elif model_choice == 'diag':
+elif model_choice == 'diagonal':
     diag = [0.5, 1]
     D = np.diag(diag)
     myModel = makeMatrixModel(D)
@@ -104,7 +104,9 @@ xmn, xmx = 0, 1
 ymn, ymx = 0, 1
 xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
 
+model_title = model_choice.capitalize() + ' Model'
 numLevels = 10
-plot_2d(xi, yi, disc_set, num_levels=numLevels, annotate='set')
-plot_2d(xi, yi, disc_samp, num_levels=numLevels, annotate='sample')
+# label keyword defaults to approx
+plot_2d(xi, yi, disc_set, num_levels=numLevels, label='approx', annotate='set', title=model_title)
+plot_2d(xi, yi, disc_samp, num_levels=numLevels, label='approx', annotate='sample', title=model_title)
 
