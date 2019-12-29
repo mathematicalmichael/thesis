@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "Python source and version check:"
 which python && python --version
 echo -e "Creating Voronoi Diagrams \n"
