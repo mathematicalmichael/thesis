@@ -1,15 +1,14 @@
 import numpy as np
 
 
-lam_true = 0.5
 def makeDecayModel(t):
     """
-    Description
+    Builds decay model by evaluating at times `t`
 
     Parameters
     ----------
     t : list-like
-        Times (s) at which to evaluate the exponential model
+        Times (s) at which to evaluate the exponential model.
 
     Returns
     -------
@@ -19,20 +18,34 @@ def makeDecayModel(t):
         rate and initial condition, respectively.
         
     """
-    def model(lam = np.array([[lam_true]])):
+    def model(input_samples):
         """
+        Function to evaluate exponential decay model at predefined times.
+
+        Parameters
+        ----------
+        input_samples : `numpy.ndarray`
+            Array of size (num_samples, input_dim) representing the samples.
+        
+        Returns
+        -------
+        model : function
+            A function that evaluates the exponential model.
+            It takes as input an (num_samples, input_dim) array representing
+            rate and initial condition, respectively.
+
         """
         # support passing different types
-        if isinstance(lam, list) or isinstance(lam, tuple):
-            lam = np.array(lam)
-        if isinstance(lam, np.ndarray):
-            if lam.ndim == 1:
-                lam = lam.reshape(1,-1)
+        if isinstance(input_samples, list) or isinstance(input_samples, tuple):
+            input_samples = np.array(input_samples)
+        if isinstance(input_samples, np.ndarray):
+            if input_samples.ndim == 1:
+                input_samples = input_samples.reshape(1,-1)
         # extract rate from first column
-        rate = lam[:,0].reshape(-1,1)
+        rate = input_samples[:,0].reshape(-1,1)
         # if only 1-D array supplied, assume fixed initial condition
         try:
-            initial_cond = lam[:,1].reshape(-1,1)
+            initial_cond = input_samples[:,1].reshape(-1,1)
         except IndexError:
             initial_cond = 0.5
 
@@ -58,8 +71,7 @@ def makeMatrixModel(A):
     -------
     model : function
         A function that evaluates the linear model.
-        It takes as input an (num_samples, input_dim) array representing
-        rate and initial condition, respectively.
+        It takes as input an (num_samples, input_dim) array.
         
     """
     
@@ -116,7 +128,7 @@ def skewmat(skew):
     return Q_map
 
 def makeSkewModel(skew):
-     """
+    """
     Build skew model in two dimensions (2->2).
 
     Parameters
@@ -130,10 +142,11 @@ def makeSkewModel(skew):
         A function that evaluates the linear model with skewness=`skew`.
         It takes as input an (num_samples, input_dim) array representing
         rate and initial condition, respectively.
-        
+
     """
     Q_map = skewmat(skew)
     return makeMatrixModel(Q_map)
+
 
 # this is from another file. 
 # if __name__ == "__main__":
