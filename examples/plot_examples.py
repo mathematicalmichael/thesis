@@ -19,25 +19,53 @@ def plot_2d(xi, yi, disc, label='Approx', num_levels=10, max_ht=None, annotate='
     # axes[1].pcolormesh(xi, yi, zi_a.reshape(xi.shape), shading='gouraud', cmap=plt.cm.viridis)
     
 
-    a00 = axes.contourf(xi, yi, Z, levels=num_levels, vmin=0, vmax=max_ht)
+    C = axes.contourf(xi, yi, Z, levels=num_levels, vmin=0, vmax=max_ht, cmap=cm.viridis)
     axes.set_ylabel('$\lambda_2$', fontsize=24)
     axes.set_xlabel('$\lambda_1$', fontsize=24)
 
-    
-    # fig.colorbar(a00, ax=axes[0])
-    # fig.colorbar(a11, ax=axes[1])
     fig.subplots_adjust(right=0.8, bottom=0.2)
-    cbar_ax = fig.add_axes([0.8125, 0.2, 0.075, 0.675])
-    m = plt.cm.ScalarMappable(cmap=cm.viridis)
-#     m.set_array(Z)
-    m.set_clim(0., max_ht)
-    plt.colorbar(m, boundaries=np.linspace(0, max_ht, num_levels+1), cax=cbar_ax, format='%2.1f')
-
     axes.annotate(annotate, (0.1, 0.8), c='w', fontsize=24)
     axes.axis('equal')
+#     
+#     plt.colorbar(C, cax=cbar_ax, format='%2.1f')
+    colorbar = clippedcolorbar(C, extend='both')
+    
+
     # plt.tight_layout()
     # TODO: better savename
     savename = '%s_N%d.pdf'%(label+'-'+annotate, disc.check_nums())
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     plt.show()
+
+
+def clippedcolorbar(CS, **kwargs):
+    from matplotlib.cm import ScalarMappable
+    from numpy import arange, floor, ceil
+    fig = CS.ax.get_figure()
+    cbar_ax = fig.add_axes([0.8125, 0.2, 0.075, 0.675])
+    vmin = CS.get_clim()[0]
+    vmax = CS.get_clim()[1]
+    m = ScalarMappable(cmap=CS.get_cmap())
+    m.set_array(CS.get_array())
+    m.set_clim(CS.get_clim())
+    step = CS.levels[1] - CS.levels[0]
+    cliplower = CS.zmin<vmin
+    clipupper = CS.zmax>vmax
+    noextend = 'extend' in kwargs.keys() and kwargs['extend']=='neither'
+    # set the colorbar boundaries
+    boundaries = arange((floor(vmin/step)-1+1*(cliplower and noextend))*step, (ceil(vmax/step)+1-1*(clipupper and noextend))*step, step)
+    # boundaries = [vmin]+CS.levels[ (CS.levels>vmin) & (CS.levels<vmax) ].tolist()+[vmax] # fails when vmin<CS.levels.min()
+    kwargs['boundaries'] = boundaries
+    # if the z-values are outside the colorbar range, add extend marker(s)
+    # This behavior can be disabled by providing extend='neither' to the function call
+    if not('extend' in kwargs.keys()) or kwargs['extend'] in ['min','max']:
+        extend_min = cliplower or ( 'extend' in kwargs.keys() and kwargs['extend']=='min' )
+        extend_max = clipupper or ( 'extend' in kwargs.keys() and kwargs['extend']=='max' )
+        if extend_min and extend_max:
+            kwargs['extend'] = 'both'
+        elif extend_min:
+            kwargs['extend'] = 'min'
+        elif extend_max:
+            kwargs['extend'] = 'max'
+    return fig.colorbar(m, cax=cbar_ax, format='%2.1f', **kwargs)

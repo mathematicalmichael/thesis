@@ -28,9 +28,9 @@ MC_assumption = False
 # if true, set n_mc_points, and pass it to baseline
 
 # define matrix for linear model, instantiate sampler
-# I = np.eye(inputDim)
+I = np.eye(inputDim)
 outputDim = 2
-I = np.random.rand(outputDim,inputDim)*2 - 1
+# I = np.random.rand(outputDim,inputDim)*2 - 1
 myModel = make_model(I)
 # myModel = make_model([1, 2])
 
@@ -96,8 +96,7 @@ xmn, xmx = 0, 1
 ymn, ymx = 0, 1
 xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
 
-plot_2d(xi, yi, disc_set, annotate='set')
-
-plot_2d(xi, yi, disc_samp, annotate='sample')
-
+numLevels = 10
+plot_2d(xi, yi, disc_set, num_levels=numLevels, annotate='set')
+plot_2d(xi, yi, disc_samp, num_levels=numLevels, annotate='sample')
 
