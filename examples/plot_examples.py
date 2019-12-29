@@ -5,7 +5,8 @@ import numpy as np
 # plt.rcParams['font.size'] = 16
 # plt.rcParams['figure.figsize'] = 5,5
 
-def plot_2d(xi, yi, disc, label='Approx', num_levels=10, max_ht=None, annotate=''):
+def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
+            annotate='', title=''):
     lambda_mesh = np.vstack([xi.flatten(),yi.flatten()]).T
     if disc.get_input().get_probabilities() is None:
         zi_disc = disc.updated_pdf(lambda_mesh)
@@ -22,7 +23,7 @@ def plot_2d(xi, yi, disc, label='Approx', num_levels=10, max_ht=None, annotate='
     C = axes.contourf(xi, yi, Z, levels=num_levels, vmin=0, vmax=max_ht, cmap=cm.viridis)
     axes.set_ylabel('$\lambda_2$', fontsize=24)
     axes.set_xlabel('$\lambda_1$', fontsize=24)
-
+    plt.title(title)
     fig.subplots_adjust(right=0.8, bottom=0.2)
     axes.annotate(annotate, (0.1, 0.8), c='w', fontsize=24)
     axes.axis('equal')
@@ -33,7 +34,7 @@ def plot_2d(xi, yi, disc, label='Approx', num_levels=10, max_ht=None, annotate='
 
     # plt.tight_layout()
     # TODO: better savename
-    savename = 'examples/%s_N%d.png'%(label+'-'+annotate, disc.check_nums())
+    savename = 'examples/t%s-%s_N%d.png'%(title, label+'-'+annotate, disc.check_nums())
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     plt.show()
