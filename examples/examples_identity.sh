@@ -2,4 +2,9 @@
 FONTSIZE=16
 FIGSIZE=5
 MODEL='identity'
-python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE
+SEED=21
+#python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE $@
+# estimating volumes using high-fidelity discretization of output_probability_set leads to uniformity
+python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE --set --seed $SEED -o 2 -n 100
+python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE --set --seed $SEED --mc_points 10000 -o 2 -n 100
+#python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE --sample --seed $SEED
