@@ -68,9 +68,12 @@ if __name__ == "__main__":
 
     parser.add_argument('--pdf', action='store_true',
                         help='Store as pdf instead of png.')
+    
+    parser.add_argument('--show', action='store_true',
+                    help='Call `plt.show()` after plotting.')
 
-    parser.add_argument('--plot', action='store_true',
-                        help='Create/save plots.')
+    parser.add_argument('--noplot', action='store_true',
+                        help='Option to not create/save plots.')
 
     parser.add_argument('--fontsize', default=16, type=float,
                     help='Sets `plt.rcParams[\'font.size\']` (default: 16).')
@@ -136,8 +139,6 @@ if __name__ == "__main__":
     if n_mc_points < 100: 
         n_mc_points = None
 
-    pdf, show_plot = args.pdf, args.plot
-
     # MODEL SELECTION
     model_choice = args.model
     if model_choice == 'skew':
@@ -197,7 +198,8 @@ if __name__ == "__main__":
             
     ### STEP 4 ###
     # plot results
-    if args.plot:
+    if not args.noplot:
+        save_pdf = args.pdf
         figLabel = args.figlabel
         import matplotlib.pyplot as plt
         import matplotlib.cm as cm
@@ -227,14 +229,20 @@ if __name__ == "__main__":
 
         numLevels = args.numlevels
         if numLevels <2: numLevels = 2
+
+        show_prev = args.show
         # label keyword defaults to approx
         if args.set:
             print("\tPlotting set-based.")
-            plot_2d(xi, yi, disc_set, num_levels=numLevels, label=figLabel, annotate='set', title=model_title)
+            plot_2d(xi, yi, disc_set, num_levels=numLevels,
+                    label=figLabel, annotate='set',
+                    title=model_title, pdf=save_pdf, preview=show_prev)
             
         if args.sample:
             print("\tPlotting sample-based.")
-            plot_2d(xi, yi, disc_samp, num_levels=numLevels, label=figLabel, annotate='sample', title=model_title)
+            plot_2d(xi, yi, disc_samp, num_levels=numLevels,
+                    label=figLabel, annotate='sample',
+                    title=model_title, pdf=save_pdf, preview=show_prev)
     
 
     print("Done.")

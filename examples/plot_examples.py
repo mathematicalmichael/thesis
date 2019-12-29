@@ -6,7 +6,7 @@ import numpy as np
 # plt.rcParams['figure.figsize'] = 5,5
 
 def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
-            annotate='', title=''):
+            annotate='', title='', pdf=False, preview=False):
     lambda_mesh = np.vstack([xi.flatten(),yi.flatten()]).T
     if disc.get_input().get_probabilities() is None:
         zi_disc = disc.updated_pdf(lambda_mesh)
@@ -37,10 +37,14 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
 
     # plt.tight_layout()
     # TODO: better savename
-    savename = 't%s-%s_N%d.png'%(title, label+'-'+annotate, disc.check_nums())
+    if pdf:
+        ext = 'pdf'
+    else:
+        ext = 'png'
+    savename = 't%s-%s_N%d.%s'%(title, label+'-'+annotate, disc.check_nums(), ext)
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
-    plt.show()
+    if preview: plt.show()
 
 
 def clippedcolorbar(CS, **kwargs):
