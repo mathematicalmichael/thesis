@@ -34,7 +34,7 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
 
     # plt.tight_layout()
     # TODO: better savename
-    savename = 'examples/t%s-%s_N%d.png'%(title, label+'-'+annotate, disc.check_nums())
+    savename = 't%s-%s_N%d.png'%(title, label+'-'+annotate, disc.check_nums())
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     plt.show()
