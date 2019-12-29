@@ -113,11 +113,11 @@ if __name__ == "__main__":
     parser.add_argument('--lam2', default=0.5, type=float,
                     help='Sets second default parameter (default: 0.5).')
 
-        parser.add_argument('--t0', default=1, type=float,
-                        help='Decay model: 1st observation time (default: 1).')
+    parser.add_argument('--t0', default=1, type=float,
+                    help='Decay model: 1st observation time (default: 1).')
 
-        parser.add_argument('--t1', default=2, type=float,
-                        help='Decay model: 2nd observation time (default: 2).')
+    parser.add_argument('--t1', default=2, type=float,
+                    help='Decay model: 2nd observation time (default: 2).')
 
     #### START OF FUNCTIONALITY ###
     args = parser.parse_args()
