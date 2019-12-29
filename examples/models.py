@@ -65,7 +65,7 @@ def makeMatrixModel(A):
     
     def model(input_samples):
         """
-        Description
+        Build model given by result of matrix-vector product.
 
         Parameters
         ----------
@@ -87,6 +87,54 @@ def makeMatrixModel(A):
         return np.inner(A,input_samples).T
     
     return model
+
+def skewmat(skew):
+    """
+    Build operator with predefined skewness.
+    
+    Parameters
+    ----------
+    skew : scalar, or list-like
+        Skewness parameter for 2-dimensional map. If scalar, `output_dim = 2`.
+        If list-like, build operator to have `output_dim = len(skew)+1`
+    
+    Returns
+    -------
+    Q_map : `np.ndarray`
+        Operator with skewness=`skew` of shape (output_dim, 2)
+
+    """
+    if isinstance(skew, list) or isinstance(skew, tuple):
+        skewnesses = skew
+    else:
+        skewnesses = [skew]
+    Q_map = [ [1.0, 0.0] ] # all map components have the same norm, rect_size to have measures of events equal btwn spaces.
+    for skew in skewnesses:
+        Q_map.append( [np.sqrt(skew**2 - 1), 1] ) # taken with the first component, this leads to a 2-2 map with skewsness 's'
+    Q_map = np.array( Q_map )
+    
+    return Q_map
+
+def makeSkewModel(skew):
+     """
+    Build skew model in two dimensions (2->2).
+
+    Parameters
+    ----------
+    skew : float
+        skewness parameter for 2-dimensional map
+
+    Returns
+    -------
+    model : function
+        A function that evaluates the linear model with skewness=`skew`.
+        It takes as input an (num_samples, input_dim) array representing
+        rate and initial condition, respectively.
+        
+    """
+    Q_map = skewmat(skew)
+    return makeMatrixModel(Q_map)
+
 # this is from another file. 
 # if __name__ == "__main__":
 #     desc = 'Make figure for demonstration of stochastic framework.'
