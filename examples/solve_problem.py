@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     parser.add_argument('-n', '--num', default=int(1E3), type=int,
                         help="""
-                            Set number of cells (default: 1E3).
+                            Set number of samples (default: 1E3).
                         If given as <1, it will revert to the default value.
                         """)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 help="""
                     Number of samples (default: 0) in calculation of
                     volumes using Monte-Carlo emulation (integration).
-                    If given as <=1000, it will revert to None.
+                    If given as <100, it will revert to None.
                     If None, or not supplied, default to using the Monte-Carlo
                     assumption (volumes = 1/num_samples).
                     """)
@@ -80,6 +80,18 @@ if __name__ == "__main__":
                         Sets `plt.rcParams[\'figure.size\']`(default: 5).
                         Assumes square aspect ratio.
                     """)
+
+    parser.add_argument('-l', '--numlevels', default=10, type=int,
+                help="""
+                    Number of contours to plot (default=10).
+                    If given as <2, it will revert to 2.
+                """)
+
+    parser.add_argument('--figlabel', default='', type=str,
+                    help='Label in figure saved name.')
+
+    parser.add_argument('-t', '--title', default=None, type=str,
+                help='Title for figure. If `None`, use `--model` in title.')
 
     # which problem type to solve?
     parser.add_argument('--set', action='store_true',
@@ -120,8 +132,9 @@ if __name__ == "__main__":
     else:
         cpd_input = None
 
-    n_mc_points = args.mc_points
-    if n_mc_points <= 1000: n_mc_points = None
+    n_mc_points = int(args.mc_points)
+    if n_mc_points < 100: 
+        n_mc_points = None
 
     pdf, show_plot = args.pdf, args.plot
 
@@ -167,8 +180,8 @@ if __name__ == "__main__":
                                        num_samples=numSamples,
                                        input_dim=inputDim,
                                        param_ref=refParam,
-                                       input_cpd=None,
-                                       n_mc_points=None)
+                                       input_cpd=cpd_input,
+                                       n_mc_points=n_mc_points)
 
         if args.sample:
             print("Solving only with sample-based approach.")
@@ -185,6 +198,7 @@ if __name__ == "__main__":
     ### STEP 4 ###
     # plot results
     if args.plot:
+        figLabel = args.figlabel
         import matplotlib.pyplot as plt
         import matplotlib.cm as cm
         from plot_examples import plot_2d
@@ -205,17 +219,22 @@ if __name__ == "__main__":
         xmn, xmx = 0, 1
         ymn, ymx = 0, 1
         xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
+        
+        if args.title is None:
+            model_title = model_choice.capitalize() + ' Model'
+        else:
+            model_title = args.title
 
-        model_title = model_choice.capitalize() + ' Model'
-        numLevels = 10
+        numLevels = args.numlevels
+        if numLevels <2: numLevels = 2
         # label keyword defaults to approx
         if args.set:
             print("\tPlotting set-based.")
-            plot_2d(xi, yi, disc_set, num_levels=numLevels, label='approx', annotate='set', title=model_title)
+            plot_2d(xi, yi, disc_set, num_levels=numLevels, label=figLabel, annotate='set', title=model_title)
             
         if args.sample:
             print("\tPlotting sample-based.")
-            plot_2d(xi, yi, disc_samp, num_levels=numLevels, label='approx', annotate='sample', title=model_title)
+            plot_2d(xi, yi, disc_samp, num_levels=numLevels, label=figLabel, annotate='sample', title=model_title)
     
 
     print("Done.")

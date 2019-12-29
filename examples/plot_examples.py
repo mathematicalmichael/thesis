@@ -11,7 +11,10 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     if disc.get_input().get_probabilities() is None:
         zi_disc = disc.updated_pdf(lambda_mesh)
     else:
-        pdf_disc = disc.get_input().get_probabilities()/disc.get_input().get_volumes()
+        vols = disc.get_input().get_volumes()
+        # vols[vols == 0] = np.inf
+        pdf_disc = disc.get_input().get_probabilities()
+        pdf_disc[vols != 0] = pdf_disc/vols[vols != 0]
         zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     Z = zi_disc.reshape(xi.shape)
     if max_ht is None: max_ht = max(Z.ravel())
