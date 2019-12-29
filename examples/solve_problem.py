@@ -51,9 +51,6 @@ MC_assumption = False
 
 ### STEP 1 ###
 # Create baseline discretization
-
-
-
 # disc = baseline_discretization(model=myModel,
 #                                num_samples=numSamples,
 #                                input_dim=inputDim,
@@ -61,18 +58,14 @@ MC_assumption = False
 #                                input_cpd=None,
 #                                n_mc_points=None)
 
-
-
 # ### STEP 2 ###
 # # Set up set-based approach
 # disc_set = solve_set_based(discretization=disc,
 #                              rect_size=uncert_rect_size,
 #                              obs_cpd=cpd_observed)
 
-
 # ### STEP 3 ### 
 # # Set up sample-based approach
-
 # disc_samp = solve_sample_based(discretization=disc,
 #                              rect_size=uncert_rect_size)
 
