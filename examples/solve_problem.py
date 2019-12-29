@@ -5,7 +5,7 @@ from models import makeMatrixModel, makeSkewModel, makeDecayModel
 # define problem dimensions
 inputDim, outputDim = 2, 2
 # define reference parameter
-refParam = np.array([0.5]*inputDim)
+# refParam = np.array([0.5]*inputDim)
 
 if __name__ == "__main__":
     import argparse
@@ -107,6 +107,19 @@ if __name__ == "__main__":
     parser.add_argument('--skew', default=1.0, type=float,
                     help='Sets skew if `--model=\'skew\'` (default: 1.0).')
 
+    parser.add_argument('--lam1', default=0.5, type=float,
+                    help='Sets first default parameter (default: 0.5).')
+
+    parser.add_argument('--lam2', default=0.5, type=float,
+                    help='Sets second default parameter (default: 0.5).')
+
+        parser.add_argument('--t0', default=1, type=float,
+                        help='Decay model: 1st observation time (default: 1).')
+
+        parser.add_argument('--t1', default=2, type=float,
+                        help='Decay model: 2nd observation time (default: 2).')
+
+    #### START OF FUNCTIONALITY ###
     args = parser.parse_args()
     numSamples, r_seed = args.num, args.seed
     
@@ -140,6 +153,13 @@ if __name__ == "__main__":
         n_mc_points = None
 
     # MODEL SELECTION
+    if args.lam1 < 0 or args.lam1 > 1:
+        lam1 = 0.5
+
+    if args.lam2 < 0 or args.lam2 > 1:
+        lam2 = 0.5
+
+    refParam = np.array([args.lam1, args.lam2])
     model_choice = args.model
     if model_choice == 'skew':
         # can be list for higher-dimensional outputs.
@@ -149,13 +169,32 @@ if __name__ == "__main__":
         myModel = makeSkewModel(skew)
     elif model_choice == 'decay':
         # times to evaluate define the QoI map
-        eval_times = [1, 2]
+
+        # error-handling for times.
+        if args.t0 > 0:
+            t0 = args.t0
+        else:
+            raise ValueError("t0<0.")
+
+        if args.t1 > 0:
+            t1 = args.t1
+        else:
+            raise ValueError("t1<0.")
+
+        if args.t1 <= t0:
+            raise ValueError("t1<t0.")
+        else:
+            t1 = args.t1
+
+        eval_times = [t0, t1]
         myModel = makeDecayModel(eval_times)
+        model_choice += ' T=[%s-%s]'%(t0, t1)
     elif model_choice == 'random':
         A = np.random.randn(outputDim,inputDim)
         myModel = makeMatrixModel(A)
     elif model_choice == 'diagonal':
-        diag = [0.5, 1]
+        print("Using `t0/t1` as diagonal entries for operator.")
+        diag = [args.t0, args.t1]
         D = np.diag(diag)
         myModel = makeMatrixModel(D)
     else:
