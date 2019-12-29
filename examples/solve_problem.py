@@ -1,17 +1,37 @@
 import numpy as np
 from examples.helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
 from examples.plot_examples import plot_2d
+from examples.models import makeMatrixModel, makeSkewModel, makeDecayModel
 
+inputDim, outputDim = 2, 2
+model_choice = 'rand'
+
+if model_choice == 'skew':
+    # can be list for higher-dimensional outputs.
+    skew = 2
+    myModel = makeSkewModel(skew)
+elif model_choice == 'decay':
+    # times to evaluate define the QoI map
+    eval_times = [1, 2]
+    myModel = makeDecayModel(eval_times)
+elif model_choice == 'rand':
+    A = np.random.randn(outputDim,inputDim)
+    myModel = makeMatrixModel(A)
+elif model_choice == 'eye':
+    I = np.eye(inputDim)
+    myModel = makeMatrixModel(I)
+elif model_choice == 'diag':
+    diag = [0.5, 1]
+    D = np.diag(diag)
+    myModel = makeMatrixModel(D)
 
 # can choose model from here
-from examples.models import makeMatrixModel as make_model
-# from models import makeDecayModel as make_model
 
-np.random.seed(11)
+# np.random.seed(11)
 
 ### STEP 0 ###
 # Define the problem structure/assumptions
-inputDim = 2
+
 numSamples = 1E3
 
 # define reference parameter
@@ -28,12 +48,6 @@ cpd_input = 49
 MC_assumption = False
 # if true, set n_mc_points, and pass it to baseline
 
-# define matrix for linear model, instantiate sampler
-I = np.eye(inputDim)
-outputDim = 2
-# I = np.random.rand(outputDim,inputDim)*2 - 1
-myModel = make_model(I)
-# myModel = make_model([1, 2])
 
 ### STEP 1 ###
 # Create baseline discretization
