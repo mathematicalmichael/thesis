@@ -6,6 +6,7 @@ $(foreach bin,$(REQUIRED_BINS),\
 # find all files required to compile / files that should trigger an update
 CHAPTERS = $(shell find . -type f -name 'chapter*.tex')
 APPENDIX = $(shell find . -type f -name 'appendix*.tex')
+
 # changes to images/figures: add/edit this line to reflect your file types
 # if you create a new variable (perhaps to track a folder), add it to target 
 IMAGES = $(shell find . -type f -name '*.png') 
