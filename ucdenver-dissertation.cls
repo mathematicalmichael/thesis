@@ -1,4 +1,3 @@
-%%
 %% The `ucdenver-dissertation.cls' is used for formatting a PhD thesis 
 %% for the Department of Biostatistics & Informatics,
 %% University of Colorado Denver.
@@ -8,6 +7,7 @@
 %%
 %% Author: Sarah Kreidler
 %%         Peter DeWitt
+%%         Michael Pilosov
 %%
 %%
 %% Package 'ucdenver-dissertation' to use with LaTeX2e 
