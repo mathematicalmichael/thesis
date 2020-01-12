@@ -28,7 +28,7 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     axes.set_xlabel('$\lambda_1$', fontsize=24)
     plt.title(title)
     fig.subplots_adjust(right=0.8, bottom=0.2)
-    axes.annotate(annotate, (0.1, 0.8), c='w', fontsize=24)
+    axes.annotate(annotate, (0.1, 0.8), color='w', fontsize=24)
     axes.axis('equal')
 #     
 #     plt.colorbar(C, cax=cbar_ax, format='%2.1f')
