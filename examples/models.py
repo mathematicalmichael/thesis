@@ -188,9 +188,14 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
         Returns model evaluated at `T={end_time}`.
         """.format(end_time=end_time)
 
-        QoI_samples = np.zeros((len(parameter_samples), len(temp_locs_list)))
+        if parameter_samples.ndim == 1:
+            assert len(parameter_samples) == 2
+            num_samples = 1
+        else:
+            num_samples = parameter_samples.shape[0]
+        QoI_samples = np.zeros((num_samples, len(temp_locs_list)))
 
-        for i in range(len(parameter_samples)):
+        for i in range(num_samples):
             try:
                 kappa_0 = parameter_samples[i, 0]
                 kappa_1 = parameter_samples[i, 1]
@@ -243,9 +248,9 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
 
             # now that the state variable (Temp at time t_stop) has been computed,
             # we take our point-value measurements
-            QoI_samples[i] = np.array([T(xi) for xi in temp_locs_list])
-        if QoI_samples.shape[0] == 1:
-            QoI_samples = QoI_samples.ravel()
+            QoI_samples[i,:] = np.array([T(xi) for xi in temp_locs_list])
+        # if QoI_samples.shape[0] == 1:
+        #     QoI_samples = QoI_samples.ravel()[0]
         return QoI_samples
 
     return model

@@ -8,13 +8,20 @@ import numpy as np
 def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
             annotate='', title='', pdf=False, preview=False):
     lambda_mesh = np.vstack([xi.flatten(),yi.flatten()]).T
+    xmin, xmax = np.min(xi), np.max(xi)
+    ymin, ymax = np.min(yi), np.max(yi)
     if disc.get_input().get_probabilities() is None:
-        zi_disc = disc.updated_pdf(lambda_mesh)
+        # zi_disc = disc.updated_pdf(lambda_mesh) # full-eval
+        pdf_disc = disc.updated_pdf()
+        zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     else:
-        vols = disc.get_input().get_volumes()
+        vols = disc.get_input().get_volumes()*(xmax-xmin)*(ymax-ymin)
+        # volumes are "proportion of domain": needs to correspond to actual area
         # vols[vols == 0] = np.inf
         pdf_disc = disc.get_input().get_probabilities()
-        pdf_disc[vols != 0] = pdf_disc/vols[vols != 0]
+        print('sum probs', np.sum(pdf_disc))
+        # pdf_disc[vols != 0] = pdf_disc[vols != 0]/vols[vols != 0]
+        pdf_disc = pdf_disc/vols
         zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     Z = zi_disc.reshape(xi.shape)
     if max_ht is None: max_ht = max(Z.ravel())
@@ -28,7 +35,9 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     axes.set_xlabel('$\lambda_1$', fontsize=24)
     plt.title(title)
     fig.subplots_adjust(right=0.8, bottom=0.2)
-    axes.annotate(annotate, (0.1, 0.8), color='w', fontsize=24)
+
+    annotate_loc = [xmin*1.1, ymax*.8]
+    axes.annotate(annotate, annotate_loc, color='w', fontsize=24)
     axes.axis('equal')
 #
 #     plt.colorbar(C, cax=cbar_ax, format='%2.1f')
