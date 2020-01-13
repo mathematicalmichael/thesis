@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
         ### ACTUAL PLOTTING CODE ###
 
-        nbins = 23
+        nbins = 50
         # xmn, xmx = 0.25, 0.75
         # ymn, ymx = 0.25, 0.75
         xmn, xmx = min_val, max_val
