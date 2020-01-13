@@ -25,4 +25,4 @@ for t in np.linspace(0,1,num_frames):
     plt.cla()
     plt.plot(temperature_locations, Qref)
     plt.ylim(0,7)
-    plt.savefig('heatrod_time/test-plot-t%4d.png'%(100*t))
+    plt.savefig('heatrod_time/test-plot-t%04d.png'%(100*t))
