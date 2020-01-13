@@ -1,6 +1,6 @@
 import numpy as np
 from helpers import baseline_discretization, solve_set_based, solve_sample_based, comparison_wrapper
-from models import makeMatrixModel, makeSkewModel, makeDecayModel
+from models import makeMatrixModel, makeSkewModel, makeDecayModel, make1DHeatModel
 
 # define problem dimensions
 inputDim, outputDim = 2, 2
@@ -18,11 +18,12 @@ if __name__ == "__main__":
 
     parser.add_argument('-m', '--model', default='random', type=str,
                     help="""
-                        Choose model from 
+                        Choose model from
                         - 'skew' (linear matrix map)
                         - 'identity' (linear matrix map)
                         - 'random' (linear matrix map)
                         - 'decay' (exponential decay)
+                        - 'heatrod' (1-dimensional heat eq)
                         - 'diagonal' (linear matrix map)
 
                     If unrecognized, it will revert to 'random' (linear map).
@@ -68,7 +69,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--pdf', action='store_true',
                         help='Store as pdf instead of png.')
-    
+
     parser.add_argument('--show', action='store_true',
                     help='Call `plt.show()` after plotting.')
 
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     #### START OF FUNCTIONALITY ###
     args = parser.parse_args()
     numSamples, r_seed = args.num, args.seed
-    
+
 
     if numSamples < 1:
         print("Incompatible number of samples. Using default.")
@@ -133,12 +134,12 @@ if __name__ == "__main__":
 
     # define width of sidelengths of support of observed
     uncert_rect_size = args.uncert_rect_size
-    # regular-grid discretization of sets (set-based approach): 
+    # regular-grid discretization of sets (set-based approach):
     # cpd = cells per dimension
-    
+
     # output_probability_set discretization
     cpd_observed = args.observed_cells_per_dim
-    if cpd_observed < 1: cpd_observed = 1  
+    if cpd_observed < 1: cpd_observed = 1
     # input_sample_set discretization (if regular)
 
     # only pay attention to cpd_input if regular sampling has been specified.
@@ -149,7 +150,7 @@ if __name__ == "__main__":
         cpd_input = None
 
     n_mc_points = int(args.mc_points)
-    if n_mc_points < 100: 
+    if n_mc_points < 100:
         n_mc_points = None
 
     # MODEL SELECTION
@@ -161,10 +162,13 @@ if __name__ == "__main__":
 
     refParam = np.array([args.lam1, args.lam2])
     model_choice = args.model
+    # default domain
+    min_val, max_val = 0, 1
+    # TODO: add options to set it: need to take in list, potentially
     if model_choice == 'skew':
         # can be list for higher-dimensional outputs.
         skew = args.skew
-        if skew < 1: 
+        if skew < 1:
             raise ValueError("Skewness must be greater than 1.")
         myModel = makeSkewModel(skew)
     elif model_choice == 'decay':
@@ -197,6 +201,13 @@ if __name__ == "__main__":
         diag = [args.t0, args.t1]
         D = np.diag(diag)
         myModel = makeMatrixModel(D)
+    elif model_choice == 'heatrod':
+        print("Using `t0/t1` for thermometer locations")
+        assert args.t0 < 1 and args.t0 > 0
+        assert args.t1 < 1 and args.t1 > 0
+        myModel = make1DHeatModel([args.t0, args.t1])
+        min_val, max_val = 0.01, 0.2
+    # ADD NEW MODELS BELOW HERE with `elif`
     else:
         model_choice = 'identity'
         I = np.eye(inputDim)
@@ -212,7 +223,9 @@ if __name__ == "__main__":
                                                    rect_size=uncert_rect_size,
                                                    cpd_observed=cpd_observed,
                                                    input_cpd=cpd_input,
-                                                   n_mc_points=n_mc_points)
+                                                   n_mc_points=n_mc_points,
+                                                   min_val=min_val,
+                                                   max_val=max_val)
 
     else:  # only do one or the other.
         # Create baseline discretization
@@ -221,7 +234,9 @@ if __name__ == "__main__":
                                        input_dim=inputDim,
                                        param_ref=refParam,
                                        input_cpd=cpd_input,
-                                       n_mc_points=n_mc_points)
+                                       n_mc_points=n_mc_points,
+                                       min_val=min_val,
+                                       max_val=max_val)
 
         if args.sample:
             print("Solving only with sample-based approach.")
@@ -234,7 +249,7 @@ if __name__ == "__main__":
             disc_set = solve_set_based(discretization=disc,
                                          rect_size=uncert_rect_size,
                                          obs_cpd=cpd_observed)
-            
+
     ### STEP 4 ###
     # plot results
     if not args.noplot:
@@ -252,7 +267,7 @@ if __name__ == "__main__":
         print('Reference Value:', refParam, 'maps to', Qref)
 
 
-        ### ACTUAL PLOTTING CODE ### 
+        ### ACTUAL PLOTTING CODE ###
 
         nbins = 50
         # xmn, xmx = 0.25, 0.75
@@ -260,7 +275,7 @@ if __name__ == "__main__":
         xmn, xmx = 0, 1
         ymn, ymx = 0, 1
         xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
-        
+
         if args.title is None:
             model_title = model_choice.capitalize() + ' Model'
         else:
@@ -276,13 +291,12 @@ if __name__ == "__main__":
             plot_2d(xi, yi, disc_set, num_levels=numLevels,
                     label=figLabel, annotate='set',
                     title=model_title, pdf=save_pdf, preview=show_prev)
-            
+
         if args.sample:
             print("\tPlotting sample-based.")
             plot_2d(xi, yi, disc_samp, num_levels=numLevels,
                     label=figLabel, annotate='sample',
                     title=model_title, pdf=save_pdf, preview=show_prev)
-    
+
 
     print("Done.")
-

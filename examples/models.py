@@ -191,8 +191,12 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
         QoI_samples = np.zeros((len(parameter_samples), len(temp_locs_list)))
 
         for i in range(len(parameter_samples)):
-            kappa_0 = parameter_samples[i, 0]
-            kappa_1 = parameter_samples[i, 1]
+            try:
+                kappa_0 = parameter_samples[i, 0]
+                kappa_1 = parameter_samples[i, 1]
+            except IndexError:
+                kappa_0 = parameter_samples[0]
+                kappa_1 = parameter_samples[1]
 
             # define the subspace we will solve the problem in
             V = df.FunctionSpace(mesh, 'Lagrange', degree)
@@ -240,6 +244,8 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
             # now that the state variable (Temp at time t_stop) has been computed,
             # we take our point-value measurements
             QoI_samples[i] = np.array([T(xi) for xi in temp_locs_list])
+        if QoI_samples.shape[0] == 1:
+            QoI_samples = QoI_samples.ravel()
         return QoI_samples
 
     return model

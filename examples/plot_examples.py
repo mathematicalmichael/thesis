@@ -21,7 +21,7 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     fig, axes = plt.subplots(ncols=1, nrows=1)
     # axes[0].pcolormesh(xi, yi, zi.reshape(xi.shape), shading='gouraud', cmap=plt.cm.viridis)
     # axes[1].pcolormesh(xi, yi, zi_a.reshape(xi.shape), shading='gouraud', cmap=plt.cm.viridis)
-    
+
 
     C = axes.contourf(xi, yi, Z, levels=num_levels, vmin=0, vmax=max_ht, cmap=cm.viridis)
     axes.set_ylabel('$\lambda_2$', fontsize=24)
@@ -30,10 +30,10 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     fig.subplots_adjust(right=0.8, bottom=0.2)
     axes.annotate(annotate, (0.1, 0.8), color='w', fontsize=24)
     axes.axis('equal')
-#     
+#
 #     plt.colorbar(C, cax=cbar_ax, format='%2.1f')
     colorbar = clippedcolorbar(C, extend='both')
-    
+
 
     # plt.tight_layout()
     # TODO: better savename
@@ -41,7 +41,11 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
         ext = 'pdf'
     else:
         ext = 'png'
-    savename = 't%s-%s_N%d.%s'%(title, label+'-'+annotate, disc.check_nums(), ext)
+
+    emul = 'mc'
+    if len(np.unique(disc.get_input()._volumes_local)) != 1:
+        emul = 'em'
+    savename = 't%s-%s_N%d_%s.%s'%(title, label+'-'+annotate, disc.check_nums(), emul, ext)
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     if preview: plt.show()
