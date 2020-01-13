@@ -33,14 +33,15 @@ solve(){
 }
 
 solve_varying_samples(){
-  mkdir -p figs_$MODEL/
+  FOLDER_NAME=figs_$MODEL/
+  mkdir -p $FOLDER_NAME
 
   NUM_SAMPLES=100
   solve
   NUM_SAMPLES=1000
   solve
 
-  mv t*N$NUM_SAMPLES* fig_$MODEL/
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 }
 
 MODEL='skew'

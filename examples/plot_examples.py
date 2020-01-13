@@ -20,8 +20,8 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
         # vols[vols == 0] = np.inf
         pdf_disc = disc.get_input().get_probabilities()
         print('sum probs', np.sum(pdf_disc))
-        # pdf_disc[vols != 0] = pdf_disc[vols != 0]/vols[vols != 0]
-        pdf_disc = pdf_disc/vols
+        pdf_disc[vols != 0] = pdf_disc[vols != 0]/vols[vols != 0]
+        # pdf_disc = pdf_disc/vols
         zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     Z = zi_disc.reshape(xi.shape)
     if max_ht is None: max_ht = max(Z.ravel())
