@@ -29,10 +29,10 @@ if __name__ == "__main__":
                     If unrecognized, it will revert to 'random' (linear map).
                     """)
 
-    parser.add_argument('-n', '--num', default=int(1E3), type=int,
+    parser.add_argument('-n', '--num', default=int(1E2), type=int,
                         help="""
-                            Set number of samples (default: 1E3).
-                        If given as <1, it will revert to the default value.
+                            Set number of samples (default: 1E2).
+                        If given as <=1, it will revert to the default value.
                         """)
 
     parser.add_argument('-u', '--uncert_rect_size', default=0.2, type=float,
@@ -125,9 +125,9 @@ if __name__ == "__main__":
     numSamples, r_seed = args.num, args.seed
 
 
-    if numSamples < 1:
+    if numSamples <= 1:
         print("Incompatible number of samples. Using default.")
-        numSamples = int(1E3)
+        numSamples = int(1E2)
 
     if r_seed > 0:
         np.random.seed(r_seed)
@@ -207,6 +207,9 @@ if __name__ == "__main__":
         assert args.t1 < 1 and args.t1 > 0
         myModel = make1DHeatModel([args.t0, args.t1])
         min_val, max_val = 0.01, 0.2
+        if np.min(refParam) < min_val or np.max(refParam) > max_val:
+            print("Reference parameter passed out of range. Mapping to interval.")
+            refParam = refParam*(max_val - min_val) + min_val
     # ADD NEW MODELS BELOW HERE with `elif`
     else:
         model_choice = 'identity'
@@ -269,11 +272,11 @@ if __name__ == "__main__":
 
         ### ACTUAL PLOTTING CODE ###
 
-        nbins = 50
+        nbins = 23
         # xmn, xmx = 0.25, 0.75
         # ymn, ymx = 0.25, 0.75
-        xmn, xmx = 0, 1
-        ymn, ymx = 0, 1
+        xmn, xmx = min_val, max_val
+        ymn, ymx = min_val, max_val
         xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
 
         if args.title is None:
