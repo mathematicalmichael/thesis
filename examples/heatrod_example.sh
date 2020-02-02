@@ -21,7 +21,7 @@ LAM_2=0.05
 # sample-based
 solve(){
   python solve_problem.py -m $MODEL --fontsize $FONTSIZE --figsize $FIGSIZE \
-    --sample --seed $SEED -n $NUM_SAMPLES \
+    --noeval --sample --seed $SEED -n $NUM_SAMPLES \
     --t0 $LOC_1 --t1 $LOC_2 \
     --lam1 $LAM_1 --lam2 $LAM_2 $@
 
