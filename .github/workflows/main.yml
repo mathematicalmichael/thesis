@@ -25,8 +25,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Install LaTeX dependencies
       run: |
-        sudo apt-get update && \
-          sudo apt-get install -y --no-install-recommends \
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
           texlive-base \
           texlive-latex-base \
           texlive-latex-extra \
@@ -34,10 +34,10 @@ jobs:
           texlive-fonts-extra \ 
           texlive-science \
           latexmk \
-          build-essential \
-          && sudo apt-get clean \
-          && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-          && sudo apt-get autoremove -y
+          build-essential
+        sudo apt-get clean
+        sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        sudo apt-get autoremove -y
 
 
     # Runs a set of commands using the runners shell
