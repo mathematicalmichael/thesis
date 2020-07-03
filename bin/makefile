@@ -12,13 +12,13 @@ $(foreach bin,$(REQUIRED_BINS),\
 all: latex_image full_image python_image
 
 # bare-bones dependencies to build image
-latex_image: bin/Dockerfile
+latex_image: Dockerfile
 	docker build -t latex:minimal -f Dockerfile .
 	docker tag latex:minimal latex:latest
 
 # extras to build posters/graphics
-full_image: bin/Dockerfile-full latex_image
+full_image: Dockerfile-full latex_image
 	docker build -t latex:full -f Dockerfile-full .
 
-python_image: bin/Dockerfile-python
+python_image: Dockerfile-python
 	docker build -t python:thesis -f Dockerfile-python .
