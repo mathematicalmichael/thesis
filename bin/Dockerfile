@@ -1,4 +1,6 @@
 FROM ubuntu:latest
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV TZ=America/Denver
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     texlive-base \
