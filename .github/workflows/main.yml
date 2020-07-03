@@ -29,8 +29,7 @@ jobs:
       run: |
         docker pull mathematicalmichael/python:thesis
         docker pull mathematicalmichael/latex:thesis
-        make latex_image
-        make python_image
+        cd bin && make all
         export PATH=$(GITHUB_WORKSPACE)/bin:$PATH
         sudo ln -s $(GITHUB_WORKSPACE)/bin/tpython $(GITHUB_WORKSPACE)/bin/python
 
