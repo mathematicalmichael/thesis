@@ -1,4 +1,4 @@
 #!/bin/sh
-IMAGE_NAME=mathematicalmichael/latex
+IMAGE_NAME=latex:thesis
 COMMAND=make
 docker run --rm -v $(pwd):/$(pwd) -w $(pwd) $IMAGE_NAME $COMMAND "$@"
