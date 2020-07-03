@@ -27,14 +27,14 @@ jobs:
     # By pulling images first, we may be able to avoid re-building using cached layers
     - name: Install dependencies with Docker
       run: |
-        docker pull mathematicalmichael/python:thesis
-        docker pull mathematicalmichael/latex:thesis
-        cd bin && make all
-        export PATH=$(GITHUB_WORKSPACE)/bin:$PATH
-        sudo ln -s $(GITHUB_WORKSPACE)/bin/tpython $(GITHUB_WORKSPACE)/bin/python
+         docker pull mathematicalmichael/python:thesis
+         docker tag mathematicalmichael/python:thesis python:thesis 
+         docker pull mathematicalmichael/latex:thesis
+         docker tag mathematicalmichael/latex:thesis latex:thesis
 
     # Runs a set of commands using the runners shell
     - name: Compile thesis with latexmk
       run: |
+        export PATH=$(pwd)/bin:$PATH
         make
         make clean
