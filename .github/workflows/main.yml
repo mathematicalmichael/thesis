@@ -8,7 +8,8 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: 
+      - '*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,19 +23,22 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Install LaTeX dependencies
+    # Use docker to handle dependencies and prepend executables to PATH
+    - name: Install dependencies with Docker
       run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-        sudo apt-get install latexmk build-essential
+        docker pull mathematicalmichael/python:thesis
+        docker tag mathematicalmichael/python:thesis python:thesis 
+        docker pull mathematicalmichael/latex:thesis
+        docker tag mathematicalmichael/latex:thesis latex:thesis
 
     # Runs a set of commands using the runners shell
     - name: Compile thesis with latexmk
       run: |
+        export PATH=$(pwd)/bin:$PATH
         make
         make clean
 
-  dockerfiles:
+  docker:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -42,8 +46,9 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
-    - name: LaTeX dependencies
+
+    # Use docker to handle dependencies and prepend executables to PATH
+    - name: Install dependencies with Docker
       run: |
-        cd bin
-        make latex_image
+        cd bin && make all
+  

@@ -9,16 +9,12 @@ $(foreach bin,$(REQUIRED_BINS),\
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
-all: latex_image full_image python_image
+all: latex_image python_image
 
 # bare-bones dependencies to build image
 latex_image: Dockerfile
-	docker build -t latex:minimal -f Dockerfile .
-	docker tag latex:minimal latex:latest
-
-# extras to build posters/graphics
-full_image: Dockerfile-full latex_image
-	docker build -t latex:full -f Dockerfile-full .
+	docker build -t latex:thesis -f Dockerfile .
+	docker tag latex:thesis latex:latest
 
 python_image: Dockerfile-python
 	docker build -t python:thesis -f Dockerfile-python .
