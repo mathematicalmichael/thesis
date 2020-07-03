@@ -26,7 +26,7 @@ jobs:
     - name: Install LaTeX dependencies
       run: |
         sudo apt-get update && \
-          apt-get install -y --no-install-recommends \
+          sudo apt-get install -y --no-install-recommends \
           texlive-base \
           texlive-latex-base \
           texlive-latex-extra \
@@ -35,9 +35,9 @@ jobs:
           texlive-science \
           latexmk \
           build-essential \
-          && apt-get clean \
-          && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-          && apt-get autoremove -y
+          && sudo apt-get clean \
+          && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+          && sudo apt-get autoremove -y
 
 
     # Runs a set of commands using the runners shell
