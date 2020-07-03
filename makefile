@@ -51,22 +51,3 @@ clean:
 	latexmk -c $(FILENAME).tex
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
-
-# bare-bones dependencies to build image
-latex_image: bin/Dockerfile
-	docker build -t latex:minimal -f bin/Dockerfile .
-	docker tag latex:minimal latex:latest
-
-# extras to build posters/graphics
-full_image: bin/Dockerfile-full latex_image
-	docker build -t latex:full -f bin/Dockerfile-full .
-
-upload: full_image
-	docker tag latex:full mathematicalmichael/latex:latest
-	docker push mathematicalmichael/latex:latest 
-	docker tag latex:full latex:latest
-	docker rmi latex:full
-	docker rmi latex:minimal
-
-python_image: bin/Dockerfile-python
-	docker build -t python:thesis -f bin/Dockerfile-python .
