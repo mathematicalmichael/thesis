@@ -2,7 +2,7 @@
 FONTSIZE=16
 FIGSIZE=5
 SEED=21
-NUM_MC_SAMPLES=10000
+NUM_MC_SAMPLES=100000
 M=1
 
 #python solve_problem.py -m $MODEL --plot --fontsize $FONTSIZE --figsize $FIGSIZE $@
@@ -31,22 +31,32 @@ solve(){
 }
 
 solve_varying_samples(){
-  mkdir -p figs_$MODEL/
+  mkdir -p $FOLDER_NAME
 
   NUM_SAMPLES=100
-  solve
-  NUM_SAMPLES=1000
-  solve
+  solve $@
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 
-  mv t*N$NUM_SAMPLES* fig_$MODEL/
+  NUM_SAMPLES=1000
+  solve $@
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
+
+  NUM_SAMPLES=10000
+  solve $@
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 }
 
 MODEL='skew'
-solve_varying_samples --skew=2
-solve_varying_samples --skew=1
+FOLDER_NAME=figs_${MODEL}_skew2/
+solve_varying_samples --skew 2
+
+FOLDER_NAME=figs_${MODEL}_skew1/
+solve_varying_samples --skew 1
 
 MODEL='identity'
+FOLDER_NAME=figs_${MODEL}/
 solve_varying_samples
 
 MODEL='random'
+FOLDER_NAME=figs_${MODEL}/
 solve_varying_samples

@@ -6,22 +6,24 @@ import numpy as np
 # plt.rcParams['figure.figsize'] = 5,5
 
 def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
-            annotate='', title='', pdf=False, preview=False):
+            annotate='', title='', pdf=False, eval=False, preview=False):
     lambda_mesh = np.vstack([xi.flatten(),yi.flatten()]).T
     xmin, xmax = np.min(xi), np.max(xi)
     ymin, ymax = np.min(yi), np.max(yi)
     if disc.get_input().get_probabilities() is None:
-        # zi_disc = disc.updated_pdf(lambda_mesh) # full-eval
-        pdf_disc = disc.updated_pdf()
-        zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
+        if eval:
+            zi_disc = disc.updated_pdf(lambda_mesh) # full-eval
+        else:
+            pdf_disc = disc.updated_pdf()
+            zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     else:
         vols = disc.get_input().get_volumes()*(xmax-xmin)*(ymax-ymin)
         # volumes are "proportion of domain": needs to correspond to actual area
         # vols[vols == 0] = np.inf
         pdf_disc = disc.get_input().get_probabilities()
         print('sum probs', np.sum(pdf_disc))
-        # pdf_disc[vols != 0] = pdf_disc[vols != 0]/vols[vols != 0]
-        pdf_disc = pdf_disc/vols
+        pdf_disc[vols != 0] = pdf_disc[vols != 0]/vols[vols != 0]
+        # pdf_disc = pdf_disc/vols
         zi_disc = pdf_disc[disc.get_input().query(lambda_mesh)[1]]
     Z = zi_disc.reshape(xi.shape)
     if max_ht is None: max_ht = max(Z.ravel())
