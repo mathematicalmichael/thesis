@@ -120,10 +120,13 @@ if __name__ == "__main__":
     parser.add_argument('--t1', default=2, type=float,
                     help='Decay model: 2nd observation time (default: 2).')
 
+    parser.add_argument('--noeval', action='store_true',
+                    help='Sample based model: plot using original samples, not mesh.')
+
     #### START OF FUNCTIONALITY ###
     args = parser.parse_args()
     numSamples, r_seed = args.num, args.seed
-
+    eval = not args.noeval # evaluate sample-based model at new samples?
 
     if numSamples <= 1:
         print("Incompatible number of samples. Using default.")
@@ -272,7 +275,7 @@ if __name__ == "__main__":
 
         ### ACTUAL PLOTTING CODE ###
 
-        nbins = 23
+        nbins = 50
         # xmn, xmx = 0.25, 0.75
         # ymn, ymx = 0.25, 0.75
         xmn, xmx = min_val, max_val
@@ -299,7 +302,8 @@ if __name__ == "__main__":
             print("\tPlotting sample-based.")
             plot_2d(xi, yi, disc_samp, num_levels=numLevels,
                     label=figLabel, annotate='sample',
-                    title=model_title, pdf=save_pdf, preview=show_prev)
+                    title=model_title, pdf=save_pdf,
+                    eval=eval, preview=show_prev)
 
 
     print("Done.")
