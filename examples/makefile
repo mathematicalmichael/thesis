@@ -9,6 +9,6 @@ heatrod:
 	sh heatrod_example.sh
 
 all: identity linear heatrod
-	echo "Building all"
+	echo "Built all"
 
-.PHONY all
+.PHONY: all
