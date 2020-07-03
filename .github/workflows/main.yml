@@ -22,26 +22,26 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
     - name: Install LaTeX dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y --no-install-recommends \
-          texlive-base \
-          texlive-latex-base \
-          texlive-latex-extra \
-          texlive-fonts-recommended \
-          texlive-fonts-extra \ 
-          texlive-science \
-          latexmk \
-          build-essential
-        sudo apt-get clean
-        sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-        sudo apt-get autoremove -y
-
+        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+        sudo apt-get install latexmk build-essential
 
     # Runs a set of commands using the runners shell
     - name: Compile thesis with latexmk
       run: |
         make
         make clean
+
+  environment:
+    # The type of runner that the job will run on
+    runs-on: docker
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    - name: Docker build
+      run: make latex_image
