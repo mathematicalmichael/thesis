@@ -25,11 +25,23 @@ jobs:
     # Runs a single command using the runners shell
     - name: Install LaTeX dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra latexmk
+        sudo apt-get update && \
+          apt-get install -y --no-install-recommends \
+          texlive-base \
+          texlive-latex-base \
+          texlive-latex-extra \
+          texlive-fonts-recommended \
+          texlive-fonts-extra \ 
+          texlive-science \
+          latexmk \
+          build-essential \
+          && apt-get clean \
+          && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+          && apt-get autoremove -y
+
 
     # Runs a set of commands using the runners shell
-    - name: Make
+    - name: Compile thesis with latexmk
       run: |
         make
         make clean
