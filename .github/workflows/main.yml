@@ -24,11 +24,12 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Install LaTeX dependencies
-      run: sudo apt-get update && \
-           sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra latexmk
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra latexmk
 
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Make
       run: |
         make
         make clean
