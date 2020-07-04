@@ -1,5 +1,5 @@
 # check for required binaries, fail gracefully with helpful error message.
-REQUIRED_BINS := latexmk
+REQUIRED_BINS := latexmk python
 $(foreach bin,$(REQUIRED_BINS),\
     $(if $(shell command -v $(bin) 2> /dev/null),$(info Found `$(bin)`),$(error Please install `$(bin)`)))
 
@@ -48,6 +48,7 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 examples:
+	export PATH=$(pwd)/bin:$PATH && \
 	cd examples && \
 	sh examples_identity.sh && \
 	sh examples_linear.sh && \
