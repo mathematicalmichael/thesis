@@ -1,5 +1,5 @@
 # check for required binaries, fail gracefully with helpful error message.
-REQUIRED_BINS := latexmk
+REQUIRED_BINS := latexmk python
 $(foreach bin,$(REQUIRED_BINS),\
     $(if $(shell command -v $(bin) 2> /dev/null),$(info Found `$(bin)`),$(error Please install `$(bin)`)))
 
@@ -37,7 +37,7 @@ DEPS := \
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
-.PHONY: all clean upload full_image latex_image python_image
+.PHONY: all clean examples
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
@@ -47,26 +47,13 @@ all: $(FILENAME).pdf
 $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS)
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
+examples:
+	cd examples && \
+	bash examples_linear.sh && \
+	bash heatrod_example.sh
+	echo "All examples built."
+
 clean:
 	latexmk -c $(FILENAME).tex
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
-
-# bare-bones dependencies to build image
-latex_image: bin/Dockerfile
-	docker build -t latex:minimal -f bin/Dockerfile .
-	docker tag latex:minimal latex:latest
-
-# extras to build posters/graphics
-full_image: bin/Dockerfile-full latex_image
-	docker build -t latex:full -f bin/Dockerfile-full .
-
-upload: full_image
-	docker tag latex:full mathematicalmichael/latex:latest
-	docker push mathematicalmichael/latex:latest 
-	docker tag latex:full latex:latest
-	docker rmi latex:full
-	docker rmi latex:minimal
-
-python_image: bin/Dockerfile-python
-	docker build -t python:thesis -f bin/Dockerfile-python .
