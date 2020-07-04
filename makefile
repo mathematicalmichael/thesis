@@ -48,10 +48,11 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 examples:
-	cd examples
-	sh examples_identity.sh
-	sh examples_linear.sh
+	cd examples && \
+	sh examples_identity.sh && \
+	sh examples_linear.sh && \
 	sh heatrod_example.sh
+	echo "All examples built."
 
 clean:
 	latexmk -c $(FILENAME).tex
