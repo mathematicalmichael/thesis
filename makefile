@@ -49,7 +49,9 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 
 examples:
 	cd examples
-	make all
+	sh examples_identity.sh
+	sh examples_linear.sh
+	sh heatrod_example.sh
 
 clean:
 	latexmk -c $(FILENAME).tex
