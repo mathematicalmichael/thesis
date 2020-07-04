@@ -35,6 +35,7 @@ jobs:
     - name: Compile thesis with latexmk
       run: |
         export PATH=$(pwd)/bin:$PATH
+        make examples
         make
         make clean
 
