@@ -48,7 +48,6 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 examples:
-	export PATH=$(pwd)/bin:$PATH && \
 	cd examples && \
 	bash examples_linear.sh && \
 	bash heatrod_example.sh
