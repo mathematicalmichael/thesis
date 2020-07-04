@@ -41,7 +41,7 @@ DEPS := \
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
-all: examples $(FILENAME).pdf
+all: $(FILENAME).pdf
 
 # our main target
 $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS)
@@ -50,7 +50,6 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 examples:
 	export PATH=$(pwd)/bin:$PATH && \
 	cd examples && \
-	sh examples_identity.sh && \
 	sh examples_linear.sh && \
 	sh heatrod_example.sh
 	echo "All examples built."

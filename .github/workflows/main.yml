@@ -33,8 +33,9 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Compile thesis with latexmk
+      env:
+        PATH: $(GITHUB_WORKSPACE)/bin:$PATH 
       run: |
-        export PATH=$(pwd)/bin:$PATH
         make examples
         make
         make clean
