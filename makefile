@@ -50,8 +50,8 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 examples:
 	export PATH=$(pwd)/bin:$PATH && \
 	cd examples && \
-	sh examples_linear.sh && \
-	sh heatrod_example.sh
+	bash examples_linear.sh && \
+	bash heatrod_example.sh
 	echo "All examples built."
 
 clean:
