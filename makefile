@@ -1,5 +1,5 @@
 # check for required binaries, fail gracefully with helpful error message.
-REQUIRED_BINS := latexmk
+REQUIRED_BINS := latexmk python
 $(foreach bin,$(REQUIRED_BINS),\
     $(if $(shell command -v $(bin) 2> /dev/null),$(info Found `$(bin)`),$(error Please install `$(bin)`)))
 
@@ -37,7 +37,7 @@ DEPS := \
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
-.PHONY: all clean upload full_image latex_image python_image
+.PHONY: all clean examples
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
@@ -46,6 +46,12 @@ all: $(FILENAME).pdf
 # our main target
 $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS)
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
+
+examples:
+	cd examples && \
+	bash examples_linear.sh && \
+	bash heatrod_example.sh
+	echo "All examples built."
 
 clean:
 	latexmk -c $(FILENAME).tex
