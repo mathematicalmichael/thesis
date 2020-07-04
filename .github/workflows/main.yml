@@ -32,11 +32,10 @@ jobs:
         docker tag mathematicalmichael/latex:thesis latex:thesis
 
     - name: Set up PATH for binaries
-        echo "::add-path::$(GITHUB_WORKSPACE)/bin"
+      run: echo "::add-path::$(GITHUB_WORKSPACE)/bin"
 
     - name: Generate figures with python
-      run: |
-        make examples
+      run: make examples
 
     - name: Compile thesis with latexmk
       run: |
