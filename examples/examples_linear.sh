@@ -32,18 +32,19 @@ solve(){
 
 solve_varying_samples(){
   mkdir -p $FOLDER_NAME
+  rm -f $FOLDER_NAME/*
 
   NUM_SAMPLES=100
   solve $@
-  mv -f t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 
   NUM_SAMPLES=1000
   solve $@
-  mv -f t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 
   NUM_SAMPLES=10000
   solve $@
-  mv -f t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv t*N$NUM_SAMPLES* $FOLDER_NAME
 }
 
 MODEL='skew'
