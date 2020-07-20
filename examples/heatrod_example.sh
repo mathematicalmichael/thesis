@@ -48,12 +48,14 @@ solve_q1q2(){
   LOC_2=0.51
   solve
   mkdir -p fig_heatrod_q1/
+  rm -f fig_heatrod_q1/*
   mv tHeatrodModel*N$NUM_SAMPLES* fig_heatrod_q1/
   # second qoi
   LOC_1=0.67
   LOC_2=0.98
   solve
   mkdir -p fig_heatrod_q2/
+  rm -f fig_heatrod_q2/*
   mv tHeatrodModel*N$NUM_SAMPLES* fig_heatrod_q2/
 }
 
