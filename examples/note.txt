@@ -1,0 +1,2 @@
+with low sample sizes, the set-based approach may actually miss probability, and not integrate to 1.
+n = 100 shows this. bump to 1000 and it goes away. for m = 2x2
