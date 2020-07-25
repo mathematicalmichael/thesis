@@ -26,10 +26,13 @@ jobs:
     - uses: actions/checkout@v2
 
     # Use docker to handle dependencies and prepend executables to PATH
-    - name: Pull + retag docker images
+    - name: Pull + retag docker image for Python (3.6) dependencies (quay.io/fenics)
       run: |
         docker pull mathematicalmichael/python:thesis
-        docker tag mathematicalmichael/python:thesis python:thesis 
+        docker tag mathematicalmichael/python:thesis python:thesis
+
+    - name: Pull + retag docker images for LaTeX dependencies (ubuntu:latest)
+      run: |        
         docker pull mathematicalmichael/latex:thesis
         docker tag mathematicalmichael/latex:thesis latex:thesis
 
@@ -40,7 +43,7 @@ jobs:
       run: make examples
 
     - name: Compile thesis with latexmk
-      run: |
-        make
-        make clean
+      run: make
 
+    - name: Clean up TeX build files
+      run: make clean

@@ -16,3 +16,5 @@ dissertation.pdf
 *.swo
 .DS_Store
 __pycache__/
+examples/*/*.png
+examples/*.gif
