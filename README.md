@@ -1,8 +1,10 @@
-# Thesis
-## of Michael Pilosov
+# Thesis of Michael Pilosov
 
+## The first fully-reproducible thesis with CI/CD pipelines for every aspect of the dissertation
 
-The text below is merely a placeholder taken from the MUD repo.
+---
+
+The text below is merely a placeholder taken from the [MUD](https://github.com/mathematicalmichael/mud.git) repo, which implements many of the analytical equations involved in this work.
 
 Analytical solutions and some associated utility functions for computing maximal updated density points for Data-Consistent Inversion.
 
