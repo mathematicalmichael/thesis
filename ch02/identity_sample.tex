@@ -1,68 +1,20 @@
 \subsection{Example}\label{sec:sample-example}
 
-Talk about the problem setup, code blocks shown.
+We have observed how the set-based approach to solving inverse problems can lead to errors in approximating measures, particularly around the boundaries of the solution set.
+The sample-based approach that we summarized above does not rely on Voronoi-cell approximations of contour events, instead assigning probability to random samples drawn from an initial density.
 
-\begin{python}
-"""
-Set up and solve problem with identity map
-"""
-# import libraries
-import bet.sample as sample
-import bet.sampling.basicSampling as bsam
-import numpy as np
-import scipy.stats as sstats
+We demonstrate that for estimating a uniform density over a subset of the initial parameter space, the sample-based approach is able to more accurately approximate it at a given sample size.
+The reason for this is that the approach has a different source of error, involving estimating to push forward of the initial density.
 
-# define input space parameters and model to instantiate sampler object
-dimension = 2
-numSamples = 100
-I = np.eye(dimension)
-def model(input_samples):
-        return (I@input_samples.T).T
-sampler = bsam.sampler(model)
+We are interested in studying how our ability to estimate a uniform density is impacted by the number of samples drawn from the initial density.
+We form an inverse problem with the identity map an standard uniform initial densities, with observed densities being uniform over $[0.4, 0.6]^2$, representing a hundred-fold reduction in uncertainty when the problem is solved
 
-# instantiate objects that hold input/output samples
-input_set = bsam.random_sample_set('r', dimension, num_samples=numSamples)
-disc = sampler.compute_QoI_and_create_discretization(input_set)
+We solve the same problem as before but use a uniform initial density in place of a uniform ansatz.
+We sample $N=100$, $1,000$ and $10,000$ samples from the initial density and use Gaussian kernel density estimation to approximate the denominator in Eq [TK - eq], and show the resulting updated densities in Figure~\ref{fig:ex:identity_sampling_approx}.
 
-# define inverse problem
-disc.set_initial(dist=sstats.uniform, loc=0, scale=1, gen=False)
-disc.set_observed(dist=sstats.uniform, loc=0.4, scale=0.2)
-
-disc_a = disc.copy()
-# set analytical density (dimension is inferred)
-disc_a.set_predicted(dist=sstats.uniform, loc=0, scale=1)
-
-# create different sample sets with higher fidelity
-disc_b = disc.copy()
-disc_b.set_initial(num=int(1E3), gen=True)
-# the line above removes the previous predicted distribution,
-#     stored densities, probabilities, and volumes.
-disc_c = disc.copy()
-disc_c.set_initial(num=int(1E4), gen=True)
-\end{python}
-
-Note that there is no need to explictly call {\tt disc.compute\_pushforward()}, (or \pythoninline{disc.compute_predicted()}) since it is computed automatically if none have been previously constructed.
-When \pythoninline{disc.updated_pdf()} is called, densities are evaluated at the initial set of $\nsamps$ random samples, and stored in \pythoninline{disc._input_sample_set._densities}.
-However, the function \pythoninline{disc.predicted_pdf()} is capable of evaluating the solution at any new set of samples (provided a model is available/equipped to the discretization), something we leverage for plotting on a regular grid.
-
-Once our four discretization objects \pythoninline{disc}, \pythoninline{disc_a}, \pythoninline{disc_b} and \pythoninline{disc_c} have been generated, we can use some utility plotting functions to compare the densities:
-
-\begin{python}
-"""
-Plotting code to generate figures.
-"""
-# define plotting parameters
-nbins = 50
-xmn, xmx = 0.25, 0.75
-ymn, ymx = 0.25, 0.75
-xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
-# plotting functions call .get_updated(), which re-computes
-# the pushforward distribution on a regular grid of samples
-plot_2d_comparison(xi, yi, disc, disc_a, '$N=$100', 'Analytical')
-plot_2d_comparison(xi, yi, disc_b, disc_c, '$N=$1,000', '$N=$10,000')
-for d in [disc, disc_b, disc_c]:
-    udpated_pdf_conditional_comparison(d, num=100, condition_on=0.5, label='approx')
-\end{python}
+Observe that the support of the updated density matches the solution of the previous inverse problem but is much more accurately approximated.
+Gone are the jagged edges that we saw before, replaced by clean squares.
+The relative probability is assigned within the support are also more similar to one another, something we demonstrate in Figure~\ref{fig:identity_sampling_conditionals}, which shows conditional densities along the unit directions through the center of the domain.
 
 \begin{figure}[ht]
 \begin{minipage}{.975\textwidth}
@@ -93,12 +45,12 @@ There is no signficant error in estimating the support of the distribution, only
 		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
     \includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
 \end{minipage}
-% N = 1E3 
+% N = 1E3
 \begin{minipage}{.975\textwidth}
 		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
 		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
 \end{minipage}
-% N = 1E4 
+% N = 1E4
 \begin{minipage}{.975\textwidth}
 		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
 		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
@@ -110,4 +62,10 @@ There is no signficant error in estimating the support of the distribution, only
 }
 \label{fig:identity_sampling_conditionals}
 \end{figure}
-\FloatBarrier
+
+Qualitatively speaking we find that the estimate of the density improve as more samples are used, but at all sample sizes, the support of the density is correctly identified, which we can see by the sharp lines in Fig~\ref{fig:identity_sampling_conditionals} and \ref{fig:ex:identity_sampling_approx}.
+
+The sample-based method trades one source of accuracy for another.
+When estimating boundaries of a set which represents an equivalent class of solutions is important, the sample best method provides a compelling alternative to be set based method.
+
+However, we know that this is not without its pitfalls, as density estimation in high dimensions can become prohibitively prone to error.
