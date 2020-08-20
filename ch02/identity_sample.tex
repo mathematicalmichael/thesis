@@ -6,7 +6,6 @@ The sample-based approach that we summarized above does not rely on Voronoi-cell
 We demonstrate that for estimating a uniform density over a subset of the initial parameter space, the sample-based approach is able to more accurately approximate it at a given sample size.
 The reason for this is that the approach has a different source of error, involving estimating to push forward of the initial density.
 
-
 We are interested in studying how our ability to estimate a uniform density is impacted by the number of samples drawn from the initial density.
 We form an inverse problem with the identity map an standard uniform initial densities, with observed densities being uniform over $[0.4, 0.6]^2$, representing a hundred-fold reduction in uncertainty when the problem is solved
 
@@ -63,7 +62,6 @@ There is no signficant error in estimating the support of the distribution, only
 }
 \label{fig:identity_sampling_conditionals}
 \end{figure}
-\FloatBarrier
 
 Qualitatively speaking we find that the estimate of the density improve as more samples are used, but at all sample sizes, the support of the density is correctly identified, which we can see by the sharp lines in Fig~\ref{fig:identity_sampling_conditionals} and \ref{fig:ex:identity_sampling_approx}.
 
