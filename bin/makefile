@@ -5,7 +5,7 @@ $(foreach bin,$(REQUIRED_BINS),\
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
-.PHONY: all full_image latex_image python_image
+.PHONY: all full_image latex_image python_image publish
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
@@ -18,3 +18,7 @@ latex_image: Dockerfile
 
 python_image: Dockerfile-python
 	docker build -t python:thesis -f Dockerfile-python .
+
+publish: python_image
+	docker tag python:thesis mathematicalmichael/python:thesis
+	docker push mathematicalmichael/python:thesis 
