@@ -5,12 +5,7 @@ The sample-based approach that we summarized above does not rely on Voronoi-cell
 
 We demonstrate that for estimating a uniform density over a subset of the initial parameter space, the sample-based approach is able to more accurately approximate it at a given sample size.
 The reason for this is that the approach has a different source of error, involving estimating to push forward of the initial density.
-We are interested in studying how our ability to estimate a uniform density is impacted by the number of samples drawn from the initial density.
 
-We solve the same problem as before but use a uniform initial density in place of a uniform ansatz.
-We sample 100, 1,000 and 10,000 samples from the initial density and use Gaussian kernel density estimation to approximate the denominator in Eq [TK - eq], and show the resulting updated densities in Figure.
-
-Observe that the support of the updated density matches the solution of the previous inverse problem but is much more accurately approximated. Gone are the jagged edges that we saw before. The relative probability is assigned within the support are also more similar to one another, something we demonstrate in the next Figure, which shows conditional densities along the unit directions through the center of the domain.
 
 We are interested in studying how our ability to estimate a uniform density is impacted by the number of samples drawn from the initial density.
 We form an inverse problem with the identity map an standard uniform initial densities, with observed densities being uniform over $[0.4, 0.6]^2$, representing a hundred-fold reduction in uncertainty when the problem is solved
