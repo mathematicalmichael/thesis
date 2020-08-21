@@ -2,7 +2,7 @@
 
 KDE is now the primary source, show relevant triangle inequality here.
 Summarize Troy and Tim's work on the sensitivity analysis of everything.
-
+Note: the stability results from that work appear to already be in here.
 
 Then, we have by repeated application of the triangle inequality that
 \begin{equation}
@@ -13,6 +13,18 @@ d(\PP_{\pspace, \ndiscs, \nsamps, h}, \paramP) \leq
 \underset{ \text{(E3)} }{\underbrace{d(\PP_{\pspace, \ndiscs}, \paramP) }}.
 \end{equation}
 
-Talk more about it.
+The source of approximation error in the sample-based approach comes from a fundamentally different source.
+We transfer the burden of responsibility for accurate approximation towards the data space instead of the parameter space.
+We have to estimate a push forward distribution, where the number of samples drawn from the initial density, representing our total model evaluation budget,
+Is still important for accurate approximation?
 
-\vspace{2in}
+We construct a similar triangle and a quality as the previous section, but the sources of error now bear different interpretations.
+
+Since there is no air in approximating the specification of an observed distribution, the only source is error are those that arise from inaccurately￼￼￼ assigning probability two samples in the denominator of equation.
+The merits of different density proclamation methods is beyond the scope of this work, we provide a brief review of the challenges involved with approximating distributions in high dimensions.
+In some sense there is a game to be played between balancing the size of the data space and the number of samples available to characterize it.
+We are motivated to minimize the difference in dimension between input output space but as the dimension of the day is best grows, our approximation error at a fixed sample size ￼￼grows out of proportion.
+
+This is the so called curse of dimensionality.
+We summarize some illustrative results for clarification from Silverman density estimation.
+[TK reproduce table from silverman and write up a brief summary].
