@@ -172,7 +172,7 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
     df.parameters['allow_extrapolation'] = True
 
     # mesh properties
-    nx = 50  # this is our h value
+    nx = 20  # this is our h value
     mesh = df.IntervalMesh(nx, 0, 1)
     degree = 1
     r = 1.0  # time stepping ratios - attention to stability
