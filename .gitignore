@@ -18,3 +18,5 @@ dissertation.pdf
 __pycache__/
 examples/*/*.png
 examples/*.gif
+*.synctex(busy)
+*.synctex
