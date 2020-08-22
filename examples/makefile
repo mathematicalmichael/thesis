@@ -1,3 +1,5 @@
+all: linear heatrod
+	echo "Built all"
 
 linear:
 	sh examples_linear.sh
@@ -5,7 +7,6 @@ linear:
 heatrod:
 	sh heatrod_example.sh
 
-all: linear heatrod
-	echo "Built all"
+# TO-DO actually put in all the figures here
 
 .PHONY: all identity linear heatrod
