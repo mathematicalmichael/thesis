@@ -1,4 +1,4 @@
-all: heatrod
+all: heatrod linear
 	echo "Built all"
 
 linear:
