@@ -8,7 +8,7 @@ We let $\pspace$ denote the set of all possible input parameters.
 We assume $\pspace\subset\RP$ is equipped with a (dominating) measure, $\pmeas$ on the Borel $\sa$ $\pborel$, defining the measure space $\Pspace$.
 The solution operator of the model $\M$ then defines a map taking $\param\in\pspace$ to a solution, denoted $u\lam$, to make explicit the dependence on $\param$, which is assumed to be unique.
 
-However, in real experimental settings we are often unable to fully observe $u\lam$. 
+However, in real experimental settings we are often unable to fully observe $u\lam$.
 Instead, we often only have access to some finite set of observable scalar quantities.
 For example, in experiments involving the diffusion of heat, we can typically only record the temperature at some small number of pre-specified points in space-time where measurement devices can be positioned.
 
@@ -35,13 +35,12 @@ The only assumption on $\qoi$ that we impose throughout this work is that of pie
 \subsection{Chapter Outline}
 First, to respect the order in which these results were researched and developed, we discuss set-based inversion.
 In the interest of clarity of exposition, we have adapted the notation of a sample-based approach developed later to express the construction of the former.
-Consequently, the references cited may require some work translating. Similarities and differences between the two approaches has heretofore avoided formal documentation, and this work serves to lay the groundwork for such a comparison. 
+Consequently, the references cited may require some work translating. Similarities and differences between the two approaches has heretofore avoided formal documentation, and this work serves to lay the groundwork for such a comparison.
 
 In this chapter, we discuss the issues that arise from the need to numerically approximate the solutions to our inverse problems but study the implications in \ref{sec:set-error} and \ref{sec:sample-error}.
 Discussion of the impact of sample size are kept to a minimum in this chapter in the interest of restricting the scope of chapter \ref{chapter:03} to the implications for convergence of (consistent) solutions to \eqref{eq:inverse-problem}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
 \section{Set-Based Inversion for Measures}\label{sec:ch02-set}
 % Intro
 \input{ch02/set_derivation}
@@ -52,22 +51,11 @@ Discussion of the impact of sample size are kept to a minimum in this chapter in
 \input{ch02/set_error}
 % Example
 \input{ch02/identity_set}
+\FloatBarrier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Sample-Based Inversion for Measures}\label{sec:ch02-sample}
-
-% Intro
-\input{ch02/sample_derivation}
-% Numerical Approximation
-\input{ch02/sample_algorithm}
-% Descriptions of Error
-\input{ch02/sample_error}
-% Example
-Identity Map in two dimensions
-\input{ch02/identity_sample}
-
-[TK - Words]
 
 \begin{equation}
 \updatedP = \initialP \frac{\observedP}{\predictedP}
@@ -81,14 +69,28 @@ Identity Map in two dimensions
 \end{split}
 \end{equation}
 
-In place of the ansatz, we have an initial distribution.
+% Intro
+\input{ch02/sample_derivation}
+\FloatBarrier
+% Numerical Approximation
+\input{ch02/sample_algorithm}
+\FloatBarrier
+% Descriptions of Error
+\input{ch02/sample_error}
+\FloatBarrier
+% Example
+Identity Map in two dimensions
+\input{ch02/identity_sample}
+\FloatBarrier
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Software Contributions}\label{sec:ch02-software}
 \input{ch02/software}
-
+\FloatBarrier
 
 \section{Illustrative Examples}\label{sec:ch02-examples}
 In some examples, an analytic, closed-form expression for the QoI map is used.
@@ -105,12 +107,14 @@ We present a brief overview of the factors that influence our practical ability 
 For the set-based approach discussed in \ref{sec:ch02-set}, it is desirable that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} is sufficiently small or eliminated entirely.
 This amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater to some problem specifications.
 We choose to impose uniform distributions on $\dspace$ so that the set-valued analog to $\observed$ is perfectly described with $\ndiscs=1$.
-This allows for a better comparison between the set- and sample-based approaches by eliminating this variable. 
+This allows for a better comparison between the set- and sample-based approaches by eliminating this variable.
 Therefore, we focus our attention on the source of error introduced by the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}:  discretizing the parameter space, which is represented by the term (E2) = $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
 The number of samples fundamentally limits the characterization of events due to the resulting simple-function approximation of the density $d\paramP / d\pmeas$, which we compare to $\updated$ from the sample-based approach.
 
 Since there is no error introduced from discretizing $\pspace$ in the sample-based approach from \ref{sec:ch02-sample}, the primary contribution of error in this approach comes from approximating the push-forward density in situations where an analytical $\predicted$ is not known.
 
+\FloatBarrier
 \input{ch02/decay_set_vs_sample}
-
+\FloatBarrier
 \input{ch02/heat_1drod_set_vs_sample}
+\FloatBarrier
