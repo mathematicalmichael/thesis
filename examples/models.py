@@ -234,7 +234,7 @@ def make1DHeatModel(temp_locs_list, end_time = 1.0):
 
             T = df.Function(V)
             t = dt  # initialize first time step
-            print("%d Starting timestepping."%i)
+            if i%100: print(f"Starting timestepping for sample {i}")
             # time stepping method is BWD Euler. (theta = 1)
             while t <= t_stop:
                 if t < t_heatoff:
