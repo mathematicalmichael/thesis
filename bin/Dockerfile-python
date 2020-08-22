@@ -16,13 +16,8 @@ RUN apt-get clean && \
     
 ### Install package from source
 # bet - dependencies for inverse problem
-ENV GIT_ACCOUNT=mathematicalmichael
-ENV CLONE_BRANCH=sample
-ENV REPO_NAME=bet
-RUN cd /tmp && \
-    git clone --single-branch --branch ${CLONE_BRANCH} https://github.com/${GIT_ACCOUNT}/${REPO_NAME}.git --depth=1 && \
-    cd ${REPO_NAME} && \
-    pip install .
+COPY install_bet.sh /tmp/
+RUN sh /tmp/install_bet.sh
 
 # formatting tools for scripts
 RUN pip install \

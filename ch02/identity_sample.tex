@@ -18,7 +18,7 @@ The relative probability is assigned within the support are also more similar to
 
 \begin{figure}
 \begin{minipage}{.975\textwidth}
-\includegraphics[width=\linewidth]{./examples/identity/samp/N100_N100-vs-Analytical_N100.pdf}
+\includegraphics[width=\linewidth]{./examples/identity/samp/N100_N100-vs-Analytical_N100.png}
 \end{minipage}
 \caption{
 (Left): $\nsamps=100$ were used to construct the predicted distribution $\predicted$.
@@ -29,7 +29,7 @@ The relative probability is assigned within the support are also more similar to
 
 \begin{figure}
 \begin{minipage}{.975\textwidth}
-\includegraphics[width=\linewidth]{./examples/identity/samp/N1-000_N1000-vs-N10-000_N10000.pdf}
+\includegraphics[width=\linewidth]{./examples/identity/samp/N1000_N1000-vs-N10000_N10000.png}
 \end{minipage}
 \caption{
 $\nsamps=1,000$ (left) and $\nsamps=10,000$(right) were used to construct the predicted distribution $\predicted$.
@@ -38,30 +38,7 @@ There is no signficant error in estimating the support of the distribution, only
 \label{fig:ex:identity_sampling_approx}
 \end{figure}
 
-\begin{figure}
-\centering
-% N = 1E2
-\begin{minipage}{.975\textwidth}
-		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
-    \includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N100_approx.pdf}
-\end{minipage}
-% N = 1E3
-\begin{minipage}{.975\textwidth}
-		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
-		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N1000_approx.pdf}
-\end{minipage}
-% N = 1E4
-\begin{minipage}{.975\textwidth}
-		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
-		\includegraphics[width=0.5\linewidth]{./examples/identity/samp/identity_1d_conditionals_50E-2_N10000_approx.pdf}
-\end{minipage}
-\caption{
-(Left): $\param_1=0.5$ conditional.
-(Right): $\param_2=0.5$ conditional.
-(Top to Bottom): Conditional for $\updated$ solutions for  $\nsamps=1E2, 1E3, \text{and} 1E4$ random samples.
-}
-\label{fig:identity_sampling_conditionals}
-\end{figure}
+
 
 Qualitatively speaking we find that the estimate of the density improve as more samples are used, but at all sample sizes, the support of the density is correctly identified, which we can see by the sharp lines in Fig~\ref{fig:identity_sampling_conditionals} and \ref{fig:ex:identity_sampling_approx}.
 

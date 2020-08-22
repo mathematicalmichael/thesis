@@ -49,11 +49,11 @@ $(FILENAME).pdf: $(TEXS) $(CHAPTERS) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(
 
 examples:
 	cd examples && \
-	bash examples_linear.sh && \
-	bash heatrod_example.sh
+	make
 	echo "All examples built."
 
 clean:
 	latexmk -c $(FILENAME).tex
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
+

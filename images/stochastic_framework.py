@@ -79,17 +79,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('--fsize', default=52,
                         help='Figure font size.')
-    parser.add_argument('--png', action='store_true',
-                        help='Store as png instead of pdf.')
+    parser.add_argument('--pdf', action='store_true',
+                        help='Store as pdf instead of png.')
     parser.add_argument('--nolabel', action='store_false',
                         help='Strip figures of labels.')
     parser.add_argument('-p','--preview', action='store_true',
                         help='Supress plt.show()')
     args = parser.parse_args()
 
-    size, save_png, = args.fsize, args.png
+    size, save_pdf, = args.fsize, not args.pdf
     no_label, show_plot = args.nolabel, args.preview
     print("Plotting surface...")
-    stochastic_framework_figure(fsize=size, png=save_png,
+    stochastic_framework_figure(fsize=size, png=save_pdf,
                                 showLabel=no_label, showFig=show_plot)
     print("Done.")
