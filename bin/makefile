@@ -22,3 +22,6 @@ python_image: Dockerfile-python
 publish: python_image
 	docker tag python:thesis mathematicalmichael/python:thesis
 	docker push mathematicalmichael/python:thesis 
+
+path:
+	@export PATH=$(shell pwd):${PATH}
