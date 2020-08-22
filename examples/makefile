@@ -14,7 +14,7 @@ clean: \
 # ch 2+3 heatrod example for fifty and five-hundred parameter samples
 # ch2 has dependence on size
 # ch3 has the introduction of a second set of QoI (measurement locations)
-heatrod: heatrod-a heatrod-b models.py
+heatrod: heatrod-a heatrod-b models.py 
 
 heatrod-a: \
 	fig_heatrod_q1/tHeatrodModel--sample_N50_mc.png \
@@ -39,6 +39,12 @@ clean_heat_b:
 	identity linear heatrod \
 	heatrod-50 heatrod-500 \
 	clean_heat_q1 clean_heat_q2
+
+# Note: for fenics-based examples, need to add `|| true` to end of python statement.
+# This is because of a bad exit of MPI throwing an error. If the figure truly failed, 
+# the following instruction would cause the target to fail since there would be no 
+# file to move into a subfolder. An unfortunate slopiness of the official fenics container.
+# TO-DO: see if a conda-based image that installs fenics could actually suffice.
 
 # first QoI map
 
