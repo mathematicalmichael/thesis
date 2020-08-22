@@ -5,16 +5,18 @@ linear: examples_linear.sh models.py
 	sh examples_linear.sh
 
 
-# the nuclear option: wipe all examples
-clean: \
-	clean_heat_q1 \
-	clean_heat_q2
+clean: clean-heat
 
+# the nuclear option: wipe all examples
+clean-heat: \
+	clean-heat-a \
+	clean-heat-b
 
 # ch 2+3 heatrod example for fifty and five-hundred parameter samples
 # ch2 has dependence on size
 # ch3 has the introduction of a second set of QoI (measurement locations)
-heatrod: heatrod-a heatrod-b models.py
+heatrod: heatrod-a heatrod-b models.py Dockerfile
+# not sure the Dockerfile symlink depenency works. maybe swap them?
 
 heatrod-a: \
 	fig_heatrod_q1/tHeatrodModel--sample_N50_mc.png \
@@ -28,17 +30,23 @@ heatrod-b: \
 	fig_heatrod_q2/tHeatrodModel--sample_N500_mc.png \
 	fig_heatrod_q2/tHeatrodModel--set_N500_em.png
 
-clean_heat_a:
+clean-heat-a:
 	rm -f fig_heatrod_q1/*
-	
-clean_heat_b:
-	rm -f fig_heatrod_q1/*
+
+clean-heat-b:
+	rm -f fig_heatrod_q2/*
 
 .PHONY: \
 	all clean \
 	identity linear heatrod \
 	heatrod-50 heatrod-500 \
-	clean_heat_q1 clean_heat_q2
+	clean-heat clean-heat-a clean-heat-b
+
+# Note: for fenics-based examples, need to add `|| true` to end of python statement.
+# This is because of a bad exit of MPI throwing an error. If the figure truly failed,
+# the following instruction would cause the target to fail since there would be no
+# file to move into a subfolder. An unfortunate slopiness of the official fenics container.
+# TO-DO: see if a conda-based image that installs fenics could actually suffice.
 
 # first QoI map
 
@@ -143,4 +151,3 @@ fig_heatrod_q2/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_proble
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
-

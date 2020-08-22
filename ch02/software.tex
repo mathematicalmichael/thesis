@@ -35,11 +35,16 @@ For others, siginficant changes had to be made to structure to allow for proper 
 
 \subsubsection{Version 2.3.0}
 This release incorporated the sampling-based approach discussed in Section~\ref{sec:ch02-sample}.
+However, it never made it to the master branch of the project due to architectural changes.
+It was used for generating many of the results initially by pointing to {\tt install\_bet.sh} which pulled the specific branch, but eventually swapped for Version 3.0.
 
+\subsubsection{Version 3.0}
+This version implemented the sample-based approach by the introduction of new sub-classes.
+It broke backwards-compatibility with much of the code written for this work.
+[TK - point to the github PR that eventually upgrades the examples (hopefully including ones for the master's. I figure it's one or two night's work, but very low priority since I am using docker to ensure that everything can be reproduced. In fact, it's actually a testament to git + docker that I can point to code in the past and recreate the results.)]
 
 \subsection{Examples in BET}
 Basic plotting functionality of BET is demonstrated in iPython notebooks [TK - some kind of citation here], which have seen an exponential growth rate on GitHub, and can be edited by the end-user to work with different plotting library versions and backends.
 These notebooks were originally created to reflect the example suite in BET (which were {\tt .py} files), but later they were migrated into a separate repository BET-examples to allow for better organization.
 In the new framework, each notebook functions as an independent example.
 Several of these notebooks were adapted from the example code in this thesis repository.
-

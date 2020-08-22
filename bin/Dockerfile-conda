@@ -1,11 +1,12 @@
-FROM quay.io/fenicsproject/stable:current
+FROM continuumio/miniconda3:4.8.2
 USER root
 
 ### Install package from source
 # bet - dependencies for inverse problem
 COPY install_bet.sh /tmp/
 
-# need git to install from source, remove after
+# need git to install from source
+# tree allows printing directories in command-line
 RUN apt-get update && \
 	apt-get install -y \
  	build-essential \
@@ -16,6 +17,7 @@ RUN apt-get update && \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 	&& apt-get autoremove -y
 
+RUN conda install -c conda-forge fenics
 # formatting tools for scripts, notebooks
 RUN pip install \
 	nbconvert \
@@ -25,14 +27,6 @@ RUN pip install \
 	#black \
 
 WORKDIR /temp
-
-# overwrite default python from fenics container
-RUN ln -f /usr/bin/python3 /usr/bin/python && \
-	ln -f /usr/local/bin/pip3 /usr/local/bin/pip && \
-	rm -rf tmp/*
-
 ENV LD_LIBRARY_PATH /opt/conda/lib:$LD_LIBRARY_PATH
 
-# need to overwrite fenics' entrypoint to avoid runtime problems
-ENTRYPOINT
 CMD ["python3"]
