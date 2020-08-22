@@ -5,11 +5,12 @@ linear: examples_linear.sh models.py
 	sh examples_linear.sh
 
 
-# the nuclear option: wipe all examples
-clean: \
-	clean_heat_q1 \
-	clean_heat_q2
+clean: clean-heat
 
+# the nuclear option: wipe all examples
+clean-heat: \
+	clean-heat-a \
+	clean-heat-b
 
 # ch 2+3 heatrod example for fifty and five-hundred parameter samples
 # ch2 has dependence on size
@@ -29,17 +30,17 @@ heatrod-b: \
 	fig_heatrod_q2/tHeatrodModel--sample_N500_mc.png \
 	fig_heatrod_q2/tHeatrodModel--set_N500_em.png
 
-clean_heat_a:
+clean-heat-a:
 	rm -f fig_heatrod_q1/*
 
-clean_heat_b:
+clean-heat-b:
 	rm -f fig_heatrod_q2/*
 
 .PHONY: \
 	all clean \
 	identity linear heatrod \
 	heatrod-50 heatrod-500 \
-	clean_heat_q1 clean_heat_q2
+	clean-heat clean-heat-a clean-heat-b
 
 # Note: for fenics-based examples, need to add `|| true` to end of python statement.
 # This is because of a bad exit of MPI throwing an error. If the figure truly failed,
