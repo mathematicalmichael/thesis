@@ -39,8 +39,8 @@ jobs:
     - name: Set up PATH for binaries
       run: echo "::add-path::$(pwd)/bin"
 
-    - name: Generate figures with python
-      run: make examples
+    #- name: Generate figures with python
+    #  run: make examples
 
     - name: Compile thesis with latexmk
       run: make
