@@ -114,11 +114,13 @@ if __name__ == "__main__":
     parser.add_argument('--lam2', default=0.5, type=float,
                     help='Sets second default parameter (default: 0.5).')
 
-    parser.add_argument('--t0', default=1, type=float,
-                    help='Decay model: 1st observation time (default: 1).')
+    parser.add_argument('--t0', default=0.5, type=float,
+                    help='Decay model: 1st observation time (default: 0.5). \
+                    Heatrod model: 1st thermometer location.')
 
-    parser.add_argument('--t1', default=2, type=float,
-                    help='Decay model: 2nd observation time (default: 2).')
+    parser.add_argument('--t1', default=0.75, type=float,
+                    help='Decay model: 2nd observation time (default: 0.75). \
+                    Heatrod model: 1st thermometer location.')
 
     parser.add_argument('--noeval', action='store_true',
                     help='Sample based model: plot using original samples, not mesh.')
@@ -195,7 +197,7 @@ if __name__ == "__main__":
 
         eval_times = [t0, t1]
         myModel = makeDecayModel(eval_times)
-        model_choice += ' T=[%s-%s]'%(t0, t1)
+        model_choice += 'T=[%s-%s]'%(t0, t1)
     elif model_choice == 'random':
         A = np.random.randn(outputDim,inputDim)
         myModel = makeMatrixModel(A)
@@ -283,7 +285,7 @@ if __name__ == "__main__":
         xi, yi = np.mgrid[xmn:xmx:nbins*1j, ymn:ymx:nbins*1j]
 
         if args.title is None:
-            model_title = model_choice.capitalize() + ' Model'
+            model_title = args.model.capitalize() + ' Model'
         else:
             model_title = args.title
 
