@@ -40,7 +40,9 @@ clean-heat-b:
 	all clean \
 	identity linear heatrod \
 	heatrod-50 heatrod-500 \
-	clean-heat clean-heat-a clean-heat-b
+	clean-heat clean-heat-a clean-heat-b \
+	decay decay-a decay-b \
+	clean-decay clean-decay-a clean-decay-b \
 
 # Note: for fenics-based examples, need to add `|| true` to end of python statement.
 # This is because of a bad exit of MPI throwing an error. If the figure truly failed,
@@ -151,3 +153,132 @@ fig_heatrod_q2/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_proble
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
+
+# Note: t0/t1 are "thermometer locations"
+
+#####
+
+decay: decay-a decay-b
+
+decay-a: \
+	fig_decay_q1/DecayModel--sample_N50_mc.png \
+	fig_decay_q1/DecayModel--set_N50_em.png \
+	fig_decay_q1/DecayModel--sample_N500_mc.png \
+	fig_decay_q1/DecayModel--set_N500_em.png
+
+decay-b : \
+	fig_decay_q2/DecayModel--sample_N50_mc.png \
+	fig_decay_q2/DecayModel--set_N50_em.png \
+	fig_decay_q2/DecayModel--sample_N500_mc.png \
+	fig_decay_q2/DecayModel--set_N500_em.png
+
+# first at a low sample size
+
+fig_decay_q1/DecayModel--sample_N50_mc.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=50 && \
+	TIME_0=1 && \
+	TIME_1=2 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
+	echo "figure generated"
+
+fig_decay_q1/DecayModel--set_N50_em.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=50 && \
+	TIME_0=1 && \
+	TIME_1=2 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+  	--mc_points $${NUM_MC_SAMPLES}  \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
+	echo "figure generated"
+
+fig_decay_q2/DecayModel--sample_N50_mc.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=50 && \
+	TIME_0=0.5 && \
+	TIME_1=1.0 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
+	echo "figure generated"
+
+fig_decay_q2/DecayModel--set_N50_em.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=50 && \
+	TIME_0=0.5 && \
+	TIME_1=1.0 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+  	--mc_points $${NUM_MC_SAMPLES}  \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
+	echo "figure generated"
+
+# now for a higher sample size ...
+fig_decay_q1/DecayModel--sample_N500_mc.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=500 && \
+	TIME_0=1 && \
+	TIME_1=2 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
+	echo "figure generated"
+
+fig_decay_q1/DecayModel--set_N500_em.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=500 && \
+	TIME_0=1 && \
+	TIME_1=2 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+  	--mc_points $${NUM_MC_SAMPLES}  \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
+	echo "figure generated"
+
+fig_decay_q2/DecayModel--sample_N500_mc.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=500 && \
+	TIME_0=0.5 && \
+	TIME_1=1.0 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
+	echo "figure generated"
+
+fig_decay_q2/DecayModel--set_N500_em.png: decay_example.sh solve_problem.py
+	. ./decay_example.sh && \
+	NUM_SAMPLES=500 && \
+	TIME_0=0.5 && \
+	TIME_1=1.0 && \
+	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
+		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
+		--t0 $${TIME_0} --t1 $${TIME_1} \
+  	--mc_points $${NUM_MC_SAMPLES}  \
+		--lam1 $${LAM_1} --lam2 $${LAM_2}
+	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
+	echo "figure generated"
+
+clean-decay: clean-decay-a clean-decay-b
+
+clean-decay-a:
+	rm -f fig_decay_q1/*
+
+clean-decay-b:
+	rm -f fig_decay_q2/*
