@@ -56,7 +56,7 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     emul = 'mc'
     if len(np.unique(disc.get_input()._volumes_local)) != 1:
         emul = 'em'
-    savename = 't%s-%s_N%d_%s.%s'%(title, label+'-'+annotate, disc.check_nums(), emul, ext)
+    savename = '%s-%s_N%d_%s.%s'%(title, label+'-'+annotate, disc.check_nums(), emul, ext)
     savename = savename.replace('$','').replace('=','').replace(',','_').replace(' ','')
     plt.savefig(savename, bbox_inches='tight')
     if preview: plt.show()

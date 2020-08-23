@@ -5,7 +5,7 @@ However, the results hold for any attempt to approximate densities defined on se
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
 
-\input{ch03/impact}
+\input{ch03/impact.tex}
 
 \section{Skewness and Information Content}\label{sec:skewness}
 In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
@@ -155,11 +155,10 @@ The analysis of this problem differs significantly from the ones in (cite: butle
 By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
 
 
-\subsection{Convergence with Repeated Observations}
-2D but with repeated data, show how the measures converge. Should be identical to the differences in the observed densities (in metric).
-use linear maps here
+\subsection{Nonlinear Examples}
+\input{ch03/heatrod.tex}
+\FloatBarrier
 
-\subsection{Nonlinear Example}
-Maybe heatrod here?
-
+\input{ch03/decay.tex}
+\FloatBarrier
 %%%%%%%%%%%%%%
