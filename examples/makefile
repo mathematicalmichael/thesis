@@ -19,16 +19,16 @@ heatrod: heatrod-a heatrod-b models.py Dockerfile
 # not sure the Dockerfile symlink depenency works. maybe swap them?
 
 heatrod-a: \
-	fig_heatrod_q1/tHeatrodModel--sample_N50_mc.png \
-	fig_heatrod_q1/tHeatrodModel--set_N50_em.png \
-	fig_heatrod_q1/tHeatrodModel--sample_N500_mc.png \
-	fig_heatrod_q1/tHeatrodModel--set_N500_em.png
+	fig_heatrod_q1/HeatrodModel--sample_N50_mc.png \
+	fig_heatrod_q1/HeatrodModel--set_N50_em.png \
+	fig_heatrod_q1/HeatrodModel--sample_N500_mc.png \
+	fig_heatrod_q1/HeatrodModel--set_N500_em.png
 
 heatrod-b: \
-	fig_heatrod_q2/tHeatrodModel--sample_N50_mc.png \
-	fig_heatrod_q2/tHeatrodModel--set_N50_em.png \
-	fig_heatrod_q2/tHeatrodModel--sample_N500_mc.png \
-	fig_heatrod_q2/tHeatrodModel--set_N500_em.png
+	fig_heatrod_q2/HeatrodModel--sample_N50_mc.png \
+	fig_heatrod_q2/HeatrodModel--set_N50_em.png \
+	fig_heatrod_q2/HeatrodModel--sample_N500_mc.png \
+	fig_heatrod_q2/HeatrodModel--set_N500_em.png
 
 clean-heat-a:
 	rm -f fig_heatrod_q1/*
@@ -52,7 +52,7 @@ clean-heat-b:
 
 # first QoI map
 
-fig_heatrod_q1/tHeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q1/HeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=500 && \
 	LOC_1=0.25 && \
@@ -62,10 +62,10 @@ fig_heatrod_q1/tHeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.
     	--mc_points $${NUM_MC_SAMPLES}  \
     	--t0 $${LOC_1} --t1 $${LOC_2} \
     	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
-fig_heatrod_q1/tHeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q1/HeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=500 && \
 	LOC_1=0.25 && \
@@ -74,10 +74,10 @@ fig_heatrod_q1/tHeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_probl
 		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${LOC_1} --t1 $${LOC_2} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
-fig_heatrod_q1/tHeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q1/HeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=50 && \
 	LOC_1=0.25 && \
@@ -87,10 +87,10 @@ fig_heatrod_q1/tHeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.p
     	--mc_points $${NUM_MC_SAMPLES}  \
     	--t0 $${LOC_1} --t1 $${LOC_2} \
     	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
-fig_heatrod_q1/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q1/HeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=50 && \
 	LOC_1=0.25 && \
@@ -99,12 +99,12 @@ fig_heatrod_q1/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_proble
 		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${LOC_1} --t1 $${LOC_2} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
 # second QoI map
 
-fig_heatrod_q2/tHeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q2/HeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=500 && \
 	LOC_1=0.67 && \
@@ -114,10 +114,10 @@ fig_heatrod_q2/tHeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.
     	--mc_points $${NUM_MC_SAMPLES}  \
     	--t0 $${LOC_1} --t1 $${LOC_2} \
     	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
-fig_heatrod_q2/tHeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q2/HeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=500 && \
 	LOC_1=0.67 && \
@@ -126,10 +126,10 @@ fig_heatrod_q2/tHeatrodModel--sample_N500_mc.png: heatrod_example.sh solve_probl
 		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${LOC_1} --t1 $${LOC_2} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
-fig_heatrod_q2/tHeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q2/HeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=50 && \
 	LOC_1=0.67 && \
@@ -139,10 +139,10 @@ fig_heatrod_q2/tHeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.p
     	--mc_points $${NUM_MC_SAMPLES}  \
     	--t0 $${LOC_1} --t1 $${LOC_2} \
     	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
-fig_heatrod_q2/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_problem.py
+fig_heatrod_q2/HeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_problem.py
 	. ./heatrod_example.sh && \
 	NUM_SAMPLES=50 && \
 	LOC_1=0.67 && \
@@ -151,7 +151,7 @@ fig_heatrod_q2/tHeatrodModel--sample_N50_mc.png: heatrod_example.sh solve_proble
 		--noeval --sample --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${LOC_1} --t1 $${LOC_2} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
-	mv tHeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
+	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
 # Note: t0/t1 are "thermometer locations"
