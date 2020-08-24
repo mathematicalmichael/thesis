@@ -20,26 +20,26 @@ We ran the simulations for a regular $3\times3$ grid exploring the interior of t
 
 In the two-dimensional data spaces $\dspaceA$ and $\dspaceB$, our uncertainty is a uniform box centered at $\qoiA(\paramref)$ with side-lengths of 0.1.
 When $\paramref$ is the bottom-left corner of our $3\times3$ grid, the two maps produce very different results, with $\qoiA$ outperforming $\qoiB$ in a similar manner as we saw in the linear examples (see Fig.~\ref{fig:NLbotleft}).
-When $\param_{\text{ref}}$ is in the upper-center of the grid, the inverse images are similar, as shown in Fig.~\ref{fig:NLtopmid}, and so which map to use for inversion into this part of the parameter spaces is not a clear choice. We might even be tempted to use the more-skewed (on average) map since it inverts into a set with smaller support.
+When $\param_{\text{ref}}$ is in the upper-center of the grid, the inverse images are similar, as shown in Fig.~\ref{fig:NLtopmid}, and so which map to use forinversion into this part of the parameter spaces is not a clear choice. We might even be tempted to use the more-skewed (on average) map since it inverts into a set with smaller support.
 
-%
-%\begin{figure}[h]
-%\begin{minipage}{.475\textwidth}
-%\includegraphics[width=\linewidth]{./images/pt0Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-%\end{minipage}
-%\begin{minipage}{.475\textwidth}
-%\includegraphics[width=\linewidth]{./images/pt5Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-%\end{minipage}
-%\caption{Comparison of the differences in Hellinger distances for the two maps and two reference points. The results for the bottom-left reference value is shown on the left and the top-center is shown on the right.}
-%\label{fig:NLHD}
-%\end{figure}
-%
-%The Hellinger distance plots for these two reference values are compared in Fig.~\ref{fig:NLHD}.
-%Of the nine reference $\param$'s we studied, $\qoiA$ yielded no considerable advantage in terms of the number of samples required to approximate the inverse images in three cases (the plots were similar to that in the right of Fig.~\ref{fig:NLHD}).
-%In three cases, $\qoiA$ performed just a bit better than $\qoiB$, (somewhere between the two figures in Fig.~\ref{fig:NLHD}).
-%In two cases, $\qoiA$ performed better than  $\qoiB$, as in the left of Fig.~\ref{fig:NLHD}.
-%In one case (with $\param$ in the bottom right corner), the difference was even more dramatic ($\qoiA$ yielded similar Hellinger distances with less than a fourth the samples).
-%
+
+\begin{figure}[h]
+\begin{minipage}{.475\textwidth}
+\includegraphics[width=\linewidth]{./images/pt0Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
+\end{minipage}
+\begin{minipage}{.475\textwidth}
+\includegraphics[width=\linewidth]{./images/pt5Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
+\end{minipage}
+  \caption{Comparison of the differences in Hellinger distances for the two maps and two reference points. The results for the bottom-left reference value is shown on the left and the top-center is shown on the right.}
+\label{fig:NLHD}
+\end{figure}
+
+The Hellinger distance plots for these two reference values are compared in Fig.~\ref{fig:NLHD}.
+Of the nine reference $\param$'s we studied, $\qoiA$ yielded no considerable advantage in terms of the number of samples required to approximate the inverse images in three cases (the plots were similar to that in the right of Fig.~\ref{fig:NLHD}).
+In three cases, $\qoiA$ performed just a bit better than $\qoiB$, (somewhere between the two figures in Fig.~\ref{fig:NLHD}).
+In two cases, $\qoiA$ performed better than  $\qoiB$, as in the left of Fig.~\ref{fig:NLHD}.
+In one case (with $\param$ in the bottom right corner), the difference was even more dramatic ($\qoiA$ yielded similar Hellinger distances with less than a fourth the samples).
+
 \begin{figure}[h]
 \begin{minipage}{.4\textwidth}
 \includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N50_em.png}
