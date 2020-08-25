@@ -1,0 +1,332 @@
+\section{Extension to Vector-Valued QoI Maps}
+The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
+These examples were chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
+The linear examples in Section~\ref{subsec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
+In those examples, we showed that our ability to resolve a true parameter improved as the gap between input dimension and operator row-rank shrunk.
+
+The rank-deficiency of an operator can be attributed either to ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
+In scenarios where $S>P$ observations are available, we are motivated to somehow leverage the form of Eq.~\eqref{eq:qoi_WME} to construct a vector-valued version incorporating subsets of $S$ for each component.
+For example, a system for which spatial measurements are available over time may motivate constructing a scalar-valued WME map for each spatial location.
+If distinctly different observable quantities are available (ones perhaps with different physical units), then these may be collapsed into each component of the map.
+
+The discussion of how to optimally construct such maps is beyond the scope of this work, and would need to take into account nuances involving measurement sensitivities and address combinatorial design-spaces.
+However, we summarize that the extension of the equations presented in Section~\ref{sec:MUD_analysis} follows directly by constructing the resultant $1\times P$ matrices $A$ and scalar-valued $b$ for each component and then stacking them to form a $D\times P$ system, where we are motivated to minimize $P-D$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \vfill
+% \pagebreak
+
+\subsection{Vector-Valued QoI map for PDE}
+In the previous example, we presumed a fair bit of prior knowledge about the structure of $g$ being a sine curve, we only had to estimate a scaling coefficient for it.
+To demonstrate the use of the WME QoI in solving inverse problems in higher dimensions, we set up the following series of examples in the same spirit as the former, presuming less about $g$ than before.
+Suppose we know that $g$ is negative and bounded below by $-4$, and we pursue estimating it by first placing two knots on the interior of the domain of $g$ and estimating its value at these points.
+This gives us a parameter space of $\Lambda = [-4, 4]$, and we choose a polynomial function $g$ which exhibits similar behavior to the former $\sin$ curve, but without the symmetry about $x_2=0.5$, and scale it so that it takes a minimum at the same value as before (at $-3$).
+Over this space we will assume a uniform density again.
+We selected $g(x) = \alpha x_2^2 (x_2 - 1)^5$, with $\alpha = 3\frac{823543}{12500}$ chosen to satify the aforementioned design specification (so that $g(x)=-3$ for $x=(0,\frac{2}{7})$).
+
+Our first two knots will be the equispaced points $x = (0,\frac{1}{3}), (0,\frac{2}{3})$, and the family of functions that this spans is visually illustrated in the left half of Figure~\ref{fig:pde-highd-initial}, alongside the true function and the associated piecewise--linear that comes from interpolating the true $g$.
+The rest of the problem setup will be kept the same as the previous example, except that instead of $N=10,000$ parameter space samples, we use $1,000$, as we will not be doing the same convergence studies, so we are less interested in exhaustively exploring $\Lambda$.
+
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.475\linewidth]{figures/pde-highd/pde-highd_init_D2}
+  \includegraphics[width=0.475\linewidth]{figures/pde-highd/pde-highd_init_D5}
+\caption{
+One thousand initial parameter samples (our model evaluation ``bugdet'') were used to estimate $g$, constructed by taking independent uniform samples from $[-4, 0]$ for each direction are shown in gray. (Left): Two-knot problem. (Right): Five-knot problem.
+}
+\label{fig:pde-highd-initial}
+\end{figure}
+
+\subsubsection{2-D Scalar}
+
+Our first inverse problem will involve solving the SIP with the same scalar-valued QoI map, and to give the reader a sense of the ability for this ``basis'' to match the one-hundred measurements used for inversion, we plot the best match of our thousand parameter samples with respect to these measurements in purple in the top half of Figure~\ref{fig:pde-highd-2d-scalar-mud}.
+There, we also plot the closest match to the interpolant function in green, and note that we have a near-identical match among our sample set, though the best predictor of the data is a different sample.
+The residual Q-Q plots for the two functions are shown to illustrate the differences in misfit.
+
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_proj_D2}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100}
+\caption{
+}
+\label{fig:pde-highd-2d-scalar-mud}
+\end{figure}
+
+In the bottom half of \ref{fig:pde-highd-2d-scalar-mud}, we show the MUD solutions arising from twenty trials using different observations of noise.
+Of particular interest is that the solutions seem to discover one of two types of explanations for the data, seemingly unable to decide which half of the domain represents a better estimate of $g$'s minimum value.
+As mentioned, this result comes from collapsing all hundred measurements into a scalar--valued QoI map, which induces a rank-deficiency in the problem, since our SIP is now $2\rightarrow 1$.
+[TK - cite Troy's result about dimensions from AWR paper] implies that we are incentivized to construct maps which ``close the gap'', so to speak, between input and output dimension, to fully leverage the geometry of available information.
+
+
+\subsubsection{2-D Vector}
+
+Suppose that instead of construct a scalar--valued QoI map, we used the form of \eqref{eq:qoi_WME} to construct a map with two components, inducing a $2 \rightarrow 2$ SIP instead.
+Would such an approach provide any tangible benefit for resolving the uncertainty in our true function $g$?
+To explore this question, we propose two relatively uninteresting methods for splitting our hundred measurements in to two sets which will be used to construct each component of the map according to \eqref{eq:qoi_WME}.
+Both are shown in the top half of Figure~\ref{fig:pde-highd-2d-geometry}, and represent a bisection through $\Omega$ vertically and horizontally.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.475\linewidth]{figures/pde-highd/pde-highd_sensors_D2}
+  \includegraphics[width=0.475\linewidth]{figures/pde-highd/pde-highd_sensors-alt_D2}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_geom_D2}
+\caption{
+(Bottom): The vector-valued QoI map is constructed for all $N=10,000$ parameter evaluations and the two resulting vectors are plotted against one another for both methods of partitioning $\Omega$.
+}
+\label{fig:pde-highd-2d-geometry}
+\end{figure}
+
+There are now two QoI maps under consideration, which should we use?
+Before solving an inverse problem, let us evaluate our thousand parameter samples through each of these maps and inspect the two-dimensional scatterplots to understand the underlying geometry induced by these maps.
+We do exactly this for three subsets of the measurements (using the first samples in each half according to the random index assigned to them), and demonstrate in the bottom half of Figure~\ref{fig:pde-highd-2d-geometry} the two resulting sets of relationship.
+
+First, we note that the inclusion of more data points has the effect of dilating (and to some extent rotating) the induced data space for both QoI maps.
+The geometric implication of this in the context of the chosen form of the QoI map has an interesting consequence.
+Recall that the observed distribution remains a unit normal, regardless of the number of data points used to construct the map.
+In two dimensions, this observed distribution becomes a multivariate unit normal distribution instead, which can be visually thought of as a ``target of fixed size'' located in the middle of each of the scatterplots in Fig. \ref{fig:pde-highd-2d-geometry}.
+As more measurements are incorporated, the size of that target relative to the rest of the space becomes increasingly small.
+If the reader would indulge the author in another metaphor, it is akin to finding the same needle in larger piles of hay.
+More is asked of the solution to the SIP, since there are more measurements with which the model must agree.
+
+The second implication of the two ways in which the maps can be formed is more visually evident, as the two quantities of interest that arise from a vertical bisection of $\Omega$ are nearly perfectly correlated.
+The two maps are presenting almost the same information (the shapes are very slim parallelograms), and so we fundamentally can already expect there to be very little difference between MUD points arising from using this map when compared to using the scalar--valued map.
+Particularly since the observed distribution is radially symmetric, this problem\---while technically two-dimensional\---appears to be practically one-dimensional.
+
+By contrast, the map induced by a horizontal split (bottom left of Fig. \ref{fig:pde-highd-2d-geometry}) provides some new information in each component.
+While there is some correlation (the data spaces are not rectangular), a far greater proportion of samples will fall within the practical support of the observed distribution, and thus qualify for possible solutions.
+More information is learned with the inclusion of each component than would be with the vertical split.
+
+To this end, for the sake of brevity, we focus our attention on comparing the horizontal vector--valued QoI map to the scalar one, and note that a more fulfilling discussion of constructing QoI maps that induce desirable geometric properties is of interest for future work.
+For the remainder of this example, the ``vector--valued'' map will refer to the the one which is split horizontally, and we note that this design, while not having any guarantees of optimality for precision or accuracy's sake, at least respects the flow of information in the system being studied.
+Since $\lambda$ is parameterizing a Neumann boundary condition, changes to it are apparent in the horizontal direction.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D2_m100}
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D2_m100}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-16}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-03}
+\caption{
+100 measurements
+}
+\label{fig:pde-highd-2d-example}
+\end{figure}
+
+We turn the reader's attention to Figure~\ref{fig:pde-highd-2d-example}, which illustrates an example MUD solution for both the scalar-- and vector--valued QoI maps.
+The predicted response surfaces are shown at the top, and the associated functions and residual plots are below it.
+In this particular instance, it appears that our vector-valued MUD solution does better capturing the qualitative behavior of $g$, the difference in the residuals is less pronounced.
+Both solutions manage to capture some general behavior of the true function, but to better understand the differences in the two solutions, we need instead to look at the set of probable samples, not only the most likely among them.
+
+This is what is shown at the bottom of Fig.~\ref{fig:pde-highd-2d-example}: we normalize our ratio pdf evaluations and plot the samples that exceed two thresholds, numerical zero (left), and $1/N$ (right) to give some sense of samples that may come from accept/reject algorithms (since our inital was uniform).
+Both scaterplots exhibit the same geometry, appearing to trace a band through the parameter space.
+Fundamentally, at first glance at the left figure, it is already apparent that half of $\Lambda$ has been ruled out, and that the correlation structure between the two knots has been discovered.
+The vector--valued samples, however, cluster more tightly around the optimal samples (the ``projection'' here refers to the sample which minimizes the 2-norm to the noiseless data).
+The incorporation of two directions instead of one whittles away more of the parameter space as being less relatively likely.
+If we were to perform accept/reject, the resulting set would be fairly well constrained to the upper-lefthand corner of the two-dimensional parameter space.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m20}
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100}
+\caption{
+(Top): When vectorizing our QoI map, we find that we are able to achieve more accuracy with fewer measurements. Here, we see far less variation in MUD solutions than in the bottom of Fig.~\ref{fig:pde-highd-2d-scalar-mud}.
+(Bottom): When all 100 measurements are incorporated
+}
+\label{fig:pde-highd-2d-vector-mud}
+\end{figure}
+
+To rule out the possibility that our one updated density / MUD point was luck, we again re-solve our SIP for twenty different realizations of noise to pollute our hundred measurements, and show the resulting solutions for the first twenty and all hundred being used to construct the vector--valued map.
+The resulting functions that are induced by these MUD points are shown in Fig.~\ref{fig:pde-highd-2d-vector-mud}, and we note that solutions are no longer are considering the possibility of the minimum value of $g$ being at the wrong knot point as we saw in Fig.~\ref{fig:pde-highd-2d-scalar-mud}, even when only twenty overall data points are used to construct $Q$.
+By the time all hundred measurements are incorporated, the MUD solutions appear to be tracing out curves between the projection function and the interpolant function, a far more accurate set of predictions than those from the scalar--valued map.
+
+How we incorporate the available data has a dramatic impact on our ability to reduce uncertainty in the parameter space.
+We attempt to illustrate this by juxtaposing figures of the initial samples in \ref{fig:pde-highd-initial} to those in \ref{fig:pde-highd-2d-scalar-mud} and \ref{fig:pde-highd-2d-vector-mud}, but to better quantify the differences, we should study how close we are to $g$ in function space.
+Since the approximation $\hat{g}$ that arises from evaluating the MUD point is piecewise-linear, and $g$ is continuous, we use the knot points and the trapezoidal rule to approximate the $L^2$ norm of $\abs{g - \hat{g}}$ (using {\tt scipy}), and plot the resulting histograms for the scalar- and vector-valued $\param$s whose relative ratios exceeded a threshold, and compare them against samples from the initial density, and show the result in Figure~\ref{fig:pde-highd-2d-hist}.
+
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_hist_D2_t5-0E-01}
+\caption{
+Histograms comparing initial samples with the highest probabilities (relative ratio $> 0.5$).
+}
+\label{fig:pde-highd-2d-hist}
+\end{figure}
+
+In \ref{fig:pde-highd-2d-hist}, the histograms have been normalized for comparison, and it is evident that the scalar--valued map still does reduce the uncertainty that we started with in our initial density, but the multi-modal nature of this plot shows a lack of resolution that is not experienced at all by the vector--valued solution.
+Both QoI maps solve a stochastic inverse problem, but the latter is more respectful of the geometry of the response surface, and so is able to learn significantly more, and bring us modelers far closer to the true function $g$.
+
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Extension to Higher Dimensions}
+
+Suppose now that an eager experimenter decided to start with a five--dimensional problem (five knots instead of two), trying to accomplish greater granularity in the ability to estimate $g$, and imposes the same type of uniform initial in each direction, yielding a parameter space of $\Lambda = [-4, 1]^5$.
+In Figure~\ref{fig:pde-highd-initial}, we show what such initial functions would look like, and note that many of them appear to exhibit fluctuating behavior for which the mesh ($36\times36$) being used to solve the problem, would not be fine enough to resolve.
+In many senses, this choice of initial density induces a lot of noise into the SIP we are hoping to solve, since ``common sense'' from a modeler's perspective may be able to rule out zig-zag functions from wasting model-evaluation budget, which we retain at the same $N=1000$ samples as in the previous 2-D problem.
+To get a sense of what the best possible representations in this peculiar choice of ``basis'' could be, we again find the closest match to the interpolant and to the data and plot them alongside residuals in Figure~\ref{fig:pde-5d-proj}.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_proj_D5}
+\caption{
+}
+\label{fig:pde-5d-proj}
+\end{figure}
+
+Observe that in Figure~\ref{fig:pde-5d-proj}, both the closest fit in parameter and measurement space fail to resolve the true function behavior at $\lambda_5$ (the interpolating piecewise--linear is shown for reference), and both place a minimum at $\lambda_2$.
+The plot here is in some sense, the best that can be solved for with this design, and is helpful for comparing against our MUD solutions.
+Of particular interest here is to note also is that both functions under-estimate $g$ at $\lambda_2$ by a large margin.
+Nevertheless, we pursue the solution for demonstration purposes and solve the SIP for both scalar-- and vector--valued QoI maps, the latter constructed with horizontal bands shown in the bottom left of Figure \ref{fig:pde-highd-5d-example}.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5_m100}
+  \includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_sensors_D5}
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D5_m100}
+\caption{
+(Top): Layout for 5-D vector--valued map and comparison of the two MUD solutions in parameter space.
+(Bottom): The response surfaces predicted by the two QoI maps alongside the noisy response surface that generated the simulated collected data.
+}
+\label{fig:pde-highd-5d-example}
+\end{figure}
+
+In Figure~\ref{fig:pde-highd-5d-example}, the scalar-- and vector--valued MUD solutions are shown for the noisy surface plotted in the top-center, with associated predicted response surfaces flanking it.
+In the bottom-center plot, we can see that the scalar-valued MUD happens to completely misidentify the location of $g$'s minimum value, but the vector-valued QoI is able to resolve the behavior much better.
+In Figure~\ref{fig:pde-highd-5d-mud} we plot the results from twenty repeated trials (perturbations of noise) when using all hundred measurements, and observe the same difference in going from scalar-- to vector--valued solutions for the five--dimensional example that we saw in two dimensions in \ref{fig:pde-highd-2d-scalar-mud}.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D5-1_m100}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D5-5_m100}
+\caption{
+(Top): Scalar-valued solutions.
+(Bottom): Vector-valued solutions.
+}
+\label{fig:pde-highd-5d-mud}
+\end{figure}
+
+By increasing the number of quantities of interest used, more directions of uncertainty are resolved in the parameter space.
+Since any solution in the equivalence class is a valid one for the SIP, the scalar-valued solutions are much more sensitive to the noise, and so the solutions often appear to identify functions with a minimum on the wrong half of the domain.
+In Figure~\ref{fig:pde-highd-5d-mud}, the scalar-valued QoI is unable to differentiate between resolving residual discrepencies in different locations in $\Omega$.
+By contrast, the vector-valued QoI is constructed with respect to the flow of information in the system, and so many more of the twenty trials land closer to the true minimum value of $g$.
+The solutions for the vector-valued approach instead explore the available knots (at $x_2=1/6$ and $1/3$), nearest the actual minimum value of $2/7$ instead, a much more valuable area of $\Lambda$ to explore.
+
+Perhaps unsurprisingly given the poorly-designed initial density, our MUD solutions still do not really trace out the interpolant that we hope it should in order to approximate $g$.
+At the very least, we would hope to accurately estimate the location and value of $g$'s minima.
+Recall that we have already solved a two-dimensional version of this problem, which could have been used to inform a much smaller region of two of the five directions to explore.
+Let us see what would happen if our initial density was constructed with more care (without needing to use any model evaluations), since we saw from earlier examples that if DCI is initialized at a good initial mean, it has a chance of outperforming even least-squares in resolving discrepency in truth.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Alternative Experimental Approach}
+
+[TK - Now we're tying back into the OED discussion]
+
+As we proceed from two to five dimensions, being weary of the fact that we are fighting against the curse of dimensionality, we want to be more intelligent with our specification of an initial density.
+Let us take a look at the samples that show up in black on the bottom-right of Figure~\ref{fig:pde-highd-2d-example} from a different perspective.
+Instead of looking at high-probability samples as locations in $\Lambda$, let us inspect them as a family of functions that are defined on the unit interval and use the envelope curves they sweep out to inform the specification of a better initial density; consider Figure~\ref{fig:pde-highd-5d-study}.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd-alt_initial_D5_m100.png}
+\caption{
+}
+\label{fig:pde-highd-5d-study}
+\end{figure}
+
+The samples whose relative ratios exceeded $1/1000$ sweep out a family of curves that can be used to estimate bounds not only on $\lambda_2$ and $\lambda_4$ (the previous $\lambda_1$ and $\lambda_2$ from the 2-D problem)\---which exhibit correlation structure that we will turn to momentarily\---but also on the remaining three knots.
+To form the intervals shown in orange in Fig.~\ref{fig:pde-highd-5d-study}, we take the upper and lower bounds of the curves passing through the vertical lines drawn at the three new knot values.
+To be conservative, we multiply our lower bound by $1.2$ and the upper by $0.8$ (we are still more than halving the interval-length in each direction as compared to the previous 5-D problem).
+(Alternatively, one could establish a lower tolerance for accepting likely samples and avoid the multiplication factor, but the authors enjoyed the connection to accepted samples from the updated density).
+
+\subsubsection{A better initial density}
+For the two directions remaining, we want to capture the correlation structure that we were able to visually identify in Fig.~\ref{fig:pde-highd-2d-example} and impose something uniform-like on it.
+To achieve this, we perform a singular-value decomposition on the likely samples from the \emph{scalar}--valued 2-D solution, since there are so many more samples (it was found to better characterize the direction of the equivalence class, suggesting perhaps a justifiable use for solving the problem with it in such cases).
+
+The singular vectors are used to transform the vector-valued samples, and a uniform sampling is performed over the rectangular bounding box for these points, shown in the center of Figure~\ref{fig:pde-highd-2d-study}.
+These generated samples, however, leave $\Lambda$ when transformed back to their native space, as seen in the left panel.
+To ameliorate this problem, we instead perform sampling in a while-loop, sampling from this uniform box and rejecting any that would get mapped back outside $\Lambda$.
+
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd-alt_initial_D2_m100}
+\caption{
+Generating proposal samples for the two directions informed by solving the 2-D inverse problem, aided by singular-value decompositions and a basic ad-hoc sampling procedure.
+}
+\label{fig:pde-highd-2d-study}
+\end{figure}
+
+Furthermore, note that in the center of the Fig~\ref{fig:pde-highd-2d-study}, there are corner-regions of the space we want to avoid wasting samples on as well, so we reject samples that have squared two-norm greater than $0.05$ from their nearest vector--valued sample.
+This sampling procedure produces the set shown in orange on the right side of the figure (ten thousand shown to demonstrate coverage).
+In a sense, we wanted to quickly define a computational open cover for the relatively high-probability samples.
+We keep one thousand of these 2-D samples, and join them with the three independent uniform sample sets of the same size taken from the intervals in Fig.\ref{fig:pde-highd-5d-study} to form our new initial sample set, the functions from which generate the curves shown in Figure~\ref{fig:pde-highd-5d-init}.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_init_D5-alt}
+\caption{
+Initial density constructed for the second attempt at the five--dimensional inverse problem, with the structure of solutions learned from the 2-D example incorporated into the selection of bounds in each direction.
+}
+\label{fig:pde-highd-5d-init}
+\end{figure}
+
+These curves, especially when contrasted to those in Fig.~\ref{fig:pde-highd-initial}, represent a far more reasonable set of possibilities, exhibiting none of the erratic roughness that was seen in the first attempt at a five--dimensional initial density.
+We note that such considerations of smoothness could be avoided by parameterizing $g$ with a basis of some sort, but that problem is beyond the scope of this already lengthy work.
+Another possible improvement would be to incorporate the correlation structure that is present in the three other directions, derivable from a similar SVD-based analysis of the interpolation of the 2-D predictions through the new knot locations, but that would require more visual exploration than the authors deem worthwhile to demonstrate the point they are trying to make.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5-alt_m100}
+  \includegraphics[width=0.9\linewidth]{figures/pde-highd/pde-highd-alt_comp_exmud_D5_m100}
+\caption{
+100 measurements for the revised five--dimensional problem yield substantially better estimates in the eyeball norm.
+}
+\label{fig:pde-highd-5d-alt-example}
+\end{figure}
+
+
+\subsubsection{Moving to Five Dimensions with more caution}
+
+We now come to the solutions that arise from solving the same five--dimensional inverse problem of interpolating the values of $g$ through equispaced knot points, with both types of maps, in Figure~\ref{fig:pde-highd-5d-alt-mud}.
+The difference in comparison to the example solutions in Fig.~\ref{fig:pde-highd-5d-mud} is stark: no longer are the solutions dramatically under-estimating the local minimum of $g$.
+To the extent to which they fail to adequately to do is due to the insufficient resolution of five knot points; both scalar-- and vector--valued solutions identify the same knot as being the likely minimum, and the latter solution estimates the minima well (horizontal line drawn for reference) in the bottom-right plot.
+
+Once again, we repeat the experiment twenty times to better understand the differences in the solutions relative to possible noise that polluted our measurements.
+We are able to notice some interesting patterns by looking at the curves on the left side of Figure~\ref{fig:pde-highd-5d-alt-mud}.
+First, we note that going from scalar-- to vector--valued resolves a significant amount of uncertainty in $\lambda_2$, $\lambda_3$, and $\lambda_4$, namely thi QoI map appears to stop considering curves which do not have a sufficiently low minimum value.
+Second, while the vector--valued MUD solution curves appear to capture the general characteristics of $g$ well, a number of them under-estimated the value at $\lambda_5$ quite severely relative to the true value (near zero), which we saw in Figure~\ref{fig:pde-highd-5d-mud} as well.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m100}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-5_m100}
+\caption{
+(Top): Scalar-valued solutions for alternative approach to the five-dimensional problem.
+(Bottom): Vector-valued solutions.
+Because we began with a better choice of initial density, both QoI maps resolve the residuals similarly (bottom-left), and produce qualitatively similar estimates of the response surface. We attribute this to the fact that the vector--valued samples were used to bound the space, but note the direction was informed by the scalar--valued samples.
+}
+\label{fig:pde-highd-5d-alt-mud}
+\end{figure}
+\FloatBarrier
+
+
+\subsubsection{Demonstration of Reduction in Uncertainty}
+
+As a final note on this experiment, we contrast the resulting $L^2$-errors to $g$ \footnote{derived from computational approximation with the trapezoidal rule} of these MUD solutions, to the previous two examples in Figure~\ref{fig:pde-highd-5d-hist}, to show a lineage of learning, so-to-speak.
+With each successive problem, our uncertainty is reduced and our MUD solutions lower in variance and increase in accuracy.
+Note that they appear to be moving towards a value away from zero, which represents a fixed bias (five equispaced knots can only approximate this $g$ so well).
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_hist_D5_t5-0E-01}
+\caption{
+Comparison of the 2D initial errors to the 5D ones, as well as the reduction of uncertainty that solving a SIP problem for each provides.
+}
+\label{fig:pde-highd-5d-hist}
+\end{figure}
