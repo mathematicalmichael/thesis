@@ -21,6 +21,8 @@ Since by the time we finish iterating through all available QoI, the error in $Q
 To address this, we perform multiple passes through our set of QoI.
 Borrowing from other sequential algorithms, these ``epochs'' will allow us to iterate until the solution stops changing by some predefined relative threshold, representing a lack of ``learning'' through continued effort.
 
+
+\subsection{Motivating Linear Example}
 We study the following motivating two-dimensional example with QoI defined by ten equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
 We first plot the result of a single epoch in Fig.~\ref{fig:iterative-linear-demo}
 \begin{figure}
@@ -52,6 +54,10 @@ We solve a total of ten 1-D inverse problems for each of them (five epochs) to m
 
 We observe that in Fig~\ref{fig:iterative-linear-demo-pair}, we are able to achieve much greater accuracy in estimating the true parameter value than in the case of Fig~\ref{fig:iterative-linear-demo}.
 The reason for this difference is that there is more mutually distinct information between successive iterations of a pair of random rows of $A$ than there is between adjacent rows, as measured by the angle between the solution contours.
+
+\subsection{Connection to Skewness}
+
+[TK - need a bit more text here, connect back to the OED examples that were just shown]
 
 \begin{figure}
   \centering
