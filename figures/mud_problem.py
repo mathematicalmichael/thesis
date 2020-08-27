@@ -214,6 +214,7 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--input-dim',     default=1, type=int)
     parser.add_argument('--fsize',               default=32, type=int)
     parser.add_argument('--test', action='store_true')
+    parser.add_argument('--save', action='store_true')
     args = parser.parse_args()
     np.random.seed(args.seed)
     
@@ -269,9 +270,11 @@ if __name__ == "__main__":
                                                               test=test)
         if len(tolerances) > 1: plot_experiment_equipment(tolerances, res,
                                                           prefix, fsize, linewidth,
-                                                          title=f"Variance of MUD Error for t={1+2*np.median(time_ratios):f}s",
+                                                          title=f"Variance of MUD Error\nfor t={1+2*np.median(time_ratios):1.3f}s",
                                                           test=test)
     ##########
     
     
-
+    if args.save:
+        import pickle
+        pickle.dump('results.pkl', res)

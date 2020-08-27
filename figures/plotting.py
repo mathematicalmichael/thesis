@@ -153,7 +153,8 @@ def plot_decay_solution(measurements, solutions, model_generator, sigma, prefix,
         plt.show()
 
 
-def plot_experiment_equipment(tolerances, res, prefix, fsize=32, linewidth=5, title=f"Variance of MUD Error", test=False):
+def plot_experiment_equipment(tolerances, res, prefix, fsize=32, linewidth=5,
+                              title=f"Variance of MUD Error", test=False):
         plt.figure(figsize=(10,10))
         for _res in res:
             _prefix, _in, _rm, _re = _res
