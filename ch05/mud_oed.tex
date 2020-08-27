@@ -1,45 +1,33 @@
-\section{Alternative Experimental Designs}
+\section{Optimal Experimental Designs}
 
 In this section we return to the nonlinear examples presented in the previous chapter and address the choices made in experimental design.
-We demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point.
+We demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point by revisiting the examples at the end of the previous chapter.
 
-We demonstrate the use of the WME map defined in \eqref{eq:qoi_WME_fixed_data} on a problem incorporating a single stream of time-series data for a first-order ODE problem.
 
-\subsection{ODE Example}
-Consider an exponential decay problem with uncertain decay rate:
+We study the impact of more precise measurement devices on the convergence rates for the parameter estimates.
+First we return the problem of estimating the rate of exponential decay by incorporating temporal measurements into the WME map from [TK - ch4 section here].
+To complement these results, we show them alongside ones generated with equipment that measures at twice the temporal frequency.
 
-$$
-\begin{cases}
-\frac{\partial u}{\partial t} & = \param u(t) \\ u(0) &= 0.75
-\end{cases}
-$$
+Next, we study the same question of the impact of measurement precision on decay rate for the PDE problem introduced in [TK - ch4 section here].
+A similar complementary problem is solved where information about the sensitivity of measurement locations is used as a ad-hoc method for informing a new bounding box for the same hundred sensors.
+In this example we walk through the sorts of analyses a modeler might conduct in order to select an experimental design through simulation and show a significant improvement in the accuracy of the MUD point at a fixed number of sensors or measurement precision.
 
-The solution is described by
-\begin{equation}
-  u(t) = u_0\exp(-\param t), \; u_0 = 0.75 ,
-\end{equation}
-where we consider $t \in [0, 3]$, allowing measurements to begin for $t\geq 1$.
-\begin{figure}[htbp]
-  \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode_200_reference_solution}
-  \caption{Time series response for exponential decay with markers for the assumed error intervals for observations.
-  Measurements are taken over the time interval $(1,3)$.
-  Five-hundred draws from $\pi_\text{init}$ are used to generate sample responses and are shown in gray.
-  (Top): Twenty updated solution (the results of the repeated trials) for $S=25$ are plotted in blue, and capture the true signal.
-  (Bottom): The solution for using all $S=200$ measurements available that were taken over the observation window.
-  }
-  \label{fig:ode-reference}
-\end{figure}
 
-We consider a uniform prior over $\param \in \Lambda = (0, 1)$ to represent our uncertainty about the decay rate.
-Measurements are simulated over the interval $t \in [1,3]$ for observations from a $100$Hz sensor, and are perturbed (as outlined in \ref{subsec:example-setup}).
-An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\param = 0.5$, and an example of possible measurements shown as perturbed points around it.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{ODE Example Revisited}
+\subsubsection{Impact of Equipment Precision}
+
+To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
+Rather than a tolerance of one decimal place, we consider choices of $\tau = 0.1, 0.05, 0.01, 0.005, \text{ and } 0.001$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.
+In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise.
+
 
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_obs_mean}
-  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_obs_var}
+  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_obs_var}
 
   \caption{Convergence of the MUD point given $N=1E4$ model evaluations for increasing numbers of observations for randomly placed sensors.
   Convergence rates are estimated using first-order linear regressions in $\text{log}_{10}$-space.
@@ -53,23 +41,18 @@ In the top half of Figure~\ref{fig:ode-convergence-obs}, we can observe that as 
 
 
 
-To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
-Rather than a tolerance of one decimal place, we consider choices of $\tau = 0.1, 0.05, 0.01, 0.005, \text{ and } 0.001$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise.
-In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise.
-
-
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_mean}
-  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_var}
+  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_std_var}
 
-  \caption{Convergence of the MUD point given $N=1E4$ model evaluations for different precisions of observations for randomly placed sensors, incorporating $S=25$ measurements.
+  \caption{Convergence of the MUD point given $N=1E4$ model evaluations for different precision of observations for randomly placed sensors, incorporating $S=25$ measurements.
   As more exact measurements are incorporated, the accuracy and precision of the MUD solution improves, convergence rates are estimated with regression, and appear to be unaffected .
   }
   \label{fig:ode-convergence-std}
 \end{figure}
 
-TK - say more here.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +93,7 @@ We now turn our attention to an example where instead of temporal measurements, 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elliptic PDE Example}\label{subsec:pde-example}
@@ -148,6 +131,7 @@ $f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$
 One could place a regular grid of sensors in the interior of $\Omega$ to simulate a sensor array of some sort.
 However, observe that the response surfaces shown in Figure~\ref{fig:pde-ref-solution} exhibit vertical symmetry about the line $x_1=0.5$ (as a result of our choice of $g$).
 We are interested in demonstrating the impact of incorporating more measurements, which poses a problem for this particular experimental design since it will heavily rely on the way in which the sensor grid is indexed.
+
 For example, if the first half of indexed sensors corresponded to the bottom half of $\Omega$, the incorporation of the second half will be equivalent to having repeated observations.
 Moreover, since the left-side of $\Omega$ is more sensitive to changes in $\param$ than the right, indexing in a serpentine manner will lead to sharper declines in uncertainty whenever a sensor from a different row gets incorporated.
 To avoid these problems, we instead simulate the sensors as being placed randomly in the interior so that index-dependence becomes irrelevant and  probability theory ensures the lack of truly redundant measurement locations.
@@ -156,6 +140,7 @@ To avoid these problems, we instead simulate the sensors as being placed randoml
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Uninformed Sensor Placement}
 
+Returning to the PDE example from [TK - ch4 section 6], recall that there we had the following experimental setup:
 We consider a selection of $S=1000$ measurement locations in the interior of the response surface chosen by sampling a uniform density over the set $(0.05, 0.95)^2 \subset \Omega$.
 In Figure~\ref{fig:pde-sensitivity}, we plot the data generated by each simulated sensor location, and observe that some measurements are more sensitive in others.
 The majority of measurements exhibit almost no sensitivity to changes in $\param$, visually represented by near-horizontal lines.
@@ -223,24 +208,21 @@ We perform the same experiment for sensors placed in $(0.05, 0.25)\times(0.05, 0
 We demonstrate the sensitivities of each sensor in the right half of Figure~\ref{fig:pde-sensitivity}, and note that there are fewer sensors twhich exhibit low sensitivity to changes in $\param$.
 It appears in the right half of Figure~\ref{fig:pde-convergence-obs}, that two decimal places of accuracy can be achieved with approximately $250$ samples instead of the $1000$ required in the left-half.
 
-
-TK - Closing statements about optimal experimental design being out of the scope of this work, but how this was an interesting thing to observe.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Concluding Remarks for Examples}
 
-As these examples demonstrate, Data--Consistent Inversion can be used for parameter identification as a viable alternative to existing methods.
-These problems have involved one-dimensional input and output spaces, and so the resulting problems were not necessarily ones that would benefit from regularization.
+These examples demonstrate, Data--Consistent Inversion can be used for parameter identification as a viable alternative to existing methods.
+The problems in this section have involved one-dimensional input and output spaces, and solely demonstrate one method by which measurements can be transformed into a QoI map.
+The problems have also involved one-dimensional parameter spaces, limiting the useful dimension of the QoI map we construct.
+We address these concerns in the next section by extending the previous (PDE) example to a vector-valued analogy but the same original experimental design for collecting measurements.
 
 We point out that in the framework of collapsing available observations of data leaves the output space as scalar-valued.
 As the number of parameters grows, this output dimension effectively stays fixed.
-This is particularly when the DCI approach becomes advantageous.
+This is particularly when the DCI approach becomes advantageous over other methods as it is less sensitive to mistakes in modeling assumptions than other methods for solving inverse problems.
 One can incorporate a much wider variety of prior beliefs about the relative likelihoods of parameters before data is collected without compromising predictive error.
 The DCI approach guarantees that the functional defined (for us, the weighted mean error) will remain accurate in spite of any encoded assumptions that are somehow at odds with data that is subsequently collected.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
