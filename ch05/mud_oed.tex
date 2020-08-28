@@ -1,27 +1,55 @@
-\section{Optimal Experimental Designs}
+\section{Optimal Experimental Design Considerations}
 
 In this section we return to the nonlinear examples presented in the previous chapter and address the choices made in experimental design.
-We demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point by revisiting the examples at the end of the previous chapter.
-
+By revisiting the examples at the end of the previous chapter, we demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point.
 
 We study the impact of more precise measurement devices on the convergence rates for the parameter estimates.
-First we return the problem of estimating the rate of exponential decay by incorporating temporal measurements into the WME map from [TK - ch4 section here].
+First we return the problem of estimating the rate of exponential decay by incorporating measurements taken in time into the WME map from [TK - ch4 section here].
 To complement these results, we show them alongside ones generated with equipment that measures at twice the temporal frequency.
 
-Next, we study the same question of the impact of measurement precision on decay rate for the PDE problem introduced in [TK - ch4 section here].
-A similar complementary problem is solved where information about the sensitivity of measurement locations is used as a ad-hoc method for informing a new bounding box for the same hundred sensors.
-In this example we walk through the sorts of analyses a modeler might conduct in order to select an experimental design through simulation and show a significant improvement in the accuracy of the MUD point at a fixed number of sensors or measurement precision.
+Next, we study the same question of the impact of measurement precision for the PDE problem introduced in [TK - ch4 section here].
+A similar complementary problem is solved where information about the sensitivity of measurement locations is used to inform improved placement of a hundred sensors.
+In this example, we walk through the sorts of analyses a modeler might conduct in order to select an experimental design through simulation and show a significant improvement in the accuracy of the MUD point.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ODE Example Revisited}
-\subsubsection{Impact of Equipment Precision}
 
-To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
-Rather than a tolerance of one decimal place, we consider choices of $\tau = 0.1, 0.05, 0.01, 0.005, \text{ and } 0.001$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.
-In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Different Measurement Equipment}
 
+One way by which modelers can improve the quality of parameter estimates is by collecting more data in a given experiment.
+We consider the same problem as in the previous section to address the following question: what would happen if our measurement equipment were able to capture twice as many observations?
+Instead of using equipment that operates at $100$Hz, we take $200$ measurements every second, resulting in 400 equispaced observations for $t \in (1,3)$.
+All other choices involved in the experiment (assumed equipment tolerance, number of trials, parameter samples), are kept the same.
+We refer to this setup wit faster measurement equipment as the ``alternative'' design.
+
+We solve the problem for the same choices of $S$ (with the addition of $S=400$), and show the resulting error plots for convergence in the right half of Figures~\ref{fig:ode-convergence-obs} and \ref{fig:ode-convergence-std}.
+We show the resulting predictions for the signal using MUD points from twenty repeated trials in Figure~\ref{fig:ode-alt-reference}.
+There, we see that the predicted signals incorporating the same number of measurements look indistinguishable for $S=20$ compared to those in Figure~\ref{fig:ode-reference} [TK - previous chapter reference broken].
+
+\begin{figure}[htbp]
+  \includegraphics[width=\linewidth]{figures/ode/ode-alt_20_reference_solution}
+  % \includegraphics[width=\linewidth]{figures/ode/ode-alt_40_reference_solution}
+  \includegraphics[width=\linewidth]{figures/ode/ode-alt_400_reference_solution}
+  \caption{The associated signals for the alternative measurement equipment that operates at twice the frequency.
+  The true signal is well-recovered.
+  (Top): First twenty-five measurements.
+  (Bottom): The entire observation window is used to solve the problem. Most of the twenty trials appear to identify the same point $\param_i$ ($1\leq i \leq N$), in the sampled parameter set.
+  }
+  \label{fig:ode-alt-reference}
+\end{figure}
+
+
+The convergence rates appear to be the same and reduction in uncertainty is almost negligible.
+However, we note that in the alternative setup, for an equal number of measurements, the time elapsed is half of that in the original.
+This implies that we can achieve similar results with a shorter observational window by using equipment that allows for faster observations.
+
+We have shown that the Data--Consistent approach to solving parameter identification problems manages to generalize to problems involving time-series data from a single Quantity of Interest.
+We now turn our attention to an example where instead of temporal measurements, we incorporate spatial ones to solve another parameter identification problem.
 
 
 \begin{figure}[htbp]
@@ -36,8 +64,19 @@ In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and 
   }
   \label{fig:ode-convergence-obs}
 \end{figure}
-We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ measurements and study the error in our estimate of $\param_\text{ref}$.
-In the top half of Figure~\ref{fig:ode-convergence-obs}, we can observe that as more measurements are incorporated to the solution of the inverse problem, both precision and accuracy are improved.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Impact of Equipment Precision}
+We expect that a method designed to address parameter estimation would see an improvement in accuracy  if the data is collected with more precise instruments.
+
+To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
+Here we show that this is indeed the case for the time-series example introduced earlier by considering choices of $\tau = 0.1, 0.05, 0.01, \text{ and } 0.005$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.
+We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ measurements and study the error in our estimate of $\lam_true$.
 
 
 
@@ -46,48 +85,15 @@ In the top half of Figure~\ref{fig:ode-convergence-obs}, we can observe that as 
   \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_mean}
   \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_std_var}
 
-  \caption{Convergence of the MUD point given $N=1E4$ model evaluations for different precision of observations for randomly placed sensors, incorporating $S=25$ measurements.
-  As more exact measurements are incorporated, the accuracy and precision of the MUD solution improves, convergence rates are estimated with regression, and appear to be unaffected .
+  \caption{Convergence of the MUD point given $N=1E4$ model evaluations incorporating measurements at a given point in time.
+  As more precise measurements are incorporated, the accuracy and precision of the MUD solution improves.
   }
   \label{fig:ode-convergence-std}
 \end{figure}
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Different Measurement Equipment}
-
-We consider the same problem as in the previous section to address the following question: what would happen if our measurement equipment were able to capture twice as many observations?
-Instead of using equipment that operates at $100$Hz, we take $200$ measurements every second, resulting in 400 equispaced observations for $t \in (1,3)$.
-All other choices involved in the experiment (assumed equipment tolerance, number of trials, parameter samples) are kept the same.
-
-\begin{figure}[htbp]
-  \includegraphics[width=\linewidth]{figures/ode/ode-alt_20_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode-alt_40_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode-alt_400_reference_solution}
-  \caption{The associated signals for the alternative measurement equipment that operates at twice the frequency.
-  The true signal is well-recovered.
-  (Top): First twenty-five measurements.
-  (Middle): Observations made over the same time interval as in the top half of Figure~\ref{fig:ode-reference}, corresponding to $S=50$.
-  (Bottom): The entire observation window is used to solve the problem. Most of the twenty trials appear to identify the same point $\param_i$ ($1\leq i \leq N$), in the sampled parameter set.
-  }
-  \label{fig:ode-alt-reference}
-\end{figure}
-First, we note that in Figure~\ref{fig:ode-alt-reference} the predicted signals incorporating the same number of measurements look indistinguishable for $S=25$ compared to those in Figure~\ref{fig:ode-reference}.
-
-
-
-We solve the problem for the same choices of $S$ (with the addition of $S=400$, and show the resulting error plots for convergence in the right half of Figures~\ref{fig:ode-convergence-obs} and \ref{fig:ode-convergence-std}.
-The convergence rates appear to be the same and reduction in uncertainty is almost negligible.
-However, we note that in the alternative setup, for an equal number of measurements, the time elapsed is half of that in the original.
-This implies that we can achieve similar results with a shorter observational window by using equipment that allows for faster observations.
-
-We have shown that the Data--Consistent approach to solving parameter identification problems manages to generalize to problems involving time-series data from a single Quantity of Interest.
-We now turn our attention to an example where instead of temporal measurements, we incorporate spatial ones to solve another parameter identification problem.
-% \vfill
-% \pagebreak
+In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise, for both experimental designs.
+We find only minor differences between the measurement equipment at a fixed point in time (observational window) as a function of how precise that equipment is.
+The alternative design is ever-so-slightly more accurate on average, but the convergence rates appear to be identical.
 
 
 
