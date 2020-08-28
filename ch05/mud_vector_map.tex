@@ -282,8 +282,8 @@ Another possible improvement would be to incorporate the correlation structure t
 
 \begin{figure}[htbp]
 \centering
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5-alt_m100}
-  \includegraphics[width=0.9\linewidth]{figures/pde-highd/pde-highd-alt_comp_exmud_D5_m100}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5-alt_m100.png}
+  \includegraphics[width=0.9\linewidth]{figures/pde-highd/pde-highd-alt_comp_exmud_D5_m100.png}
 \caption{
 100 measurements for the revised five--dimensional problem yield substantially better estimates in the eyeball norm.
 }
@@ -299,13 +299,21 @@ To the extent to which they fail to adequately to do is due to the insufficient 
 
 Once again, we repeat the experiment twenty times to better understand the differences in the solutions relative to possible noise that polluted our measurements.
 We are able to notice some interesting patterns by looking at the curves on the left side of Figure~\ref{fig:pde-highd-5d-alt-mud}.
-First, we note that going from scalar-- to vector--valued resolves a significant amount of uncertainty in $\lambda_2$, $\lambda_3$, and $\lambda_4$, namely thi QoI map appears to stop considering curves which do not have a sufficiently low minimum value.
+First, we note that going from scalar-- to vector--valued resolves a significant amount of uncertainty in $\lambda_2$, $\lambda_3$, and $\lambda_4$, namely the QoI map appears to stop considering curves which do not have a sufficiently low minimum value.
 Second, while the vector--valued MUD solution curves appear to capture the general characteristics of $g$ well, a number of them under-estimated the value at $\lambda_5$ quite severely relative to the true value (near zero), which we saw in Figure~\ref{fig:pde-highd-5d-mud} as well.
 
 \begin{figure}[htbp]
 \centering
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m100}
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-5_m100}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m20.png}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-5_m20.png}
+\caption{Compared to before, we're doing much better, even with less data incorporated into our QoI maps.}
+\label{fig:pde-highd-5d-alt-mud-20}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m100.png}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-5_m100.png}
 \caption{
 (Top): Scalar-valued solutions for alternative approach to the five-dimensional problem.
 (Bottom): Vector-valued solutions.
