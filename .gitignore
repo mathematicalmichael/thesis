@@ -19,7 +19,6 @@ examples/*/*.png
 examples/*.gif
 *.synctex(busy)
 *.synctex
-figures/res*data
 *.pdf
 figures/trash
-*.pkl
+*.xml
