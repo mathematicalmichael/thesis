@@ -36,15 +36,15 @@ solve_varying_samples(){
 
   NUM_SAMPLES=100
   solve $@
-  mv t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv *N$NUM_SAMPLES* $FOLDER_NAME
 
   NUM_SAMPLES=1000
   solve $@
-  mv t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv *N$NUM_SAMPLES* $FOLDER_NAME
 
   NUM_SAMPLES=10000
   solve $@
-  mv t*N$NUM_SAMPLES* $FOLDER_NAME
+  mv *N$NUM_SAMPLES* $FOLDER_NAME
 }
 
 MODEL='skew'

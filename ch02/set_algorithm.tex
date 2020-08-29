@@ -28,7 +28,7 @@ Choose a discretization partition $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ of $\dsp
  \caption{Numerical Approximation of the Inverse Density}
  \label{alg:inv_density}
 \end{algorithm}
-\FloatBarrier
+
 
 The first two stages correspond to formulating the discretized version of the SIP given in step (S1) in Fig.~\ref{fig:scheme}.
 We first discretize the probability space $\Ospace$.
@@ -55,5 +55,3 @@ This results in an approximate probability measure, denoted by $\PP_{\pspace, \n
 Note that Algorithm~\ref{alg:inv_density} makes no mention of the method by which the samples $\set{ \param^{(\iparam)} }_{\iparam=1}^{\nsamps}$ were generated or sets in $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ are chosen.
 $\set{ \param^{(\iparam)} }_{\iparam=1}^{\nsamps}$ may be generated using uniform random sampling, latin hypercube sampling, or even regular grids.
 A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ below.
-
-\vfill

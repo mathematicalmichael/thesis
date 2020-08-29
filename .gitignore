@@ -12,9 +12,13 @@ dissertation.pdf
 *.log
 *.out
 *.toc
-*.swp
-*.swo
+*.sw[pokl]
 .DS_Store
 __pycache__/
 examples/*/*.png
 examples/*.gif
+*.synctex(busy)
+*.synctex
+*.pdf
+figures/trash
+*.xml

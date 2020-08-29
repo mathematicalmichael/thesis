@@ -2,5 +2,3 @@
 IMAGE_NAME=python:thesis
 COMMAND=python
 docker run --rm -i -v $(pwd):/temp -w /temp $IMAGE_NAME $COMMAND "$@"
-# mounting to /tmp to purposefully avoid hard-coding paths in scripts
-# if you have paths like /home/username/..., your code will fail

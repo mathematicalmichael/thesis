@@ -1,1 +1,19 @@
 \subsection{Numerical Approximation and Analysis}\label{sec:sample-approx}
+
+We saw in the earlier section that the source of error for the set based approach involved mis-estimation of the support of contour events in the parameter space. ￼
+
+The stability results in section demonstrates the sensitivity of the sample based approach to errors in specifications of the initial, observed, and the push forward densities.
+The latter requires construction through approximation, and is the primary contribution of errors in the updated density.
+From the perspective of modelers, there is no correct choice of initial, only ones which are unsuitable for satisfying the predictability assumption.
+That means that the effort is invested in characterizing the predicted distribution will have the greatest impact on the accuracy of the updated density.
+
+There is no one method which is suitable for arbitrary choices of dimension and distribution.
+However the literature on density estimation points to kernel density estimation as one of the most popular and practical methods to implement.
+A kernel in this context refers to a choice of a distribution which is used to assign probabilities to samples.
+Any new point can then be assigned probability by evaluating its likelihood against each distribution and averaging all of them.
+It has a strong dependence on the number of samples used and the dimension which the approximation is taking place.
+
+We demonstrate that the sources of error involved in the sample based approach lead to a trade off wherein the contours are defined on top of correct support sets but there may be inconsistency in the probabilities along the contour's direction, something that the specification of an ansatz (after the sets are constructed), prevents from occurring.
+
+In some sense it becomes a problem of deciding what is more important to the specific use case.
+Is it more of a problem to assign positive probability to points which should have been identified as not possible, or to assign incorrect probabilities to points belonging to the same equivalence class?

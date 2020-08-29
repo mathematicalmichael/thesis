@@ -5,11 +5,11 @@ However, the results hold for any attempt to approximate densities defined on se
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
 
-\input{ch03/impact}
+\input{ch03/impact.tex}
 
 \section{Skewness and Information Content}\label{sec:skewness}
 In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
-In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$. 
+In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$.
 An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\pmeas$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy is proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
 This is a version of the so-called curse-of-dimension for the explicit approach.
 
@@ -24,7 +24,7 @@ S_\qoi(J_{\param,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
 \label{eq:skewness}
 \end{equation}
 
-We define the \textbf{local skewness} of a map $\qoi$ at a point $\pspace$ as 
+We define the \textbf{local skewness} of a map $\qoi$ at a point $\pspace$ as
 \begin{equation}
 S_\qoi(\param) := \max_{1\leq k \leq d} S_\qoi(J_{\param,Q}, \bf{j}_k).
 \label{eq:localskewness}
@@ -39,7 +39,7 @@ The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined 
 \end{equation}
 \end{defn}
 
-In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition of the Jacobian $J_{\param,Q}$. 
+In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition of the Jacobian $J_{\param,Q}$.
 In general, we approximate $\overline{S_Q}$ with Monte-Carlo approximations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,7 +53,7 @@ Consider the following family of linear maps:
 \begin{equation}\label{eq:qmap2}
 \left \lbrace \qoi^{(s)} =  \mat{cc}{1 & 0 \\ \sqrt{s^2 - 1}& 1 } \right \rbrace_{s\in S},
 \end{equation}
-for $S=\set{1,2,4}$. These maps are designed to control the global skewness (since it is equal to local skewness in a linear map), while preserving the measures of sets between $\pspace$ and $\dspace$. 
+for $S=\set{1,2,4}$. These maps are designed to control the global skewness (since it is equal to local skewness in a linear map), while preserving the measures of sets between $\pspace$ and $\dspace$.
 More specifically, the support of $\updatedP$ associated with each QoI map using uniform observed measures have equal $\pmeas$-measure, which isolates the impact of accuracy solely to the skewness of the QoI map.
 
 The skewness of these maps is given by the index $s$, so $\qoi^{(1)}$ is $1$, the skewness of $\qoi^{(2)}$ is $2$, and $S_{\qoi^{(4)}} = 4$.
@@ -88,15 +88,15 @@ $6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
 \label{fig:skew}
 \end{figure}
 
-It is evident in Figure~\ref{fig:skew} that skewness has a direct impact on the number of samples required to achieve a given accuracy. 
-We see that the measure induced by $\qoi^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $\qoi^{(2)}$ does. 
+It is evident in Figure~\ref{fig:skew} that skewness has a direct impact on the number of samples required to achieve a given accuracy.
+We see that the measure induced by $\qoi^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $\qoi^{(2)}$ does.
 The effect is even more pronounced when compared against $\qoi^{(4)}$.
 
 This provided a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}, where it is demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\pmeas$-measure of the {\em symmetric difference} of the inverse sets.
 
 \end{ex}
 
-The example above motivates a number of research directions involving how to resolve approximation errors. 
+The example above motivates a number of research directions involving how to resolve approximation errors.
 How the Data Consistent Inversion framework handles the skewness in QoI maps is unclear and requires numerical studies to investigate, which we perform herein [TK - cite where].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,20 +155,9 @@ The analysis of this problem differs significantly from the ones in (cite: butle
 By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
 
 
-\subsection{Convergence with Repeated Observations}
-2D but with repeated data, show how the measures converge. Should be identical to the differences in the observed densities (in metric).
-use linear maps here
+\input{ch03/heatrod.tex}
+\FloatBarrier
 
-\subsection{Nonlinear Example}
-Maybe heatrod here?
-
+\input{ch03/decay.tex}
+\FloatBarrier
 %%%%%%%%%%%%%%
-
-Pick an ODE problem and show how the results look like (assimilating as many data points as inputs, if using time-series model).
-
-Our goal in this section is to provide a set of examples that demonstrate these two approaches, their ``solutions.''
-Exponential Decay, uncertain initial condition and rate. Fix two measurement times. No OED discussion.
-
-
-This is going to set up the stage nicely.
-What if we had more measurements to incorporate? Discuss how the distributions we imposed as our observed were kind of a little disingenuous since they were based on single measurements. Well, rather, they represent the answer to a different question.

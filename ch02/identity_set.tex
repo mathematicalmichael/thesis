@@ -73,7 +73,7 @@ plot_2d_comparison(xi, yi, disc_1, disc_2,
 
 \begin{figure}[ht]
 \begin{minipage}{.975\textwidth}
-  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N100_N100-vs-M4-N100_N100.pdf}
+  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N100_N100-vs-M4-N100_N100.png}
 \end{minipage}
 \caption{
 $\nsamps=100$ were used to discretize $\pspace$ and $\ndiscs=1, 4$ (left/right) were used to discretize $\dspace$.
@@ -96,8 +96,8 @@ With $\nsamps = 1000$, there are usually still significant differences in the sy
 Below, we demonstrate the use of more samples to resolve the geometry of the desired set.
 \begin{figure}[ht]
 \begin{minipage}{.975\textwidth}
-  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N1000_N1000-vs-M4-N1000_N1000.pdf}
-  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N10000_N10000-vs-M4-N10000_N10000.pdf}
+  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N1000_N1000-vs-M4-N1000_N1000.png}
+  \includegraphics[width=\linewidth]{./examples/identity/set/M1-N10000_N10000-vs-M4-N10000_N10000.png}
 \end{minipage}
 \caption{
 (Top):$\nsamps=1,000$ were used to discretize $\pspace$ and $\ndiscs=1, 4$ (left/right) were used to discretize $\dspace$.
@@ -105,7 +105,7 @@ Below, we demonstrate the use of more samples to resolve the geometry of the des
 }
 \label{fig:ex:identity_set_1E3_1E4}
 \end{figure}
-\FloatBarrier
+
 
 We remark on the fact that in this particular situation, $\ndiscs = 1$ is a ``correct'' choice for the probability measure chosen, and $\ndiscs = 4$ actually introduces errors.
 The reason that the latter solutions have different values inside of the support of $\PPspace$

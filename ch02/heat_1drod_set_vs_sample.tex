@@ -1,6 +1,5 @@
 \subsection{1D Heat Rod}\label{ex:heat-set-sample}
-%Here we present a nonlinear example to demonstrate that the general trend of the previous results also holds.
-%Some nuanced differences do arise, however, and we address them after the problem statement.
+
 Consider the one-dimensional heat equation with homogeneous Neumann boundary conditions on the unit interval:
 
 \begin{equation}
@@ -23,66 +22,13 @@ Here, we interpret the following problem as heating the middle of an infinitesim
 The rod is subdivided in two, and each half has an uncertain thermal diffusivity $\kappa \in [0.01, 0.2]$.
 This yields a two-dimensional parameter space $\param = (\param_1, \param_2) \in [0.01, 0.2]\times [0.01, 0.2]$, where $\param_1$ represents the thermal diffusion on the left-half and $\param_2$ is the $\kappa$ for the right half.
 
-The quantities of interest we study are four point-evaluations of the state variable, at spatial location 0.25, 0.51, 0.67, and 0.98 along the rod.
-Choosing any pair of them for the inversion yields six possible quantities of interest maps.
-As before, we demonstrate that some choices appear to have advantages over others.
-
-From the prior examples, we would suspect that choosing the QoI map with lower skewness results in lower Hellinger distances.
-However in the earlier experiments we utilized maps that inverted into sets of identical size, which is not the case in this nonlinear example; each QoI map scales sets differently depending on the location in the parameter space.
-To isolate this scaling effect, we attempt to compare QoIs that invert into sets of similar size \emph{on average} but have differing average skewness.
-
-This is what motivated our specific choice of spatial locations at which to measure the state variable $T$.
-Our first QoI $\qoiA$ uses measurements at 0.25 and 0.51, and has average skewness of 1.08, and our second $\qoiB$ uses measurements at 0.67 and 0.98, with average skewness 1.56.
-While we would have liked to use a map with average skewness of 2 for a more similar comparison to the prior examples, this was the best range we could find where the maps inverted into sets of comparable size on average\footnote{average local scaling is 1.99 versus 2.19}.
-
-Owing to the nonlinearity of the problem, the Hellinger distances between reference and estimated probability measures now have an inherent dependence on the location of the point $\param$ in the parameter space.
-We ran the simulations for a regular $3\times3$ grid exploring the interior of the parameter space and present a selection of two reference points that illustrate the differences in the nonlinear case.
-
-In the two-dimensional data spaces $\dspaceA$ and $\dspaceB$, our uncertainty is a uniform box centered at $\qoiA(\paramref)$ with side-lengths of 0.1.
-When $\paramref$ is the bottom-left corner of our $3\times3$ grid, the two maps produce very different results, with $\qoiA$ outperforming $\qoiB$ in a similar manner as we saw in the linear examples (see Fig.~\ref{fig:NLbotleft}).
-When $\param_{\text{ref}}$ is in the upper-center of the grid, the inverse images are similar, as shown in Fig.~\ref{fig:NLtopmid}, and so which map to use for inversion into this part of the parameter spaces is not a clear choice. We might even be tempted to use the more-skewed (on average) map since it inverts into a set with smaller support.
-
-%
-%\begin{figure}[h]
-%\begin{minipage}{.475\textwidth}
-%\includegraphics[width=\linewidth]{./images/pt0Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-%\end{minipage}
-%\begin{minipage}{.475\textwidth}
-%\includegraphics[width=\linewidth]{./images/pt5Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-%\end{minipage}
-%\caption{Comparison of the differences in Hellinger distances for the two maps and two reference points. The results for the bottom-left reference value is shown on the left and the top-center is shown on the right.}
-%\label{fig:NLHD}
-%\end{figure}
-%
-%The Hellinger distance plots for these two reference values are compared in Fig.~\ref{fig:NLHD}.
-%Of the nine reference $\param$'s we studied, $\qoiA$ yielded no considerable advantage in terms of the number of samples required to approximate the inverse images in three cases (the plots were similar to that in the right of Fig.~\ref{fig:NLHD}).
-%In three cases, $\qoiA$ performed just a bit better than $\qoiB$, (somewhere between the two figures in Fig.~\ref{fig:NLHD}).
-%In two cases, $\qoiA$ performed better than  $\qoiB$, as in the left of Fig.~\ref{fig:NLHD}.
-%In one case (with $\param$ in the bottom right corner), the difference was even more dramatic ($\qoiA$ yielded similar Hellinger distances with less than a fourth the samples).
-%
 \begin{figure}[h]
 \begin{minipage}{.475\textwidth}
-\includegraphics[width=\linewidth]{./images/refheat_pt0Q1_M1N40000_2D_0_1}
+\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N50_em.png}
 \end{minipage}
 \begin{minipage}{.475\textwidth}
-\includegraphics[width=\linewidth]{./images/refheat_pt0Q2_M1N40000_2D_0_1}
+\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N50_mc.png}
 \end{minipage}
-\caption{The inverse image of the reference measure for $\qoiA$ (left) and $\qoiB$ (right). The latter is visually quite a bit more skewed }
-\label{fig:NLbotleft}
+\caption{The inverse image of the reference measure for set-based (left) and sample-based (right) solutions for $N=50$ parameter samples.}
+\label{fig:heatrod-sol-ex}
 \end{figure}
-
-\begin{figure}[h]
-\begin{minipage}{.475\textwidth}
-\includegraphics[width=\linewidth]{./images/refheat_pt5Q1_M1N40000_2D_0_1}
-\end{minipage}
-\begin{minipage}{.475\textwidth}
-\includegraphics[width=\linewidth]{./images/refheat_pt5Q2_M1N40000_2D_0_1}
-\end{minipage}
-\caption{The inverse image of the reference measure for $\qoiA$ (left) and $\qoiB$ (right). Here, the local skewnesses are similar, so we do not expect to see much of a difference in the Hellinger distances.}
-\label{fig:NLtopmid}
-\end{figure}
-
-With these nonlinear cases, we find that taking an ``on average'' approach is inefficient, as there can be dramatic differences in the geometric properties of the inverse images in the parameter space depending on the location.
-These results motivate further study into utilizing different QoI maps (perhaps some of those other four combinations available to us in this example) depending on where the samples came from in the parameter space.
-In general, we saw in this example that given that two maps invert into sets of similar size on average, using the one with lower skewness results in less samples required to accurately approximate the inverse image.
-The maps we used had average skewnesses that differed by 0.5 (instead of by 1), and the trend from the linear examples still held in significant portions of the parameter space.
