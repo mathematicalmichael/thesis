@@ -1,5 +1,5 @@
 DATA=res1u.pkl res2u.pkl res5u.pkl
-DEPS:=mud_problem.py convergence.py experiments.py plotting.py
+DEPS:=mud_problem.py convergence.py experiments.py plotting.py newpoisson.py
 
 # n is number of trials (repeatitions of experiment to avg out results)
 # r stands for proportion of time elapsed
