@@ -40,7 +40,7 @@ def load_poisson(sensors, l):
     num_samples = len(l)
     print(f"Loaded {num_samples} evaluations of parameter space.")
     
-    mesh = RectangleMesh(Point(0,0), Point(1,1), 32, 32)
+    mesh = RectangleMesh(Point(0,0), Point(1,1), 36, 36)
     V = FunctionSpace(mesh, 'Lagrange',1)
 
     qoi = []
