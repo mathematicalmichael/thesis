@@ -85,9 +85,9 @@ def poisson(gamma, mesh=None, nx=36, ny=36, width=1):
     # Define boundary condition
     u0 = fin.Constant(0.0)
     if isinstance(gamma, int) or isinstance(gamma, float): # 1-D case
-        # u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma, kappa=0.0, degree=2)
+        u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma, kappa=0.0, degree=2)
         # the function below will have a min at (2/7, -gamma) by design (scaling factor chosen via calculus)
-        u_L = fin.Expression(f"pow(x[1], 2) * pow(x[1] - 1, 5) * gamma", gamma=gamma*823543/12500, degree=3)
+#         u_L = fin.Expression(f"pow(x[1], 2) * pow(x[1] - 1, 5) * gamma", gamma=gamma*823543/12500, degree=3)
     elif len(gamma) == 1:
         u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma[0], kappa=0.0, degree=2)
     else: # Higher-D case

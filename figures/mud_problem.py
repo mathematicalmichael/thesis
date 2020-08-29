@@ -1,6 +1,6 @@
 import numpy as np
 
-# from mud import full_functional, norm_input, norm_data, norm_predicted,  
+# from mud import full_functional, norm_input, norm_data, norm_predicted,
 from mud.plot import make_2d_unit_mesh
 from mud.util import std_from_equipment
 
@@ -24,7 +24,7 @@ def generate_sensors_pde(num_measure, xmin=0.05, ymin=0.05, xmax=0.95, ymax=0.95
 def load_poisson(sensors, l, nx=36, ny=36):
     num_samples = len(l)
     print(f"Loaded {num_samples} evaluations of parameter space.")
-    
+
     mesh = RectangleMesh(Point(0,0), Point(1,1), nx, ny)
     V = FunctionSpace(mesh, 'Lagrange', 1)
 
@@ -43,7 +43,7 @@ def load_poisson(sensors, l, nx=36, ny=36):
           'Input', lam.shape,
           'Measurements', sensors.shape,
           'Num Input Samples', num_samples) # check shapes correct
-    
+
     return lam, qoi
 
 
@@ -57,13 +57,13 @@ def main_pde(model_list, num_trials=5,
     print(f"Will run simulations for S={measurements}")
     res = []
     num_measure = max(measurements)
-    
+
     sd_vals     = [ std_from_equipment(tolerance=tol, probability=0.99) for tol in tolerances ]
     sigma       = sd_vals[-1] # sorted, pick largest
     for _prefix in [ 'pde', 'pde-alt']:
         print(f"Example: {_prefix}")
         if _prefix == 'pde-alt':
-            sensors = generate_sensors_pde(num_measure, ymax=0.5, xmax=0.25)
+            sensors = generate_sensors_pde(num_measure, ymax=0.95, xmax=0.25)
         else:
             sensors = generate_sensors_pde(num_measure, ymax=0.95, xmax=0.95)
 
@@ -142,18 +142,18 @@ def main_ode(num_trials,
             sensors = generate_sensors_ode(measurement_hertz=200, start_time=t_min, end_time=t_max)
         else:
             sensors = generate_sensors_ode(measurement_hertz=100, start_time=t_min, end_time=t_max)
-        
+
         measurements = [ int(np.floor(len(sensors)*r)) for r in time_ratios ]
         print(f"Measurements: {measurements}")
 #         times        = [ sensors[m-1] for m in measurements ]
         num_measure = max(measurements)
-        
+
         model    = makeDecayModel(sensors, lam_true)
         qoi_true = model() # no args evaluates true param
         np.random.seed(seed)
         lam = np.random.rand(int(1E4)).reshape(-1,1)
         qoi = model(lam)
-        
+
         def mud_wrapper(num_obs, sd):
             return mud_problem(domain=domain, lam=lam, qoi=qoi, sd=sd, qoi_true=qoi_true, num_obs=num_obs)
 
@@ -202,7 +202,7 @@ if __name__ == "__main__":
     desc = """
         Examples
         """
-    
+
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('-p', '--prefix',        default='pde', type=str)
     parser.add_argument('-m', '--num-measure',   default=[],  action='append')
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     parser.add_argument('--save', action='store_true')
     args = parser.parse_args()
     np.random.seed(args.seed)
-    
+
     prefix       = args.prefix
     num_trials   = args.num_trials
     fsize        = args.fsize
@@ -273,8 +273,8 @@ if __name__ == "__main__":
                                                           title=f"Variance of MUD Error\nfor t={1+2*np.median(time_ratios):1.3f}s",
                                                           test=test)
     ##########
-    
-    
+
+
     if args.save:
         import pickle
         pickle.dump('results.pkl', res)
