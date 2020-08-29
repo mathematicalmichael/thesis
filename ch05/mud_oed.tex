@@ -15,7 +15,6 @@ In this example, we walk through the sorts of analyses a modeler might conduct i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ODE Example Revisited}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,10 +34,10 @@ There, we see that the predicted signals incorporating the same number of measur
   \includegraphics[width=\linewidth]{figures/ode/ode-alt_20_reference_solution}
   % \includegraphics[width=\linewidth]{figures/ode/ode-alt_40_reference_solution}
   \includegraphics[width=\linewidth]{figures/ode/ode-alt_400_reference_solution}
-  \caption{The associated signals for the alternative measurement equipment that operates at twice the frequency.
+  \caption{The associated signals for the measurement equipment that operates at twice the frequency.
   The true signal is well-recovered.
-  (Top): First twenty-five measurements.
-  (Bottom): The entire observation window is used to solve the problem. Most of the twenty trials appear to identify the same point $\param_i$ ($1\leq i \leq N$), in the sampled parameter set.
+  (Top): First twenty measurements.
+  (Bottom): The entire value $\param_i$ ($1\leq i \leq N$), in the sampled parameter set.
   }
   \label{fig:ode-alt-reference}
 \end{figure}
@@ -76,7 +75,7 @@ We expect that a method designed to address parameter estimation would see an im
 
 To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
 Here we show that this is indeed the case for the time-series example introduced earlier by considering choices of $\tau = 0.1, 0.05, 0.01, \text{ and } 0.005$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.
-We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ measurements and study the error in our estimate of $\lam_true$.
+We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ measurements and study the error in our estimate of $\paramref$.
 
 
 
@@ -104,7 +103,7 @@ The alternative design is ever-so-slightly more accurate on average, but the con
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elliptic PDE Example}\label{subsec:pde-example}
 
-Consider the following Poisson problem defined on a unit domain:
+Consider the following Poisson problem defined on a unit domain $\Omega$:
 \begin{equation}\label{eq:pde-equation}
 \begin{cases}
 \hfill -\nabla \cdot \nabla u &= f \quad\text{on } \Omega \\
@@ -116,7 +115,7 @@ Consider the following Poisson problem defined on a unit domain:
 where $(x_1, x_2) \in \Omega = (0,1)^2$, $\Gamma_T$ is the top, $\Gamma_B$ is the bottom, $\Gamma_L$ and $\Gamma_R$ left and right, respectively.
 $\frac{\partial u}{\partial \mathbf{n}}$ denotes the outward normal direction.
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
   \includegraphics[width=0.475\linewidth]{figures/pde/pde_reference_solution}
   \includegraphics[width=0.475\linewidth]{figures/pde/pde-alt_reference_solution}
@@ -133,10 +132,11 @@ Our initial density is chosen to be uniform over the interval $\Lambda = (1,5)$.
 $f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$
 
 
-
+We are interested in demonstrating the impact of incorporating more measurements on our ability to estimate $\paramref$.
+This poses a problem for this particular experimental design since it will heavily rely on the way in which the sensor grid is indexed.
 One could place a regular grid of sensors in the interior of $\Omega$ to simulate a sensor array of some sort.
-However, observe that the response surfaces shown in Figure~\ref{fig:pde-ref-solution} exhibit vertical symmetry about the line $x_1=0.5$ (as a result of our choice of $g$).
-We are interested in demonstrating the impact of incorporating more measurements, which poses a problem for this particular experimental design since it will heavily rely on the way in which the sensor grid is indexed.
+However, observe that the response surfaces shown in Figure~\ref{fig:pde-ref-solution} exhibit vertical symmetry about the line $x_2=0.5$ (as a result of our choice of $g$).
+
 
 For example, if the first half of indexed sensors corresponded to the bottom half of $\Omega$, the incorporation of the second half will be equivalent to having repeated observations.
 Moreover, since the left-side of $\Omega$ is more sensitive to changes in $\param$ than the right, indexing in a serpentine manner will lead to sharper declines in uncertainty whenever a sensor from a different row gets incorporated.
@@ -146,26 +146,24 @@ To avoid these problems, we instead simulate the sensors as being placed randoml
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Uninformed Sensor Placement}
 
-Returning to the PDE example from [TK - ch4 section 6], recall that there we had the following experimental setup:
+Returning to the PDE example from [TK - ch4 section 6], recall that there we had the following experimental setup, which we use here as well:
 We consider a selection of $S=1000$ measurement locations in the interior of the response surface chosen by sampling a uniform density over the set $(0.05, 0.95)^2 \subset \Omega$.
-In Figure~\ref{fig:pde-sensitivity}, we plot the data generated by each simulated sensor location, and observe that some measurements are more sensitive in others.
-The majority of measurements exhibit almost no sensitivity to changes in $\param$, visually represented by near-horizontal lines.
-However, some of the sensors have steep slopes, indicating higher sensitivity to the unknown parameter.
-To generate convergence plots, we use all thousand available measurements but solve the problem repeatedly for $S = 5, 10, 15, 20, 25, 50, 100, 250, 500, \text{ and } 1000$.
+In Figure~\ref{fig:pde-sensitivity}, we plot the data generated by each simulated sensor location, and observe that some measurements are more sensitive than others.
+The majority of measurements exhibit almost no sensitivity to changes in $\param$, visually represented by the density of nearly horizontal lines.
+However, some of the sensors have steep slopes, which indicates higher sensitivity to changes in $\param$.
 
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
   \includegraphics[width=0.35\linewidth]{figures/pde/pde_sensitivity_qoi}
   \includegraphics[width=0.6\linewidth]{figures/pde/pde_qoi_response}
   \includegraphics[width=0.35\linewidth]{figures/pde/pde-alt_sensitivity_qoi}
   \includegraphics[width=0.6\linewidth]{figures/pde/pde-alt_qoi_response}
-  \caption{We plot the values of the response surface evaluated at all $S=1000$ random measurement locations.
-  The histogram depicts the measurement values of the response surface evaluated at the true parameter value $\param_\text{ref}=3$.
-  (Left): Sensitivity of measurements as a function of $\param$, the scaling for the left boundary condition function.
-  (Right): Since the response at each measurement location is linear with respect to $\param$, we compute the slopes for all $S=1000$ sensors and show the associated histogram.
-  (Top): Uninformed sensor placement. Observe that most locations are insensitive to changes in $\param$. The ratio of most to least sensitive slopes exceeds 50.
-  (Bottom): Informed sensor placement. The informed sensors have much less variability in their respective sensitivities (ratio closer to 10).
+  \caption{Sensitivity of measurements as a function of $\param$, the scaling for the left boundary condition function.
+  We plot the values of the response surface evaluated at all $S=1000$ random measurement locations.
+  Since the response at each measurement location is linear with respect to $\param$, we can compute the slopes for all $S=1000$ sensors and show the associated histogram (left).
+  (Top): Uninformed sensor placement. Observe that most locations are insensitive to changes in $\param$.
+  (Bottom): Informed sensor placement. The informed sensors have much less variability in their respective sensitivities.
   }
 \label{fig:pde-sensitivity}
 \end{figure}
@@ -173,14 +171,15 @@ To generate convergence plots, we use all thousand available measurements but so
 
 
 We are interested in knowing how the uncertainty around the parameter estimate (the MUD point) changes as we incorporate more (noisy) data.
-Consider the plots in the left-half of Figure~\ref{fig:pde-convergence-obs}, which demonstrates the impact of increasing $S$ on our ability to resolve $\param_\text{ref}$.
+Consider the plots in the left-half of Figure~\ref{fig:pde-convergence-obs}, which demonstrates the impact of increasing $S$ on our ability to resolve $\paramref$.
+To generate convergence plots, we use all thousand available measurements but solve the problem repeatedly for $S = 5, 10, 15, 20, 25, 50, 100, 250, 500, \text{ and } 1000$.
+For visual clarity, we plot the first hundred sensors on plots which do not show convergence.
 
-
-\begin{figure}[htbp]
+\begin{figure}
   \centering
   \includegraphics[width=0.475\linewidth]{figures/pde/pde_convergence_mud_obs_mean}
   \includegraphics[width=0.475\linewidth]{figures/pde/pde_convergence_mud_obs_var}
-  \caption{Convergence of the MUD point (given $N=1E4$ model evaluations) for increasing numbers of observations for randomly placed sensors.
+  \caption{Convergence of the MUD point (given $N=1E3$ model evaluations) for increasing numbers of observations for randomly placed sensors.
   We observe similar rates of convergence for both arrangements of measurement locations, with a marked improvement in both accuracy and precision when an informed placement is used.
   }
   \label{fig:pde-convergence-obs}
@@ -188,7 +187,7 @@ Consider the plots in the left-half of Figure~\ref{fig:pde-convergence-obs}, whi
 
 
 Similar to \ref{fig:ode-convergence-std}, we demonstrate that using more sensitive measurement equipment improves the estimation of the MUD point.
-Again we consider choices of standard deviation associated with $\tau = 0.1, 0.05, 0.01, 0.005, \text{ and } 0.001$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$
+Again we consider choices of standard deviation associated with $\tau = 0.1, 0.05, 0.01, \text{ and } 0.005$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$.
 In Figure~\ref{fig:pde-convergence-std}, we study the impact of more precise measurement equipment on the absolute error's mean and variance.
 
 \begin{figure}[htbp]
@@ -203,15 +202,16 @@ In Figure~\ref{fig:pde-convergence-std}, we study the impact of more precise mea
 
 
 These results demonstrate that even randomly placed sensors in the interior of $\Omega$ are suitable for parameter estimation.
-Figure~\ref{fig:pde-ref-solution} shows the twenty most sensitive sensors appear by the left boundary of the domain; choosing sensors more carefully using this information could lead to improved accuracy with fewer sensors.
-Let us turn our attention to incroporating this observation into our experimental design chocies.
+Figure~\ref{fig:pde-ref-solution} highlights the twenty most sensitive sensors, which appear by the left boundary of the domain; choosing sensors more carefully using this information could lead to improved accuracy with fewer sensors.
+We now demonstrate how such an observation can be incorporated into our experimental design choices.
+
 
 \subsubsection{Informed Sensor Placement}
 Instead of placing sensors throughout the square interior of $\Omega$ given by $(0.05, 0.95)^2$, we briefly consider how the convergence results would change if the subdomain for sensors was better chosen to be near the left boundary.
 Furthermore, the response surface exhibits horizontal symmetry, so we restrict locations to the bottom half of $\Omega$.
 We perform the same experiment for sensors placed in $(0.05, 0.25)\times(0.05, 0.5)$ and show the results in
 
-We demonstrate the sensitivities of each sensor in the right half of Figure~\ref{fig:pde-sensitivity}, and note that there are fewer sensors twhich exhibit low sensitivity to changes in $\param$.
+We demonstrate the sensitivities of each sensor in the right half of Figure~\ref{fig:pde-sensitivity}, and note that there are fewer sensors which exhibit low sensitivity to changes in $\paramref$.
 It appears in the right half of Figure~\ref{fig:pde-convergence-obs}, that two decimal places of accuracy can be achieved with approximately $250$ samples instead of the $1000$ required in the left-half.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
