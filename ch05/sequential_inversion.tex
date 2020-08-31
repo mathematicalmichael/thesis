@@ -15,8 +15,8 @@ By choosing a dimension of 1, we can focus solely on the order in which QoIs are
 We also choose to use a linear map for convenience so that we can use the analytical solutions presented in the previous chapter without concern for approximation error.
 
 With each iteration in the sequence of inverse problems, we are in-effect trying to explain measurements that constitute a single QoI at the expense of accuracy in others.
-By contrast, the vector-valued approach seeks accuracy in all of the simultaneously.
-This trade off is all about convenience, since 1-dimensional problems are computationally ``cheap,'' we can iterate through many more of them for the same computational cost.
+By contrast, the vector-valued approach seeks accuracy in all of the directions of observations simultaneously.
+This trade off is all about efficiency, since 1-dimensional problems are computationally ``cheap,'' we can iterate through many more of them for the same computational cost.
 Since by the time we finish iterating through all available QoI, the error in $Q^{(1)}$ may have been allowed to drift quite significantly away from its solution contour through the sequence of inverting through $Q^{(1)}, Q^{(2)}, \dots Q^{(100)}$.
 To address this, we perform multiple passes through our set of QoI.
 Borrowing from other sequential algorithms, these ``epochs'' will allow us to iterate until the solution stops changing by some predefined relative threshold, representing a lack of ``learning'' through continued effort.
@@ -24,11 +24,12 @@ Borrowing from other sequential algorithms, these ``epochs'' will allow us to it
 
 \subsection{Motivating Linear Example}
 We study the following motivating two-dimensional example with QoI defined by ten equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
-We first plot the result of a single epoch in Fig.~\ref{fig:iterative-linear-demo}
+We first plot the result of a single epoch in the left panel of Fig.~\ref{fig:iterative-linear-demo}.
+
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch}
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch.png}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs.png}
 
   \caption{
   Dotted lines show the solution contours for each row of the operator $A$.
@@ -39,15 +40,16 @@ We first plot the result of a single epoch in Fig.~\ref{fig:iterative-linear-dem
 \end{figure}
 
 The spiral shape is a result of the underlying geometry of this QoI map defined by rotations. The successive rows are so similar to each other that very little is ``learned'' between each iteration; the projection doesn't cover a large distance in $\pspace$.
-To drive this point home, we choose two pairs of indices from among the ten available in order to define two QoI maps, the contours for which we plot in different colors in Fig.~\ref{fig:iterative-linear-demo-pair}.
+To further underscore this point, we choose two pairs of indices from among the ten available in order to define two QoI maps, the contours for which we plot in different colors in Fig.~\ref{fig:iterative-linear-demo-pair}.
 We solve a total of ten 1-D inverse problems for each of them (five epochs) to match the budget of the previous example (with ten maps and one epoch).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs-pair}
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs-pair-alt}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs-pair.png}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-fewepochs-pair-alt.png}
   \caption{
   Iterating through five epochs of two QoI, each formed by picking two of the ten available rows of $A$ at random.
+  The random directions chosen on the left exhibit more redundancy than those on the right, so the same amount of iteration results in less accuracy.
   }
   \label{fig:iterative-linear-demo-pair}
 \end{figure}
@@ -61,8 +63,8 @@ The reason for this difference is that there is more mutually distinct informati
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch-pair-smart}
-  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch-rand}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch-pair-smart.png}
+  \includegraphics[width=0.475\linewidth]{examples/iterative/10D-firstepoch-rand.png}
   \caption{
   If we are careful with how we construct our maps or choose our iteration strategy, we can achieve considerably more accurate solutions with the same computational cost.
   (Left): Iterating through a single epoch with a QoI formed by picking rows of $A$ which exhibit mutual orthogonality.
@@ -83,11 +85,11 @@ We limit ourselves to solving 100 inverse problems (i.e. up to ten epochs for th
 First, we use the QoI as they are presented to us, in order with respect to increased rotation angle (which defines the rows of $A$).
 Next, we shuffle the rows and then perform ten epochs.
 Lastly, we create an ordering based on a random shuffling of the indices representing the rows of $A$, repeated ten times, for which only a single epoch is performed.
-The latter approach is similar to the second in that the same problems are solved the same number of times overall, but it lifts the restriction that a row must only be used once in each effective ``epoch''.
+The latter approach is similar to the second in that the same problems are solved the same number of times overall, but it lifts the restriction that a row must only be used once in each effective ``epoch.''
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.95\linewidth]{examples/iterative/10D-convergence-comparison}
+  \includegraphics[width=0.95\linewidth]{examples/iterative/10D-convergence-comparison.png}
   \caption{
   Twenty different initial means are chosen and iterated on for three approaches.
   Individual experiments are transparent and the mean error is shown as solid lines.
@@ -99,7 +101,7 @@ The latter approach is similar to the second in that the same problems are solve
   \label{fig:iterative-convergence-comparison}
 \end{figure}
 
-We see in Figure~\ref{fig:iterative-convergence-comparison} that using the rows of $A$ sequentially performs very poor, which aligns with ``spiraling'' seen in Figure~\ref{fig:iterative-linear-demo} where the first few epochs were plotted.
+We see in Figure~\ref{fig:iterative-convergence-comparison} that using the rows of $A$ sequentially performs very poorly (the error struggles to get past a single decimal place of accuracy), which aligns with ``spiraling'' seen in Figure~\ref{fig:iterative-linear-demo} where the first few epochs were plotted.
 Shuffling the rows but requiring that every tenth iteration to use the same row (i.e., ensure same ordering for each epoch), leads to a considerable improvement by which sixteen decimal places of accuracy are achieved in under $100$ iterations.
 In a few instances, the shuffled approach stumbles on an ordering that accelerates convergence, likely due to orthogonal pairs of rows in the shuffled order.
 These cases exhibit the kind of behavior we saw in the left panel of Fig~\ref{fig:iterative-linear-demo-smart}; in other words, sometimes our random shuffling finds the ``smart'' rows to iterate through.

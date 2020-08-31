@@ -1,5 +1,5 @@
 #!/bin/sh
-NUM_SAMPLES=10000
+NUM_SAMPLES=1000
 FILE_PREFIX=res
 for dim in 1 2 5 ; do
     echo "Running for Dim=${dim}. Saving to ${FILE_PREFIX}${dim}"
