@@ -104,7 +104,7 @@ We now turn our attention to an example where instead of temporal measurements, 
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Elliptic PDE Example}\label{subsec:pde-example}
+\subsection{Elliptic PDE Example}\label{sec:pde-example}
 
 Consider the following Poisson problem defined on a unit domain $\Omega$:
 \begin{equation}\label{eq:pde-equation}
@@ -242,6 +242,6 @@ We address these concerns in the next section by extending the previous (PDE) ex
 
 We point out that incorporating available observations as we have done in the previous two examples leaves the output space scalar-valued.
 As the number of parameters grows, this output dimension resulting from such an approach effectively stays fixed.
-This is particularly when the DCI approach becomes advantageous over other methods as it is less sensitive to mistakes in modeling assumptions than other methods for solving inverse problems.
+These situations are particularly when the DCI approach becomes advantageous over other methods, as it is less sensitive to mistakes in modeling assumptions than other methods for solving inverse problems as we saw with the linear examples in ch4 [TK - refer back to section 4 and 6].
 One can incorporate a much wider variety of prior beliefs about the relative likelihoods of parameters before data is collected without compromising predictive error.
 The DCI approach guarantees that the functional defined (for us, the weighted mean error) will remain accurate in spite of any encoded assumptions that are somehow at odds with data that is subsequently collected.
