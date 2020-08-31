@@ -41,8 +41,8 @@ The observation-consistent solution is an update to the initial mean in this sam
 The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\paramref$.
 
 We show that regardless of how well-informed your beliefs are, the convergence rate of the MUD solutions as more data is incorporated\---either by dimension or rank)\---will match those of the Least-Squares solutions.
-Moreover, the MUD solutions are not sensitive to scaling of the initial covariance (how strongly initial beliefs are held), the way that the MAP solution is.
-This provides a strong motivating factor for the consideration of the observation-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
+Moreover, unlike MAP solutions, the MUD point is not sensitive to scaling of the initial covariance (how strongly initial beliefs are held).
+This insensitivity provides a strong motivating factor for the consideration of the observation-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
 We leave the investigation of more connections to the removal of hyper-parameter estimation to future work.
 
 [TK - can put example here about MCMC extensions, sequence of problems with resampling from updated densities. Have a notebook's worth of results with the Rosenbrock]
