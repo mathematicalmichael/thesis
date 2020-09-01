@@ -116,9 +116,11 @@
 
 \newcommand{\qspace}{\mathcal{Q}}
 \newcommand{\lam}{\left ( \param \right ) }
+\newcommand{\lami}{\left ( \param_\iparam \right ) }
 \newcommand{\qoi}{Q}
 \newcommand{\qlam}{\qoi\lam}
 \newcommand{\q}{\left ( \qlam \right )}
+\newcommand{\qi}{\left ( \qoi\lami \right )}
 % Model M(u, param) = 0
 \newcommand{\M}{\mathcal{M}}
 
@@ -130,7 +132,7 @@
 
 \DeclareMathOperator*{\dciP}{\updatedP = \initialP \frac{\observedP}{\predictedP}}
 \DeclareMathOperator*{\dciD}{\updated = \initial \frac{\observed}{\predicted}}
-\DeclareMathOperator*{\dci}{\updated\lam = \initial\lam \frac{\observed\qlam}{\predicted\qlam}}
+\DeclareMathOperator*{\dci}{\updated\lam = \initial\lam \frac{\observed\q}{\predicted\q}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Theorems

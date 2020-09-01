@@ -1,5 +1,24 @@
 \subsection{Numerical Approximation and Analysis}\label{sec:sample-algorithm}
 
-[TK - Algorithm goes here]
+The numerical approximation of the updated density can be achieved by following Algorithm~\ref{alg:updated_density}, which involves approximating a push-forward distribution using a finite set of samples drawn from the initial density and mapped forward by $\qoi$.
+Once an approximation of the predicted density is formed, it can be evaluated alongside the initial and observed density at any other point so long as evaluation through $\qoi$ is available.
 
+
+
+\begin{algorithm}[hbtp]
+\DontPrintSemicolon
+Draw $\nsamps$ samples from the initial density to construct the set $\set{\param^{(\iparam)}}_{\iparam=1}^{\nsamps} \subset \pspace$.
+	\For{$\iparam = 1, \hdots, \nsamps$}{
+	Compute $\qoi_\iparam = \qoi(\param^{(\iparam)})$.\\
+	}
+	Approximate $\predicted\q$, the push-forward of $\initial$, by some method such as kernel density estimation.
+  \For{$\iparam = 1, \hdots, \nsamps$}{
+	Compute $\updated\lami = \initial\qi \frac{\observed\qi}{\predicted\qi}$.\\
+	}
+
+ \caption{Numerical Approximation of the Inverse Density using the Sample-Based Approach}
+ \label{alg:updated_density}
+\end{algorithm}
+
+TK -
 picture of pushforward given different number of samples, overview of KDE
