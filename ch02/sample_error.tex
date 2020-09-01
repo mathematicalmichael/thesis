@@ -26,5 +26,26 @@ In some sense there is a game to be played between balancing the size of the dat
 We are motivated to minimize the difference in dimension between input output space but as the dimension of the day is best grows, our approximation error at a fixed sample size grow out of proportion.
 
 This is the so called curse of dimensionality.
-We summarize some illustrative results for clarification from Silverman density estimation.
-[TK reproduce table from silverman and write up a brief summary].
+We summarize some illustrative results for clarification from \cite{Silverman} on the topic of one-dimensional Gaussian density estimation.
+The table in \ref{table:silverman} shows the required sample size as a function of dimension required to ensure that the relative mean square error at zero is less than 0.1 (which says nothing of global accuracy).
+
+\begin{figure}
+  \begin{tabular}{ l | l }
+  \hline \\ Dimensionality & Required Sample Size\\ \hline
+  1  & 4\\
+  2  & 19\\
+  3  & 67\\
+  4  & 223\\
+  5  & 768\\
+  6  & 2 790\\
+  7  & 10 700\\
+  8  & 43 700\\
+  9  & 187 000\\
+  10 & 842 000\\ \hline
+  \end{tabular}
+\caption{Sample size required (accurate to about 3 significant figures) to ensure that the relative mean square error at zero is less than $0.1$, when estimating a standard multivariate normal density using a normal kernel and the window width that minimizes the mean square error at zero.}
+\label{table:silverman}
+\end{figure}
+
+To achieve this tolerance of 0.1 for a integrated square error $E \int (\hat{f} - f)^2 / \inf f^2$ would require approximately $1.7$ times the samples shown in \ref{table:silverman} for dimensions up to 10 \cite{Silverman}.
+The sample sizes required grow even larger for global measures of accuracy, which are fortunately rarely required to achieve in practice due to the nature of $\observed$ assigning probability over only a region of $\predicted$.
