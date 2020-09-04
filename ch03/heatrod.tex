@@ -1,4 +1,4 @@
-\subsection{Example: Thermal Conductivity on a 1D Heat Rod}\label{ex:heat-set-sample-accuracy}
+Total Variation\subsection{Example: Thermal Conductivity on a 1D Heat Rod}\label{ex:heat-set-sample-accuracy}
 
 Consider the one-dimensional heat equation with homogeneous Neumann boundary conditions on the unit interval presented in \ref{ex:heat-set-sample}.
 
@@ -7,7 +7,7 @@ The quantities of interest we study are four point-evaluations of the state vari
 Choosing any pair of them for the inversion yields six possible quantities of interest maps.
 As before, we demonstrate that some choices appear to have advantages over others.
 
-From the prior examples, we would suspect that choosing the QoI map with lower skewness results in lower Hellinger distances.
+From the prior examples, we would suspect that choosing the QoI map with lower skewness results in lower Total Variations.
 However in the earlier experiments we utilized maps that inverted into sets of identical size, which is not the case in this nonlinear example; each QoI map scales sets differently depending on the location in the parameter space.
 To isolate this scaling effect, we attempt to compare QoIs that invert into sets of similar size \emph{on average} but have differing average skewness.
 
@@ -15,7 +15,7 @@ This is what motivated our specific choice of spatial locations at which to meas
 Our first QoI $\qoiA$ uses measurements at 0.25 and 0.51, and has average skewness of 1.08, and our second $\qoiB$ uses measurements at 0.67 and 0.98, with average skewness 1.56.
 While we would have liked to use a map with average skewness of 2 for a more similar comparison to the prior examples, this was the best range we could find where the maps inverted into sets of comparable size on average\footnote{average local scaling is 1.99 versus 2.19}.
 
-Owing to the nonlinearity of the problem, the Hellinger distances between reference and estimated probability measures now have an inherent dependence on the location of the point $\param$ in the parameter space.
+Owing to the nonlinearity of the problem, the Total Variations between reference and estimated probability measures now have an inherent dependence on the location of the point $\param$ in the parameter space.
 We ran the simulations for a regular $3\times3$ grid exploring the interior of the parameter space and present a selection of two reference points that illustrate the differences in the nonlinear case.
 
 In the two-dimensional data spaces $\dspaceA$ and $\dspaceB$, our uncertainty is a uniform box centered at $\qoiA(\paramref)$ with side-lengths of 0.1.
@@ -30,39 +30,36 @@ When $\param_{\text{ref}}$ is in the upper-center of the grid, the inverse image
 \begin{minipage}{.475\textwidth}
 \includegraphics[width=\linewidth]{./images/pt5Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
 \end{minipage}
-  \caption{Comparison of the differences in Hellinger distances for the two maps and two reference points. The results for the bottom-left reference value is shown on the left and the top-center is shown on the right.}
+  \caption{Comparison of the differences in Total Variations for the two maps and two reference points. The results for the bottom-left reference value is shown on the left and the top-center is shown on the right.}
 \label{fig:NLHD}
 \end{figure}
 
-The Hellinger distance plots for these two reference values are compared in Fig.~\ref{fig:NLHD}.
+The Total Variation plots for these two reference values are compared in Fig.~\ref{fig:NLHD}.
 Of the nine reference $\param$'s we studied, $\qoiA$ yielded no considerable advantage in terms of the number of samples required to approximate the inverse images in three cases (the plots were similar to that in the right of Fig.~\ref{fig:NLHD}).
 In three cases, $\qoiA$ performed just a bit better than $\qoiB$, (somewhere between the two figures in Fig.~\ref{fig:NLHD}).
 In two cases, $\qoiA$ performed better than  $\qoiB$, as in the left of Fig.~\ref{fig:NLHD}.
-In one case (with $\param$ in the bottom right corner), the difference was even more dramatic ($\qoiA$ yielded similar Hellinger distances with less than a fourth the samples).
+In one case (with $\param$ in the bottom right corner), the difference was even more dramatic ($\qoiA$ yielded similar Total Variations with less than a fourth the samples).
 
 \begin{figure}
-\begin{minipage}{.4\textwidth}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N50_em.png}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N500_em.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N50_em.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N50_mc.png}
 
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q2/HeatrodModel--set_N50_em.png}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q2/HeatrodModel--set_N500_em.png}
-\end{minipage}
-\caption{The inverse image of the reference measure for $\qoiA$ (top half) and $\qoiB$ (bottom half) for $N=100$. }
-\label{fig:heatrod-convergence}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q1/HeatrodModel--set_N500_em.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N500_mc.png}
+
+\caption{The inverse image of the reference measure for $\qoiA$ for $\nsamps = 50$ (top) and $\nsamps = 500$ (bottom). }
+\label{fig:heatrod-convergence-a}
 \end{figure}
 
 \begin{figure}
-\begin{minipage}{.4\textwidth}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N50_mc.png}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N500_mc.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q2/HeatrodModel--set_N50_em.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q2/HeatrodModel--sample_N50_mc.png}
 
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q2/HeatrodModel--sample_N50_mc.png}
-\includegraphics[width=\linewidth]{examples/fig_heatrod_q2/HeatrodModel--sample_N500_mc.png}
-\end{minipage}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q2/HeatrodModel--set_N500_em.png}
+\includegraphics[width=.45\linewidth]{examples/fig_heatrod_q2/HeatrodModel--sample_N500_mc.png}
 
-\caption{The inverse image of the reference measure for $\qoiA$ (top half) and $\qoiB$ (bottom half) for $N=1000$. }
-\label{fig:heatrod-convergence}
+\caption{The inverse image of the reference measure for $\qoiB$ for $\nsamps = 50$ (top) and $\nsamps = 500$ (bottom). }
+\label{fig:heatrod-convergence-b}
 \end{figure}
 
 With these nonlinear cases, we find that taking an ``on average'' approach is inefficient, as there can be dramatic differences in the geometric properties of the inverse images in the parameter space depending on the location.
