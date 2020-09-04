@@ -103,12 +103,12 @@ How the Data Consistent Inversion framework handles the skewness in QoI maps is 
 %%%% discussion of convergence
 
 \subsection{Convergence}
-Second, and perhaps most importantly, since the spaces $\pspace$ we are considering are generally bounded and finite, the Hellinger metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
+Second, and perhaps most importantly, since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
 The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
-Thus, convergence of a sequence of probability measures under the Hellinger metric implies that the QoI's will also converge component-wise in $\RR$.
-In other words, convergence in the Hellinger metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure.
-In other words, if $\PP_{\pspace,\ndiscs,\nsamps,h}$ converges to either $\PP_{\pspace,\ndiscs,\nsamps}$, $\PP_{\pspace,\ndiscs}$, or $P_\pspace$ using the Hellinger metric, this implies that the error converged to zero in the numerically computed $\qoi(\param^{(j)})$.
-Thus, convergence in the Hellinger metric implies, in a sense, convergence of the numerical method used to construct the QoI map.
+Thus, convergence of a sequence of probability measures under the Total Variation metric implies that the QoI's will also converge component-wise in $\RR$.
+In other words, convergence in the Total Variation metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure.
+In other words, if $\PP_{\pspace,\ndiscs,\nsamps,h}$ converges to either $\PP_{\pspace,\ndiscs,\nsamps}$, $\PP_{\pspace,\ndiscs}$, or $P_\pspace$ using the Total Variation metric, this implies that the error converged to zero in the numerically computed $\qoi(\param^{(j)})$.
+Thus, convergence in the Total Variation metric implies, in a sense, convergence of the numerical method used to construct the QoI map.
 Furthermore, recall that weak convergence $\PP_n \to \PP$ is defined to mean
 \[
 \int f \PP_n \to \int f \PP \text{ as } n \to \infty
@@ -119,7 +119,7 @@ Taking $f = \Chi_A$, this leads to the following implication:
 \PP_{\pspace, \ndiscs, \nsamps} \to P_\pspace \implies \PP_{\pspace, \ndiscs, \nsamps} (A) \to P_\pspace (A) \quad \forall{A\in\pborel}.
 \]
 %provided we rigorously define $\P\PP_{\pspace, \ndiscs, \nsamps}$ to measure sets in $\BB_\pspace$, which we proceed to do in the following section\footnote{\bf{I know this is clumsy, but I'm not exactly sure how to phrase this correctly, because it almost seems like this would be true for all $A\in\pspace$ instead. I suppose the omission of the differential operator above is intentionally vague to gloss over this detail. Can we sharpen this up?}}
-It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Hellinger distance as the metric used in the numerical results of Section \ref{sec:results}.
+It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Total Variation as the metric used in the numerical results of Section \ref{sec:ch03-set} and \ref{sec:ch03-sample}.
 
 
 \input{ch03/set_accuracy}
