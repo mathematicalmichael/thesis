@@ -1,163 +1,87 @@
-\chapter{\uppercase{Impact of Output Quantities on Accuracy} \label{chapter:03}}
+\chapter{\uppercase{Data-Driven Maps and Consistent Inversion} \label{chapter:04}}
 
-Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of set-valued solutions to stochastic inverse problems with respect to their ability to be well-approximated by Monte-Carlo integration.
-However, the results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
+Going off the previous chapter, we may be interested in a different question, and may be in situations where we can collect data easily (or it has already been collected for us).
+What are the other types of questions we can ask? Parameter Identification.
 
-We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
+We focus on extending the DCI framework to situations where we want to answer a different question.
 
-\input{ch03/impact.tex}
+\
+\section{A Generalized Stochastic Map Framework}
+%% EDIT THE FOLLOWING BELOW!
+Such observable values of $u\lam$ are mathematically modeled by functionals of the solution, denoted $\obs_i: u\lam \to \RR$.
+The collection of such functionals into a vector defines a {\em Parameter-to-Observables} (PtO) map, denoted $\obs( u\lam )$ or $\obs\lam\in\RO$ for short.
 
-\section{Skewness and Information Content}\label{sec:skewness}
-In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
-In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$.
-An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\pmeas$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy is proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
-This is a version of the so-called curse-of-dimension for the explicit approach.
+The observable data is then naturally denoted as $\obs(\pspace)$, and any subsequent transformation of this vector (e.g. averaging, sub-selecting) is captured by the definition of a {\em Quantity of Interest} (QoI) map, denoted $\qoi$.
 
-Skewness is explored further in \cite{Walsh} in the context of optimal experimental design.
-There, an additional geometric property of $\qoi$ related to the \emph{precision} in the solution of the associated stochastic inverse problem is introduced and quantified.
-For completeness, we define skewness below and refer the interested reader to \cite{BGE+15, BPW17, Walsh} for more details.
-
-\begin{defn}
-For any QoI map $\qoi$, $\param \in \pspace$, and a specified row vector $\bf{j}_k$ of the Jacobian $J_{\param, Q}$, we define
-\begin{equation}
-S_\qoi(J_{\param,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
-\label{eq:skewness}
-\end{equation}
-
-We define the \textbf{local skewness} of a map $\qoi$ at a point $\pspace$ as
-\begin{equation}
-S_\qoi(\param) := \max_{1\leq k \leq d} S_\qoi(J_{\param,Q}, \bf{j}_k).
-\label{eq:localskewness}
-\end{equation}
-\end{defn}
-
-\begin{defn}
-The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined as
-\begin{equation}
-\overline{S_Q} := \frac{1}{\mu_{\pspace}(\pspace)} \int_\pspace S_Q (\param) \, d\mu_{\pspace}
-\label{eq:avgskew}
-\end{equation}
-\end{defn}
-
-In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition of the Jacobian $J_{\param,Q}$.
-In general, we approximate $\overline{S_Q}$ with Monte-Carlo approximations.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We demonstrate the effect of skewness on the explicit measure theoretic approach in the following example.
-
-\subsubsection{Motivating Example}
-
-\begin{ex}
-\label{ex:skewness}
-Consider the following family of linear maps:
-\begin{equation}\label{eq:qmap2}
-\left \lbrace \qoi^{(s)} =  \mat{cc}{1 & 0 \\ \sqrt{s^2 - 1}& 1 } \right \rbrace_{s\in S},
-\end{equation}
-for $S=\set{1,2,4}$. These maps are designed to control the global skewness (since it is equal to local skewness in a linear map), while preserving the measures of sets between $\pspace$ and $\dspace$.
-More specifically, the support of $\updatedP$ associated with each QoI map using uniform observed measures have equal $\pmeas$-measure, which isolates the impact of accuracy solely to the skewness of the QoI map.
-
-The skewness of these maps is given by the index $s$, so $\qoi^{(1)}$ is $1$, the skewness of $\qoi^{(2)}$ is $2$, and $S_{\qoi^{(4)}} = 4$.
-
-
+Since the solution to the model, $u\lam$, depends on $\param$, so do the QoI, and we adopt the notation that $$\qlam := \qoi(\obs(u\lam))$$ to make this dependence on model parameters explicit.
 
 \begin{figure}[ht]
-\begin{minipage}{.65\textwidth}
-\begin{table}[H]
-\begin{tabular}{ c | c | c | c }
-N & $\qoi^{(a)}$ & $\qoi^{(b)}$ & $\qoi^{(c)}$\\ \hline \hline
-$200$ & $2.97E-01$ & $3.42E-01$ & $5.28E-01$\\ \hline
-
-$400$ & $2.00E-01$ & $2.41E-01$ & $3.79E-01$\\ \hline
-
-$800$ & $1.59E-01$ & $1.78E-01$ & $2.88E-01$\\ \hline
-
-$1600$ & $1.06E-01$ & $1.31E-01$ & $1.93E-01$\\ \hline
-
-$3200$ & $8.38E-02$ & $9.39E-02$ & $1.41E-01$\\ \hline
-
-$6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
-
-\end{tabular}
-\end{table}
-
+\begin{minipage}{.975\textwidth}
+\includegraphics[width=\linewidth]{./images/stochastic_framework.png}
 \end{minipage}
-\begin{minipage}{.65\textwidth}
-		\includegraphics[width=\linewidth]{./images/Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-\end{minipage}
-\caption{The results of $d_\text{TV}(\updatedPxNM, \updatedPxNN)$.}
-\label{fig:skew}
+\caption{
+The space of possible observations represents the full range of measurements that could have been collected.
+The computable pushforward is a conditional of the full observable space, based on the noise that actually polluted the measurements once they have been taken.
+}
+\label{fig:stochastic_framework}
 \end{figure}
-
-It is evident in Figure~\ref{fig:skew} that skewness has a direct impact on the number of samples required to achieve a given accuracy.
-We see that the measure induced by $\qoi^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $\qoi^{(2)}$ does.
-The effect is even more pronounced when compared against $\qoi^{(4)}$.
-
-This provided a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}, where it is demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\pmeas$-measure of the {\em symmetric difference} of the inverse sets.
-
-\end{ex}
-
-The example above motivates a number of research directions involving how to resolve approximation errors.
-How the Data Consistent Inversion framework handles the skewness in QoI maps is unclear and requires numerical studies to investigate, which we perform herein [TK - cite where].
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% discussion of convergence
-
-\subsection{Convergence}
-Second, and perhaps most importantly, since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
-The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
-Thus, convergence of a sequence of probability measures under the Total Variation metric implies that the QoI's will also converge component-wise in $\RR$.
-In other words, convergence in the Total Variation metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure.
-In other words, if $\PP_{\pspace,\ndiscs,\nsamps,h}$ converges to either $\PP_{\pspace,\ndiscs,\nsamps}$, $\PP_{\pspace,\ndiscs}$, or $P_\pspace$ using the Total Variation metric, this implies that the error converged to zero in the numerically computed $\qoi(\param^{(j)})$.
-Thus, convergence in the Total Variation metric implies, in a sense, convergence of the numerical method used to construct the QoI map.
-Furthermore, recall that weak convergence $\PP_n \to \PP$ is defined to mean
-\[
-\int f \PP_n \to \int f \PP \text{ as } n \to \infty
-\]
-for bounded Lipschitz functions $f:\pspace\to\RR$.
-Taking $f = \Chi_A$, this leads to the following implication:
-\[
-\PP_{\pspace, \ndiscs, \nsamps} \to P_\pspace \implies \PP_{\pspace, \ndiscs, \nsamps} (A) \to P_\pspace (A) \quad \forall{A\in\pborel}.
-\]
-%provided we rigorously define $\P\PP_{\pspace, \ndiscs, \nsamps}$ to measure sets in $\BB_\pspace$, which we proceed to do in the following section\footnote{\bf{I know this is clumsy, but I'm not exactly sure how to phrase this correctly, because it almost seems like this would be true for all $A\in\pspace$ instead. I suppose the omission of the differential operator above is intentionally vague to gloss over this detail. Can we sharpen this up?}}
-It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Total Variation as the metric used in the numerical results of Section \ref{sec:ch03-set} and \ref{sec:ch03-sample}.
-
-
-\input{ch03/set_accuracy}
-\input{ch03/sample_accuracy}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\
-\section{Software Contributions}\label{sec:ch03-software}
-
-Talk about the BET module that computes metrics.
-Discuss testing, show sample of usage (disconnected from skewness, high-level).
-
-
-\
-\section{Numerical Results and Analysis}\label{sec:ch03-examples}
-
-
-We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
-\begin{equation}\label{eq:newobjective}
-d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
-\end{equation}
-where $\tau$ is some designated tolerance.
-
-Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
-The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
-To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
-
-The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
-Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
-
-The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
-By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
-
-
-\input{ch03/heatrod.tex}
 \FloatBarrier
 
-\input{ch03/decay.tex}
-\FloatBarrier
-%%%%%%%%%%%%%%
+Set stage with the work Troy has been doing lately.
+
+\
+\section{Data-Driven Maps}
+
+More material from the paper, including sensitivity analysis with number of data points.
+
+Theory... TK - closed form in 1D
+
+
+\subsection{Extension to Multiple Quantities of Interest}
+
+This kind of brings us back around to the topic of skewness and OED. Don't get too involved, but do mention it and follow up in the OED discussion in later chapter.
+
+For now, here is basically what needs to be the takeaway:
+
+TK - when you have more than 1 QoI, you can just collapse all the information into one. This doesn't really respect units or differences in information sources, requires minor modification wherein you divide by each variance.
+
+TK - The other option is to iterate between them and converge towards an intersection. What happens when we have error is that the intersection of any pair may be in different places. Less error = less variability in this regard.
+Algorithmically, we bounce around in that region, trading off precision (each step loses accuracy in prior directions in favor of increased accuracy of another).
+
+
+\subsection{Numerical Approximations and Analysis}
+
+
+TK - If you do not know the variance of your data, then you can approximate it. The theory that comes from this is related to approximate maps converging. good estimates of variance occur at relatively low sample sizes.
+
+\subsection{Descriptions of Error}
+
+\subsection{Examples}
+
+Identity map that is growing.
+
+\
+\section{Software Contributions}
+
+Module into BET (started off as CBayes, make footnote or include in appendix) that transforms time-series into QoI and performs data-consistent inversion.
+This is implemented as a ``mode'' in BET that can be triggered.
+May or may not auto-detect when to use it?
+
+How might ``the user'' interact with these sorts of problems where there is a large matrix of output data?
+
+\
+\section{Numerical Results and Analysis}
+
+\subsection{Parameter Estimation and Precision with Time-Series Models}
+Take the exponential decay problem and show what happens as we increase the number of data points.
+
+\subsubsection{Fixed-Time}
+NOTE: third column of the CSE poster goes here as one example (fixed interval of time).
+
+\subsubsection{Fixed-Frequency}
+Next example has fixed measurement frequency.
+
+
+First, in fixed-time window (say, [1,2]), then at fixed frequency, go up to 100 measurements. Show results.
+
+Show a problem with repeated observations (so, slightly different context, but similar question, and now in a position to compare the measure and density approaches). Use example that was presented at SIAM AN18, except re-formulated as measuring the weight and volume of a liquid.
