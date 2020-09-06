@@ -1,11 +1,51 @@
-\chapter{\uppercase{Summary, Conclusions, and Future Work} \label{chapter:06}}
+\chapter{\uppercase{Future Work and Preliminary Results} \label{chapter:06}}
 
-\
-\section{Summary of Dissertation}
+\input{ch05/mud_oed.tex}
+\FloatBarrier
 
-\
-\section{Conclusions}
+% \
+% \section{Summary of Dissertation}
+%
+% \
+% \section{Conclusions}
+%
+% \
+% \section{Continuity of Research}
+%
 
-\
-\section{Continuity of Research}
+\section{Miscellaneous Extensions}
 
+
+\subsection{Leveraging Data in Different Ways}\label{sec:ch05-data}
+Mention the other map we can use (SSE) here.
+
+\subsection{Addressing Model Assumptions}\label{sec:ch05-variance}
+Both the maps required us to have knowledge of the variance in the measurements.
+What if we got it wrong?
+\emph{What if we don't know the variance? How does mis-estimating it affect our solutions?}
+In this section we pose some questions and provide a brief hint at a research direction but really we do not have adequate time to flesh out the answers to these, just acknowledge that they're similar concerns shared by the Bayesians.
+
+Multiplicative noise - handled in a straightforward way, maybe put an example here and leave it at that? Put it in appendix?
+
+
+\subsection{Machine-Learning Enhancements}\label{sec:ch05-ml}
+
+Recall that in the previous chapter we demonstrated that the MUD solution retains the accuracy of least-squares solutions while simultaneously offering the flexibility of specifying initial beliefs.
+Normally in order to incorporate such beliefs, practitioners in the machine-learning field would perform Tikhonov regularization, usually with the inclusion of a hyper-parameter which scales the additional parameter-space norm in the objective function.
+Mathematically, this scaling factor applied to the norm is equivalent to scaling the matrix representation of the initial (prior) covariance.
+Increasing this scaling factor is interpreted as having less confidence in these initial assumptions.
+Conversely, decreasing it is equivalent to putting more emphasis on the prior beliefs than the evidence provided by the data, which causes MAP solutions to drift away from the solution contour (equivalence class) to which $\paramref$ belongs.
+
+We summarize again that the MUD point is not impacted by such a scaling of the initial covariance, providing \emph{consistent} solutions which demonstrate levels of accuracy that MAP points only exhibit for larger values of scaling factors.
+Not only is it robust to the specification of prior assumptions, but it manages to offer the flexibility of such specifications without paying the additional cost of hyper-parameter optimization that would be required for the Tikhonov solution to achieve comparable results; any choice of $\alpha$ would have sufficed.
+
+By contrast, the Tikhonov-regularized solution selects a point that is biased in directions defined by the initial density (covariance).
+The observation-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
+The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\paramref$.
+
+We show that regardless of how well-informed your beliefs are, the convergence rate of the MUD solutions as more data is incorporated\---either by dimension or rank)\---will match those of the Least-Squares solutions.
+Moreover, unlike MAP solutions, the MUD point is not sensitive to scaling of the initial covariance (how strongly initial beliefs are held).
+This insensitivity provides a strong motivating factor for the consideration of the observation-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
+We leave the investigation of more connections to the removal of hyper-parameter estimation to future work.
+
+[TK - can put example here about MCMC extensions, sequence of problems with resampling from updated densities. Have a notebook's worth of results with the Rosenbrock]

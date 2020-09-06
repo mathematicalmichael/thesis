@@ -1,37 +1,37 @@
 stableinitial\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
 
-To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data. 
+To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data.
 
 \begin{defn}[Initial Distribution]\label{defn:initial}
   The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{initial distribution} (or density).
-  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$. 
+  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$.
 \end{defn}
 
-To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$. 
-In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem. 
+To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
+In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
 To make this precise, we use the following:
 
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
-  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density). 
-  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by 
+  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
+  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
   \begin{equation}\label{eq:predicted}
     \predictedP (E) = P_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
   \end{equation}
-  which should be recognizable from the definition of the forward problem. 
+  which should be recognizable from the definition of the forward problem.
   In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
 \end{defn}
 
 
 The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ such that the push-forward of it matched $\observedP$.
-The following assumption guarantees a solution to the stochastic inverse problem. 
-It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the initial beliefs. 
+The following assumption guarantees a solution to the stochastic inverse problem.
+It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the initial beliefs.
 
 \begin{assumption}[Predictability Assumption]\label{as:pred}
   The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
 \end{assumption}
 
-If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial) have a priori ruled that almost surely these events should not occur. 
-Therefore, either initial beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation. 
+If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial) have a priori ruled that almost surely these events should not occur.
+Therefore, either initial beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation.
 
 
 The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
@@ -46,7 +46,7 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
   For any set $A\in \pborel$, the solution $\updatedP$ given defined by
   \begin{equation}\label{eq:dci_sol}
     \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
-  \end{equation} 
+  \end{equation}
   is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior (initial) probability measure $P_\pspace$ on $(\pspace, \pborel)$.
   Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
@@ -59,7 +59,7 @@ $\updatedP(\pspace) = 1$.
 These definitions are combined to form the \emph{updated density}, originally derived in \cite{BJW18}:
 
 \begin{defn}[Updated Distribution]\label{defn:updated}
-  A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivative, 
+  A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivative,
   \begin{equation}\label{eq:update}
     \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \forall \; \param \in \pspace.
   \end{equation}
@@ -73,7 +73,7 @@ Moreover, this Corollary provides the basis for a useful numerical diagnostic th
 
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
 
-We first recall the Total Variation (TV) metric, defined as 
+We first recall the Total Variation (TV) metric, defined as
 \begin{equation}\label{eq:tv}
 d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
 \end{equation}
@@ -82,8 +82,8 @@ The stability results below are all with respect to the TV metric, which is wide
 We first define stability with respect to perturbations in the data.
 
 \begin{defn}[Stability of Updated Densities I]\label{defn:stableobs}
-  Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}. 
-  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
+  Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}.
+  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively.
   We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
   \begin{equation}
     d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
@@ -100,10 +100,10 @@ In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP
 This next definition and result are useful in analyzing the sensitivity of the updated density with respect to the initial beliefs.
 
 \begin{defn}[Stability of Updated Densities II]\label{defn:stableinitial}
-  Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
-  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively. 
-  Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively. 
-  We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$, 
+  Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}.
+  Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively.
+  Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
+  We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observedP)$,
   \begin{equation}\label{eq:stableinitial}
     d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
   \end{equation}
@@ -114,7 +114,7 @@ This next definition and result are useful in analyzing the sensitivity of the u
   \label{thm:stableinitial}
 \end{thm}
 
-Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$. 
+Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$.
 Given that specifying the definition of a ``true'' initial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
 If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
@@ -128,8 +128,8 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 
 %%%%%%%%% Section 2.3
 \subsection{Numerical Approximation and Sampling}\label{sec:approx}
-%Since we are given $\initial$ and $\observed$, the computation of $\predicted$ is the only aspect of the Consistent Bayesian framework that needs to be approximated. 
-%Since there are few restrictions on the structure of the map $\qoi$ that defines $\predicted$, there is in general no explicit expression from which we can generate samples, so we use a numerical approximation to the probability density function. 
+%Since we are given $\initial$ and $\observed$, the computation of $\predicted$ is the only aspect of the Consistent Bayesian framework that needs to be approximated.
+%Since there are few restrictions on the structure of the map $\qoi$ that defines $\predicted$, there is in general no explicit expression from which we can generate samples, so we use a numerical approximation to the probability density function.
 %
 %For simplicity, we simply propagate Monte-Carlo samples from the prior and use a kernel density estimate (usually Gaussian\footnote{In this proposal, all results are generated using this kernel, though six kernels common to density estimation are implemented in the ConsistentBayes Python package [TK - cite Silverman and your github].}).
 %
@@ -148,7 +148,7 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 %
 
 
-%The computational object associated with $\predicted$ is stored for re-use and can be evaluated at locations in $\dspace$ other than $\sett{d_i}{i=1}{N}$. 
+%The computational object associated with $\predicted$ is stored for re-use and can be evaluated at locations in $\dspace$ other than $\sett{d_i}{i=1}{N}$.
 %This procedure should be thought of as a characterization of the data space given the prior assumptions encoded in $\initial$.
 
 
@@ -167,11 +167,11 @@ If this assumption is satisfied, we have the following theorem from \cite{BJW18}
   \begin{equation}\label{eq:predicted_bound}
     d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
   \end{equation}
-  where the $C$ is the constant taken from Assumption \ref{as:predx}. 
+  where the $C$ is the constant taken from Assumption \ref{as:predx}.
 \end{thm}
 
 In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
-Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$. 
+Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$.
 We leverage the re-use of samples in the results herein extensively.
 
 In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.}
@@ -193,7 +193,7 @@ Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate
 %\[
 %I(\updated ) = \int_\pspace r\q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
 %\]
-%which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated. 
+%which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated.
 %
 %Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
 %\begin{equation}\label{eq:KLdiv}
@@ -202,4 +202,4 @@ Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate
 %i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
 
 
-Where possible, we express $\predicted$ analytically for purposes of demonstration (especially for comparing numerical solutions to the exact solutions). 
+Where possible, we express $\predicted$ analytically for purposes of demonstration (especially for comparing numerical solutions to the exact solutions).

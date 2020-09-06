@@ -155,7 +155,8 @@
 \numberwithin{equation}{section}
 \newtheorem{prob}{Problem}
 \numberwithin{equation}{section}
-%
+\newtheorem{corollary}{Corollary}[section]
+
 
 
 %%% stuff from proposal to sort out later %%%
@@ -169,3 +170,23 @@
 \newcommand{\updatedPxM}{\PP_{\pspace,\ndiscs}^\true}
 \newcommand{\updatedPxNM}{\PP_{\pspace,\nsamps,\ndiscs}^\true}
 \newcommand{\updatedPxNMh}{\PP_{\pspace,\nsamps,\ndiscs,\imesh}^\true}
+
+%%% stuff from mud paper %%% -- commented out means already defined!
+\newcommand{\initialCov}{\Sigma_\text{init}}
+\newcommand{\observedCov}{\Sigma_\text{obs}}
+\newcommand{\predictedCov}{\Sigma_\text{pred}}
+\newcommand{\updatedCov}{\Sigma_\text{up}}
+\newcommand{\initialMean}{\param_0}
+% \newcommand{\observedMean}{\yobs}
+
+\newcommand{\mudpt}{\param^{\text{MUD}}}
+
+% siam cls includes this...
+\newtheorem{definition}{Definition}[section]
+
+% subfigure
+\newcommand{\subf}[2]{%
+  {\small\begin{tabular}[t]{@{}c@{}}
+  #1\\#2
+  \end{tabular}}%
+}
