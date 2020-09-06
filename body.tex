@@ -364,37 +364,37 @@ comes from the {\em predicted} density.
 % \[
 % 	\initialMean = \mat[cc]{0.25 & 0.25}^\top, \initialCov = \mat[cc]{1 & -0.25 \\ -0.25 & 0.5}, \ \observedMean=1, \text{ and } \observedCov = \mat[c]{0.25}.
 % \]
-%
-% \begin{figure}
-%    % \includegraphics[width=\linewidth]{figures/Regularization-all-in-one.pdf}
-%   \centering
-%   \begin{tabular}{|ccc|}
-%     \hline
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
-%       {data mismatch}
-%     &
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/tikonov_contour.png}}
-%       {regularization}
-%     &
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/classical_solution.png}}
-%       {bayesian posterior}
-%     \\
-%     \hline
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
-%       {data mismatch}
-%     &
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_contour.png}}
-%       {modified regularization}
-%     &
-%       \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_solution.png}}
-%        {updated density}
-%     \\
-%     \hline
-%   \end{tabular}
-%
-%   \caption{Gaussian data mismatch over 2-D parameter space for a 2-to-1 linear map (left plots). Gaussian initial/prior lead to different regularization terms associated with updated/Bayesian PDFs (middle plots), which lead to different optimization functions (right plots) and parameter estimates that produce maximum PDF values for update/Bayesian PDF (red dot in right plots).}
-%   \label{fig:regularization}
-% \end{figure}
+
+\begin{figure}
+   % \includegraphics[width=\linewidth]{figures/Regularization-all-in-one.pdf}
+  \centering
+  \begin{tabular}{|ccc|}
+    \hline
+      \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
+      {data mismatch}
+    &
+      \subf{\includegraphics[width=0.3\linewidth]{figures/tikonov_contour.png}}
+      {regularization}
+    &
+      \subf{\includegraphics[width=0.3\linewidth]{figures/classical_solution.png}}
+      {bayesian posterior}
+    \\
+    \hline
+      \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
+      {data mismatch}
+    &
+      \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_contour.png}}
+      {modified regularization}
+    &
+      \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_solution.png}}
+       {updated density}
+    \\
+    \hline
+  \end{tabular}
+
+  \caption{Gaussian data mismatch over 2-D parameter space for a 2-to-1 linear map (left plots). Gaussian initial/prior lead to different regularization terms associated with updated/Bayesian PDFs (middle plots), which lead to different optimization functions (right plots) and parameter estimates that produce maximum PDF values for update/Bayesian PDF (red dot in right plots).}
+  \label{fig:regularization}
+\end{figure}
 
 
 The top row of Fig.~\ref{fig:regularization} shows contour plots in the parameter space for the data-mismatch term (left), Tikhonov regularization term (middle), as well as the functional $T(\param)$ (right).
@@ -513,15 +513,15 @@ Overall, this motivates the MUD point as an \emph{alternative parameter estimate
 These ideas are explored further in Section~\ref{sec:high-dim-linear-example} and utilized in the analysis of QoI maps constructed from noisy measurement data associated with a true parameter value in Section~\ref{sec:data-maps}.
 We end this section by summarizing the above results in the following theorem stating the existence and uniqueness of a MUD point for the linear Gaussian case.
 
-% \begin{theorem}\label{thm:MUD_existence_uniqueness}
-% Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
-% If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
+\begin{thm}\label{thm:MUD_existence_uniqueness}
+Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
+If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
 % \begin{enumerate}[(a)]
 % \item There exists a unique parameter, denoted by $\mudpt$, that maximizes $\updated$.
 % \item $Q(\mudpt) = \observedMean$.
 % \item If $d=p$, $\mudpt$ is given by $A^{-1}$. If $d<p$, $\mudpt$ is given by~\eqref{eq:mud-point-analytical-final} and the covariance associated with this point is given by~\eqref{eq:updatedCov_final}.
 % \end{enumerate}
-% \end{theorem}
+\end{thm}
 
 
 
