@@ -4,21 +4,21 @@ By contrast, sampling from densities is an \emph{implicit} approach, and is disc
 Here, we provide a ``set-based'' derivation of the updated measure to more easily compare to the explicit approximation of the solution given measure in~\cite{BET+14}.
 
 First, we start by observing that if $A, B \subset \pspace$ such that $A = \qoi^{-1}(\qoi(B))$, then we have that $B\subset A$ (the inclusion may be proper).
-Therefore, for any probability measure $P$ on $(\pspace, \pborel)$, 
+Therefore, for any probability measure $\PP$ on $(\pspace, \pborel)$,
 \[
-P(B) = P(B|A) \, P(A).
+\PP(B) = \PP(B|A) \, \PP(A).
 \]
-If $P$ is intended to solve the inverse problem, then we are motivated to take
+If $\PP$ is intended to solve the inverse problem, then we are motivated to take
 \[
-P(A) = \observed (\qoi(A)) = \observed (B),
+\PP(A) = \observed (\qoi(A)) = \observed (B),
 \]
 in the above formula.
 
-We must now determine how to properly define $P(B|A)$. 
+We must now determine how to properly define $\PP(B|A)$.
 We leverage Bayes' Theorem~\cite{Smith} in order to utilize the prior density on contour events.
 In other words, we use the prior (ansatz) measure $\initialP$ extended on $(\pspace, \pborel)$ and Bayes' Theorem to get
 \begin{equation}\label{eq:bayes_full}
-P(B|A) = \initialP(B|A) = \frac{ \initialP(A|B) \initialP(B) }{ \initialP(A) },
+\PP(B|A) = \initialP(B|A) = \frac{ \initialP(A|B) \initialP(B) }{ \initialP(A) },
 \end{equation}
 and since $B \subset A$, $\initialP(A|B) = 1$, \eqref{eq:bayes_full} simplifies to
 
