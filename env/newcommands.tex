@@ -27,7 +27,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
-\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\\ \end{array}\right]}
+\newcommand{\mat}[2][cccccccccccc]{\left[\begin{array}{#1}#2\\ \end{array}\right]}
 
 % Standard Probability
 \DeclareMathOperator{\E}{\mathbb{E}}
@@ -169,3 +169,13 @@
 \newcommand{\updatedPxM}{\PP_{\pspace,\ndiscs}^\true}
 \newcommand{\updatedPxNM}{\PP_{\pspace,\nsamps,\ndiscs}^\true}
 \newcommand{\updatedPxNMh}{\PP_{\pspace,\nsamps,\ndiscs,\imesh}^\true}
+
+%%% stuff from mud paper %%%
+\newcommand{\initialCov}{\Sigma_\text{init}}
+\newcommand{\observedCov}{\Sigma_\text{obs}}
+\newcommand{\predictedCov}{\Sigma_\text{pred}}
+\newcommand{\updatedCov}{\Sigma_\text{up}}
+\newcommand{\initialMean}{\param_0}
+\newcommand{\observedMean}{\yobs}
+
+\newcommand{\mudpt}{\param^{\text{MUD}}}
