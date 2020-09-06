@@ -1,5 +1,10 @@
 \subsection{1D Heat Rod}\label{ex:heat-set-sample}
 
+We demonstrate that the same principles at play in Example\ref{ex:decay-set-sample} apply to another nonlinear problem.
+The set-- and sample--based methods are functionally equivalent solution methods which leverage the same foundational measure--theoretic principles.
+Here, the quantification of uncertainty is for the thermal conductivity properties of a material based on temperature data collected after heating it in an experiment.
+
+
 Consider the one-dimensional heat equation with homogeneous Neumann boundary conditions on the unit interval:
 
 \begin{equation}
@@ -18,9 +23,15 @@ f(x) = A e^\frac{- (x-0.5)^2}{w} \Chi_{[0,0.5]}(t)
 \end{equation}
 where $\Omega = (0,1)\times (0,1)$ is the space-time interior and $f(x,t) = A e^\frac{- (x-0.5)^2}{w} \Chi_{[0,0.5]}(t)$.
 
-Here, we interpret the following problem as heating the middle of an infinitesimally thin unit-length rod for half a second with the heat-source modeled by a Gaussian curve with amplitude $A=50$ and variance of $w=0.05$.
+Here, we interpret the following problem as heating the middle of an infinitesimally thin unit-length rod for half a second with a heat-source modeled by a Gaussian curve with amplitude $A=50$ and variance of $w=0.05$.
+This heat source is turned on at the beginning of the experiment and turned off halfway through the 1-second duration.
+
 The rod is subdivided in two, and each half has an uncertain thermal diffusivity $\kappa \in [0.01, 0.2]$.
-This yields a two-dimensional parameter space $\param = (\param_1, \param_2) \in [0.01, 0.2]\times [0.01, 0.2]$, where $\param_1$ represents the thermal diffusion on the left-half and $\param_2$ is the $\kappa$ for the right half.
+This yields a two-dimensional parameter space $\param = (\param_1, \param_2) \in [0.01, 0.2]^2$, where $\param_1$ represents the thermal diffusion on the left-half and $\param_2$ is the $\kappa$ for the right half.
+
+Two measurement locations along the rod are used for taking a measurement
+We assume a uniform density for each observation with a side--length of $0.1$ and attempt to identify a set which contains our true reference value of $\paramref = (0.15, 0.05)$.
+In Figure~\ref{fig:heatrod-sol-ex} we show the solution to this SIP for the set-- and sample--based methods for $N=50$ parameter samples used to explore $\pspace$.
 
 \begin{figure}[h]
 \begin{minipage}{.475\textwidth}
@@ -29,6 +40,12 @@ This yields a two-dimensional parameter space $\param = (\param_1, \param_2) \in
 \begin{minipage}{.475\textwidth}
 \includegraphics[width=\linewidth]{examples/fig_heatrod_q1/HeatrodModel--sample_N50_mc.png}
 \end{minipage}
-\caption{The inverse image of the reference measure for set-based (left) and sample-based (right) solutions for $N=50$ parameter samples.}
+\caption{The inverse image of the reference measure for set-based (left) and sample-based (right) solutions for $\nsamps=50$ parameter samples.}
 \label{fig:heatrod-sol-ex}
 \end{figure}
+
+The experimental results in \ref{fig:heatrod-sol-ex} both show images which identify $\paramref$ as a feasible solution.
+Both solutions again agree on the support of the inverse image.
+We will look a the impacts of the sample size $\nsamps$ in the next chapter and study convergence towards a high-fidelity solution for different choices of measurement locations and values of $\paramref$.
+
+[ TK - I don't know, there's not a whole lot to say. At this point I'm just establishing that both these methods are more or less equivalent despite having quite different algorithmic approaches.]
