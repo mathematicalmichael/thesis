@@ -513,7 +513,7 @@ Overall, this motivates the MUD point as an \emph{alternative parameter estimate
 These ideas are explored further in Section~\ref{sec:high-dim-linear-example} and utilized in the analysis of QoI maps constructed from noisy measurement data associated with a true parameter value in Section~\ref{sec:data-maps}.
 We end this section by summarizing the above results in the following theorem stating the existence and uniqueness of a MUD point for the linear Gaussian case.
 
-\begin{thm}\label{thm:MUD_existence_uniqueness}
+\begin{theorem}\label{thm:MUD_existence_uniqueness}
 Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
 If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
 \begin{enumerate}[(a)]
@@ -521,7 +521,7 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 \item $Q(\mudpt) = \observedMean$.
 \item If $d=p$, $\mudpt$ is given by $A^{-1}$. If $d<p$, $\mudpt$ is given by~\eqref{eq:mud-point-analytical-final} and the covariance associated with this point is given by~\eqref{eq:updatedCov_final}.
 \end{enumerate}
-\end{thm}
+\end{theorem}
 
 
 
