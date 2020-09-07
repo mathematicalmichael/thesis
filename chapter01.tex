@@ -26,14 +26,14 @@ There are many ways to write a functioning program to demonstrate a proof-of-con
 
 Decisions made early in the software design cycle have lasting impacts on future features and functionality.
 Rigor is added to libraries through the writing of \emph{unit tests}, and use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible.
-Code that only runs on the computer of the author is impractical since any thorough critique requires independent verification.
+Code that only runs on the author's computer is impractical, since any thorough critique requires independent verification.
 Without proper context and architecture, new ideas that are implemented in programs are unlikely to be adopted.
 
 \subsection{Reproducibility}
-This thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data in a novel Data-Consistent framework\---it also serves to document the process of ensuring that the work herein is \textbf{fully reproducible}.
+This thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data in a novel Data-Consistent framework\---it also serves to document the process of ensuring that the work is \textbf{fully reproducible}.
 In mathematics, reproducibility is ensured through the use of proofs, which motivate the original work presented here.
 However, as the title of this thesis suggests, much of the focus is actually on the computational implementation of the novel research into Data Consistent Inversion, studying the impact of using computers to perform the task of making conclusions based on data.
-The implementation of mathematics on computers is done through software.
+Mathematics is implemented on computers through software.
 We are therefore concerned with ensuring the expected functionality of that software, which aligns with our training as mathematicians; we care deeply about making sure things are rigorous.
 
 In short, we want to make sure that theory aligns with practice, and that both live up to high standards of intellectual scrutiny.
@@ -55,15 +55,13 @@ A cloud service called Binder [ TK - cite mybinder.org] allows one-click deploym
 
 \section{Software Contributions}\label{sec:ch01-software}
 
-As discussed in \ref{sec:motivations}, the entirety of the mathematical content herein has been incorporated into freely available open-source software, including this work itself.
-The novel mathematical developments that have gone into the work herein are all reflected in various modules and sub-modules as part of the BET Python package.
+As discussed in \ref{sec:motivations}, the entirety of the mathematical content presented has been incorporated into freely available open-source software, including this document.
+The novel mathematical developments that have gone into this work are all reflected in various modules and sub-modules as part of the BET Python package.
 This software suite follows a number of industry best-practices for code-coverage (\ref{sec:code-coverage}) and continuous integration (\ref{sec:continuous-integration}), i.e. the code is well-tested (\ref{sec:unit-testing}).
 
-A significant proportion of the effort involved in the writing of this thesis revolved around learning about the art and practice of modern (open-source) software development.
-As new ideas sprang up, our research group found itself coding and re-coding the same methods that had yet to be incorporated into user-friendly, computationally efficient, and properly-parallelized libraries.
-Over the years, the software fell behind the state-of-the-art in research, and previous maintainers of code had moved on from their academic positions.
+A significant effort in the writing of this thesis involved learning about the art and practice of modern (open-source) software development.
 The author spent most of 2019 bringing the software in-line with the latest developments in Data-Consistent Inversion.
-
+[TK - later on, put some more in here, we may move this all to a separate chapter, so this section would set the stage for that chapter. i.e. this section is written last.]
 
 \subsection{Software Design and Architecture}\label{sec:architecture}
 

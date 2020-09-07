@@ -20,28 +20,28 @@ where we use $\pp$ to distinguish the \emph{posterior} from the updated density 
 
 Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
 We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
-We compare the Bayesian posterior to our updated density, but temporarily abuse notation for the sake of comparison and use $\updated$ to refer to both, with $\pp$ representing the posterior when the distinction needs to be made. 
+We compare the Bayesian posterior to our updated density, but temporarily abuse notation for the sake of comparison and use $\updated$ to refer to both, with $\pp$ representing the posterior when the distinction needs to be made.
 
-$L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a normalizing constant, known as the \emph{evidence} \cite{Smith}, ensures the posterior density integrates to one:
+$L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a normalizing constant (known as the \emph{evidence} \cite{Smith}), which ensures the posterior density integrates to one:
 \[
 C = \int_\pspace \initial\lam L_\dspace(d | \param) \, d\param.
 \]
 
-Note that the likelihood function is not necessarily a density.
+Note that there are no constraints or requirements that likelihood function be a density\footnote{It is just the case that in order to pose problems where we can align the two methods, we need to form $L$ as a density.}.
 In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\initial(\param) L_\dspace (d | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
-In other words, $L_\dspace (d | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data. 
+In other words, $L_\dspace (d | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data.
 An interpretation of $L_\dspace (d | \param)$ is the relative likelihood that a single parameter $\param\in\pspace$ explains the observed data, whereas $\observed(\qlam)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
 
+In this framework, there is a different notion of consistency, referring to certain asymptotic properties of $\updated$ in the limit of infinite data \cite{Barron, Silverman}.
 It is important to note that the Bayesian framework poses a different question for which a different answer is sought, which is based on the presence of $L_\dspace(d | \param)$ in place of $\observed(\qlam)$.
 Specifically, the problem analyzed by the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \cite{Smith, Concrete, Complete}.
-In this framework, there is a different notion of consistency, referring to certain asymptotic properties of $\updated$ in the limit of infinite data \cite{Barron, Silverman}.
-The philosophical underpinnings of Bayesian inference\---the underlying question being asked\---is akin to the following:
+The philosophical underpinnings of Bayesian inference is akin to the asking following:
 
 \begin{center}
   \emph{How does one incorporate collected data to shift prior beliefs about parameter values?}
 \end{center}
 
-This is in contrast to the Data-Consistent framework, where we seek a pull-back measure: a description of the uncertainty set that explains the variation in the observations under a given description of error.
+The philosophical underpinnings of Bayesian inference are distinct from the Data-Consistent framework, where we seek a pull-back measure: a description of the uncertainty set that explains the variation in the observations under a given description of error.
 This approach expresses a desire to reconstruct a distribution (or probability measure), asking:
 
 \begin{center}
@@ -49,8 +49,7 @@ This approach expresses a desire to reconstruct a distribution (or probability m
 \end{center}
 
 We note that there are problems that one can formulate where the observed density corresponds directly to a normalized likelihood function familiar to Bayesian statisticians, as we demonstrate below.
-
-One difference that is immediately obvious between the two solutions is the use of normalizing constant $C$ in $\pp$ not present in $\updated$, as discussed in Corollary~\ref{cor:int} above.
+One difference between the two solutions is the use of normalizing constant $C$ in $\pp$ not present in $\updated$, as discussed in Corollary~\ref{cor:int} above.
 To illustrate the two approaches, we explore the impact of this difference in the example below, taken from \cite{BJW18}.
 
 \begin{ex}
@@ -87,8 +86,8 @@ The likelihood (observed density) is shown as a solid red line.
 
 % [TK - removed paragraph] We can see in Figure~\ref{fig:comparison} that the two approaches pose different questions and thus yield different results.
 % The Data-Consistent Inversion framework seeks to recreate the observed density, which it does for both $p=1$ and $p=5$, but the Bayesian approach is a combination of both the observed and the push-forward of the prior.
-
-For the sake of fairness, it is worth noting that Bayesians do not push-forward their posterior density, so in some sense this comparison is not entirely fair.
+[TK - a lot of this discussion is well-covered in the intro to the mud paper... let's move it here??]
+Bayesians do not push-forward their posterior density, so in some sense this comparison is not entirely fair.
 It is not the goal of Bayesian inference to recreate the likelihood function in this way.
 Rather, the point of maximum likelihood would be propagated and perturbed with the assumed noise model.
 This is because Bayesian inverse problems are fundamentally posed as parameter-identification (an optimization to be performed), not distribution estimation.
