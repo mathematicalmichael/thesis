@@ -1,18 +1,16 @@
 \subsection{Background and Motivation}
-The open-source software package BET was developed actively from 2012-2015 as part of research performed under grant [TK grant-NSF+DOE].
-It was originally written in Python 2.7 and is administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github].
+The open-source software package BET was developed actively from 2012-2015 under grant [TK grant-NSF+DOE].
+It was originally written in Python 2.7 and is currently administered by the Computational Hydrology Group at the University of Texas: Austin through their UT-CHG GitHub group [TK - cite Github].
 The initial purpose of this open-source software package was to implement the methods first described in [TK - cite BET papers] for the description and solution of stochastic inverse problems summarized in Section~\ref{sec:ch02-set}.
-
-In the intermittent years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]).
+In the intervening years since its original publication in [TK - date of first release, cite Github], the BET package has seen two major releases and the incorporation of several sub-modules (e.g. the functions in {\tt sensitivity} implement much of the original research performed by Dr. Walsh [TK - cite Scott]).
 
 
 \subsection{Upgrades, Updates, and Features}
 Since the last major release [TK - cite latest release], the Python community announced the end of long-term support for Python 2 [TK - cite announcement].
-Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which suggested that BET should likely undergo the same transition.
-
+Several of the dependencies in BET have been actively developed in Python 3 with no updates to the Python 2 analogs, which necessitated an upgrade to allow the package to be a usable contribution to open source software.
 The work summarized in Section~\ref{sec:ch02-sample} was implemented in Python 3 independently by the author through the release of the ConsistentBayes package.
 Since that code was used for many of the preliminary results for this work, it made very little sense to re-implement them in Python 2 for BET given the recent trends in community development.
-With funding made available through the NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 was the most sensible choice.
+With funding made available through the NSF [TK - cite grant], the opportunity to upgrade BET to Python 3 allowed the library to avoid falling into disuse by relying on an unsupported language.
 
 
 \subsubsection{Version 2.1.0}
@@ -24,19 +22,18 @@ Future installations (starting in 2020) will not limit the versions of some core
 
 \subsubsection{Version 2.2.0}
 Several releases of BET (after the upgrade to Python 3 in v2.1.0), incorporated developments that will be discussed herein.
-For
-
+[TK - i have no recollection what the significance of this was]
 
 \subsubsection{Version 2.2.1}
 Major bugfix for parallel testing allowed tests to pass for more than 2 processors.
 For some tests, this involved changing the setup parameters to ensure the problem was large enough to break up onto up to 8 processors.
-For others, siginficant changes had to be made to structure to allow for proper saving and loading of files in parallel.
+For others, significant changes had to be made to structure to allow for proper saving and loading of files in parallel.
 
 
 \subsubsection{Version 2.3.0}
 This release incorporated the sampling-based approach discussed in Section~\ref{sec:ch02-sample}.
-However, it never made it to the master branch of the project due to architectural changes.
-It was used for generating many of the results initially by pointing to {\tt install\_bet.sh} which pulled the specific branch, but eventually swapped for Version 3.0.
+However, it never made it to the master branch of the project due to architectural changes in BET.
+It was used for generating many of the results in this thesis initially by pointing to {\tt install\_bet.sh} which pulled the specific branch, but eventually this was swapped for Version 3.0.
 
 \subsubsection{Version 3.0}
 This version implemented the sample-based approach by the introduction of new sub-classes.
