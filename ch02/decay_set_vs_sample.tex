@@ -1,8 +1,7 @@
 
 \subsection{Exponential Decay}\label{ex:decay-set-sample}
 
-We would like to demonstrate the qualitative differences in the solutions provided by the set-- and sample--based methods for a nonlinear problem.
-To this end, we consider the exponential decay problem with uncertain decay rate and initial condition (which are paired to form the 2-D vector $\param$):
+To demonstrate the qualitative differences in the solutions provided by the set-- and sample--based methods for a nonlinear problem, we consider an exponential decay problem with uncertain decay rate and initial condition (which are paired to form the 2-D vector $\param$):
 $$
 \begin{cases}
   \frac{\partial u}{\partial t} & = \param_1 u(t), \\
@@ -40,7 +39,7 @@ The sample-based approach, especially at this low sample size (density estimatio
 It does not capture the equivalence--class nature of the solution set the way the set--valued one does, which benefits from using $\ndiscs=1$ (aligning with the choice of uniform observed density).
 
 
-We address what would occur had we been able to observe earlier in time, say at $t=0.5$ by showing the associated solutions under the same experimental conditions in \ref{fig:heatrod-sol-ex2}.
+We address what would occur had we been able to observe earlier in time at $t=0.5$ by showing the associated solutions under the same experimental conditions in \ref{fig:heatrod-sol-ex2}.
 There is a marked reduction in uncertainty, as several regions of $\pspace$ have been ruled out from consideration.
 
 

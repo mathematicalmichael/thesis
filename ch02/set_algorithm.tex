@@ -50,8 +50,9 @@ Voronoi-cell discretization (partition) induced by $\nsamps = 25 $ uniform i.i.d
 
 The third stage then identifies the collection of Voronoi cells in $\pspace$ that approximate the contour events in $\cborel$ defined by $\qoi^{-1}(D_\idisc)$ for $\idisc=1,\hdots,\ndiscs$. This allows us to formulate the consistent solution to the discretized SIP on $(\pspace, \cborel, \contourP)$ as illustrated in step (S2) of Fig.~\ref{fig:scheme}.
 Finally, the fourth stage\---associated with step (S3) in Fig.~\ref{fig:scheme}\---uses a discrete version of the ansatz to approximate the probability of $\VV_\iparam$ for $\iparam=1,\dots,\nsamps$.
-This results in an approximate probability measure, denoted by $\PP_{\pspace, \ndiscs, \nsamps}$, which produces the same probability estimates for events $A$ and $A\setminus \set{ \param^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
+This results in an approximate probability measure, denoted by $\updatedPxNM$, which produces the same probability estimates for events $A$ and $A\setminus \set{ \param^{(\iparam)} }_{\iparam=1}^\nsamps$, which are identical almost everywhere with respect to $\pmeas$.
 
 Note that Algorithm~\ref{alg:inv_density} makes no mention of the method by which the samples $\set{ \param^{(\iparam)} }_{\iparam=1}^{\nsamps}$ were generated or sets in $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ are chosen.
 $\set{ \param^{(\iparam)} }_{\iparam=1}^{\nsamps}$ may be generated using uniform random sampling, latin hypercube sampling, or even regular grids.
-A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ below.
+A thorough discussion of the choices involved in making such decisions is beyond the scope of this work, though we touch briefly on the discretization of $\dspace$ in the following section.
+\vfill

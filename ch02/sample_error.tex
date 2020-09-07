@@ -1,10 +1,16 @@
 \subsection{Descriptions of Error}\label{sec:sample-error}
 
-KDE is now the primary source, show relevant triangle inequality here.
-Summarize Troy and Tim's work on the sensitivity analysis of everything.
-Note: the stability results from that work appear to already be in here.
+[TK - this section below is still a bit rough, but the ideas are starting to get laid out]
 
-Then, we have by repeated application of the triangle inequality that
+The source of approximation error in the sample-based approach comes from a fundamentally different source.
+We transfer the burden of responsibility for accurate approximation towards the data space instead of the parameter space.
+To estimate a push forward distribution, samples that are drawn from the initial density represent our total model evaluation budget.
+For the sample-based approach, it is important to ask: \emph{Is the number of samples still important for accurate approximation?}
+We demonstrate that the answer is yes, but the dependence is shifted from the parameter space to the data space, which is often of a lower dimension, which requires less samples to accurately approximate due to the dependence of density approximation on dimension.
+We construct a similar triangle inequality as in \ref{sec:set-error}, but the sources of error now bear different interpretations.
+
+We have by repeated application of the triangle inequality that
+
 \begin{equation}
 \label{eq:sample-triangleineq}
 d(\PP_{\pspace, \ndiscs, \nsamps, h}, \paramP) \leq
@@ -13,24 +19,19 @@ d(\PP_{\pspace, \ndiscs, \nsamps, h}, \paramP) \leq
 \underset{ \text{(E3)} }{\underbrace{d(\PP_{\pspace, \ndiscs}, \paramP) }}.
 \end{equation}
 
-The source of approximation error in the sample-based approach comes from a fundamentally different source.
-We transfer the burden of responsibility for accurate approximation towards the data space instead of the parameter space.
-We have to estimate a push forward distribution, where the number of samples drawn from the initial density, representing our total model evaluation budget,
-Is still important for accurate approximation?
 
-We construct a similar triangle and a quality as the previous section, but the sources of error now bear different interpretations.
-
-Since there is no air in approximating the specification of an observed distribution, the only source is error are those that arise from inaccurately assigning probability two samples in the denominator of equation.
-The merits of different density proclamation methods is beyond the scope of this work, we provide a brief review of the challenges involved with approximating distributions in high dimensions.
-In some sense there is a game to be played between balancing the size of the data space and the number of samples available to characterize it.
+Since there is no error in approximating the specification of an observed distribution, the only sources of error are those that arise from inaccurately assigning probability to samples in the denominator of equation \eqref{eq:updated-density} (i.e., approximating the predicted distribution/measure).
+The merits of different density approximation methods is beyond the scope of this work, but we provide a brief review of the challenges involved with approximating distributions in high dimensions.
+In some sense there is a need to balance the size of the data space and the number of samples available to characterize it.
+If model evaluation is cheap, larger data spaces can be constructed to be more informative and have better geometric properties for approximating a solution.
+If model evaluations are limited, or perhaps already exhausted, then there may be motivation to pose a one-dimensional problem because it minimizes error in the predicted distribution due to dimension.
 We are motivated to minimize the difference in dimension between input output space but as the dimension of the day is best grows, our approximation error at a fixed sample size grow out of proportion.
 
-This is the so called curse of dimensionality.
 We summarize some illustrative results for clarification from \cite{Silverman} on the topic of one-dimensional Gaussian density estimation.
 The table in \ref{table:silverman} shows the required sample size as a function of dimension required to ensure that the relative mean square error at zero is less than 0.1 (which says nothing of global accuracy).
 
 \begin{figure}
-  \begin{tabular}{ l | l }
+  \begin{tabular}{ l | r }
   \hline \\ Dimensionality & Required Sample Size\\ \hline
   1  & 4\\
   2  & 19\\
@@ -47,5 +48,6 @@ The table in \ref{table:silverman} shows the required sample size as a function 
 \label{table:silverman}
 \end{figure}
 
-To achieve this tolerance of 0.1 for a integrated square error $E \int (\hat{f} - f)^2 / \inf f^2$ would require approximately $1.7$ times the samples shown in \ref{table:silverman} for dimensions up to 10 \cite{Silverman}.
-The sample sizes required grow even larger for global measures of accuracy, which are fortunately rarely required to achieve in practice due to the nature of $\observed$ assigning probability over only a region of $\predicted$.
+To achieve this tolerance of 0.1 for an integrated square error $E \int (\hat{f} - f)^2 / \inf f^2$ would require approximately $1.7$ times the samples shown in \ref{table:silverman} for dimensions up to 10 \cite{Silverman}.
+Required sample sizes grow even larger for global measures of accuracy.
+Fortunately these are infrequently required in practice due to the nature of $\observed$ assigning probability over only a small region of the practical support of $\predicted$.
