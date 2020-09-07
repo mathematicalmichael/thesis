@@ -1,4 +1,4 @@
-stableinitial\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
+\subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
 
 To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data.
 
@@ -15,7 +15,7 @@ To make this precise, we use the following:
   The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
   It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
   \begin{equation}\label{eq:predicted}
-    \predictedP (E) = P_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
+    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
   \end{equation}
   which should be recognizable from the definition of the forward problem.
   In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
@@ -65,19 +65,19 @@ These definitions are combined to form the \emph{updated density}, originally de
   \end{equation}
 \end{defn}
 
-Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical/statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
-Moreover, this Corollary provides the basis for a useful numerical diagnostic that informs us about the quality of a solution based on finite sampling and density estimatation.
+Corollary~\ref{cor:int} is critical to understanding some significant differences between the statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
+Moreover, this Corollary provides the basis for a useful numerical diagnostic that informs us about the quality of a solution based on finite sampling and density estimation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
 
-We first recall the Total Variation (TV) metric, defined as
+We first recall the Total Variation (TV) metric on the space of probability measures, defined as
 \begin{equation}\label{eq:tv}
-d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
+d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
 \end{equation}
-where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $P_f, P_g$, respectively.
+where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $\PP_f, \PP_g$, respectively.
 The stability results below are all with respect to the TV metric, which is widely used in the literature and is also known as \emph{statistical distance}~\cite{GS02, Smith, Silverman}.
 We first define stability with respect to perturbations in the data.
 
@@ -114,7 +114,7 @@ This next definition and result are useful in analyzing the sensitivity of the u
   \label{thm:stableinitial}
 \end{thm}
 
-Taken together, these stability results provide assurances that the updated density we obtain is ``accurate'' up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$.
+Taken together, these stability results provide assurance that the updated density we obtain is accurate up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$.
 Given that specifying the definition of a ``true'' initial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
 If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
