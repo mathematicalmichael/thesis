@@ -31,7 +31,7 @@ We summarize some illustrative results for clarification from \cite{Silverman} o
 The table in \ref{table:silverman} shows the required sample size as a function of dimension required to ensure that the relative mean square error at zero is less than 0.1 (which says nothing of global accuracy).
 
 \begin{figure}
-  \begin{tabular}{ l | l }
+  \begin{tabular}{ l | r }
   \hline \\ Dimensionality & Required Sample Size\\ \hline
   1  & 4\\
   2  & 19\\
@@ -48,5 +48,6 @@ The table in \ref{table:silverman} shows the required sample size as a function 
 \label{table:silverman}
 \end{figure}
 
-To achieve this tolerance of 0.1 for a integrated square error $E \int (\hat{f} - f)^2 / \inf f^2$ would require approximately $1.7$ times the samples shown in \ref{table:silverman} for dimensions up to 10 \cite{Silverman}.
-The sample sizes required grow even larger for global measures of accuracy, which are fortunately rarely required to achieve in practice due to the nature of $\observed$ assigning probability over only a region of $\predicted$.
+To achieve this tolerance of 0.1 for an integrated square error $E \int (\hat{f} - f)^2 / \inf f^2$ would require approximately $1.7$ times the samples shown in \ref{table:silverman} for dimensions up to 10 \cite{Silverman}.
+Required sample sizes grow even larger for global measures of accuracy.
+Fortunately these are infrequently required in practice due to the nature of $\observed$ assigning probability over only a small region of the practical support of $\predicted$.
