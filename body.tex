@@ -73,7 +73,7 @@ We therefore address several technical challenges where appropriate to both poin
 The rest of this paper is outlined as follows.
 {\bf This is done last.}
 
-
+[ TK - I feel like this can move up earlier somewhere? Maybe not... Ch2 really doesn't hit on this.]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,7 +81,7 @@ The rest of this paper is outlined as follows.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As discussed in the introduction, the typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\lam_true$.
+As discussed in the introduction, the typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
 This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
 To help build intuition about these differences, we summarize key details about these inverse problems and their solutions before presenting an example that highlights differences in solutions.
 
@@ -98,7 +98,7 @@ To help build intuition about these differences, we summarize key details about 
 
 %The Bayesian inversion framework  is perhaps the most
 %popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-%As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\lam_true$.
+%As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
 
 \subsection{Terminology, notation, and the inverse problems}
 
@@ -151,14 +151,14 @@ Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) de
 \subsubsection{The Bayesian inverse problem}
 
 We now develop a typical Bayesian inverse problem following the framework described in \cite{Stuart10}.
-Let $d$ denote the ``noisy'' data obtained on $Q(\lam_true)$, which is often represented as
+Let $d$ denote the ``noisy'' data obtained on $Q(\paramref)$, which is often represented as
 \begin{equation*}
-	d = Q(\lam_true) + \xi,
+	d = Q(\paramref) + \xi,
 \end{equation*}
 where $\xi$ is a random variable used to model the measurement error that is often assumed to follow a Gaussian distribution.
 Then, the data-likelihood function, often written as a conditional density, $\pi_\text{like}(d\, |\, \param)$, is formed.
 This describes the differences in relative likelihoods that the data could have been generated from a particular $\param$.
-Ideally, the largest values of $\pi_\text{like}(d\, | \, \param)$ occur whenever $\param$ is a ``good'' approximation to the true parameter $\lam_true$.
+Ideally, the largest values of $\pi_\text{like}(d\, | \, \param)$ occur whenever $\param$ is a ``good'' approximation to the true parameter $\paramref$.
 The data-likelihood function is distinct from the observed density used in the observation-consistent framework.
 
 The next ingredient in the Bayesian framework is the specification of a prior density denoted by $\pi_\text{prior}(\param)$.
@@ -215,7 +215,7 @@ Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace =
 For the observation-consistent framework, we assume $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$.
 The push-forward of initial PDF, the observed PDF, and the updated PDF are shown in Fig.~\ref{fig:bayes-comparison}.
 
-For the Bayesian inverse problem, we assume $d\in \dspace$ with $d=Q(\lam_true)+\xi$ where $\xi\sim N(0,0.1^2)$.
+For the Bayesian inverse problem, we assume $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 %In particular, we assume that $d=0.25$ and follow the process of \cite{Stuart_Bayesian} to form the data-likelihood function so that it matches the observed density.
 We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
 The posterior and its push-forward are also shown in Fig.~\ref{fig:bayes-comparison}.
@@ -247,9 +247,9 @@ The takeaway to the above discussion and example is that each density is solving
 The posterior density is intended to provide point estimates of a true parameter value whereas the updated density is intended to quantitatively characterize natural variations in parameter values.
 
 Suppose we reformulated this example slightly to make the role of data more central.
-Specifically, suppose $Q(\lam_true)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\lam_true)+\xi$ where $\xi\sim N(0,0.1^2)$.
+Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
-In this case, the objective is to use the posterior or updated density to produce an estimate of $\lam_true$.
+In this case, the objective is to use the posterior or updated density to produce an estimate of $\paramref$.
 In the next section, we motivate the use of the maximal updated density point as a means of providing a useful point estimate to parameters.
 
 
@@ -525,18 +525,19 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Higher-Dimensional Linear Gaussian Examples}\label{sec:high-dim-linear-example}
 
-%For under-determined QoI maps, $\lam_true$ is un-recoverable due to the set-valued nature of the set $Q^{-1}(\observedMean)$.
-%While the incorporation of prior beliefs through the use of an initial or prior density allows us to determine a single ``best'' estimate of $\lam_true$, this is not necessary.
-%For instance, the least squares (LS) solution produces a single point estimate of $\lam_true$ by enforcing a requirement of minimal norm.
+%For under-determined QoI maps, $\paramref$ is un-recoverable due to the set-valued nature of the set $Q^{-1}(\observedMean)$.
+%While the incorporation of prior beliefs through the use of an initial or prior density allows us to determine a single ``best'' estimate of $\paramref$, this is not necessary.
+%For instance, the least squares (LS) solution produces a single point estimate of $\paramref$ by enforcing a requirement of minimal norm.
 %The LS solution will lie at the intersection of hyper-balls centered at the origin and the set-valued hyperplanes associated with $Q^{-1}(\observedMean)$, which is visible in Figure~\ref{fig:regularization} in 2-dimensions.
 
 %By contrast, the Tikhonov-regularized solution selects a point that is biased by an initial covariance on $\Lambda$.
 %The observation-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
-%The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\lam_true$.
+%The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\paramref$.
 
 %There may or may not be good reasons for us to impose a requirement on the norm of the solution.
 %If there are physical reasons relating to the magnitude of parameters involved, then the least-squares solution may very well be more accurate than the other two.
@@ -588,16 +589,16 @@ The impact of this is also explored in the following examples.
 \subsection{Impact of Output Dimension}%: Random $\RR^{k\times 100}$ matrix for $k=1,2,\ldots,100$}
 
 
-%Here, we demonstrate how the various estimates of a true parameter $\lam_true$ are impacted by the number of available QoI.%, especially in problems where the dimension of $\pspace$ is high.
-%As more QoI are incorporated, the expectation is that the accuracy of $\lam_true$ improves as well.
-%In the following example, we demonstrate that the MUD point does indeed perform this way, and compare its ability to approximate $\lam_true$ against two other popular solution methods: the least-squares solution and Tikhonov-regularized solution, i.e. the MAP point.
+%Here, we demonstrate how the various estimates of a true parameter $\paramref$ are impacted by the number of available QoI.%, especially in problems where the dimension of $\pspace$ is high.
+%As more QoI are incorporated, the expectation is that the accuracy of $\paramref$ improves as well.
+%In the following example, we demonstrate that the MUD point does indeed perform this way, and compare its ability to approximate $\paramref$ against two other popular solution methods: the least-squares solution and Tikhonov-regularized solution, i.e. the MAP point.
 
-We consider QoI defined by $A\param+\mathbf{b}$ for $A\in\RR^{k\times 100}$ where $k=1,2,\ldots,100$ to demonstrate how the various estimates of a true parameter $\lam_true$ are impacted by the number of available QoI.
+We consider QoI defined by $A\param+\mathbf{b}$ for $A\in\RR^{k\times 100}$ where $k=1,2,\ldots,100$ to demonstrate how the various estimates of a true parameter $\paramref$ are impacted by the number of available QoI.
 To generate the matrices, we first generate $10,000$ independent identically distributed (i.i.d.) random numbers from a $N(0,1)$ distribution that are arranged into a reference $\RR^{100\times 100}$ matrix.
 
-The same distribution is also used for generating the components of the 100-dimensional vectors defining a reference bias vector $\mathbf{b}$ and reference parameter $\lam_true$.
+The same distribution is also used for generating the components of the 100-dimensional vectors defining a reference bias vector $\mathbf{b}$ and reference parameter $\paramref$.
 A multivariate Gaussian distribution is used for the initial density, with zero mean and $\initialCov$ chosen as a diagonal covariance with random entries drawn from $U[0.5, 1.5]$ and sorted in descending order.%\footnote{A random seed of $271$ is used so that the covariance in this example matches that in the following, where we perform a similar study but vary the row-rank of $A$ instead of the dimension.}
-%We then attempt to recover $\lam_true$ with the three solution methods: MUD, MAP, and Least Squares, leveraging analytical solutions for all three since we have posed a linear problem under Gaussian assumptions.
+%We then attempt to recover $\paramref$ with the three solution methods: MUD, MAP, and Least Squares, leveraging analytical solutions for all three since we have posed a linear problem under Gaussian assumptions.
 The prior density is also a zero mean multivariate Gaussian distribution.
 However, to demonstrate the impact of the strength of prior beliefs on the MAP point, we choose the prior covariance to be $\alpha\initialCov$  for $\alpha=0.001, 0.01, 0.1, $ and $10$.
 Here, smaller values of $\alpha$ correspond to a ``stronger'' belief in the prior since the prior density becomes more concentrated near the prior mean.
@@ -607,24 +608,24 @@ To study the impact of dimension on the MUD, MAP, and least squares estimates, w
 sequence of inverse problems by truncating the rows of the reference matrix and bias vector.
 %
 %We scale the initial covariance $\initialCov$ by a factor $\alpha$ for $\alpha = 0.01, 0.1, 1, 10 $ to simulate varying levels of attachment to the specification of the initial density.
-The results are summarized in the left plot of Figure~\ref{fig:lin-error}, which shows convergence towards $\lam_true$ for all the problems considered with the exception of several MAP estimates corresponding to strongly-held beliefs in the prior.
+The results are summarized in the left plot of Figure~\ref{fig:lin-error}, which shows convergence towards $\paramref$ for all the problems considered with the exception of several MAP estimates corresponding to strongly-held beliefs in the prior.
 
 
 %We demonstrate that the MUD solution retains the accuracy of least squares solutions while simultaneously offering the flexibility of specifying initial beliefs.
 %Normally in order to incorporate such beliefs, one would perform Tikhonov regularization, usually with the inclusion of a hyper-parameter which scales the additional parameter-space norm in the objective function.
 %Mathematically, this scaling factor applied to the norm is equivalent to scaling the matrix representation of the initial (prior) covariance.
 %Increasing this scaling factor is interpreted as having less confidence in these initial assumptions.
-%Conversely, decreasing it is equivalent to putting more emphasis on the prior beliefs than the evidence provided by the data, which causes MAP solutions to drift away from the solution contour (equivalence class) to which $\lam_true$ belongs.
+%Conversely, decreasing it is equivalent to putting more emphasis on the prior beliefs than the evidence provided by the data, which causes MAP solutions to drift away from the solution contour (equivalence class) to which $\paramref$ belongs.
 %The MUD point, by contrast, is not impacted by such a scaling of the initial covariance, providing \emph{consistent} solutions which demonstrate levels of accuracy that MAP points only exhibit for larger values of scaling factors.
 
 %To illustrate this with a concrete example, we consider the problem $A\param + b = y$ by first generating a square matrix $A$ of dimension $100$ with standard Gaussian entries.
-%The same distribution is used for the components of vector $b$ and $\lam_true$ as well.
+%The same distribution is used for the components of vector $b$ and $\paramref$ as well.
 %A Gaussian distribution is used for the initial density, with mean at the origin (to complement the structure imposed by the least-squares framework), and a diagonal covariance with entries drawn from $U[0.5, 1.5]$ and sorted in descending order.\footnote{A random seed of $271$ is used so that the covariance in this example matches that in the following, where we perform a similar study but vary the row-rank of $A$ instead of the dimension.}
-%We then attempt to recover $\lam_true$ with the three solution methods: MUD, MAP, and Least Squares, leveraging analytical solutions for all three since we have posed a linear problem under Gaussian assumptions.
+%We then attempt to recover $\paramref$ with the three solution methods: MUD, MAP, and Least Squares, leveraging analytical solutions for all three since we have posed a linear problem under Gaussian assumptions.
 %To study the impact of dimension, we solve inverse problems for a sequence of maps generated by truncating the rows of $A$.
 %Finally, several scalings of the initial covariance are chosen to simulate a common procedure in the Bayesian literature: hyper-parameter optimization.
 %We scale the initial covariance $\initialCov$ by a factor $\alpha$ for $\alpha = 0.01, 0.1, 1, 10 $ to simulate varying levels of attachment to the specification of the initial density.
-%The results are summarized in Figure~\ref{fig:lin-error}, which shows convergence towards $\lam_true$ for all the problems considered with the exception of several Tikhonov solutions corresponding to strongly-held beliefs in initial assumptions about parameters.
+%The results are summarized in Figure~\ref{fig:lin-error}, which shows convergence towards $\paramref$ for all the problems considered with the exception of several Tikhonov solutions corresponding to strongly-held beliefs in initial assumptions about parameters.
 
 We note that the MUD solution is the same for all choices of $\alpha$ and corresponds to the same level of accuracy that the MAP point achieves when $\alpha$ is chosen to be large.
 In other words, the MUD point is not impacted by a scaling of the initial covariance, providing \emph{consistent} solutions which demonstrate levels of accuracy that MAP points only exhibit for larger values of scaling factors.
@@ -658,7 +659,7 @@ To control the rank of $A$, we first construct a reference $\RR^{100\times 100}$
 We then compute a singular value decomposition of this reference matrix of the form $USV^\top$ and construct 100 rank-1 matrices of the form $A_i=\mathbf{u}_i s_i \mathbf{v}_i^\top$ for $i=1,\ldots,100$ where $\mathbf{u}_i$ and $\mathbf{v}_i$ denote the $i$th columns of $U$ and $V$, respectively and $s_i$ denotes the $i$th singular value.
 Then, we analyze the impact of $A = \sum_i^r A_i$ for $r=1,\ldots,100$.
 %\footnote{We validated by alternatively generating rank-1 matrices from random Gaussian vectors $a_i \in \RR^100$ to form $A_i = a_i a_i^T$, and included assertion checks in code to validate correct rank with our generating functions.}.
-Aside from the differing construction of $A$, the rest of the choices involved in the experiment ($\lam_true$, the reference bias vector, and the distributions involved) is identical to the previous example.
+Aside from the differing construction of $A$, the rest of the choices involved in the experiment ($\paramref$, the reference bias vector, and the distributions involved) is identical to the previous example.
 
 In the right plot of Figure~\ref{fig:lin-error}, we
 %super-impose the pseudo-inverse solution in light blue and see that it matches the black line associated with the MUD error much of the time.
@@ -672,7 +673,7 @@ Also, we again see that the MAP estimates are impacted by the strength of prior 
 \section{Data-constructed QoI maps and MUD points}\label{sec:data-maps}
 
 Suppose there exists $d$ measurement devices for which repeated noisy data are obtained.
-For each $1\leq j\leq N$, denote by $\mathcal{M}_j(\lam_true)$ the $j$th measurement device, and denote by $N_j$ the number of noisy data obtained for $\mathcal{M}_j(\lam_true)$.
+For each $1\leq j\leq N$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device, and denote by $N_j$ the number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
 Let $d_{j,i}$ denote the $i$th noisy datum obtained for the $j$th measurement where $1\leq i\leq N_j$.
 To simplify the presentation and some of the resulting notation, we assume an unbiased additive error model for the measurement noise with independent identically distributed (i.i.d.) Gaussian errors so that
 \begin{equation}\label{eq:obs_data_error}
@@ -691,9 +692,9 @@ The data-defined QoI map we consider in this work is referred to as the weighted
 %%\begin{equation}\label{eq:qoi_WME}
 %%	Q_{(\param,\xi) := \frac{1}{\sqrt{S}} \sum_{j=1}^S \frac{M_j(\param)-d_j(\xi_j)}{\sigma_j}.
 %%\end{equation}
-By a substitution of \eqref{eq:obs_data_error} into \eqref{eq:qoi_WME} and rationalizing the denominator of the multiplicative factor, $Q_{\text{WME},j}(\lam_true)$ is identified as the sample average of $N_j$ random draws from an i.i.d.~$N(0,N_j)$ distribution.
-By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\lam_true$ in \eqref{eq:obs_data_error}.
-Subsequently, each component of $Q_\text{WME}(\lam_true)$ is a random draw from an $N(0,1)$ distribution.
+By a substitution of \eqref{eq:obs_data_error} into \eqref{eq:qoi_WME} and rationalizing the denominator of the multiplicative factor, $Q_{\text{WME},j}(\paramref)$ is identified as the sample average of $N_j$ random draws from an i.i.d.~$N(0,N_j)$ distribution.
+By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\paramref$ in \eqref{eq:obs_data_error}.
+Subsequently, each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.
 Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ distribution.
 
 
@@ -764,12 +765,14 @@ Despite these differences, both examples share the following details.
   \item A reference parameter is chosen and used to establish a (noiseless) reference solution (in space or time).
   \item An i.i.d. additive noise model with $\xi \sim N(0,\sigma^2)$ is used to perturb the reference temporal and spatial solutions.
   \item Since the magnitude of solutions in both examples is $\mathcal{O}(1)$, noise variances are chosen so that $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$, with $\tau=0.1$. In other words, we simulate an ``engineering accuracy'' by permitting measurement noise to vary by  approximately 10\% of the signal magnitude.
-%  \item Vertical axes on convergence plots represent the absolute error between $\lam_true$ and $\mudpt$, with bounds chosen to be fixed across plots within a figure.
+%  \item Vertical axes on convergence plots represent the absolute error between $\paramref$ and $\mudpt$, with bounds chosen to be fixed across plots within a figure.
 %  \item Errors are reported as the average over 20 sets of independently generated noisy data.
 %  \item To estimate convergence rates, we compute first-order linear regressions for the logarithm (base 10) of the mean and variances for the absolute error. The coefficient for the mean in the regression appears as an annotation in the figures.
 \end{itemize}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{ODE Example}\label{subsec:ode-example}
 \begin{figure}[htb]
@@ -792,7 +795,7 @@ Despite these differences, both examples share the following details.
   \includegraphics[width=0.4\linewidth]{figures/ode/ode_convergence_mud_obs_var}
   \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   {
-  \color{blue}{Change "Proportion of Time Elapsed" to "N" and plot vs $N$. Remove the orange scatter points and curves. Change titles to $\mathbb{E}(\abs{\mudpt - \lam_true})$ and $Var(\abs{\mudpt-\lam_true})$.}
+  \color{blue}{Change "Proportion of Time Elapsed" to "N" and plot vs $N$. Remove the orange scatter points and curves. Change titles to $\mathbb{E}(\abs{\mudpt - \paramref})$ and $Var(\abs{\mudpt-\paramref})$.}
   }
   }
   \label{fig:ode-convergence-obs}
@@ -812,13 +815,18 @@ and measurements begin at $t=1$.
 
 The initial uncertainty in the decay rate is given by a uniform density on $\param \in \Lambda = (0, 1)$, and $10,000$ samples from this density are used to estimate the push-forward and updated densities as well as the MUD points.
 Noisy data are simulated over the interval $t \in [1,3]$ assuming a $100$Hz measurement sensor.
-An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\lam_true = 0.5$, and a particular realization of noisy data shown as perturbed points around it.
+An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\paramref = 0.5$, and a particular realization of noisy data shown as perturbed points around it.
 
-For 20 different realizations of $N=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ noisy measurement data, we construct $Q_\text{WME}$ with $u(t;\param)$ replacing $M_j(\param)$ in~\eqref{eq:qoi_WME}, estimate $\mudpt$, and analyze the statistical error in these estimates of $\lam_true$.
-In the left plot of Figure~\ref{fig:ode-convergence-obs}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\lam_true$) decreases.
+For 20 different realizations of $N=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ noisy measurement data, we construct $Q_\text{WME}$ with $u(t;\param)$ replacing $M_j(\param)$ in~\eqref{eq:qoi_WME}, estimate $\mudpt$, and analyze the statistical error in these estimates of $\paramref$.
+In the left plot of Figure~\ref{fig:ode-convergence-obs}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\paramref$) decreases.
 The right plot demonstrates that the precision (i.e., the variance in the error) is also reduced by using more data.
 These results are also visualized in the plots of Figure~\ref{fig:ode-reference} where the distinct red curves in the top plot are the signals associated with the 20 $\mudpt$ estimates associated with the 20 independent trials of $N=20$ noisy measurements.
 However, in the bottom plot, these 20 red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{PDE Example}\label{subsec:pde-example}
 

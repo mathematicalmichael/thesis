@@ -1,7 +1,7 @@
 \section{Extension to Vector-Valued QoI Maps}
 The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
 These examples were chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
-The linear examples in Section~\ref{subsec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
+The linear examples in Section~\ref{sec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
 In those examples, we showed that our ability to resolve a true parameter improved as the gap between input dimension and operator row-rank shrunk.
 
 The rank-deficiency of an operator can be attributed either to ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
@@ -19,7 +19,7 @@ However, we summarize that the extension of the equations presented in Section~\
 In the PDE example of \ref{sec:pde-example}, we presumed knowledge about the structure of $g$ being a sine curve; we only had to estimate a scaling coefficient for it.
 To demonstrate the use of the WME QoI in solving inverse problems in higher dimensions, we set up the following series of examples in the same spirit with respect to the model and measurement locations, but presuming less about $g$ than before.
 
-We choose a polynomial function $g$ which exhibits similar behavior to the former sine curve, but without the symmetry about $x_2=0.5$, and scale it so that it takes a minimum at the same value as before (at $u = -3$).
+We choose a polynomial function $g$ which exhibits similar behavior to the former sine curve, but without the symmetry about $x_2=0.5$, and scale it so that it takes a minimum at the same value as before (at $g = -3$).
 We selected $g(x) = \alpha x_2^2 (x_2 - 1)^5$, with $\alpha$ chosen to satisfy the aforementioned design specification (so that $g(x)=-3$ for $x=(0,\frac{2}{7})$).
 Suppose that as modelers, we are told only that $g$ is negative and bounded below by $-4$.
 
@@ -45,7 +45,7 @@ One thousand initial parameter samples (our model evaluation budget) were used t
 \subsubsection{A Scalar-Valued QoI Map}
 
 Our first inverse problem involves solving the SIP with the same scalar-valued QoI map constructed by incorporating all the measurements into \eqref{eq:qoi_WME}.
-To give the reader a sense of the ability for this ``basis'' to match the one-hundred measurements used for inversion, we plot the best match of our thousand parameter samples with respect to these measurements in purple in the top half of Figure~\ref{fig:pde-highd-2d-scalar-mud}.
+To give the reader a sense of the ability for this ``basis'' to match the one-hundred measurements used for inversion, we plot the best match of our thousand parameter samples with respect to these measurements in purple in the top half of Figure~\ref{fig:pde-highd-2d-projection}.
 There, we also plot the closest match to the interpolating piecewise-linear function in green, and note that we have a near-identical match among our thousand parameter samples, though the best predictor of the data we collected is a different sample.
 We are curious which of these two functions the MUD will more closely resemble.
 The residual Q-Q plots for the two functions are shown to illustrate the differences in misfit to provide an alternative view to the goodness-of-fit.
@@ -54,11 +54,11 @@ The residual Q-Q plots for the two functions are shown to illustrate the differe
 \begin{figure}
 \centering
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_proj_D2.png}
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
-\caption{
+\caption{ TK - x-axis label needs to be fixed and this figure needs a proper caption.
 }
-\label{fig:pde-highd-2d-scalar-mud}
+\label{fig:pde-highd-2d-projection}
 \end{figure}
+
 
 In the bottom half of \ref{fig:pde-highd-2d-scalar-mud}, we show the MUD solutions arising from twenty trials using different observations of noise.
 Of particular interest is that the solutions seem to discover one of two types of explanations for the data, seemingly unable to decide which half of the domain represents a better estimate of $g$'s minimum value.
@@ -66,6 +66,13 @@ As mentioned, this set of solutions comes from collapsing all hundred measuremen
 [TK - cite Troy's result about dimensions from AWR paper] implies that we have an incentive to construct maps which ``close the gap,'' so to speak, between input and output dimension, to fully leverage the geometry of available information.
 The contour structure of the updated density samples plotted in red in \ref{fig:pde-highd-2d-example}.
 
+\begin{figure}
+\centering
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
+\caption{ TK - x-axis label needs to be fixed and this figure needs a proper caption.
+}
+\label{fig:pde-highd-2d-scalar-mud}
+\end{figure}
 
 \FloatBarrier
 \subsubsection{Some (Options for) Vector-Valued QoI Maps}
@@ -168,7 +175,7 @@ By the time all hundred measurements are incorporated, the MUD solutions appear 
 \end{figure}
 
 How we incorporate the available data has a dramatic impact on our ability to reduce uncertainty in the parameter space.
-We attempt to illustrate this by requesting the reader juxtapose figures of the initial samples in \ref{fig:pde-highd-initial} to those in \ref{fig:pde-highd-2d-scalar-mud} and \ref{fig:pde-highd-2d-vector-mud}.
+We attempt to illustrate this by requesting the reader juxtapose figures of the initial samples in \ref{ffig:pde-highd-initial-2d} to those in \ref{fig:pde-highd-2d-scalar-mud} and \ref{fig:pde-highd-2d-vector-mud}.
 To better quantify the differences between the two types of maps, it is more rigorous to study how close we are to $g$ (in function space).
 Since the approximation $\hat{g}$ that arises from evaluating the MUD point is piecewise-linear, and $g$ is continuous, we use the knot points and the trapezoidal rule to approximate the $L^2$ norm of $\abs{g - \hat{g}}$ (using {\tt scipy}), and plot the resulting histograms for the scalar- and vector-valued $\param$s whose relative ratios exceeded a threshold, and compare them against samples from the initial density, and show the result in Figure~\ref{fig:pde-highd-2d-hist}.
 

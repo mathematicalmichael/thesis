@@ -1,5 +1,11 @@
 \subsection{Example: Initial Condition and Rate of Something Decaying}\label{ex:decay-set-sample-accuracy}
 
+TK - if we keep this example, I need to write about it.
+
+\emph{Why is it here?}
+Because I can. LOL. No, but seriously...
+Whereas the truth was impacting our choice of optimal spatial location for measurements in the previous example, we now find that measuring at different points in time changes our inverse density as well, and should be taken into consideration for optimal experimental design purposes.
+
 \begin{figure}[h]
 \begin{minipage}{.4\textwidth}
 \includegraphics[width=\linewidth]{examples/fig_decay_q1/DecayModel--set_N50_em.png}
@@ -20,7 +26,11 @@
 \label{fig:decay-convergence}
 \end{figure}
 
-With these nonlinear cases, we find that taking an ``on average'' approach is inefficient, as there can be dramatic differences in the geometric properties of the inverse images in the parameter space depending on the location.
-These results motivate further study into utilizing different QoI maps (perhaps some of those other four combinations available to us in this example) depending on where the samples came from in the parameter space.
-In general, we saw in this example that given that two maps invert into sets of similar size on average, using the one with lower skewness results in less samples required to accurately approximate the inverse image.
-The maps we used had average skewnesses that differed by 0.5 (instead of by 1), and the trend from the linear examples still held in significant portions of the parameter space.
+In the nonlinear examples, the location of the true parameter value has just as much of an impact on our ability to recover an inverse density as does the map we use (induced by where or when we measure).
+However, we cannot know the location of the parameters that led to our observations ahead of time, so the best we can hope to do is pick maps that perform well ``on average,'' which may seem a bit dis-satisfactory if it means leaving out data that has already been collected.
+In situations where the decision of where/when to measure needs to be made, there is no getting around needing to make decisions based on the average skewness of the operator, but when data has already been collected, we have several options at our disposal.
+
+For instance, we may look into solving a series of inverse problems, passing the updated solution from one as the initial density to the next, choosing different QoI maps each time from the available data.
+We explore this in \ref{sec:ch05-sequential} with respect to the MUD point, but leave exploration of the full densities being iterated for future work.
+Another approach would be to construct a piecewise-defined QoI map, where maps can be used in locally-optimal ways to create globally-optimal geometric properties from the contributions of the individuals components.
+[TK - we have work like this... but we should just leave it to future work since it's some time to clean it up for presentation... ]
