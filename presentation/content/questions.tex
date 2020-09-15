@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 \begin{itemize}
-	\item <1-> Let $\PosxM$ be the exact solution to the approximate inverse problem using the discretization of $P_\dspace$ by $M$ samples
-	\item <2-> Let $\PosxNM$ denote the approximate solution to the approximate problem under both aforementioned discretizations, so 
+	\item <1-> Let $\predictedPxM$ be the exact solution to the approximate inverse problem using the discretization of $P_\dspace$ by $M$ samples
+	\item <2-> Let $\predictedPxNM$ denote the approximate solution to the approximate problem under both aforementioned discretizations, so 
 \[
-\Pos = \lim\limits_{M\to\infty} \PosxM = \lim\limits_{M\to\infty} \lim\limits_{N\to\infty} \PosxNM
+\predictedP = \lim\limits_{M\to\infty} \predictedPxM = \lim\limits_{M\to\infty} \lim\limits_{N\to\infty} \predictedPxNM
 \]
-	\item <3-> Let $\PosxNMh$ denote the approximate solution given the model discrepancy
+	\item <3-> Let $\predictedPxNMh$ denote the approximate solution given the model discrepancy
 \[
-\PosxNM= \lim\limits_{h \downarrow 0} \PosxNMh
+\predictedPxNM= \lim\limits_{h \downarrow 0} \predictedPxNMh
 \]
 \item <3-> $h$ refers to a mesh or other numerical parameter that determines the accuracy of the numerical solution evaluation of the QoI map
 \end{itemize}
@@ -39,10 +39,10 @@
 Repeated application of the triangle inequality yields
 \begin{equation}
 \label{eq:triangleineq}
-d_{\text{TV}}(\PosxNMh, \Pos) \leq 
-\underset{ \text{(E1)} }{\underbrace{ d_{\text{TV}}(\PosxNMh, \PosxNM)}} + 
-\underset{ \text{(E2)} }{\underbrace{ d_{\text{TV}}(\PosxNM, \PosxM) }}+ 
-\underset{ \text{(E3)} }{\underbrace{ d_{\text{TV}}(\PosxM, \Pos) }}.
+d_{\text{TV}}(\predictedPxNMh, \predictedP) \leq 
+\underset{ \text{(E1)} }{\underbrace{ d_{\text{TV}}(\predictedPxNMh, \predictedPxNM)}} + 
+\underset{ \text{(E2)} }{\underbrace{ d_{\text{TV}}(\predictedPxNM, \predictedPxM) }}+ 
+\underset{ \text{(E3)} }{\underbrace{ d_{\text{TV}}(\predictedPxM, \predictedP) }}.
 \end{equation}
 \begin{itemize}
 
@@ -236,7 +236,7 @@ $6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
 
 		\includegraphics[width=0.5\linewidth]{./images/Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
 
-\caption{The results of $d_\text{TV}(\PosxNM, \PosxNN)$.}
+\caption{The results of $d_\text{TV}(\predictedPxNM, \predictedPxNN)$.}
 \label{fig:skew}
 \end{figure}
 \end{frame}

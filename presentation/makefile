@@ -49,3 +49,4 @@ clean:
 	/bin/rm -f *.bbl
 	/bin/rm -f *.nav
 	/bin/rm -f *.snm
+	/bin/rm -f *.synctex.gz
