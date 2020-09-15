@@ -1,0 +1,209 @@
+\mode<presentation>
+
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{tikz}
+\usetikzlibrary{shadings,positioning}
+\usepackage{varwidth}
+
+\definecolor{CUGold}{RGB}{207,184,124} % #CFB87C
+\definecolor{CUDarkGray}{RGB}{86,90,92}
+\definecolor{CULightGray}{RGB}{162,164,163}
+\definecolor{CUBlue}{RGB}{75,146,219} % #4B92DB
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamerfont{title}{size=\fontsize{16}{18}\selectfont}
+\setbeamerfont{subtitle}{size=\fontsize{10}{14}\selectfont}
+\setbeamerfont{author}{size=\fontsize{8}{10}\selectfont}
+\setbeamerfont{headsection}{size=\fontsize{8}{14}\selectfont}
+\setbeamerfont{headsubsection}{size=\fontsize{6}{8}\selectfont}
+\setbeamerfont{pagenumber}{size=\fontsize{8}{8}\selectfont}
+\setbeamerfont{date}{size=\fontsize{8}{10}\selectfont}
+\setbeamerfont{frametitle}{size=\fontsize{10}{14}\selectfont}
+
+\setbeamercolor*{palette primary}{fg=white,bg=CUGold}
+\setbeamercolor*{palette secondary}{fg=white,bg=CUDarkGray}
+\setbeamercolor*{palette tertiary}{fg=white,bg=CULightGray}
+\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+\setbeamercolor*{palette quinary}{fg=white,bg=CUBlue}
+\setbeamercolor*{palette senary}{fg=CUBlue,bg=white}
+
+\setbeamercolor*{frametitle}{fg=black,bg=white}
+\setbeamercolor*{title}{bg=white,fg=CUGold}
+\setbeamercolor*{subtitle}{bg=white,fg=CUGold}
+\setbeamercolor*{title page header}{parent=palette quaternary}
+\setbeamercolor*{frame title header}{bg=black, fg=CUGold}
+\setbeamercolor*{frame page header}{bg=CUGold, fg=white}
+\setbeamercolor*{frame footer}{fg=black, bg=white}
+\setbeamercolor*{titlefooter}{bg=black, fg=white}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+\setbeamercolor*{lineup}{parent=palette primary}
+\setbeamercolor*{linemid}{parent=palette secondary}
+\setbeamercolor*{linebottom}{parent=palette tertiary}
+
+% Block environment
+\setbeamercolor*{structure}{fg=CUGold}
+\setbeamercolor{block title}{use=structure,fg=structure.fg!50!black,bg=structure.fg!70!bg}
+\setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+\setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!70!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+\setbeamertemplate{blocks}[rounded][shadow]
+
+% Items.
+\setbeamercolor*{item}{fg=CUGold}
+\defbeamertemplate{itemize item}{squarealt}
+{\tiny\raise.5ex\hbox{\donotcoloroutermaths$\blacksquare$}}
+\defbeamertemplate{itemize subitem}{squarealt}
+{\large\raise.1ex\hbox{\guillemotright}}
+\defbeamertemplate{itemize subsubitem}{squarealt}
+{\tiny\raise.3ex\hbox{\donotcoloroutermaths$\blacksquare$}}
+\setbeamertemplate{items}[squarealt]
+
+% Margins.
+\newlength{\beamer@fancy@normalmargin}
+\setlength{\beamer@fancy@normalmargin}{.06\paperwidth}
+\setbeamersize{text margin left=\beamer@fancy@normalmargin}
+\setbeamersize{text margin right=\beamer@fancy@normalmargin}
+\setlength\leftmargini{.6\beamer@fancy@normalmargin}
+\setlength\leftmarginii{.6\beamer@fancy@normalmargin}
+\setlength\leftmarginiii{.6\beamer@fancy@normalmargin}
+
+% Frame Footer.
+\defbeamertemplate*{footline}{decolines theme}
+{
+  \leavevmode
+  \makebox[\paperwidth]{
+      \begin{tikzpicture}
+          \node [left color=white, right color=black,thick,rectangle,inner sep=1pt ] (footer) {
+              \begin{minipage}{\paperwidth}{
+                      \begin{flushright}
+                          \includegraphics[height=15pt]{cu-denver}
+                          \phantom{XXX}
+                      \end{flushright}
+                  }\end{minipage}
+              };
+      \end{tikzpicture}
+          }
+  \makebox[\paperwidth]{
+      \begin{tikzpicture}
+          \node [minimum height=3pt,fill=white, inner sep=0pt ] (footerbottom) {
+              \begin{minipage}{\paperwidth}{
+                  }\end{minipage}
+              };
+      \end{tikzpicture}
+  }
+}
+
+% Frame Header
+\providecommand\insertframetitle{}
+\defbeamertemplate*{headline}{decolines theme}
+{
+    \leavevmode
+    \makebox[\paperwidth]
+    {
+        \begin{tikzpicture}
+            \begin{scope}[ minimum height=14pt, rectangle, inner sep=0pt ]
+                \node [ minimum width=0.95\paperwidth, fill=black ] (headerbar) at (0,0)
+                {
+                    \begin{minipage}{0.95\paperwidth}
+                        {
+                            \ifx\insertsection\@empty
+                            {
+                                \hspace{-3pt}\usebeamerfont{headsection}\hspace{1em}{\sc{\color{CUGold}\insertframetitle}}
+                                \phantom{$\vert$}\vskip2pt 
+                            }
+                            \else
+                            {
+                                \hspace{-3pt}\usebeamerfont{headsection}\hspace{1em}{\sc{\color{CUGold}\insertsection}}
+                                \ifx\insertsubsection\@empty
+                                {\phantom{$\vert$}\vskip2pt} 
+                                \else
+                                {
+                                    {\color{CULightGray}$\vert$}\hspace{0.5em}{\usebeamerfont{headsubsection}{\sc{\color{CULightGray}\insertsubsection}}}
+                                    \vskip2pt 
+                                }
+                                \fi
+                            }
+                            \fi
+                        }
+                    \end{minipage}
+                };
+                \node [ minimum width=1pt, fill=CUGold, right=-1pt of headerbar ] (verticalbar) { };
+                \node [ minimum width=0.05\paperwidth, fill=CUGold, right=0pt of headerbar ] (framenumber) 
+                { \color{white}\usebeamerfont{pagenumber}\insertframenumber{} };
+            \end{scope}
+        \end{tikzpicture}
+    }
+}
+\defbeamertemplate*{frametitle}{decolinestheme}
+{
+    \hbox{
+        \ifx\insertsection\@empty{}
+        \else
+        {
+            \begin{beamercolorbox}[wd=.95\paperwidth,ht=15pt,dp=0pt]{}
+                \hspace{3pt}\usebeamerfont{frametitle}{\insertframetitle}
+                \vskip3pt
+            \end{beamercolorbox}
+        }
+        \fi
+    }
+}
+
+% Title page
+\defbeamertemplate*{title page}{fancy}[1][]
+{  
+  {\parskip0pt\offinterlineskip
+      \hbox{\hskip-\Gm@lmargin\hbox{\vbox{
+          \@tempdima=\textwidth\textwidth=\paperwidth\hsize=\textwidth\def\\{,}\vbox{}\vskip-1.40ex%
+    % Title.
+          \makebox[\paperwidth]{
+              \begin{tikzpicture}
+                  \node [minimum height=0.88\paperheight, bottom color=CUDarkGray,
+                  top color=black,thick,rectangle,inner sep=1pt ] (title) at (0,0) {
+                      \begin{minipage}{\paperwidth}
+                          {
+                              \begin{center}
+                                  \vspace{2.5em}
+                                  \usebeamerfont{title}\color{CUGold}\inserttitle\\
+                                  \ifx\insertsubtitle\@empty
+                                  \else
+                                  {\usebeamerfont{subtitle}\color{CUGold}\insertsubtitle\\}
+                                  \fi
+                                  \vspace{2.5em}
+                                  \usebeamerfont{author}\color{CULightGray}\insertauthor\\
+                                  \vspace{1.0em}
+                                  \usebeamerfont{author}\color{CULightGray}\insertinstitute\\
+                                  \vspace{1.0em}
+                                  \usebeamerfont{date}\color{CULightGray}\insertdate{}
+                              \end{center}
+                          }
+                      \end{minipage}
+                  };
+    % Footer
+                  \node [minimum height=0.12\paperheight, minimum
+                      width=\paperwidth, below =1pt of title,top color=black, bottom color=black,inner sep=0pt ] (titlefooter) {
+                      \begin{minipage}{\paperwidth}
+                          \begin{center}
+                              \includegraphics[height=.10\paperheight]{mathStatSci_horiz_4c_rv}
+                          \end{center}
+                      \end{minipage}
+                  };
+    % Gold separation bar
+                  \node [minimum height=0.01\paperheight, minimum
+                      width=\paperwidth, below =-1pt of title,top color=CUGold, bottom color=CUDarkGray, inner sep=0pt ] (goldbar) {
+                      \begin{minipage}{\paperwidth}
+                          {}
+                      \end{minipage}
+                  };
+              \end{tikzpicture}
+          } 
+      }
+  } } } 
+}
+\mode<all>

@@ -47,3 +47,9 @@ jobs:
 
     - name: Clean up TeX build files
       run: make clean
+
+    - name: Build presentation
+      run: |
+        cd presentation
+        make
+        make clean
