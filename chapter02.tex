@@ -24,20 +24,21 @@ Similarly, the range of the QoI defines the \emph{data space} $\dspace$, i.e.
 $$\dspace = \qoi(\pspace) \subset \RD$$
 
 We let $\qspace$ denote the set of possible QoI maps for which it is possible to collect experimental data.
-For example, suppose we may record only a single temperature measurement at any of ten locations in space-time.
+For example, suppose we can record only a single temperature measurement at any of ten locations in space-time.
 Then $\qspace$ is defined by ten possible QoI maps.
 If we can record any two such measurements, then $\qspace$ is defined by $\binom{10}{2} = 45$ possible maps.
-Observe that $\qspace$ could easily be uncountable, for example if we were not limited to the spatial locations (or time) at which we could record temperature measurements.
+Observe that $\qspace$ could easily be uncountable\--for example if we were not limited to the spatial locations (or time) at which we could record temperature measurements.
 However, for simplicity, we will only discuss problems where $\qspace$ is finite.
 In the event that we need to compare maps, we adopt the notation $\dspace_{\qoi}$ to emphasize that the data space depends on the choice of QoI map $\qoi$; when the context is clear, we drop the subscript.
 The only assumption on $\qoi$ that we impose throughout this work is that of piecewise-differentiability.
 
 \subsection{Chapter Outline}
-First, to respect the order in which these results were researched and developed, we discuss set-based inversion.
+First, to reflect the order in which these results were researched and developed, we discuss set-based inversion.
 In the interest of clarity of exposition, we have adapted the notation of a sample-based approach developed later to express the construction of the former.
-Consequently, the references cited may require some work translating. Similarities and differences between the two approaches has heretofore avoided formal documentation, and this work serves to lay the groundwork for such a comparison.
+Consequently, the references cited may require some work translating to match the notation we used.
+Similarities and differences between the two approaches has heretofore avoided formal documentation due to the novelty of the observation-consistent approach, particularly with respect to its use for epistemic uncertainty quantification, and this work serves to lay the groundwork for such a comparison.
 
-In this chapter, we discuss the issues that arise from the need to numerically approximate the solutions to our inverse problems but study the implications in \ref{sec:set-error} and \ref{sec:sample-error}.
+In this chapter, we discuss the issues that arise from the need to numerically approximate the solutions to our inverse problems, and study the implications in \ref{sec:set-error} and \ref{sec:sample-error}.
 Discussion of the impact of sample size are kept to a minimum in this chapter in the interest of restricting the scope of chapter \ref{chapter:03} to the implications for convergence of (consistent) solutions to \eqref{eq:inverse-problem}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,7 +55,7 @@ Discussion of the impact of sample size are kept to a minimum in this chapter in
 \FloatBarrier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
+% \pagebreak
 \section{Sample-Based Inversion for Measures}\label{sec:ch02-sample}
 
 % Intro
@@ -81,21 +82,19 @@ Discussion of the impact of sample size are kept to a minimum in this chapter in
 In some examples, an analytic, closed-form expression for the QoI map is used.
 In these examples, term (E1) in Eq.~\eqref{eq:set-triangleineq} is identically zero.
 Furthermore, since the probabilities we introduce on $\dspace$ in the numerical results are uniform and our maps linear, the densities can be described analytically with a characteristic function.
-In this event, the solution $\paramP$ to the SIP is given exactly by a change of variables formula and it's support can be specified exactly.
+In this event, the solution $\paramP$ to the SIP is given exactly by a change of variables formula and its support can be specified exactly.
 By inverting characteristic functions, the solutions are also be members of this same family of functions if the choice of \emph{ansatz} (or \emph{initial density}) is taken to be uniform over $\pspace$.
 
 Such simplifications in the examples considered here allow us to study the DCI method for a class of functions for which a solution is readily available, and serves as a requisite testing ground before advancing to more nuanced problem definitions.
 In a sense, these are both ``unit'' (and ``regression'') tests for various aspects of the computational algorithms (and entire algorithms, respectively).
-
 We present a brief overview of the factors that influence our practical ability to accurately approximate $\paramP$ and $\updated$ using finite sampling.
 
-For the set-based approach discussed in \ref{sec:ch02-set}, it is desirable that $\ndiscs$ is chosen without respect to $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} is sufficiently small or eliminated entirely.
-This amounts to saying that the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater to some problem specifications.
+For the set-based approach discussed in \ref{sec:ch02-set}, $\ndiscs$ is chosen independent of $\nsamps$ so that (E3) = $d(\PP_{\pspace, \ndiscs}, \paramP)$ from \ref{sec:set-error} is sufficiently small or eliminated entirely.
+In other words, the decision about how to discretize the uncertainty in $\dspace$ is made a priori to cater to some problem specifications.
 We choose to impose uniform distributions on $\dspace$ so that the set-valued analog to $\observed$ is perfectly described with $\ndiscs=1$.
-This allows for a better comparison between the set- and sample-based approaches by eliminating this variable.
+Elimintating this variable allows for a better comparison between the set- and sample-based approaches.
 Therefore, we focus our attention on the source of error introduced by the primary contribution of error in Eq.~\eqref{eq:set-triangleineq}:  discretizing the parameter space, which is represented by the term (E2) = $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$.
 The number of samples fundamentally limits the characterization of events due to the resulting simple-function approximation of the density $d\paramP / d\pmeas$, which we compare to $\updated$ from the sample-based approach.
-
 Since there is no error introduced from discretizing $\pspace$ in the sample-based approach from \ref{sec:ch02-sample}, the primary contribution of error in this approach comes from approximating the push-forward density in situations where an analytical $\predicted$ is not known.
 
 \FloatBarrier

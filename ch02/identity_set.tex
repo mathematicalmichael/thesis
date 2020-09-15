@@ -90,7 +90,8 @@ The inverse image of this set is a characteristic function defined on $\pborel$,
 The fundamental challenge with the set-based approach is linked to the geometry of the induced Voronoi-cell tesselation on $\pspace$.
 With only $\nsamps = 100$ samples, we see in \ref{fig:ex:identity_set_1E2} that the region (which is supposed to be a square) hardly represents one.
 There is ample variation in the shape parameters of the induced sets $\VV_\iparam$ when so few samples are used.
-It is possible to ``get lucky'' with the aligning of boundaries between the true target density $\Chi_{[0.4, 0.6]^2}$, but the Figure is representative of the difficulty of using $\nsamps = 100$ random samples to describe a geometry.
+It is possible that some small sample sets will result in a Voronoi tesselation that aligns with the boundaries of the true target density $\Chi_{[0.4, 0.6]^2}$, but the figure is representative of the difficulty of using $\nsamps = 100$ random samples to describe a geometry.
+More often than not, it is hard to approximate a square with $100$ Voronoi cells that come from Mont-Carlo sampling of $\pspace$.
 With $\nsamps = 1000$, there are usually still significant differences in the symmetric difference of approximated and true supports of the densities.
 
 Below, we demonstrate the use of more samples to resolve the geometry of the desired set.
@@ -102,10 +103,12 @@ Below, we demonstrate the use of more samples to resolve the geometry of the des
 \caption{
 (Top):$\nsamps=1,000$ were used to discretize $\pspace$ and $\ndiscs=1, 4$ (left/right) were used to discretize $\dspace$.
 (Bottom): The same, except with $\nsamps=10,000$, where we finally begin to see something resembling the correct correct geometry.
-}
+As $\nsamps$ increases, the negative impact on error of choosing higher $\ndiscs$ is resolved.}
 \label{fig:ex:identity_set_1E3_1E4}
 \end{figure}
 
 
 We remark on the fact that in this particular situation, $\ndiscs = 1$ is a ``correct'' choice for the probability measure chosen, and $\ndiscs = 4$ actually introduces errors.
-The reason that the latter solutions have different values inside of the support of $\PPspace$
+The reason that the latter solutions have different values inside of the support of $\PPspace$ is because there are four sets in output space that the $\nsamps$ parameter samples may be mapped to, so the probability of all four receiving equal proportions of samples depends on increasing $\nsamps$.
+When $\ndiscs = 1$, all samples land in the same set and probability is assigned in equal proportion to each of them.
+Had we chosen a non-uniform density, this would fail to hold, and we would need to increase $\ndiscs$ and accordingly, $\nsamps$.

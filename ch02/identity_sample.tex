@@ -1,10 +1,9 @@
 \subsection{Example}\label{sec:sample-example}
 
 The set-based approach to solving inverse problems can lead to errors in approximating measures, particularly around the boundaries of the solution set.
-The sample-based approach that we summarized above does not rely on Voronoi-cell approximations of contour events, instead assigning probability to random samples drawn from an initial density.
-
-For estimating a uniform density over a subset of the initial parameter space, the sample-based approach is able to more accurately approximate it at a given sample size.
+By contrast, the sample-based approach we introduced above more accurately approximates a uniform density over a subset of the initial parameter space at a given sample size $\nsamps$.
 The reason for this is that the approach has a different source of error, involving estimating to push forward of the initial density.
+The sample-based approach does not rely on a Voronoi-cell approximation of contour events, and instead assigns probability to random samples drawn from an initial density.
 
 We are interested in studying how our ability to estimate a uniform density is impacted by the number of samples drawn from the initial density.
 We form an inverse problem with the identity map an standard uniform initial densities, with observed densities being uniform over $[0.4, 0.6]^2$, representing a hundred-fold reduction in uncertainty when the problem is solved
@@ -12,8 +11,8 @@ We form an inverse problem with the identity map an standard uniform initial den
 We solve the same problem as in the set-valued example \ref{sec:set-example}, but use a uniform initial density in place of a uniform ansatz.
 We sample $N=1E2$, $1E3$ and $1E4$ samples from the initial density and use Gaussian kernel density estimation to approximate the denominator in Eq [TK - eq], and show the resulting updated densities in Figure~\ref{fig:ex:identity_sampling_1E2} and \ref{fig:ex:identity_sampling_1E3_1E4} alongside the analytical solution.
 
-Gone are the jagged edges that we saw in \ref{fig:ex:identity_set_1E3_1E4}, replaced by clean squares.
-The relative probability is assigned within the support are also more uniform, visually represented by the
+The jagged edges of the shapes that we saw in \ref{fig:ex:identity_set_1E3_1E4} are replaced by unambiguous squares.
+The relative probability that is assigned within the support is also more uniform, visually represented by the uniformity of color in the density plot.
 
 \begin{figure}
 \begin{minipage}{.975\textwidth}
@@ -39,8 +38,6 @@ There is no signficant error in estimating the support of the distribution, only
 
 
 The sample-based method trades one source of accuracy for another.
-When estimating boundaries of a set which represents an equivalent class of solutions is important, the sample best method provides a compelling alternative to be set based method.
-
-However, we know that this is not without its pitfalls, as density estimation in high dimensions can become prohibitively prone to error.
-
-[ Silverman reference, back to section that was just introduced]
+The sample-based method provides a compelling alternative to be set-based method when estimating boundaries of a set (which represents an equivalent class of solutions), is important.
+When few model evaluations are available and the observed distribution is non-uniform, the lack of need to use nearest-neighbor sampling (discretizing with $\ndiscs$), also provides a benefit.
+However, we know that this is not without its pitfalls, as density estimation in high dimensions can become prohibitively prone to error \cite{Silverman}.

@@ -4,6 +4,9 @@ Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit 
 However, the results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
+We focus on the accuracy of the density/measure, since this is what solves our SIP.
+The updated solution can be used for point estimation, or used holistically for prediction under uncertainty.
+Regardless of the context for solving the SIP, it is important to address the sources of approximation error that pollute the observation-consistent framework.
 
 \input{ch03/impact.tex}
 
@@ -129,6 +132,7 @@ It is a combination of computational ease of implementation and theoretical impl
 
 \
 \section{Software Contributions}\label{sec:ch03-software}
+TK - Eh. I could take it or leave it at this point to be honest. may just be worth throwing all of this stuff into a chapter 7 and calling it a day.
 
 Talk about the BET module that computes metrics.
 Discuss testing, show sample of usage (disconnected from skewness, high-level).
