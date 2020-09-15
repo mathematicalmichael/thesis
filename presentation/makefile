@@ -14,6 +14,7 @@ FIGURES = $(shell find . -type f -name '*.pdf' | grep 'figures')
 REFS = $(shell find . -type f -name 'references*.bib')
 # custom latex environment/styles for python, bash, etc. (syntax highlighting)
 ENVS = $(shell ls env/*.tex) 
+THEME = $(shell find . -type f -wholename 'theme/*.pdf') 
 
 # file name (without .tex)
 FILENAME = presentation
@@ -28,8 +29,7 @@ TEXS = $(patsubst %, %.tex, $(TEXFILES))
 
 # style-file dependendencies (unlikely to change these, but just in case)
 DEPS := \
-	../ref/ucdDissertation.bst \
-	beamerthemeCUDenver.sty
+	../ref/ucdDissertation.bst
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
@@ -40,11 +40,12 @@ DEPS := \
 all: $(FILENAME).pdf
 
 # our main target
-$(FILENAME).pdf: $(TEXS) $(FILES) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS)
+$(FILENAME).pdf: $(TEXS) $(FILES) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS) $(THEME)
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 clean:
 	latexmk -c $(FILENAME).tex
 	/bin/rm -f *.spl
 	/bin/rm -f *.bbl
-
+	/bin/rm -f *.nav
+	/bin/rm -f *.snm
