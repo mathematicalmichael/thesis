@@ -1,0 +1,122 @@
+\documentclass[10pt]{beamer}
+
+\usetheme{CUDenver}
+
+\usepackage{mathtools}
+\usepackage[abs]{overpic}
+\setlength\unitlength{1mm}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{amsthm}
+\usepackage[mathcal]{euscript}
+\usepackage{algorithmic}
+\usepackage{boxedminipage}
+\usepackage{fancyvrb}
+\usepackage{epstopdf}
+\usepackage[lined,ruled]{algorithm2e}
+
+\newcommand{\tred}[1]{\textcolor{Red}{#1}}
+\newcommand{\tgreen}[1]{\textcolor{Green}{#1}}
+\newcommand{\tcyan}[1]{\textcolor{Cyan}{#1}}
+\newcommand{\tyellow}[1]{\textcolor{Yellow}{#1}}
+\newcommand{\tpurple}[1]{\textcolor{Purple}{#1}}
+\newcommand{\tblack}[1]{\textcolor{Black}{#1}}
+\newcommand{\tgrey}[1]{\textcolor{Grey}{#1}}
+\newcommand{\tdeepred}[1]{\textcolor{deepred}{#1}}
+\definecolor{Green}{rgb}{0,.5,0}
+%use for definitions
+\definecolor{Red}{rgb}{.8,.2,0}
+%use for emphasis
+\definecolor{Yellow}{rgb}{.6,.6,.1}
+%use for part titles
+\definecolor{Cyan}{rgb}{.2,.6,.7}
+%use for comments
+\definecolor{Purple}{rgb}{.4,0,1}
+%use for examples
+\definecolor{deepred}{rgb}{.53,.29,.24}
+%use for important points
+\definecolor{Black}{rgb}{0,0,0}
+%use for washout
+\definecolor{Grey}{rgb}{.45,.45,.45}
+\input{env/newcommands.tex}
+\synctex=1
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=6.5em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+\usepackage[english]{babel}
+
+\newtheorem{assumption}{Assumption}
+\newtheorem{defn}{Definition}
+
+
+\author{Michael Pilosov\\ \vskip 5pt{Advisor: Troy Butler}}%* \vskip 3pt Troy Butler}
+\title[CG]{How Geometric Features\\of Quantity of Interest Maps\\Impact Errors and Convergence\\of Sample-Based Solutions\\to Stochastic Inverse Problems}
+\institute{University of Colorado Denver}
+\date{\today}
+\begin{document}
+
+
+\begin{frame}[t,plain]
+    \titlepage
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notation and Terminology}
+% start the content of the presentation
+\input{intro_slides.tex}
+\input{problem_formulation.tex}
+
+\input{comparison.tex}
+\input{questions.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{}
+\vskip 64pt
+\begin{center}
+\Huge Thank You
+\end{center}
+\end{frame}
+
+
+\bibliographystyle{plain}
+\bibliography{../../ReferencesBib}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
