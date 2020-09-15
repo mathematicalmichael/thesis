@@ -26,11 +26,11 @@
 
 \begin{tikzpicture}[node distance=2cm, auto,]
  %nodes
- 
+
  % We make a dummy figure to make everything look nice.
  \node[] (dummy) {};
   \node[right=of dummy] (data) {$\dspace$};
-  
+
   \node[punkt, inner sep=5pt,below=of dummy]
  (model) {Model \\ (PDE)}
  	edge[pil,->, bend right=25] node[right] {$Q(u\lam)$} (data);
@@ -38,8 +38,8 @@
  \node[left=of dummy] (pspace) {$\Lambda$}
    edge[pil,->, bend right=45] node[left] {$u\lam$} (model)
    edge[pil,->, bend left=45] node[above] {$Q\lam$} (data);
-   
-   
+
+
 \end{tikzpicture}
 
 \vspace{1em}
@@ -117,7 +117,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
-\begin{itemize}[<+->]
+\begin{itemize}
 	\item State variable: $u$ {\color{gray}(e.g. heat, energy, pressure, deflection)}
 	\vskip 10pt
 	\item<.-> Parameters: $\lambda$ {\color{gray}(e.g. source term, diffusion, boundary data)}
@@ -125,12 +125,12 @@
 		\item Deterministic model: $\mathcal{M} (u, \lambda) = 0$, $$\mathcal{M}:\lambda \to u(\lambda)$$
 
 	\item Quantity of Interest map \tdeepred{(QoI)} - at least pcw differentiable \vskip 5pt
-		\begin{itemize}[<+->]
+		\begin{itemize}
 		\item Functional of the solution $$q: u(\lambda) \to \RR$$
 		\item Can be vector valued $$Q = \mat{c}{q_1\\ q_2\\ \vdots \\ q_d}$$
 		\item<.-> $Q(\lambda) := Q(u(\lambda))$
 	\end{itemize}
-	
+
 \end{itemize}
 
 \end{frame}
@@ -162,6 +162,6 @@
 
 {\scriptsize Figure adopted from \cite{BET14+} and used with permission}
 
-\tdeepred{Key Question:} Distinguish (assign probability to) events that belong to same contour. 
+\tdeepred{Key Question:} Distinguish (assign probability to) events that belong to same contour.
 \end{center}
 \end{frame}
