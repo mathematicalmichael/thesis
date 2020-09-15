@@ -21,7 +21,7 @@ FILENAME = presentation
 # dependency list: if changes detected in dependency, rebuild target
 TEXFILES := \
 	$(FILENAME) \
-	$(shell cat FILENAME.tex | grep input | sed 's|\\input{||g' | sed 's|}||g' | sed 's|.tex||g')
+	$(shell cat presentation.tex | grep input | sed 's|\\input{||g' | sed 's|}||g' | sed 's|.tex||g')
 
 # adds .tex to path name
 TEXS = $(patsubst %, %.tex, $(TEXFILES))
