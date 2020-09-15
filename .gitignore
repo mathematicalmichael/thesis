@@ -22,3 +22,8 @@ examples/*.gif
 *.pdf
 figures/trash
 *.xml
+*.nav
+*.snm
+presentation/images/*.png
+presentation/images/*/*.png
+presentation/images/*.eps
