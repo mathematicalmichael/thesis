@@ -5,7 +5,7 @@
 \begin{itemize}
 	\item In the explicit approach, a finite numerical approximation of (often uncountably many) events in $\sa$s is required.
 	\item Two primary sources of approximation error: 
-	\begin{itemize}[<+->]
+	\begin{itemize}
 	
 		\item (1) partitioning the parameter space $\pspace$ to approximate events in $\pborel$
 		\item (2) partitioning the data space $\dspace$ to approximate events in $\BBB_{\dspace}$
@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 \begin{itemize}
-	\item <1-> Let $\PosxM$ be the exact solution to the approximate inverse problem using the discretization of $P_\dspace$ by $M$ samples
-	\item <2-> Let $\PosxNM$ denote the approximate solution to the approximate problem under both aforementioned discretizations, so 
+	\item <1-> Let $\predictedPxM$ be the exact solution to the approximate inverse problem using the discretization of $P_\dspace$ by $M$ samples
+	\item <2-> Let $\predictedPxNM$ denote the approximate solution to the approximate problem under both aforementioned discretizations, so 
 \[
-\Pos = \lim\limits_{M\to\infty} \PosxM = \lim\limits_{M\to\infty} \lim\limits_{N\to\infty} \PosxNM
+\predictedP = \lim\limits_{M\to\infty} \predictedPxM = \lim\limits_{M\to\infty} \lim\limits_{N\to\infty} \predictedPxNM
 \]
-	\item <3-> Let $\PosxNMh$ denote the approximate solution given the model discrepancy
+	\item <3-> Let $\predictedPxNMh$ denote the approximate solution given the model discrepancy
 \[
-\PosxNM= \lim\limits_{h \downarrow 0} \PosxNMh
+\predictedPxNM= \lim\limits_{h \downarrow 0} \predictedPxNMh
 \]
 \item <3-> $h$ refers to a mesh or other numerical parameter that determines the accuracy of the numerical solution evaluation of the QoI map
 \end{itemize}
@@ -39,10 +39,10 @@
 Repeated application of the triangle inequality yields
 \begin{equation}
 \label{eq:triangleineq}
-d_{\text{TV}}(\PosxNMh, \Pos) \leq 
-\underset{ \text{(E1)} }{\underbrace{ d_{\text{TV}}(\PosxNMh, \PosxNM)}} + 
-\underset{ \text{(E2)} }{\underbrace{ d_{\text{TV}}(\PosxNM, \PosxM) }}+ 
-\underset{ \text{(E3)} }{\underbrace{ d_{\text{TV}}(\PosxM, \Pos) }}.
+d_{\text{TV}}(\predictedPxNMh, \predictedP) \leq 
+\underset{ \text{(E1)} }{\underbrace{ d_{\text{TV}}(\predictedPxNMh, \predictedPxNM)}} + 
+\underset{ \text{(E2)} }{\underbrace{ d_{\text{TV}}(\predictedPxNM, \predictedPxM) }}+ 
+\underset{ \text{(E3)} }{\underbrace{ d_{\text{TV}}(\predictedPxM, \predictedP) }}.
 \end{equation}
 \begin{itemize}
 
@@ -236,7 +236,7 @@ $6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
 
 		\includegraphics[width=0.5\linewidth]{./images/Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
 
-\caption{The results of $d_\text{TV}(\PosxNM, \PosxNN)$.}
+\caption{The results of $d_\text{TV}(\predictedPxNM, \predictedPxNN)$.}
 \label{fig:skew}
 \end{figure}
 \end{frame}
@@ -246,7 +246,7 @@ $6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-\begin{itemize}[<+->]
+\begin{itemize}
 	\item Let $t_0$ denote the initial time for the system being modeled 
 	\item Let $\set{t_i}_{i=1}^M$ denote a set of observation times such that $t_0\leq t_1<t_2<\ldots<t_M$
 	\item For each $1\leq i\leq M$, let $d_i$ denote the (noisy) measured (scalar) datum associated with some observable model output
@@ -265,7 +265,7 @@ $6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Fundamental Questions}
-\begin{itemize}[<+->]
+\begin{itemize}
 	\item How do we construct a QoI map that incorporates all these observations?
 	\item Should we treat observations as individual QoI in a vector-valued map or should we define a scalar-valued QoI map that incorporates all of the observations?
 	\item Choosing a vector-valued approach will certainly introduce skewness effects into the QoI map, but doing this in an ``optimal'' way can reduce uncertainty~\cite{Walsh}.
