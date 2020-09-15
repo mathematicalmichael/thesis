@@ -1,0 +1,238 @@
+\subsection{Problem Formulation and Solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+This now brings us to our central definition:
+
+\begin{defn}[Inverse Problem]\label{defn:consistency}
+Given a probability measure $\Obs$ on $(\dspace, \dborel)$, absolutely continuous with respect to $\mu_\dspace$, the \textbf{inverse problem} is to determine a probability measure $\Pos$ on $(\pspace, \pborel)$, absolutely continuous with respect to $\mu_\pspace$, 
+
+Given an event $E \in \mathcal{B}_\dspace$,
+\begin{equation}\label{eq:inv}
+\Pos(Q^{-1}(E)) = \int_{Q^{-1}(E)} \pos \lam \, d\mu_\pspace = \int_E \obs \q \, d\mu_\dspace = \Obs(E),
+\end{equation} 
+
+where 
+\begin{equation*}
+\pos = \frac{d\Pos}{d\mu_\pspace} \;\text{ and }\; \pi_\dspace = \frac{d\PP_\dspace}{d\mu_\dspace}.
+\end{equation*}
+\eqref{eq:inv} defines a \tdeepred{``Consistent Solution,''} yields a \tdeepred{Consistency Condition.}
+\end{defn}
+
+Note: {\scriptsize We use the notation $P$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives).}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{itemize}
+	\item <1-> From the perspective of a forward problem, we seek $\Pos$ such that its push-forward measure is equivalent to $\Obs$. 
+	
+	\item <2-> In measure-theoretic terms, $\Pos$ is a pull-back measure of $\Obs$.
+	\begin{defn}[Observed Density]\label{defn:obsden}
+The density $\pi_\dspace$ in \eqref{eq:inv} represents the uncertainty in QoI data and is referred to as the \textbf{observed density}.
+\end{defn}
+
+	\item <3-> We adopt a Bayesian perspective of combining prior beliefs with data. 
+	\begin{defn}[Prior Density]\label{defn:priorden}
+The density $\pri$ represents any prior beliefs about parameters before evidence is taken into account, and is referred to as the \textbf{prior density}.
+\end{defn}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{itemize}
+	\item <1->We ``push-forward'' the prior beliefs using the QoI map to compare to the evidence provided by $\obs$. 
+	\item <2-> Solve forward problem to construct solution to inverse problem. 
+	\item <3-> The push-forward density of $\pri$ under the map $Q$ is denoted by $\pfpr$. 
+	\begin{defn}[Push-forward of Prior]\label{defn:pfprior}
+$\pfpr$ is given as the Radon-Nikodym derivative (with respect to $\mu_\dspace$) of the push-forward probability measure defined by 
+\begin{equation}\label{eq:pfpr}
+P_\dspace^Q (E)  = P_\pspace \left ( Q^{-1}(E) \right ), \; \forall \; E \in \dborel.
+\end{equation}
+\end{defn}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+These definitions are combined to form the \textbf{posterior density}, originally derived in \cite{BJW18}:
+\begin{equation}\label{eq:post}
+\pos \lam = \pri \lam \frac{\pi_\dspace \q }{\pfpr \q }, \; \lambda \in \pspace.
+\end{equation}
+
+\begin{itemize}
+	\item <1-> The map $Q$ impacts the structure of the posterior
+	\item <2-> $\obs$ and $\pfpr$ defined on $(\dspace, \dborel)$ are evaluated at $Q\lam$
+	\item <2-> $\dspace$ itself depends on $Q$
+	\item <3-> Primary work in solving for $\pos$ (in \eqref{eq:inv}) requires constructing $\pfpr$
+	\item <4-> This is because $\pri$ and $\obs$ are given \emph{a priori} (often parametric)
+	\item <5-> Posterior derived through use of Disintegration Theorem in \cite{BJW18}
+	\item <6-> Existence and Uniqueness provided that we satisfy assumptions
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{Properties and Assumptions of the Posterior}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{assumption}[Predictability Assumption]\label{as:pred}
+The measure associated with $\obs$ is absolutely continuous with respect to the measure associated with $\obs$.
+\end{assumption}
+
+
+The requirement is guaranteed if the following is satisfied:
+\begin{equation}\label{eq:pred}
+\exists \; C>0 \text{ such that } \obs (d) \leq C \pfpr(d) \text{ for a.e. } d\in \dspace,
+\end{equation}
+where it is understood that $d = Q\lam$ for some $\lambda \in \pspace$.
+Assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18}:
+\begin{theorem}[Existence and Uniqueness]
+For any set $A\in \pborel$, the solution $\Pos$ given defined by
+\begin{equation}\label{eq:cb_sol}
+\Pos (A) = \int_\dspace \left (  \int_{\pspace \in Q^{-1}(d)}  \pri\lam \frac{\obs\q}{\pfpr\q} \, d\mu_{\pspace, d} \lam \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
+\end{equation} 
+is a consistent solution, and is unique up to choice of $P_\pspace$ on $(\pspace, \pborel)$.
+\end{theorem}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+This posterior density \eqref{eq:post} appearing within the iterated integral in \eqref{eq:cb_sol} has no normalization constant (it already integrates to one), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
+\begin{corollary}\label{cor:int}
+$\Pos(\pspace) = 1$.
+\end{corollary}
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Stability}
+
+\begin{defn}{Total Variation / Statistical Distance}
+	\begin{equation}\label{eq:tv}
+		d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
+	\end{equation}
+\end{defn}
+where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $P_f, P_g$, respectively.
+
+All the stability results herein are presented with respect to this metric.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+\begin{defn}[Stability of Posteriors I]\label{defn:stableobs}
+Given $\Pri$ and $\Obs$, let $\widehat{\Obs}$ be any perturbation to $\Obs$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}. 
+Let $\Pos$ and $\widehat{\Pos}$ denote the consistent solutions associated with $\Obs$ and $\widehat{\Obs}$, respectively. 
+We say that $\Pos$ is \emph{stable} with respect to perturbations in $\Obs$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
+\begin{equation}
+d_{\text{TV}} (\Obs, \widehat{\Obs}) < \delta \implies d_{\text{TV}} (\Pos, \widehat{\Pos}) < \eps.
+\end{equation}
+\end{defn}
+
+In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\Pos}, \Pos) = d_{\text{TV}} (\widehat{\Obs}, \Obs)$, which immediately proves the following:
+
+\begin{theorem}
+$\Pos$ is stable with respect to perturbations in $\Obs$.
+\end{theorem}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{defn}[Stability of Posteriors II]\label{defn:stableprior}
+Given $\Pri$ and $\Obs$, let $\widehat{\Pri}$ be any perturbation to $\Pri$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}. 
+Let $\Pos$ and $\widehat{\Pos}$ denote the consistent solutions associated with $\Obs$ and $\widehat{\Obs}$, respectively. 
+Let $\sett{P_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{P_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\Pri$ and $\widehat{\Pri}$, respectively. 
+We say that $\Pos$ is \emph{stable} with respect to perturbations in $\Pri$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\obs)$, 
+\begin{equation}\label{eq:stableprior}
+d_{\text{TV}} (P_{\pspace, d}, \widehat{P_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\Pos, \widehat{\Pos}) < \eps.
+\end{equation}
+\end{defn}
+
+\begin{theorem}
+$\Pos$ is stable with respect to perturbations in the prior.
+\label{thm:stableprior}
+\end{theorem}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{itemize}
+
+	\item <1->Taken together, these stability results provide assurances that the posterior we obtain is ``accurate'' up to the level of experimental error polluting $\obs$ and error in incorrectly specifying prior assumptions. 
+	\item <2-> Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+	\item <3-> Generating samples from $\pos$ requires a numerical approximation to $\pfpr$, which introduces additional errors in $\pos$.
+	
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Numerical Approximation and Sampling}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{itemize}
+	\item <1-> If $\widehat{\pfpr}$ denotes a computational approximation to the push-forward of the prior density, then the conditional densities from the disintegration theorem are given as
+\[
+\frac{\widehat{dP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\pri\lam}{ \widehat{\pfpr\q} }
+\]
+	\item <2-> Let $\widehat{\pfpr(d)}$ be a computational approximation to $\pfpr$ and $\widehat{\pos}$ the associated approximate posterior $\pos$
+	\item <3-> For the approximation of the push-forward of the prior density, we require:
+\begin{assumption}\label{as:predx}
+There exists some $C>0$ such that
+\[
+\obs (d) \leq C \widehat{\pfpr(d)} \text{ for a.e. } d\in \dspace.
+\]
+\end{assumption}
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{assumption}\label{as:predx}
+There exists some $C>0$ such that
+\[
+\obs (d) \leq C \widehat{\pfpr(d)} \text{ for a.e. } d\in \dspace.
+\]
+\end{assumption}
+
+If this assumption is satisfied, we can prove the following theorem from \cite{BJW18}:
+
+\begin{theorem}
+The error in the approximate posterior is:
+\begin{equation}\label{eq:pfpr_bound}
+d_{\text{TV}} (\Pos, \widehat{\Pos}) \leq C d_{\text{TV}} (\Pfpr, \widehat{\Pfpr}),
+\end{equation}
+where the $C$ is the constant taken from \eqref{as:predx}. 
+\end{theorem}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Practical Considerations}
+
+\begin{itemize}
+	\item <1-> We approximate $\pfpr$ using density estimation on a forward propagation of samples
+	\item <2-> Then, we may evaluate $\pos$ directly for any sample of $\pspace$ at the cost of one model solve
+	\item <3-> Accuracy of the computed posterior density relies on the accuracy of the approximation of the push-forward of the prior
+	\item <4-> We use Gaussian KDE, which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\pri$ propagated through $Q$.
+
+\end{itemize}
+\end{frame}
