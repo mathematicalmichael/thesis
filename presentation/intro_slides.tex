@@ -88,7 +88,7 @@
 {We denote the measurable spaces of parameters and data on the QoI as $(\pspace,\pborel)$ and $(\dspace,\dborel)$, respectively.}
 \bigskip
 
-\tdeepred{Given some prior density $\pri$ on $(\pspace,\pborel)$, we let $\pfpr$ denote the push-forward of this density on $(\dspace,\dborel)$.}
+\tdeepred{Given some prior density $\initial$ on $(\pspace,\pborel)$, we let $\predicted$ denote the push-forward of this density on $(\dspace,\dborel)$.}
 
 \end{frame}
 
@@ -108,7 +108,7 @@
 	\includegraphics[width=0.85\textwidth]{./figures/threelevels/schematic_data_lambda_level3}
 \end{figure}
 
-\tdeepred{Given $\obs$ on $(\dspace,\dborel)$, we let $\pos$ denote the pullback (consistent) density on $(\pspace,\pborel)$.}
+\tdeepred{Given $\obs$ on $(\dspace,\dborel)$, we let $\predicted$ denote the pullback (consistent) density on $(\pspace,\pborel)$.}
 
 \end{frame}
 
@@ -122,7 +122,7 @@
 	\vskip 10pt
 	\item<.-> Parameters: $\lambda$ {\color{gray}(e.g. source term, diffusion, boundary data)}
 	\vskip 10pt
-		\item Deterministic model: $\MMM (u, \lambda) = 0$, $$\MMM:\lambda \to u(\lambda)$$
+		\item Deterministic model: $\mathcal{M} (u, \lambda) = 0$, $$\mathcal{M}:\lambda \to u(\lambda)$$
 
 	\item Quantity of Interest map \tdeepred{(QoI)} - at least pcw differentiable \vskip 5pt
 		\begin{itemize}[<+->]
