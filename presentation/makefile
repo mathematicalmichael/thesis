@@ -22,6 +22,7 @@ FILENAME = presentation
 # dependency list: if changes detected in dependency, rebuild target
 TEXFILES := \
 	$(FILENAME) \
+	beamerthemeCUDenver.sty \
 	$(shell cat presentation.tex | grep input | sed 's|\\input{||g' | sed 's|[}%]||g' | sed 's|.tex||g')
 
 # adds .tex to path name
