@@ -14,7 +14,8 @@ FIGURES = $(shell find . -type f -name '*.pdf' | grep 'figures')
 REFS = $(shell find . -type f -name 'references*.bib')
 # custom latex environment/styles for python, bash, etc. (syntax highlighting)
 ENVS = $(shell ls env/*.tex) 
-THEME = $(shell find . -type f -wholename 'theme/*.pdf') 
+THEME = beamerthemeCUDenver.sty \
+	$(shell find . -type f -wholename 'theme/*.pdf') 
 
 # file name (without .tex)
 FILENAME = presentation
@@ -22,7 +23,6 @@ FILENAME = presentation
 # dependency list: if changes detected in dependency, rebuild target
 TEXFILES := \
 	$(FILENAME) \
-	beamerthemeCUDenver.sty \
 	$(shell cat presentation.tex | grep input | sed 's|\\input{||g' | sed 's|[}%]||g' | sed 's|.tex||g')
 
 # adds .tex to path name
