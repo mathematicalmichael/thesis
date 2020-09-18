@@ -1,24 +1,22 @@
 \subsection{Problem Formulation and Solution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-This now brings us to our central definition:
 
 \begin{defn}[Inverse Problem]\label{defn:consistency}
-Given a probability measure $\observedP$ on $(\dspace, \dborel)$, absolutely continuous with respect to $\mu_\dspace$, the \textbf{inverse problem} is to determine a probability measure $\predictedP$ on $(\pspace, \pborel)$, absolutely continuous with respect to $\mu_\pspace$,
+Given $\observedP$ on $(\dspace, \dborel)$ the \textbf{inverse problem} is to determine a probability measure $\predictedP$ on $(\pspace, \pborel)$ such that 
 
-Given an event $E \in \mathcal{B}_\dspace$,
 \begin{equation}\label{eq:inv}
-\predictedP(Q^{-1}(E)) = \int_{Q^{-1}(E)} \predicted \lam \, d\mu_\pspace = \int_E \obs \q \, d\mu_\dspace = \observedP(E),
+\predictedP(Q^{-1}(E)) = \observedP(E),
 \end{equation}
+for all events $E \in \mathcal{B}_\dspace$, where
 
-where
 \begin{equation*}
-\predicted = \frac{d\predictedP}{d\mu_\pspace} \;\text{ and }\; \pi_\dspace = \frac{d\PP_\dspace}{d\mu_\dspace}.
+\predicted = \frac{d\predictedP}{d\mu_\pspace} \;\text{ and }\; \observed = \frac{d\observedP}{d\mu_\dspace}.
 \end{equation*}
 \eqref{eq:inv} defines a \tdeepred{``Consistent Solution,''} yields a \tdeepred{Consistency Condition.}
 \end{defn}
 
-Note: {\scriptsize We use the notation $P$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives).}
+Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives).}
 \end{frame}
 
 
