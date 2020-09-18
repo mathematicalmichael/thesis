@@ -7,23 +7,25 @@ $(foreach bin,$(REQUIRED_BINS),\
 APPENDIX = $(shell find . -type f -name 'appendix*.tex')
 
 # changes to images/figures: add/edit this line to reflect your file types
-# if you create a new variable (perhaps to track a folder), add it to target 
-IMAGES = $(shell find . -type f -name '*.png') 
+# if you create a new variable (perhaps to track a folder), add it to target
+IMAGES = $(shell find . -type f -name '*.png')
 FIGURES = $(shell find . -type f -name '*.pdf' | grep 'figures')
 
 REFS = $(shell find . -type f -name 'references*.bib')
 # custom latex environment/styles for python, bash, etc. (syntax highlighting)
-ENVS = $(shell ls env/*.tex) 
+ENVS = $(shell ls env/*.tex)
 THEME = beamerthemeCUDenver.sty \
-	$(shell find . -type f -wholename 'theme/*.pdf') 
+	$(shell find . -type f -wholename 'theme/*.pdf')
 
 # file name (without .tex)
 FILENAME = presentation
-
+VPATH=content/
 # dependency list: if changes detected in dependency, rebuild target
 TEXFILES := \
 	$(FILENAME) \
+	before now after intro_slides comparison problem_formulation \
 	$(shell cat presentation.tex | grep input | sed 's|\\input{||g' | sed 's|[}%]||g' | sed 's|.tex||g')
+
 
 # adds .tex to path name
 TEXS = $(patsubst %, %.tex, $(TEXFILES))
@@ -34,7 +36,7 @@ DEPS := \
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
-.PHONY: all clean 
+.PHONY: all clean
 
 # the first real target is the one used when no other arguments are passed to `make`
 # by creating a dependency on the pdf, we trigger a compilation by default.
