@@ -1,22 +1,23 @@
-\subsection{Broad Goals of Uncertainty Quantification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}[t]{Broad Goals of Uncertainty Quantification}
+\centering
+    \emph{Why does any of this matter?}
+	\vskip 20pt
 
-\begin{itemize}
-	\item Quantify and reduce uncertainty
-	\vskip 20pt
-	\item Be \emph{accurate} and \emph{precise}
-	\vskip 20pt
-	\item Make inferences and predictions
-	\vskip 20pt
-	\item Design ``efficient'' experiments
-	\vskip 20pt
-	\item Collect and use data ``intelligently''
-\end{itemize}
-
+    \begin{itemize}
+        \item Quantify and reduce uncertainty (aleotoric, epistemic)
+	    \vskip 20pt
+	    \item Be \emph{accurate} and \emph{precise}
+	    \vskip 20pt
+	    \item Make inferences and predictions
+	    \vskip 20pt
+	    \item Design ``efficient'' experiments
+	    \vskip 20pt
+	    \item Collect and use data ``intelligently''
+    \end{itemize}
+    
 \end{frame}
 
-\subsection{Formal Definitions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 %\vskip 25pt
@@ -26,20 +27,19 @@
 
 \begin{tikzpicture}[node distance=2cm, auto,]
  %nodes
-
+ 
  % We make a dummy figure to make everything look nice.
- \node[] (dummy) {};
-  \node[right=of dummy] (data) {$\dspace$};
+\node[] (dummy) {};
 
-  \node[punkt, inner sep=5pt,below=of dummy]
- (model) {Model \\ (PDE)}
+\node[right=of dummy] (data) {$\dspace$};
+  
+\node[punkt, inner sep=5pt, below=of dummy] (model) {Model \\ (PDE)}
  	edge[pil,->, bend right=25] node[right] {$Q(u\lam)$} (data);
 
- \node[left=of dummy] (pspace) {$\Lambda$}
+\node[left=of dummy] (pspace) {$\Lambda$}
    edge[pil,->, bend right=45] node[left] {$u\lam$} (model)
    edge[pil,->, bend left=45] node[above] {$Q\lam$} (data);
-
-
+   
 \end{tikzpicture}
 
 \vspace{1em}
@@ -50,7 +50,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{The QoI Map}
+\begin{frame}{The QoI Map Relates Inputs and Outputs}
 
 \only<1>{
 
