@@ -3,37 +3,36 @@
 \begin{frame}[t]
 
 \begin{defn}[Inverse Problem]\label{defn:consistency}
-Given $\observedP$ on $(\dspace, \dborel)$ the \textbf{inverse problem} is to determine a probability measure $\predictedP$ on $(\pspace, \pborel)$ such that 
+Given $\observedP$ on $(\dspace, \dborel)$ the \textbf{inverse problem} is to determine a probability measure $\updatedP$ on $(\pspace, \pborel)$ such that 
 
-\begin{equation}\label{eq:inv}
-\predictedP(Q^{-1}(E)) = \observedP(E),
-\end{equation}
+	\begin{equation}\label{eq:inv}
+		\updatedP(Q^{-1}(E)) = \observedP(E),
+	\end{equation}
 for all events $E \in \mathcal{B}_\dspace$, where
 
-\begin{equation*}
-\predicted = \frac{d\predictedP}{d\mu_\pspace} \;\text{ and }\; \observed = \frac{d\observedP}{d\mu_\dspace}.
-\end{equation*}
+	\begin{equation*}
+		\updated = \frac{d\updatedP}{d\mu_\pspace} \;\text{ and }\; \observed = \frac{d\observedP}{d\mu_\dspace}.
+	\end{equation*}
 \eqref{eq:inv} defines a \tdeepred{``Consistent Solution,''} yields a \tdeepred{Consistency Condition.}
 \end{defn}
 
-Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives).}
+Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives), which exist under the assumption of a dominating (Lebesgue) volume measure $\mu$.}
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}[t]{Perspectives}
 \begin{itemize}
-	\item From the perspective of a forward problem, we seek $\predictedP$ such that its push-forward measure is equivalent to $\observedP$.
+	\item We seek the $\updatedP$ whose push-forward measure matches $\observedP$
+	\item In measure-theoretic terms, $\updatedP$ is a pull-back measure of $\observedP$
 
-	\item In measure-theoretic terms, $\predictedP$ is a pull-back measure of $\observedP$.
 	\begin{defn}[Observed Density]\label{defn:obsden}
-The density $\pi_\dspace$ in \eqref{eq:inv} represents the uncertainty in QoI data and is referred to as the \textbf{observed density}.
-\end{defn}
+		The density $\observed$ in \eqref{eq:inv} represents the uncertainty in QoI data.
+	\end{defn}
 
-	\item We adopt a Bayesian perspective of combining prior beliefs with data.
-	\begin{defn}[Prior Density]\label{defn:priorden}
-The density $\initial$ represents any prior beliefs about parameters before evidence is taken into account, and is referred to as the \textbf{prior density}.
-\end{defn}
+	\begin{defn}[Initial Density]\label{defn:initialden}
+		$\initial$ encodes prior beliefs about $\param$'s (before evidence is accounted for)
+	\end{defn}
 
 \end{itemize}
 
