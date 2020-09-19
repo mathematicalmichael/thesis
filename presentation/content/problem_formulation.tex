@@ -58,44 +58,45 @@ Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to r
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-These definitions are combined to form the \textbf{posterior density}, originally derived in \cite{BJW18}:
+These definitions are combined to form the \textbf{updated density}, originally derived in \cite{BJW18}:
 \begin{equation}\label{eq:post}
-\predicted \lam = \initial \lam \frac{\pi_\dspace \q }{\predicted \q }, \; \lambda \in \pspace.
+\updated \lam = \initial \lam \frac{\observed \qlam }{\predicted \qlam }, \; \param, \in \pspace.
 \end{equation}
 
 \begin{itemize}
 	\item $\obs$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
-	\item The map $Q$ impacts the structure of the posterior
-	\item $\dspace$ itself depends on $Q$
-	\item Primary work in solving for $\predicted$ (in \eqref{eq:inv}) requires constructing $\predicted$
-	\item This is because $\initial$ and $\obs$ are given \emph{a priori} (often parametric)
-	\item Posterior derived through use of Disintegration Theorem in \cite{BJW18}
+	\item The map $\qoi$ impacts the structure of the posterior
+	\item $\dspace$ itself depends on $\qoi$
+	\item Primary effort in solving for $\updated$ (in \eqref{eq:inv}) requires constructing $\predicted$
+	\item This is because $\initial$ and $\observed$ are given \emph{a priori} (often parametric)
+	\item Updated derived through use of Disintegration Theorem in \cite{BJW18}
 	\item Existence and Uniqueness provided that we satisfy assumptions
 \end{itemize}
 \end{frame}
 
 
 
-\subsection{Properties and Assumptions of the Posterior}
+\subsection{Properties and Assumptions of the Update}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 \begin{assumption}[Predictability Assumption]\label{as:pred}
-The measure associated with $\obs$ is absolutely continuous with respect to the measure associated with $\obs$.
+The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
 \end{assumption}
 
 
 The requirement is guaranteed if the following is satisfied:
 \begin{equation}\label{eq:pred}
-\exists \; C>0 \text{ such that } \obs (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
+\exists \; C>0 \text{ s.t. } \observed (d) \leq C \predicted (d) \text{ for a.e. } d\in \dspace,
 \end{equation}
-where it is understood that $d = Q\lam$ for some $\lambda \in \pspace$.
+where it is understood that $d = \qlam$ for some $\param \in \pspace$.
+
 Assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18}:
 \begin{theorem}[Existence and Uniqueness]
 For any set $A\in \pborel$, the solution $\predictedP$ given defined by
 \begin{equation}\label{eq:cb_sol}
-\predictedP (A) = \int_\dspace \left (  \int_{\pspace \in Q^{-1}(d)}  \initial\lam \frac{\obs\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
+\predictedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\param \frac{\obs\q}{\predicted\q} \, d\mu_{\pspace, d} \param \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
 \end{equation}
-is a consistent solution, and is unique up to choice of $P_\pspace$ on $(\pspace, \pborel)$.
+is a consistent solution, and is unique up to choice of $\initialP$ on $(\pspace, \pborel)$.
 \end{theorem}
 
 \end{frame}
