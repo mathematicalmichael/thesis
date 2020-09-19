@@ -39,17 +39,18 @@ Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to r
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}[t]{Summarizing}
 \begin{itemize}
-	\item We ``push-forward'' the prior beliefs using the QoI map to compare to the evidence provided by $\obs$.
-	\item Solve forward problem to construct solution to inverse problem.
-	\item The push-forward density of $\initial$ under the map $Q$ is denoted by $\predicted$.
-	\begin{defn}[Push-forward of Prior]\label{defn:pfprior}
-$\predicted$ is given as the Radon-Nikodym derivative (with respect to $\mu_\dspace$) of the push-forward probability measure defined by
-\begin{equation}\label{eq:pfpr}
-P_\dspace^Q (E)  = P_\pspace \left ( Q^{-1}(E) \right ), \; \forall \; E \in \dborel.
-\end{equation}
-\end{defn}
+	\item ``Push-forward'' \textbf{initial} beliefs using $\qoi$ to \textbf{compare} to \textbf{observed} (data)
+	\item Solve forward problem to construct solution to inverse problem
+	\item The push-forward density of $\initial$ under the map $\qoi$ is denoted by $\predicted$
+
+	\begin{defn}[Predicted Density]\label{defn:predicted}
+		$\predicted$ is given as the Radon-Nikodym derivative (with respect to $\mu_\dspace$) of the push-forward probability measure defined by:
+		\begin{equation}\label{eq:pred}
+			\predictedP (E)  = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
+		\end{equation}
+	\end{defn}
 
 \end{itemize}
 
@@ -63,7 +64,7 @@ These definitions are combined to form the \textbf{posterior density}, originall
 \end{equation}
 
 \begin{itemize}
-	\item $\obs$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $Q\lam$
+	\item $\obs$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
 	\item The map $Q$ impacts the structure of the posterior
 	\item $\dspace$ itself depends on $Q$
 	\item Primary work in solving for $\predicted$ (in \eqref{eq:inv}) requires constructing $\predicted$
@@ -213,7 +214,7 @@ If this assumption is satisfied, we can prove the following theorem from \cite{B
 
 \begin{theorem}
 The error in the approximate posterior is:
-\begin{equation}\label{eq:pfpr_bound}
+\begin{equation}\label{eq:pred_bound}
 d_{\text{TV}} (\predictedP, \widehat{\predictedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
 \end{equation}
 where the $C$ is the constant taken from \eqref{as:predx}.
