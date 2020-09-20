@@ -123,50 +123,49 @@ where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
-\begin{defn}[Stability of Posteriors I]\label{defn:stableobs}
-Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}.
-Let $\predictedP$ and $\widehat{\predictedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively.
-We say that $\predictedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
-\begin{equation}
-d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\predictedP, \widehat{\predictedP}) < \eps.
-\end{equation}
+\begin{defn}[Stability of Updates I]\label{defn:stableobs}
+	We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
+	\begin{equation}
+		d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+	\end{equation}
 \end{defn}
 
-In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\predictedP}, \predictedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, which immediately proves the following:
+\vspace{0.5in}
+In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, implying that:
+\vspace{0.5in}
 
 \begin{theorem}
-$\predictedP$ is stable with respect to perturbations in $\observedP$.
+	$\updatedP$ is stable with respect to perturbations in $\observedP$.
 \end{theorem}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-\begin{defn}[Stability of Posteriors II]\label{defn:stableprior}
-Given $\initialP$ and $\observedP$, let $\widehat{\initialP}$ be any perturbation to $\initialP$ on $(\pspace, \pborel)$ satisfying \eqref{eq:pred}.
-Let $\predictedP$ and $\widehat{\predictedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively.
-Let $\sett{P_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{P_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
-We say that $\predictedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\obs)$,
-\begin{equation}\label{eq:stableprior}
-d_{\text{TV}} (P_{\pspace, d}, \widehat{P_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\predictedP, \widehat{\predictedP}) < \eps.
+\begin{defn}[Stability of Updates II]\label{defn:stableinitial}
+Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
+
+We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observed)$,
+\begin{equation}\label{eq:stableinitial}
+d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
 \end{equation}
 \end{defn}
 
 \begin{theorem}
-$\predictedP$ is stable with respect to perturbations in the prior.
-\label{thm:stableprior}
+$\updatedP$ is stable with respect to perturbations in the initial.
+\label{thm:stableinitial}
 \end{theorem}
 
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}[t]{Properties of the Updated Density}
 \begin{itemize}
 
-	\item Taken together, these stability results provide assurances that the updated we obtain is ``accurate'' up to the level of experimental error polluting $\obs$ and error in incorrectly specifying prior assumptions.
-	\item Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
-	\item Generating samples from $\predicted$ requires a numerical approximation to $\predicted$, which introduces additional errors in $\predicted$.
+	\item Taken together, these stability results provide assurances that the updated we obtain is accurate up to the level of experimental error polluting $\observed$ and error in incorrectly specifying initial assumptions.
+	\item Given that specifying the definition of a ``true'' initial is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+	\item Generating samples from $\predicted$ requires a numerical approximation to $\predicted$, which introduces \textbf{additional errors} in $\predicted$.
 
 \end{itemize}
 
@@ -177,16 +176,17 @@ $\predictedP$ is stable with respect to perturbations in the prior.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 \begin{itemize}
-	\item If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the prior density, then the conditional densities from the disintegration theorem are given as
+	\item Let $\widehat{\predicted}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated $\updated$
+	\item The conditional densities from the Disintegration theorem are 
 \[
-\frac{\widehat{dP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }
+\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted (d)} }
 \]
-	\item Let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\predicted}$ the associated approximate updated $\predicted$
-	\item For the approximation of the push-forward of the prior density, we require:
+\vspace{0.25in}
+	\item To approximate the push-forward of the initial density, we require:
 \begin{assumption}\label{as:predx}
 There exists some $C>0$ such that
 \[
-\obs (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
+\observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
 \]
 \end{assumption}
 
@@ -200,7 +200,7 @@ There exists some $C>0$ such that
 \begin{assumption}\label{as:predx}
 There exists some $C>0$ such that
 \[
-\obs (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
+\observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
 \]
 \end{assumption}
 
@@ -209,7 +209,7 @@ If this assumption is satisfied, we can prove the following theorem from \cite{B
 \begin{theorem}
 The error in the approximate updated is:
 \begin{equation}\label{eq:pred_bound}
-d_{\text{TV}} (\predictedP, \widehat{\predictedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
+d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\updatedP, \widehat{\updatedP}),
 \end{equation}
 where the $C$ is the constant taken from \eqref{as:predx}.
 \end{theorem}
@@ -223,7 +223,7 @@ where the $C$ is the constant taken from \eqref{as:predx}.
 \begin{itemize}
 	\item We approximate $\predicted$ using density estimation on a forward propagation of samples
 	\item Then, we may evaluate $\predicted$ directly for any sample of $\pspace$ at the cost of one model solve
-	\item Accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior
+	\item Accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial
 	\item We use Gaussian KDE, which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $Q$.
 
 \end{itemize}
