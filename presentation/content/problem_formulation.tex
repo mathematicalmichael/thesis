@@ -57,20 +57,20 @@ Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to r
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-These definitions are combined to form the \textbf{updated density}, originally derived in \cite{BJW18}:
-\begin{equation}\label{eq:post}
+\begin{frame}[t]{The Updated Density solves the SIP}
+These definitions are combined to form the \textbf{updated density}:
+\begin{equation}\label{eq:up}
 \updated \lam = \initial \lam \frac{\observed \qlam }{\predicted \qlam }, \; \param, \in \pspace.
 \end{equation}
 
 \begin{itemize}
-	\item $\obs$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
-	\item The map $\qoi$ impacts the structure of the posterior
+	\item $\observed$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
+	\item The map $\qoi$ impacts the structure of the update
 	\item $\dspace$ itself depends on $\qoi$
-	\item Primary effort in solving for $\updated$ (in \eqref{eq:inv}) requires constructing $\predicted$
+	\item Primary effort in solving for $\updated$ (in \eqref{eq:up}) requires constructing $\predicted$
 	\item This is because $\initial$ and $\observed$ are given \emph{a priori} (often parametric)
 	\item Updated derived through use of Disintegration Theorem in \cite{BJW18}
-	\item Existence and Uniqueness provided that we satisfy assumptions
+	\item Existence and Uniqueness given a predictability assumption
 \end{itemize}
 \end{frame}
 
@@ -80,51 +80,44 @@ These definitions are combined to form the \textbf{updated density}, originally 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 \begin{assumption}[Predictability Assumption]\label{as:pred}
-The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
+	The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
 \end{assumption}
 
 
 The requirement is guaranteed if the following is satisfied:
-\begin{equation}\label{eq:pred}
-\exists \; C>0 \text{ s.t. } \observed (d) \leq C \predicted (d) \text{ for a.e. } d\in \dspace,
-\end{equation}
-where it is understood that $d = \qlam$ for some $\param \in \pspace$.
 
-Assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18}:
-\begin{theorem}[Existence and Uniqueness]
-For any set $A\in \pborel$, the solution $\predictedP$ given defined by
-\begin{equation}\label{eq:cb_sol}
-\predictedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\param \frac{\obs\q}{\predicted\q} \, d\mu_{\pspace, d} \param \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
+\begin{equation}\label{eq:pred}
+	\exists \; C>0 \text{ s.t. } \observed (d) \leq C \predicted (d) \text{ for a.e. } d\in \dspace,
 \end{equation}
-is a consistent solution, and is unique up to choice of $\initialP$ on $(\pspace, \pborel)$.
+
+where $d = \qlam$ for some $\param \in \pspace$.
+By \cite{BJW18}, if \eqref{as:pred} holds, we have: 
+
+\begin{theorem}[Existence and Uniqueness]
+	For any set $A\in \pborel$, the solution $\updatedP$ given defined by
+	\begin{equation}\label{eq:cb_sol}
+		\updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\param \frac{\observed(d)}{\predicted(d)} \, d\mu_{\pspace, d} \param \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
+	\end{equation}
+
+	is a consistent solution, and is unique up to choice of $\initialP$ on $(\pspace, \pborel)$.
 \end{theorem}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-
-This posterior density \eqref{eq:post} appearing within the iterated integral in \eqref{eq:cb_sol} has no normalization constant (it already integrates to one), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
-\begin{corollary}\label{cor:int}
-$\predictedP(\pspace) = 1$.
-\end{corollary}
-
-\end{frame}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Stability}
 
+All the stability and convergence results presented are with respect to:
+\vspace{0.5in}
+
 \begin{defn}{Total Variation / Statistical Distance}
 	\begin{equation}\label{eq:tv}
-		d_{\text{TV}} (P_f, P_g) := \int \abs{f - g} \, d\mu,
+		d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
 	\end{equation}
+where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $\PP_f, \PP_g$, respectively.
 \end{defn}
-where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $P_f, P_g$, respectively.
 
-All the stability results herein are presented with respect to this metric.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,7 +164,7 @@ $\predictedP$ is stable with respect to perturbations in the prior.
 \begin{frame}[t]
 \begin{itemize}
 
-	\item Taken together, these stability results provide assurances that the posterior we obtain is ``accurate'' up to the level of experimental error polluting $\obs$ and error in incorrectly specifying prior assumptions.
+	\item Taken together, these stability results provide assurances that the updated we obtain is ``accurate'' up to the level of experimental error polluting $\obs$ and error in incorrectly specifying prior assumptions.
 	\item Given that specifying the definition of a ``true'' prior is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
 	\item Generating samples from $\predicted$ requires a numerical approximation to $\predicted$, which introduces additional errors in $\predicted$.
 
@@ -188,7 +181,7 @@ $\predictedP$ is stable with respect to perturbations in the prior.
 \[
 \frac{\widehat{dP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} }
 \]
-	\item Let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\predicted}$ the associated approximate posterior $\predicted$
+	\item Let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\predicted}$ the associated approximate updated $\predicted$
 	\item For the approximation of the push-forward of the prior density, we require:
 \begin{assumption}\label{as:predx}
 There exists some $C>0$ such that
@@ -214,7 +207,7 @@ There exists some $C>0$ such that
 If this assumption is satisfied, we can prove the following theorem from \cite{BJW18}:
 
 \begin{theorem}
-The error in the approximate posterior is:
+The error in the approximate updated is:
 \begin{equation}\label{eq:pred_bound}
 d_{\text{TV}} (\predictedP, \widehat{\predictedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
 \end{equation}
@@ -230,7 +223,7 @@ where the $C$ is the constant taken from \eqref{as:predx}.
 \begin{itemize}
 	\item We approximate $\predicted$ using density estimation on a forward propagation of samples
 	\item Then, we may evaluate $\predicted$ directly for any sample of $\pspace$ at the cost of one model solve
-	\item Accuracy of the computed posterior density relies on the accuracy of the approximation of the push-forward of the prior
+	\item Accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the prior
 	\item We use Gaussian KDE, which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $Q$.
 
 \end{itemize}
