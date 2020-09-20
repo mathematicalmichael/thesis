@@ -204,12 +204,12 @@ There exists some $C>0$ such that
 \]
 \end{assumption}
 
-If this assumption is satisfied, we can prove the following theorem from \cite{BJW18}:
+If this assumption is satisfied, we can prove the following cite{BJW18}:
 
 \begin{theorem}
 The error in the approximate updated is:
 \begin{equation}\label{eq:pred_bound}
-d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\updatedP, \widehat{\updatedP}),
+d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
 \end{equation}
 where the $C$ is the constant taken from \eqref{as:predx}.
 \end{theorem}
@@ -221,10 +221,15 @@ where the $C$ is the constant taken from \eqref{as:predx}.
 \begin{frame}[t]{Practical Considerations}
 
 \begin{itemize}
-	\item We approximate $\predicted$ using density estimation on a forward propagation of samples
-	\item Then, we may evaluate $\predicted$ directly for any sample of $\pspace$ at the cost of one model solve
-	\item Accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial
-	\item We use Gaussian KDE, which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $Q$.
-
+	\item We approximate $\predicted$ using density estimation on forward propagation of samples from $\initial$
+	\item May evaluate $\updated$ directly for any sample of $\pspace$ (one model solve)
+	\item Accuracy of the computed updated density is proportional to accuracy of approximation of the predicted density
+	\item We (currently) use Gaussian KDE
+	\begin{itemize}
+			\item Let $\dimD$ be the dimension of $\dspace$
+			\item Let $\nsamps$ is the number of samples from $\initial$ propagated through $\qoi$
+			\item Converges at a rate of $\mathcal{O}(\nsamps^{-4/(4+\dimD)})$ in mean-squared error
+			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error
+	\end{itemize}
 \end{itemize}
 \end{frame}
