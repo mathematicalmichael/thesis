@@ -15,7 +15,36 @@
 \begin{figure}
 \centering
 
-The one with the regularization equations.
+\emph{The one with the regularization equations.}
+
+\begin{table}[htbp]
+\centering
+
+\begin{tabular}{|c|c|}
+\hline
+  & \\
+  $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}$
+&
+  $\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}$
+\\ 
+\hline
+  & \\
+  Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
+      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$
+  \\ & \\ \hline & \\
+  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$
+\\
+& \\
+  \hline
+\end{tabular}
+\caption{The $\param$ which minimizes these functionals also maximizes the updated PDF (left) and the Bayesian posterior PDF (right).
+
+$T(\param)$ is the typical functional often associated with Tikhonov regularization.
+
+The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
+  \label{tab:func_comparisons}
+\end{table}
+
 
 \end{figure}
 
