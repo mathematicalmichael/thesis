@@ -15,7 +15,17 @@
 \begin{figure}
 \centering
 
-The one with the horizontal vs vertical QoI maps.
+\begin{figure}
+\centering
+  \includegraphics[width=0.25\linewidth]{figures/pde-highd_sensors_D2.png}
+  \includegraphics[width=0.25\linewidth]{figures/pde-highd_sensors-alt_D2.png}
+  \includegraphics[width=0.5\linewidth]{figures/pde-highd_geom_D2.png}
+\caption{
+$N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
+}
+\label{fig:pde-highd-2d-geometry}
+\end{figure}
+
 
 \end{figure}
 
@@ -28,14 +38,50 @@ The one with the horizontal vs vertical QoI maps.
 
 \begin{frame}[t]
 %\vskip 25pt
-\centering
 \begin{figure}
 \centering
 
 The one with the small problems in large batches.
 
+\only<1>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair.png}
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair-alt.png}
+  \caption{
+  Iterating through five epochs of two QoI, each formed by picking two of the ten available rows of $A$ at random.
+  The random directions chosen on the left exhibit more redundancy than those on the right, so the same amount of iteration results in less accuracy.
+  }
+  \label{fig:iterative-linear-demo-pair}
 \end{figure}
+}
 
+\only<2>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-rand.png}
+  \caption{
+  If we are careful with how we construct our maps or choose our iteration strategy, we can achieve considerably more accurate solutions with the same computational cost.
+  }
+  \label{fig:iterative-linear-demo-smart}
+\end{figure}
+}
+
+\only<3>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/iterative/10D-convergence-comparison.png}
+  \caption{
+  20 initial means are chosen and iterated on for three approaches for ordering QoI.
+  Individual experiments are transparent and the mean error is shown as solid lines.
+  }
+  \label{fig:iterative-convergence-comparison}
+\end{figure}
+}
+
+
+\end{figure}
 \end{frame}
 
 
@@ -49,7 +95,29 @@ The one with the small problems in large batches.
 \begin{figure}
 \centering
 
-The one with all the fancy code contributions.
+\emph{How do I know I can trust you?}
+
+\vspace{0.25in}
+
+You don't. But I enabled you to check for yourself.
+
+\vspace{0.25in}
+
+\begin{itemize}
+	\item Public repository hosted on Github.com ({\tt github.com/mathematicalmichael/thesis})
+	\item Github Actions implements Continuous Integration / Deployment
+	\item Each change is validated for reproducibility
+	\item {\tt makefile} for convenience ({\tt make <filename>})
+	\begin{itemize}
+		\item dissertation (\LaTeX)
+		\item presentation (beamer)
+		\item every example, convergence result (Python)
+		\item every image in every figure
+	\end{itemize}
+	\item Unit tests aid in ensuring integrity of functions
+	\item PyPi published implementation of main methods: {\tt pip install mud}
+	\item Docker guarantees software runtime (on {\tt x86}, {\tt armv8} forthcoming): \\ {\tt docker pull mathematicalmichael/python:thesis}({\tt latex:thesis})
+\end{itemize}
 
 \end{figure}
 
