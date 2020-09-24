@@ -1,12 +1,11 @@
-\chapter{\uppercase{Impact of Output Quantities on Accuracy} \label{chapter:03}}
+\chapter{\uppercase{Impact of Geometry of Output Quantities on Consistent Solutions} \label{chapter:03}}
 
 Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of set-valued solutions to stochastic inverse problems with respect to their ability to be well-approximated by Monte-Carlo integration.
 However, the results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
-We focus on the accuracy of the density/measure, since this is what solves our SIP.
-The updated solution can be used for point estimation, or used holistically for prediction under uncertainty.
-Regardless of the context for solving the SIP, it is important to address the sources of approximation error that pollute the observation-consistent framework.
+We focus on the accuracy of the consistent solutions to the SIP.
+It is illustrative to begin witgh the original set-based approximations to solutions developed in \cite{} [TK - cite] as teh dependence of solutions on skewness is more explicit than in the density-based approach.
 
 %%%%%
 
@@ -21,15 +20,16 @@ Regardless of the context for solving the SIP, it is important to address the so
 % Descriptions of Error
 \input{set-based/set_error.tex}
 
-%%%%%
+%%%%% absorb sentence below into previous section??
 
-\input{ch03/impact.tex}
+Since the error due to $\imesh$ can be estimated as described in previous studies, and $\ndiscs$ can be made arbitrarily large, we neglect (E1) and (E3) here.
+Thus, we limit our focus to (E2), where certain geometric properties of the QoI map are known to significantly impact this term, as we show below.
 
 \section{Skewness and Information Content}\label{sec:skewness}
 In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
 In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$.
 An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\pmeas$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy is proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
-This is a version of the so-called curse-of-dimension for the explicit approach.
+This is a version of the so-called curse-of-dimension for the set-based approach.
 
 Skewness is explored further in \cite{Walsh} in the context of optimal experimental design.
 There, an additional geometric property of $\qoi$ related to the \emph{precision} in the solution of the associated stochastic inverse problem is introduced and quantified.
@@ -57,8 +57,8 @@ The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined 
 \end{equation}
 \end{defn}
 
-In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition of the Jacobian $J_{\param,Q}$.
-In general, we approximate $\overline{S_Q}$ with Monte-Carlo approximations.
+In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition (SVD) of the Jacobian $J_{\param,\qoi}$, i.e., we randomly sample $J_{\param,\qoi}$ and compute the SVDs.
+In general, we approximate $\overline{S_\qoi}$ with Monte-Carlo approximations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We demonstrate the effect of skewness on the explicit measure theoretic approach in the following example.
