@@ -15,7 +15,36 @@
 \begin{figure}
 \centering
 
-The one with the regularization equations.
+\emph{The one with the regularization equations.}
+
+\begin{table}[htbp]
+\centering
+
+\begin{tabular}{|c|c|}
+\hline
+  & \\
+  $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}$
+&
+  $\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}$
+\\ 
+\hline
+  & \\
+  Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
+      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$
+  \\ & \\ \hline & \\
+  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$
+\\
+& \\
+  \hline
+\end{tabular}
+\caption{The $\param$ which minimizes these functionals also maximizes the updated PDF (left) and the Bayesian posterior PDF (right).
+
+$T(\param)$ is the typical functional often associated with Tikhonov regularization.
+
+The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
+  \label{tab:func_comparisons}
+\end{table}
+
 
 \end{figure}
 
@@ -31,7 +60,37 @@ The one with the regularization equations.
 \begin{figure}
 \centering
 
-The one with the contours.
+\begin{figure}
+   % \includegraphics[width=\linewidth]{figures/Regularization-all-in-one.pdf}
+  \centering
+  \begin{tabular}{|ccc|}
+    \hline
+      \subf{\includegraphics[width=0.25\linewidth]{figures/data_mismatch_contour.png}}
+      {data mismatch}
+    &
+      \subf{\includegraphics[width=0.25\linewidth]{figures/tikonov_contour.png}}
+      {regularization}
+    &
+      \subf{\includegraphics[width=0.25\linewidth]{figures/classical_solution.png}}
+      {bayesian posterior}
+    \\
+    \hline
+      \subf{\includegraphics[width=0.25\linewidth]{figures/data_mismatch_contour.png}}
+      {data mismatch}
+    &
+      \subf{\includegraphics[width=0.25\linewidth]{figures/consistent_contour.png}}
+      {modified regularization}
+    &
+      \subf{\includegraphics[width=0.25\linewidth]{figures/consistent_solution.png}}
+       {updated density}
+    \\
+    \hline
+  \end{tabular}
+
+  \caption{Gaussian data mismatch for a 2-to-1 linear map (left plots). Gaussian initial/prior induce different regularization terms (middle plots), which leads to different optimization functions (right plots) and parameter estimates.}
+  \label{fig:regularization}
+\end{figure}
+
 
 \end{figure}
 
