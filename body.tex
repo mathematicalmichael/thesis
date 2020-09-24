@@ -1,270 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-\label{sec:Intro}
-
-The last several decades have seen an increasing reliance upon quantitative predictions from computational, simulation-based models of physical systems to inform engineering design, predict the behavior of physical systems, and even shape public policy, e.g., see [TK - need citation] for just a few such examples.
-It is therefore more important than ever to quantify, and reduce whenever possible, the uncertainties impacting such models.
-Unfortunately, many key characteristics governing system behavior, described as model inputs (referred to here as parameters), are often hidden from direct observation.
-When observable model output data are sensitive to variations in these parameters, we formulate and solve inverse problems using this output data to quantify uncertainties in parameters.
-Inverse problems therefore play a vital role in the uncertainty quantification (UQ) community.
-
-In UQ, uncertainties are categorized as being either aleatoric (i.e., irreducible) or epistemic (i.e., reducible) in nature, which are often quantitatively described and interpreted in distinct ways.
-Below, we use abstractions of conceptual examples to distinguish how both types of uncertainties arise in parameters and impact the type of inverse problem that is solved to quantify these uncertainties.
-% and their associated inverse problems while simultaneously comparing and contrasting methodologies for solving these problems.
-This further serves to highlight the contributions of this work.
-
-Consider modeling the manufacturing process of an engineered system involving various electrical or mechanical components.
-The intrinsic variability in component properties, e.g., due to impurities in raw materials used in their construction, are aleatoric in nature.
-%These are quantitatively characterized as probability measures.
-Component properties define a sample space (the set of all possible outcomes), and combining this sample space with a description of measurable events along with a probability measure defines a probability space.
-Scalar-valued model parameters associated with component properties defines a random vector (i.e., a measurable function) from this probability space of components into the parameters required by the model.
-Subsequently, the mapping from parameters to observable model outputs defines what we refer to as a Quantities of Interest (QoI) map.
-Observation of a probability measure on the range of the QoI map leads to the formulation of a stochastic inverse problem (SIP) where the goal is to pullback the observed probability measure onto the space of parameters.
-Conceptually, a pullback measure is observation-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
-
-While it is possible to construct explicit approximations to observation-consistent measures (e.g., see \cite{BET+14}), this becomes computationally intractable for high-dimensional parameter spaces or QoI maps.
-A recently developed density-based approach [TK - fix citations]\cite{BJW18a, BJW18b, BWY20} solves the SIP in a novel way by first solving a stochastic forward problem (SFP).
-Specifically, an {\em initial} probability measure is first specified on the parameters to encode any prior knowledge of parameter variability.
-Then, a SFP is solved where the push-forward of the initial probability measure is used to define a {\em predicted} probability measure on the Quantity (or Quantities) of Interest (QoI) associated with observable model outputs.
-The discrepancy between the predicted and {\em observed} probability measures on the QoI, expressed as a ratio of probability density functions (more generally, Radon-Nikodym derivatives), is then used to {\em update} the initial probability measure.
-The {\em updated} probability measure constructed is then observation-consistent.
-Moreover, the updates to the initial probability measure only occur in directions informed by the QoI.
-In other words, the initial probability measure serves to regularize the space of all pullback measures solving the SIP to produce a unique solution.
-
-The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \cite{Dellacherie_Meyer_book} as the central tool in establishing existence, uniqueness, and stability of solutions.
-Updated probability measures often have complex structures that are not well approximated by a family of parametrically defined distributions (e.g., Gaussian).
-This further distinguishes this approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \cite{}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
-Subsequently, solutions to the SIP using Bayesian approaches will not, in general, produce solutions (defined as posterior distributions) whose push-forward matches the observed distribution (see Section 7.2 in \cite{BJW18a} for an example comparing the approaches).
-In fact, the push-forward of the posterior is not even of general interest in most Bayesian paradigms.
-Instead, the posterior predictive, defining the distribution of possible unobserved values is of more interest \cite{}, which is constructed as a conditional distribution on the observations but makes practical use of the posterior through a marginalization.
-These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community is intended to solve an inverse problem involving epistemic uncertainty as we describe below and expand upon in Section~\ref{sec:compare}.
-
-In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
-  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
-  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
-  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
-  cockayneoatessullivangirolami}, one of the initial assumptions is that data obtained on a QoI are polluted by measurement error, i.e., data are ``noisy.''
-  Measurement errors can theoretically be reduced using improved measurement instruments (i.e., they are epistemic in nature).
-  A data-likelihood function is used to express the relative likelihoods that all of the data came from a particular choice of the parameter.
-  Encoding any initial assumptions about which parameters are more likely than others as a prior density allows the formal construction of a posterior density as a conditional density that describes the difference in relative likelihoods of any parameter value given the data.
-
-It is common to use specific point estimators such as the maximum a--posteriori (MAP) point given by the mode of the posterior as the actual solution to the inverse problem.
-The posterior is then re-interpreted as providing descriptions of uncertainty in that specific point estimate.
-The Bernstein-von Mises theorem provides conditions under which the posterior will become concentrated around the single true parameter in the limit of infinite data.
-
-{\bf Add short paragraph discussing the connection of deterministic optimization approaches in estimating MAP points, which strengthens the perspective that the Bayesian inverse problem is used to produce point estimates.}
-
-Returning to the abstract example of a manufacturing process, the typical Bayesian paradigm described above is most applicable to a specific instance of the manufactured system.
-In other words, suppose a single system is extracted from the end of the production line, we subject this system to experiments for which we collect data on the system response, and we are interested in using this data to determine the precise parameter values associated with this single system.
-The Bayesian framework is fundamentally designed to address such a problem while the observation-consistent framework as presented in \cite{BJW18a, BJW18b, BWY20} is not.
-The latter is designed to describe the holistic natural variability among the outputs of the aforementioned system, not an individual output from the manufacturing line.
-
-The main contributions of this work are as follows.
-We extend the observation-consistent framework to solve problems involving epistemic uncertainties in model parameters.
-This requires constructing QoI maps in an {\em a posteriori} fashion using noisy data, which is a novel way to define QoI maps in the observation-consistent framework.
-The theory of existence, uniqueness, and convergence of maximal updated density (MUD) points are also provided for certain linear data-constructed QoI maps using typical assumptions found in the Bayesian literature.
-Comparisons to other parameter estimates such as those obtained using a least-squares or Bayesian approach are also provided.
-The applicability of the approach to nonlinear data-constructed QoI maps is also numerically demonstrated for ordinary and partial differential equation models of dynamical and stationary systems.
-While there are several on-going and future research directions that are outside the scope of the current work, we do not wish to hide certain technical challenges in implementing this approach in certain scenarios.
-We therefore address several technical challenges where appropriate to both point out these challenges as well as the heuristics we currently employ to handle these challenges.
-
-
-The rest of this paper is outlined as follows.
-{\bf This is done last.}
-
-[ TK - I feel like this can move up earlier somewhere? Maybe not... Ch2 really doesn't hit on this.]
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Comparing Inverse Problems and Solutions}\label{sec:compare}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-As discussed in the introduction, the typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
-To help build intuition about these differences, we summarize key details about these inverse problems and their solutions before presenting an example that highlights differences in solutions.
-
-%As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
-%  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
-%  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
-%  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
-%  cockayneoatessullivangirolami} is designed to quantify epistemic sources of uncertainty.
-%These conceptual differences have significant impacts on the solutions to inverse problems formulated within these distinctive frameworks.
-%We provide more details below to further clarify these impacts for the reader.
-%An example is then used to illustrate the differences, which is also helpful for building intuition.
-%Moreover, the details provided below play a vital role in Section~\ref{sec:estimation} where features of the observation-consistent framework are used to motivate its extension to point estimation problems.
-
-
-%The Bayesian inversion framework  is perhaps the most
-%popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-%As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-
-\subsection{Terminology, notation, and the inverse problems}
-
-To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
-Denote by $\pspace$ the space of physically relevant parameters for the model.
-Denote by $Q$ the (potentially vector-valued) QoI map from the parameter space, $\pspace$, to the data space defined by $\dspace:= Q(\pspace)$.
-
-\subsubsection{The stochastic inverse problem (SIP)}
-
-We first define the concept of push-forward measures as solutions to the SFP mentioned in the introduction.
-This helps frame the SIP more clearly as the direct inversion of the SFP.
-\begin{definition}[Stochastic Forward Problem (SFP)]\label{def:forward-problem}
-  Given an initial (i.e., initially specified) probability measure $\initialP$ on $\pspace$, the SFP is the determination of the push-forward probability measure $\predictedP$ on $\dspace$, defined by
-\begin{equation*}
-\predictedP(E) := \initialP(Q^{-1}(E)),
-\end{equation*}
-for all events $E\subset\dspace$.
-\end{definition}
-
-We often refer to the push-forward of the initial measure as the {\em predicted} measure since it may be constructed before any observed data are known.
-This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
-\begin{definition}[Stochastic Inverse Problem (SIP)]\label{def:inverse-problem}
-Given an observed probability measure $\observedP$ on $\dspace$, the SIP is to determine a pullback probability measure, denoted $\mathbb{P}_\pspace$, on $\pspace$, which is observation-consistent in the sense that
-\begin{equation}\label{eq:data-consistent}
-\mathbb{P}_\pspace(Q^{-1}(E)) = \observedP(E),
-\end{equation}
-for all events $E\subset\dspace$.
-\end{definition}
-
-Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP, but rather there is a class of pullback measures that solve the SIP.
-In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
-An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
-
-In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension, and is stable with respect to perturbations in the initial and observed probability measures.
-We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details.
-Here, we simply summarize the density-based solution to the SIP as:
-\begin{equation}\label{eq:updated-pdf}
-	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
-\end{equation}
-The densities (i.e., Radon-Nikodym derivatives) $\initial$ and $\observed$ are associated with the specification of $\initialP$ and $\observedP$, respectively.
-The density $\predicted$ is associated with the predicted measure $\predictedP$.
-In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
-
-In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
-A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
-Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
-This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
-Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
-
-\subsubsection{The Bayesian inverse problem}
-
-We now develop a typical Bayesian inverse problem following the framework described in \cite{Stuart10}.
-Let $d$ denote the ``noisy'' data obtained on $Q(\paramref)$, which is often represented as
-\begin{equation*}
-	d = Q(\paramref) + \xi,
-\end{equation*}
-where $\xi$ is a random variable used to model the measurement error that is often assumed to follow a Gaussian distribution.
-Then, the data-likelihood function, often written as a conditional density, $\pi_\text{like}(d\, |\, \param)$, is formed.
-This describes the differences in relative likelihoods that the data could have been generated from a particular $\param$.
-Ideally, the largest values of $\pi_\text{like}(d\, | \, \param)$ occur whenever $\param$ is a ``good'' approximation to the true parameter $\paramref$.
-The data-likelihood function is distinct from the observed density used in the observation-consistent framework.
-
-The next ingredient in the Bayesian framework is the specification of a prior density denoted by $\pi_\text{prior}(\param)$.
-The prior describes the different relative likelihoods assumed for the true parameter before data are collected.
-This is also distinct from the role of the {\em initial} density used in the observation-consistent framework.
-
-The posterior density (i.e., the solution to the Bayesian inverse problem) is given by a conditional density, denoted by $\pi_\text{post}(\param\, | \, d)$, proportional to the product of the prior and data-likelihood function.
-In other words,
-\begin{equation*}
-	\pi_\text{post}(\param\, | \, d) \propto \pi_\text{prior}(\param)\pi_\text{like}(d\, | \, \param)
-\end{equation*}
-This form of the density follows from Bayes' rule (not from the Disintegration Theorem as with the updated density).
-The posterior can be interrogated to assess the difference in relative likelihoods of a fixed parameter given the observed data.
-Subsequently, the posterior is often used to produce a ``best'' estimate of the true parameter.
-For example, the maximum a posteriori (MAP) point is the parameter that maximizes the posterior density.
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{|c|c|}
-\hline
- & \\
-$\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}
-$
-&
-$
-	\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}
-$
- \\ & \\ \hline
-\end{tabular}
-\caption{Updated density solving the observation-consistent inverse problem (left) and posterior density solving the Bayesian inverse problem (right).}
-		\label{tab:dens_comparisons}
-\end{table}
-
-\subsection{Comparisons and an illustrative example}
-
-Before we compare the posterior and updated densities for an example, we find it useful to summarize these densities side-by-side in Table~\ref{tab:dens_comparisons} and comment on a few notable aspects not mentioned above.
-Observe for the posterior density that the data-likelihood function appears in both the numerator and denominator.
-In particular, the data-likelihood function informs the {normalizing constant}, commonly referred to as the evidence term, in the denominator.
-This is in contrast to the denominator of the updated density, which is given by the predicted density, which is in general not a constant, and can be constructed independently of $\observed$
-
-A practical implication of this difference is that the updated density only alters the structure of the initial density in what we refer to as the ``data-informed'' parameter directions.
-Specifically, for a fixed $q\in\dspace$, let $C_q := \set{\param\in\pspace\, : \, Q(\param)=q}$, i.e., $C_q$ is a ``contour'' in parameter space.
-Then, for any $\param\in C_q$, we immediately have $\updated(\param)=r(q)\initial(\param)$ where $r(q)$ is a fixed constant of proportionality for all $\param\in C_q$.
-%Subsequently, using the Disintegration theorem on both the initial and updated densities produces exactly the same family of conditional densities on the contours in parameter space.
-By contrast, while the posterior does not have to agree with the prior in any direction in parameter space, the prior does impact the structure of the posterior in all directions.
-
-
-The previous paragraph is not\---and should not be interpreted as\---a criticism of the Bayesian inverse framework.
-It is simply meant to highlight that the observation-consistent and Bayesian frameworks formulate and solve inverse UQ problems from different perspectives and with different (although at times seemingly compatible) assumptions.
-Consequently, the solutions for an inverse problem formulated under either framework may differ significantly.
-As the example (adopted from \cite{BJW18a}) below demonstrates, this is true even if we arbitrarily force the inverse problems to appear as similar as possible.
-
-Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$.
-For the observation-consistent framework, we assume $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$.
-The push-forward of initial PDF, the observed PDF, and the updated PDF are shown in Fig.~\ref{fig:bayes-comparison}.
-
-For the Bayesian inverse problem, we assume $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
-%In particular, we assume that $d=0.25$ and follow the process of \cite{Stuart_Bayesian} to form the data-likelihood function so that it matches the observed density.
-We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
-The posterior and its push-forward are also shown in Fig.~\ref{fig:bayes-comparison}.
-
-While the updated and posterior densities in Fig.~\ref{fig:bayes-comparison} share certain similarities (e.g., they are uni-modal with similar locations of the mode), they are otherwise visibly distinct.
-The differences between these densities is made more evident by examining their push-forwards.
-The push-forward of the updated density agrees well with the observed density, which is to be expected.
-However, the push-forward of the posterior is bi-modal and does not match the observed density, which we recall is identical to the data-likelihood function in this case.
-%with peaks that appear to align fairly well with the two distinct peaks of the predicted density and observed density.
-%Recall that the observed density and data-likelihood are, in this case, identical.
-%Moreover, with the setup described above, the predicted density can also be interpreted as the push-forward of the prior density.
-%This demonstrates the regularizing impact of the prior on the posterior and how i.
-
-%
-%Hierarchical Bayesian methods \cite{} extend this typical framework to problems where aleatoric uncertainties are present, but are still fundamentally developed from a  point estimation perspective.
-%Specifically, prior distributions are specified from a parametric family of distributions, such as Gaussian distributions, and the hyper-parameters used to define that family of distributions, such as the means and variances, become a focal point of estimation by the methodology.
-
-
-\begin{figure}[htbp]
-\centering
-   \includegraphics[width=0.49\linewidth]{figures/cbayes_comp_sbayes_50000_paramdens_nonlinear-standalone.pdf}
-   \includegraphics[width=0.49\linewidth]{figures/cbayes_comp_sbayes_50000_outdens_nonlinear-standalone.pdf}
- \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
- (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
- \label{fig:bayes-comparison}
-\end{figure}
-
-The takeaway to the above discussion and example is that each density is solving a {\em different} inverse problem.
-The posterior density is intended to provide point estimates of a true parameter value whereas the updated density is intended to quantitatively characterize natural variations in parameter values.
-
-Suppose we reformulated this example slightly to make the role of data more central.
-Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
-For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
-In this case, the objective is to use the posterior or updated density to produce an estimate of $\paramref$.
-In the next section, we motivate the use of the maximal updated density point as a means of providing a useful point estimate to parameters.
-
-
-%A critical component in the Bayesian framework is the prior density, which encodes any knowledge or assumptions about them input (parameter) space that we may wish to impose before any data are observed.
-%In some cases, the prior and initial densities may be both specified and interpreted identically.
-%However, in the Bayesian framework, the impact of the prior on the posterior density is perhaps best understood as a regularization term that makes the inverse problem well--posed by penalizing parameters uninformed by the data.
-%Ideally, the prior should not interfere with well--informed parameters, i.e., parameters informed by the data.
-%{Unfortunately, well--informed parameters are not known a priori and none of the existing prior elicitation approaches avoid polluting data--informed directions in the parameter space.}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparing the Maximal Updated Density (MUD) and MAP points}\label{sec:estimation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -365,27 +100,26 @@ The parameters in the initial and observed densities are given by
 \]
 
 \begin{figure}
-   % \includegraphics[width=\linewidth]{figures/Regularization-all-in-one.pdf}
   \centering
   \begin{tabular}{|ccc|}
     \hline
-      \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/data_mismatch_contour.png}}
       {data mismatch}
     &
-      \subf{\includegraphics[width=0.3\linewidth]{figures/tikonov_contour.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/tikonov_contour.png}}
       {regularization}
     &
-      \subf{\includegraphics[width=0.3\linewidth]{figures/classical_solution.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/classical_solution.png}}
       {bayesian posterior}
     \\
     \hline
-      \subf{\includegraphics[width=0.3\linewidth]{figures/data_mismatch_contour.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/data_mismatch_contour.png}}
       {data mismatch}
     &
-      \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_contour.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/consistent_contour.png}}
       {modified regularization}
     &
-      \subf{\includegraphics[width=0.3\linewidth]{figures/consistent_solution.png}}
+      \subf{\includegraphics[width=0.3\linewidth]{figures/contours/consistent_solution.png}}
        {updated density}
     \\
     \hline
@@ -525,7 +259,6 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Higher-Dimensional Linear Gaussian Examples}\label{sec:high-dim-linear-example}
@@ -770,14 +503,12 @@ Despite these differences, both examples share the following details.
 %  \item To estimate convergence rates, we compute first-order linear regressions for the logarithm (base 10) of the mean and variances for the absolute error. The coefficient for the mean in the regression appears as an annotation in the figures.
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{ODE Example}\label{subsec:ode-example}
 \begin{figure}[htb]
-  \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode_200_reference_solution}
+  \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution.png}
+  \includegraphics[width=\linewidth]{figures/ode/ode_200_reference_solution.png}
   \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
  Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
  Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
@@ -791,8 +522,8 @@ Despite these differences, both examples share the following details.
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.4\linewidth]{figures/ode/ode_convergence_mud_obs_mean}
-  \includegraphics[width=0.4\linewidth]{figures/ode/ode_convergence_mud_obs_var}
+  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
+  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
   \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   {
   \color{blue}{Change "Proportion of Time Elapsed" to "N" and plot vs $N$. Remove the orange scatter points and curves. Change titles to $\mathbb{E}(\abs{\mudpt - \paramref})$ and $Var(\abs{\mudpt-\paramref})$.}
@@ -822,11 +553,6 @@ In the left plot of Figure~\ref{fig:ode-convergence-obs}, we observe that as mor
 The right plot demonstrates that the precision (i.e., the variance in the error) is also reduced by using more data.
 These results are also visualized in the plots of Figure~\ref{fig:ode-reference} where the distinct red curves in the top plot are the signals associated with the 20 $\mudpt$ estimates associated with the 20 independent trials of $N=20$ noisy measurements.
 However, in the bottom plot, these 20 red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{PDE Example}\label{subsec:pde-example}
 
@@ -858,9 +584,8 @@ See the plot of Figure~\ref{fig:pde-Q} for a representative noisy response surfa
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D2_m100}
+\includegraphics[width=0.65\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
 \caption{
-{\color{blue}Just use center plot.}
 A representative noisy perturbation of the reference response surface. Locations of the randomly chosen spatial data used to construct both $Q_{1D}$ and $Q_{2D}$ are shown as black and red dots.
 }
 \label{fig:pde-Q}
@@ -878,14 +603,13 @@ These same $1000$ samples are used across all $20$ realizations of random noisy 
 
 \begin{figure}[htbp]
 \centering
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100}
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
 \caption{
-{\color{blue}Remove the closest in output sample from all plots. Clean up legends and titles. Remove $m=100$. Titles for new center and right plots: ``MUD estimates for $Q_{1D}$'' and ``MUD estimates for $Q_{2D}$''. Legends for these plots: ``Interpolant of ref. $g$'' and ``MUD estimate of $g$''.
-Title for new left plot: ``Initial estimates of $g$''. Legend: ``Reference $g$'' (the smooth curve), ``Interpolant of ref. $g$'' (piecewise-linear curve and use dashed curve for it), and ``Random initial est. of $g$'' (for the red curves).}
-In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dashed black curve.
-The red curves {\color{blue}\bf Make more opaque} in the center and right plots show the variability in MUD estimates of $g(x_2)$ for the 20 different realizations of noisy data.
+In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
+The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
+The purple curves in the center and right plots show the variability in MUD estimates of $g(x_2)$ for the 20 different realizations of noisy data.
 The center plot uses $Q_{1D}$ and the right plot uses $Q_{2D}$ to construct the MUD estimates.
 }
 \label{fig:pde-MUD}
@@ -896,9 +620,23 @@ Two separate types of data-constructed $Q_\text{WME}$ maps are constructed from 
 The first map, which for simplicity we denote by $Q_{1D}$, uses all 100 spatial data points to construct a scalar-valued QoI map.
 Given the location of the spline knots, a second map, which for simplicity we denote by $Q_{2D}$, uses the data points above (below) the mid-line of the spatial domain to form the first (second) component of the 2-dimensional vector-valued QoI map.
 This separation of spatial data is illustrated in the top-left plot in Figure~\ref{fig:pde-Q}.
+For reference, the interpolant of the reference $g(x_2)$ on the spline basis is also shown in these plots.
+The sample from $\pspace$ which best predicts the hundred noiseless measurements (in 2-norm) is also shown, referred to as the projection of $g(x_2)$.
 
-%The top-center and top-right plots in Figure~\ref{fig:pde} illustrate solutions associated with the MUD estimates of $g(x_2)$ obtained from $Q_{1D}$ and $Q_{2D}$, respectively, using the noisy data shown in the top-left plot.
+\begin{figure}[htbp]
+\centering
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_convergence.png}
+\caption{
+A plot of the variance in 2-norm of MUD solutions acquired from solving the SIP with $Q_{1D}$ and $Q_{2D}$ as more measurements are incorporated.
+The solid black line represents $Q_{1D}$ and the dashed blue line represents $Q_{2D}$.
+}
+\label{fig:pde-convergence}
+\end{figure}
+
 
 The center and right plots in Figure~\ref{fig:pde-MUD} shows the variability in the $20$ MUD estimates of $g(x_2)$ obtained from the different realizations of noisy data using $Q_{1D}$ and $Q_{2D}$, respectively.
-For reference, the interpolant of the reference $g(x_2)$ on the spline basis is also shown in these plots.
-Comparing these plots, we see that the MUD estimates associated with $Q_{2D}$ have less spatial variability than those associated with $Q_{1D}$ while also being better pointwise estimates for this interpolant of $g(x_2)$.
+A comparison of these plots suggests the MUD estimates associated with $Q_{2D}$ have less spatial variability than those associated with $Q_{1D}$, while also being better point-wise estimates for the interpolant or projection of $g(x_2)$.
+To quantify this reduction in variability, the convergence with respect to the number of measurements incorporated is illustrated in Figure~\ref{fig:pde-convergence}.
+There we see that using $Q_{2D}$ for inversion results in a slow but noticeable reduction in variance while $Q_{1D}$ exhibits a slight upward trend.
+The MUD solutions for $Q_{1D}$ appear unable to resolve which of the two parameters represents a minimum value of $g$, while $Q_{2D}$ MUD solutions concentrate around the $\lambda_i$ which best predicts the measurements.
+The latter solution captures more features of the solution we seek (an estimate of $g$).
