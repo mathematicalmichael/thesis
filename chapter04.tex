@@ -8,6 +8,21 @@ We focus on the accuracy of the density/measure, since this is what solves our S
 The updated solution can be used for point estimation, or used holistically for prediction under uncertainty.
 Regardless of the context for solving the SIP, it is important to address the sources of approximation error that pollute the observation-consistent framework.
 
+%%%%%
+
+\section{Set-Based Inversion for Measures}\label{sec:set-based}
+% Intro
+\input{set-based/set_derivation.tex}
+%% \input{ch02/set_derivation_bayes.tex}
+
+% Numerical Approximation
+\input{set-based/set_algorithm.tex}
+
+% Descriptions of Error
+\input{set-based/set_error.tex}
+
+%%%%%
+
 \input{ch03/impact.tex}
 
 \section{Skewness and Information Content}\label{sec:skewness}
@@ -129,14 +144,6 @@ It is a combination of computational ease of implementation and theoretical impl
 \input{ch03/sample_accuracy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\
-\section{Software Contributions}\label{sec:ch03-software}
-TK - Eh. I could take it or leave it at this point to be honest. may just be worth throwing all of this stuff into a chapter 7 and calling it a day.
-
-Talk about the BET module that computes metrics.
-Discuss testing, show sample of usage (disconnected from skewness, high-level).
-
 
 \
 \section{Numerical Results and Analysis}\label{sec:ch03-examples}
