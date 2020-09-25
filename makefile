@@ -24,6 +24,7 @@ TEXFILES := \
 	$(FILENAME) \
 	abstract \
 	notation \
+	body \
 	env/newcommands \
 	env/usepackages \
 
