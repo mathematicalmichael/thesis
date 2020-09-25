@@ -25,6 +25,9 @@ TEXFILES := \
 	abstract \
 	notation \
 	body \
+	set-based/set_derivation \
+	set-based/set_algorithm \
+	set-based/set_error \
 	env/newcommands \
 	env/usepackages \
 
