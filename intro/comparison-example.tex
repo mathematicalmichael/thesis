@@ -69,10 +69,10 @@ u(\param) = \param^p
 for $p$ chosen as either 1 or 5.
 For both approaches, the prior and initial density is given by a uniform distribution on $U[-1,1]$.
 In the Data-Consistent Inversion framework, $\observed \sim \mathcal{N}(0.25,0.1^2)$.
-In the statistical Bayesian framework, we take $\q=0.25$ and assume an additive error noise model with distribution $\mathcal{N}(0,0.1^2)$ so that the likelihood, $L_\dspace(d | \param)$, matches the observed density as a function of $\param$.
+In the statistical Bayesian framework, we take $\q=0.25$ as the datum and assume an additive error noise model with distribution $\mathcal{N}(0,0.1^2)$ so that the likelihood, $L_\dspace(\q | \param)$, matches the observed density as a function of $\param$.
 
 When $p=1$, we have $\predicted = \frac{1}{2} = C$.
-Since $\observed\Q = L_\dspace(d|\param)$ and $\predicted$ agrees with the normalizing constant $C$, the posterior and update agree on $\pspace$ (we show the push-forwards in the right plot of Figure~\ref{fig:comparison}).
+Since $\observed\Q = L_\dspace(\q|\param)$ and $\predicted$ agrees with the normalizing constant $C$, the posterior and update agree on $\pspace$ (we show the push-forwards in the right plot of Figure~\ref{fig:comparison}).
 When $p=5$, the non-linearity of the model causes the push-forward of $\initial$ to be non-constant, so the two approaches now yield differing solutions, as seen in the left plot of Figure~\ref{fig:comparison}).
 The push-forward of the posterior associated with the statistical Bayesian framework is influenced by the push-forward of the prior in a way that the push-forward of the updated density avoids.
 
@@ -96,13 +96,11 @@ The likelihood (observed density) is shown as a solid red line.
 % [TK - removed paragraph] We can see in Figure~\ref{fig:comparison} that the two approaches pose different questions and thus yield different results.
 % The Data-Consistent Inversion framework seeks to recreate the observed density, which it does for both $p=1$ and $p=5$, but the Bayesian approach is a combination of both the observed and the push-forward of the prior.
 [TK - a lot of this discussion is well-covered in the intro to the mud paper... let's move it here??]
-Bayesians do not push-forward their posterior density, so in some sense this comparison is not entirely fair.
-It is not the goal of Bayesian inference to recreate the likelihood function in this way.
-Rather, the point of maximum likelihood would be propagated and perturbed with the assumed noise model.
-This is because Bayesian inverse problems are fundamentally posed as parameter-identification (an optimization to be performed), not distribution estimation.
-In the event that a Bayesian would want to estimate a distribution, they would do so by creating a parametric representation thereof.
-For example, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it [TK - cite more] \cite{Smith}.
-Nonparametric densities can be approximated by mixture models.
+In summary, it is not the goal of Bayesian inference to construct a pullback distribution.
+Bayesian inverse problems are fundamentally posed as parameter-identification, not distribution estimation.
+However, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it [TK - cite more] \cite{Smith}.
+This defines what is commonly referred to a as a Hierarchical Bayesian Inverse Problem.
+More complex densities can be approximated by mixture models.
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
 No such compromise is required in the Data-Consistent Inversion framework.
