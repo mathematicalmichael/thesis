@@ -11,9 +11,9 @@ Draw $\nsamps$ samples from the initial density to construct the set $\set{\para
 	\For{$\iparam = 1, \hdots, \nsamps$}{
 	Compute $\qoi_\iparam = \qoi(\param^{(\iparam)})$.\\
 	}
-	Approximate $\predicted\q$, the push-forward of $\initial$, by some method such as kernel density estimation.
+	Approximate $\predicted\Q$, the push-forward of $\initial$, by some method such as kernel density estimation.
   \For{$\iparam = 1, \hdots, \nsamps$}{
-	Compute $\updated\lami = \initial\qi \frac{\observed\qi}{\predicted\qi}$.\\
+	Compute $\updated\lami = \initial\Qi \frac{\observed\Qi}{\predicted\Qi}$.\\
 	}
 
  \caption{Numerical Approximation of the Inverse Density using the Sample-Based Approach}
