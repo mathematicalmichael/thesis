@@ -45,7 +45,7 @@ Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite
 \begin{thm}[Existence and Uniqueness]
   For any set $A\in \pborel$, the solution $\updatedP$ given defined by
   \begin{equation}\label{eq:dci_sol}
-    \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
+    \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\Q}{\predicted\Q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
   \end{equation}
   is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior (initial) probability measure $P_\pspace$ on $(\pspace, \pborel)$.
   Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
@@ -61,7 +61,7 @@ These definitions are combined to form the \emph{updated density}, originally de
 \begin{defn}[Updated Distribution]\label{defn:updated}
   A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivative,
   \begin{equation}\label{eq:update}
-    \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \forall \; \param \in \pspace.
+    \updated \lam = \initial \lam \frac{\observed \Q }{\predicted \Q }, \; \forall \; \param \in \pspace.
   \end{equation}
 \end{defn}
 
@@ -119,7 +119,7 @@ Given that specifying the definition of a ``true'' initial density is somewhat n
 However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
 If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
 \[
-\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} },
+\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\Q} },
 \]
 where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\updatedP}$.
 In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the initial.
@@ -180,24 +180,24 @@ Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate
 %For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
 %We let
 %\[
-%\updated\lam = \initial \lam r\q, \text{ where } r\q = \frac{\observed\q}{\predicted\q}
+%\updated\lam = \initial \lam r\Q, \text{ where } r\Q = \frac{\observed\Q}{\predicted\Q}
 %\]
 %
-%Many standard calculations about the updated density involve integrals of functions of $r\q$ with respect to the prior.
+%Many standard calculations about the updated density involve integrals of functions of $r\Q$ with respect to the prior.
 %For any measurable function $f$, we establish the connection of calculating quantities over $\pspace$ with those over $\dspace$ by leveraging the following identity from measure theory:
 %\[
-%\int_\pspace f\left( r\q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
+%\int_\pspace f\left( r\Q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
 %\]
 %
 %We use several throughout this proposal, including the integral of the updated density:
 %\[
-%I(\updated ) = \int_\pspace r\q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
+%I(\updated ) = \int_\pspace r\Q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
 %\]
 %which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated.
 %
 %Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
 %\begin{equation}\label{eq:KLdiv}
-%\text{KL}(\initial : \updated ) = \int_\pspace r\q \log r\q \, d\initialP = \text{KL}(\observed : \predicted ),
+%\text{KL}(\initial : \updated ) = \int_\pspace r\Q \log r\Q \, d\initialP = \text{KL}(\observed : \predicted ),
 %\end{equation}
 %i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
 
