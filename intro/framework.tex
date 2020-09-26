@@ -144,3 +144,27 @@ A practical form of the predictability assumption is that there exists a constan
 Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
 This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
 Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data.
+
+\begin{defn}[Initial Distribution]\label{defn:initial}
+  The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{initial distribution} (or density).
+  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$.
+\end{defn}
+
+To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
+In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
+To make this precise, we use the following:
+
+\begin{defn}[Predicted Distribution]\label{defn:predicted}
+  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
+  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
+  \begin{equation}\label{eq:predicted}
+    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
+  \end{equation}
+  which should be recognizable from the definition of the forward problem.
+  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
+\end{defn}
