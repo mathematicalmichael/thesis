@@ -4,73 +4,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As discussed in the introduction, the typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
-To help build intuition about these differences, we summarize key details about these inverse problems and their solutions before presenting an example that highlights differences in solutions.
-
-%As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
-%  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
-%  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
-%  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
-%  cockayneoatessullivangirolami} is designed to quantify epistemic sources of uncertainty.
-%These conceptual differences have significant impacts on the solutions to inverse problems formulated within these distinctive frameworks.
-%We provide more details below to further clarify these impacts for the reader.
-%An example is then used to illustrate the differences, which is also helpful for building intuition.
-%Moreover, the details provided below play a vital role in Section~\ref{sec:estimation} where features of the observation-consistent framework are used to motivate its extension to point estimation problems.
-
-
-%The Bayesian inversion framework  is perhaps the most
-%popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-%As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-
-\subsection{Terminology, notation, and the inverse problems}
-
-To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
-Denote by $\pspace$ the space of physically relevant parameters for the model.
-Denote by $Q$ the (potentially vector-valued) QoI map from the parameter space, $\pspace$, to the data space defined by $\dspace:= Q(\pspace)$.
-
-\subsubsection{The stochastic inverse problem (SIP)}
-
-We first define the concept of push-forward measures as solutions to the SFP mentioned in the introduction.
-This helps frame the SIP more clearly as the direct inversion of the SFP.
-\begin{definition}[Stochastic Forward Problem (SFP)]\label{def:forward-problem}
-  Given an initial (i.e., initially specified) probability measure $\initialP$ on $\pspace$, the SFP is the determination of the push-forward probability measure $\predictedP$ on $\dspace$, defined by
-\begin{equation*}
-\predictedP(E) := \initialP(Q^{-1}(E)),
-\end{equation*}
-for all events $E\subset\dspace$.
-\end{definition}
-
-We often refer to the push-forward of the initial measure as the {\em predicted} measure since it may be constructed before any observed data are known.
-This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
-\begin{definition}[Stochastic Inverse Problem (SIP)]\label{def:inverse-problem}
-Given an observed probability measure $\observedP$ on $\dspace$, the SIP is to determine a pullback probability measure, denoted $\mathbb{P}_\pspace$, on $\pspace$, which is observation-consistent in the sense that
-\begin{equation}\label{eq:data-consistent}
-\mathbb{P}_\pspace(Q^{-1}(E)) = \observedP(E),
-\end{equation}
-for all events $E\subset\dspace$.
-\end{definition}
-
-Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP, but rather there is a class of pullback measures that solve the SIP.
-In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
-An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
-
-In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension, and is stable with respect to perturbations in the initial and observed probability measures.
-We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details.
-Here, we simply summarize the density-based solution to the SIP as:
-\begin{equation}\label{eq:updated-pdf}
-	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
-\end{equation}
-The densities (i.e., Radon-Nikodym derivatives) $\initial$ and $\observed$ are associated with the specification of $\initialP$ and $\observedP$, respectively.
-The density $\predicted$ is associated with the predicted measure $\predictedP$.
-In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
-
-In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
-A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
-Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
-This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
-Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
-
 \subsubsection{The Bayesian inverse problem}
 
 We now develop a typical Bayesian inverse problem following the framework described in \cite{Stuart10}.
@@ -181,9 +114,3 @@ In the next section, we motivate the use of the maximal updated density point as
 %However, in the Bayesian framework, the impact of the prior on the posterior density is perhaps best understood as a regularization term that makes the inverse problem well--posed by penalizing parameters uninformed by the data.
 %Ideally, the prior should not interfere with well--informed parameters, i.e., parameters informed by the data.
 %{Unfortunately, well--informed parameters are not known a priori and none of the existing prior elicitation approaches avoid polluting data--informed directions in the parameter space.}
-
-
-
-
-
-
