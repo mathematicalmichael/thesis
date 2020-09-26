@@ -1,7 +1,7 @@
 \subsection{Comparison to Bayesian Inversion}\label{sec:bayesian}
 [TK - fix this ] We establish two comparisons: first to Bayesian inversion \cite{Walpole, Berger, Complete, Smith}, the second to a measure-theoretic approach studied in \cite{BET+14, BE13}.
 
-It is important to note that the Bayesian framework poses a different question for which a different answer is sought, which is based on the presence of $L_\dspace(d | \param)$ in place of $\observed(\qlam)$.
+It is important to note that the Bayesian framework poses a different question for which a different answer is sought.
 Specifically, the problem analyzed by the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \cite{Smith, Concrete, Complete}.
 The philosophical underpinnings of Bayesian inference is akin to the asking following:
 
@@ -19,11 +19,11 @@ This approach expresses a desire to reconstruct a distribution (or probability m
 
 $L_\dspace$ is the likelihood function as a function of the output and the denominator $C$ is a normalizing constant (known as the \emph{evidence} \cite{Smith}), which ensures the posterior density integrates to one:
 \[
-C = \int_\pspace \initial\lam L_\dspace(d | \param) \, d\param.
+C = \int_\pspace \prior\lam L_\dspace(d | \param) \, d\param.
 \]
 
-Note that there are no constraints or requirements that likelihood function be a density\footnote{It is just the case that in order to pose problems where we can align the two methods, we need to form $L$ as a density.}.
-In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\initial(\param) L_\dspace (d | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
+Note that there are no constraints or requirements that likelihood function be a density.
+In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\prior(\param) L_\dspace (d | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
 In other words, $L_\dspace (d | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data.
 An interpretation of $L_\dspace (d | \param)$ is the relative likelihood that a single parameter $\param\in\pspace$ explains the observed data, whereas $\observed(\qlam)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
 In this framework, there is a different notion of consistency, referring to certain asymptotic properties of $\posterior$ in the limit of infinite data \cite{Barron, Silverman}.
@@ -37,20 +37,19 @@ In this framework, there is a different notion of consistency, referring to cert
 The Bayesian formulation gives a posterior density as:
 
 \begin{equation}\label{eq:sb_post}
-    \pp\lam := \initial\lam \frac{L_\dspace (d | \param)}{ C },
+    \posterior\lam := \prior\lam \frac{L_\dspace (d | \param)}{ C },
 \end{equation}
 
-where we use $\pp$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
+where we use $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
 
-Here, we borrow the notation $\initial$ to represent the Bayesian $\pp_\text{prior}$, since in our comparative examples we use the two interchangeably.
+$\prior$ represents the Bayesian prior density, distinct from the initial density $\initial$ in the role it plays in the SIP.
 We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
-We compare the Bayesian posterior to our updated density, but temporarily abuse notation for the sake of comparison and use $\updated$ to refer to both, with $\pp$ representing the posterior when the distinction needs to be made.
 
 
 
 We note there are problems one can formulate where the observed density corresponds directly to a normalized likelihood function familiar to Bayesian statisticians, as we demonstrate below.
-One difference between the two solutions is the use of normalizing constant $C$ in $\pp$ not present in $\updated$, as discussed in Corollary~\ref{cor:int} above.
-To illustrate the two approaches, we explore the impact of this difference in the example below, taken from \cite{BJW18}.
+One difference between $\updated$ and $\posterior$ is the use of normalizing constant $C$ in $\posterior$ not present in $\updated$, as explained by Corollary~\ref{cor:int} above.
+To illustrate the differences in the two densities, we explore the impact of this difference in the example below, taken from \cite{BJW18}.
 
 \begin{ex}
 Consider
