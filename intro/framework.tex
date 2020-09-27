@@ -72,6 +72,12 @@ This helps frame the SIP more clearly as the direct inversion of the SFP.
 
 %%%%%%%%%%%%%%%%%%%
 
+The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
+In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP_\pspace$ given the specification of an observed density.
+However, there are many applications of interest where $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both.
+
+%%%%%%%%%%%%%%%%%%%
+
 \begin{defn}[Initial Distribution]\label{defn:initial}
   The role of the density $\PP_\pspace$ in \eqref{eq:forward-problem} is defined by the specification of the \emph{initial measure}, $\initialP$, which represents any prior beliefs about parameters before observations on QoI are taken into account.
   If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\observed$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the volume measure $\pmeas$.
@@ -129,17 +135,6 @@ for all events $E\subset\dspace$.
 %%%%%%%%%%%%%%%%%%%%%
 
 
-The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
-In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP_\pspace$ given the specification of an observed density.
-However, there are many applications of interest where $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both.
-
-
-The specific nuances of this relationship are discussed in \ref{chapter:02} and \ref{chapter:03} in greater detail.
-Here, we simply note that the construction of \eqref{eq:update} requires only the forward-problem construction of $\predicted$, since $\initial$ and $\observed$ are given \emph{a priori}.
-Additional properties are given in \ref{sec:properties} alongside the conditions for the existence and uniqueness of an update of the form given by \eqref{eq:inverse-problem}.
-
-
-
 Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP, but rather there is a class of pullback measures that solve the SIP.
 In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
 An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
@@ -153,6 +148,13 @@ Here, we simply summarize the density-based solution to the SIP as:
 The densities (i.e., Radon-Nikodym derivatives) $\initial$ and $\observed$ are associated with the specification of $\initialP$ and $\observedP$, respectively.
 The density $\predicted$ is associated with the predicted measure $\predictedP$.
 In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
+
+%%%%%%%%%%%%%%%%%%%
+
+The specific nuances of this relationship are discussed in \ref{chapter:02} and \ref{chapter:03} in greater detail.
+Here, we simply note that the construction of \eqref{eq:update} requires only the forward-problem construction of $\predicted$, since $\initial$ and $\observed$ are given \emph{a priori}.
+Additional properties are given in \ref{sec:properties} alongside the conditions for the existence and uniqueness of an update of the form given by \eqref{eq:inverse-problem}.
+%%%%%%%%%%%%%%%%%%%
 
 In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
 A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
