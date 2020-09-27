@@ -123,18 +123,6 @@ This is in contrast to the SIP and its observation-consistent solutions that are
 %%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{definition}[Stochastic Inverse Problem (SIP)]\label{def:inverse-problem}
-Given an observed probability measure $\observedP$ on $\dspace$, the SIP is to determine a pullback probability measure, denoted $\mathbb{P}_\pspace$, on $\pspace$, which is observation-consistent in the sense that
-\begin{equation}\label{eq:data-consistent}
-\mathbb{P}_\pspace(Q^{-1}(E)) = \observedP(E),
-\end{equation}
-for all events $E\subset\dspace$.
-\end{definition}
-
-
-%%%%%%%%%%%%%%%%%%%%%
-
-
 Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP, but rather there is a class of pullback measures that solve the SIP.
 In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
 An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
