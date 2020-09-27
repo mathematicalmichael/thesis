@@ -4,22 +4,25 @@ The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ suc
 The following assumption guarantees a solution to the stochastic inverse problem in the form of an update to the initial distribution.
 It implies that any event which is assigned a positive probability by the observations must also have a positive predicted probability.
 
-\begin{assumption}[Predictability Assumption (Theoretical Form)]\label{as:pred}
+\begin{assumption}[Predictability Assumption (Theoretical Form)]\label{as:predicted-theoretical}
   The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
 \end{assumption}
 
 If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial beliefs) have a priori ruled that almost surely these events should not occur.
 Therefore, either initial beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation.
 
-
-The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
-\begin{equation}\label{eq:pred}
+The following form establishes a practical form of \ref{as:predicted-theoretical} which states that the predicted measure must dominate the observed.
+\begin{assumption}[Predictability Assumption (Practical Form)]\label{as:predicted-practical}
+The requirement given in Assumption~\ref{as:predicted-theoretical} is guaranteed if the following is satisfied:
+\begin{equation}\label{eq:pred-pract}
   \exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
 \end{equation}
 where it is understood that $\q = \qlam$ for some $\param \in \pspace$.
+\end{assumption}
 
-
-Now, assuming \eqref{eq:pred} holds, we state the following theorem from \cite{BJW18} based upon the disintegration of measures:
+Assumption~\ref{as:predicted-practical} is particularly useful in that it is the same condition required for rejection sampling to work.
+This allows us to sample from the updated density using the initial density when we have i.i.d. initial samples available by evaluating the outputs of $\param_\iparam$ under $\qoi$ through the ratio of observed to predicted densities\footnote{ TK - I know analytically how this works and this isn't quite it, it's the RN deriv of the initial combining with the integrand, but this is an interesting intuitive explanation, so let's give it a go: The reason this is possible is that the latter is equivalent to sampling from the observed using samples from the predicted due to the consistency of the updated solution (divide both sides of \eqref{eq:update} by $\initial$ to see the equivalence of ratios).}.
+Now, assuming \eqref{eq:pred-pract} holds, we state the following theorem from \cite{BJW18} based upon the disintegration of measures:
 
 
 \begin{thm}[Existence and Uniqueness]
@@ -51,7 +54,6 @@ Moreover, this Corollary provides the basis for a useful numerical diagnostic th
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
-
 The Total Variation (TV) metric on a space of probability measures, absolutely continuous with respect to a dominating measure $\mu$ is defined as
 \begin{equation}\label{eq:tv}
 d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
@@ -136,7 +138,7 @@ where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\upda
 
 
 We assume the following for the approximation of the push-forward of the initial density:
-\begin{assumption}\label{as:predx}
+\begin{assumption}\label{as:predicted-theoreticalx}
 There exists some $C>0$ such that
 \[
 \observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
@@ -149,7 +151,7 @@ If this assumption is satisfied, then from \cite{BJW18}, we have the following:
   \begin{equation}\label{eq:predicted_bound}
     d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
   \end{equation}
-  where the $C$ is the constant taken from Assumption \ref{as:predx}.
+  where the $C$ is the constant taken from Assumption \ref{as:predicted-theoreticalx}.
 \end{thm}
 
 A straightforward approach to construct $\widehat{\predicted}$ is to use a forward propagation of samples from $\pspace$ to $\dspace$ and then apply kernel density estimation (KDE)~\cite{BJW18}.
