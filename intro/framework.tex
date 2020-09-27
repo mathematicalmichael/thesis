@@ -56,16 +56,45 @@ We begin with defining the types of forward and inverse problems considered in t
   Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
 \end{defn}
 
-In measure-theoretic terms, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
+\subsubsection{The stochastic inverse problem (SIP)}
+
+In measure-theoretic terms, $\PP_\dspace$ in Definition~\ref{def:forward-problem} is a push-forward measure of $\PP_\pspace$, and in Definition~\ref{def:inverse-problem}, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
 From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\PP_\dspace$.
 In other words, \emph{the solution we seek to the inverse problem is constrained by a forward problem.}
 Below, we formalize some of the vocabulary involved in the formulation and solution of the stochastic inverse problem.
+We refine the concept of push-forward measures as solutions to the SFP mentioned in the introduction, formally introducing the requisite vocabulary of \emph{initial}, \emph{observed}, and \emph{predicted} densities.
+This helps frame the SIP more clearly as the direct inversion of the SFP.
+
+
+\begin{defn}[Initial Distribution]\label{defn:initial}
+  The role of the density $\PP_\pspace$ in \eqref{eq:forward-problem} is defined by the specification of the \emph{initial measure}, $\initialP$, which represents any prior beliefs about parameters before observations on QoI are taken into account.
+  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\observed$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the volume measure $\pmeas$.
+\end{defn}
+
 
 \begin{defn}[Observed Distribution]\label{defn:observed}
   The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data
   If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed distribution} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the volume measure $\dmeas$.
 \end{defn}
 
+
+%%%%%%%%%%%%%%%%%%%%%
+
+To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
+In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
+We refer to the push-forward of the initial measure as the \emph{predicted measure} since it may be constructed before any observed data are known.
+This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
+To make this precise, we use the following:
+
+\begin{defn}[Predicted Distribution]\label{defn:predicted}
+  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
+  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
+  \begin{equation}\label{eq:predicted}
+    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
+  \end{equation}
+  which should be recognizable from the definition of the forward problem.
+  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
+\end{defn}
 
 %%%%%%%%%%%%%%%%%%%
 
@@ -87,44 +116,9 @@ This is in contrast to the SIP and its observation-consistent solutions that are
 %As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
 
 
-\subsubsection{The stochastic inverse problem (SIP)}
-
-We refine the concept of push-forward measures as solutions to the SFP mentioned in the introduction, formally introducing the requisite vocabulary of \emph{initial} and \emph{predicted} densities.
-This helps frame the SIP more clearly as the direct inversion of the SFP.
-
 %%%%%%%%%%%%%%%%%%%%%
 
-\begin{defn}[Initial Distribution]\label{defn:initial}
-  The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{initial distribution} (or density).
-  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$.
-\end{defn}
 
-To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
-In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
-To make this precise, we use the following:
-
-\begin{defn}[Predicted Distribution]\label{defn:predicted}
-  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
-  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
-  \begin{equation}\label{eq:predicted}
-    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
-  \end{equation}
-  which should be recognizable from the definition of the forward problem.
-  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
-\end{defn}
-
-%%%%%%%%%%%%%%%%%%%%%
-
-\begin{definition}[Stochastic Forward Problem (SFP)]\label{def:forward-problem}
-  Given an initial (i.e., initially specified) probability measure $\initialP$ on $\pspace$, the SFP is the determination of the push-forward probability measure $\predictedP$ on $\dspace$, defined by
-\begin{equation*}
-\predictedP(E) := \initialP(Q^{-1}(E)),
-\end{equation*}
-for all events $E\subset\dspace$.
-\end{definition}
-
-We often refer to the push-forward of the initial measure as the {\em predicted} measure since it may be constructed before any observed data are known.
-This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
 \begin{definition}[Stochastic Inverse Problem (SIP)]\label{def:inverse-problem}
 Given an observed probability measure $\observedP$ on $\dspace$, the SIP is to determine a pullback probability measure, denoted $\mathbb{P}_\pspace$, on $\pspace$, which is observation-consistent in the sense that
 \begin{equation}\label{eq:data-consistent}
@@ -134,7 +128,8 @@ for all events $E\subset\dspace$.
 \end{definition}
 
 
-%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
 
 The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
 In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP_\pspace$ given the specification of an observed density.
