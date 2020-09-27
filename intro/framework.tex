@@ -58,13 +58,19 @@ We begin with defining the types of forward and inverse problems considered in t
 
 \subsubsection{The stochastic inverse problem (SIP)}
 
-In measure-theoretic terms, $\PP_\dspace$ in Definition~\ref{def:forward-problem} is a push-forward measure of $\PP_\pspace$, and in Definition~\ref{def:inverse-problem}, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
+In measure-theoretic terms, $\PP_\dspace$ in Definition~\ref{defn:forward-problem} is a push-forward measure of $\PP_\pspace$, and in Definition~\ref{defn:inverse-problem}, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
 From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\PP_\dspace$.
 In other words, \emph{the solution we seek to the inverse problem is constrained by a forward problem.}
 Below, we formalize some of the vocabulary involved in the formulation and solution of the stochastic inverse problem.
 We refine the concept of push-forward measures as solutions to the SFP mentioned in the introduction, formally introducing the requisite vocabulary of \emph{initial}, \emph{observed}, and \emph{predicted} densities.
 This helps frame the SIP more clearly as the direct inversion of the SFP.
 
+\begin{defn}[Observed Distribution]\label{defn:observed}
+  The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data
+  If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed distribution} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the volume measure $\dmeas$.
+\end{defn}
+
+%%%%%%%%%%%%%%%%%%%
 
 \begin{defn}[Initial Distribution]\label{defn:initial}
   The role of the density $\PP_\pspace$ in \eqref{eq:forward-problem} is defined by the specification of the \emph{initial measure}, $\initialP$, which represents any prior beliefs about parameters before observations on QoI are taken into account.
@@ -72,16 +78,8 @@ This helps frame the SIP more clearly as the direct inversion of the SFP.
 \end{defn}
 
 
-\begin{defn}[Observed Distribution]\label{defn:observed}
-  The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data
-  If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed distribution} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the volume measure $\dmeas$.
-\end{defn}
-
-
-%%%%%%%%%%%%%%%%%%%%%
-
 To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
-In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
+In other words, we first solve the forward problem of \eqref{eq:forward-problem} to construct a solution to the inverse problem of \eqref{eq:inverse-problem}.
 We refer to the push-forward of the initial measure as the \emph{predicted measure} since it may be constructed before any observed data are known.
 This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
 To make this precise, we use the following:
