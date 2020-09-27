@@ -56,7 +56,7 @@ We begin with defining the types of forward and inverse problems considered in t
   Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
 \end{defn}
 
-\subsubsection{The stochastic inverse problem (SIP)}
+\subsubsection{The Stochastic Inverse Problem (SIP)}
 
 In measure-theoretic terms, $\PP_\dspace$ in Definition~\ref{defn:forward-problem} is a push-forward measure of $\PP_\pspace$, and in Definition~\ref{defn:inverse-problem}, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
 From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\PP_\dspace$.
@@ -78,13 +78,21 @@ However, there are many applications of interest where $\qoi$ fails to be a bije
 
 %%%%%%%%%%%%%%%%%%%
 
+Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in \ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
+In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
+An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
+
+In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension
+The solution to the SIP presented there is a direct inversion of a SFP; we introduce the following definitions to connect the result to general forms presented in \ref{defn:forward-problem} and \ref{defn:inverse-problem}:
+
+
 \begin{defn}[Initial Distribution]\label{defn:initial}
   The role of the density $\PP_\pspace$ in \eqref{eq:forward-problem} is defined by the specification of the \emph{initial measure}, $\initialP$, which represents any prior beliefs about parameters before observations on QoI are taken into account.
   If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\observed$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the volume measure $\pmeas$.
 \end{defn}
 
 
-To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
+To construct a solution to the SIP, we push-forward the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
 In other words, we first solve the forward problem of \eqref{eq:forward-problem} to construct a solution to the inverse problem of \eqref{eq:inverse-problem}.
 We refer to the push-forward of the initial measure as the \emph{predicted measure} since it may be constructed before any observed data are known.
 This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
