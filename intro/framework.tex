@@ -1,24 +1,23 @@
 \subsection{Terminology, notation, and the inverse problems}
-
-To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
-Denote by $\pspace$ the space of physically relevant parameters for the model.
-Denote by $Q$ the (potentially vector-valued) QoI map from the parameter space, $\pspace$, to the data space defined by $\dspace:= Q(\pspace)$.
-
 We provide a summary of the notation, definitions, problem-formulation, and assumptions that reoccur throughout this work.
 For more details on the original sources and derivations,  we refer the interested reader to \cite{BES12, BE13, BET+14}.
+To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
+Denote by $\pspace$ the space of physically relevant parameters for the model.
 
 Let $u$ be the solution to a model $\M(u, \param) = 0$, perhaps of a physical system such as the amount of contaminant in a subsurface.
-Let $\param$ represent a parameter into such a model, e.g. the permeability of the medium in the subsurface through which a contaminant is spreading.
-Such parameters are often uncertain and we begin the quantification of uncertainty by identifying the set of all physically plausible parameters denoted by $\pspace\subset\RR^\dimP$.
+In this context, $\param$ represents a parameter into such a model, e.g. the permeability of the medium in the subsurface through which a contaminant is spreading.
+Such parameters are often uncertain, and we begin the quantification of uncertainty by identifying the set of all physically plausible parameters denoted by $\pspace\subset\RR^\dimP$.
 Since different choices of $\param \in \pspace$ often lead to different model solutions, we write $u\lam$ to make this dependence explicit.
 
-However, we cannot in general observe the entire solution $u(\param)$.
+We cannot in general observe the entire solution $u(\param)$.
 Instead, we are often limited in our ability to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. the contaminant levels at a specific well at a particular time).
 We let $\qoi$ denote the QoI map from the solution space of the model to the space of observable data.
-Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI datum predicted by the model.
-Clearly, the QoI map depends on $\param$ through the dependency of $u$ on $\param$, so we write $\qlam$ to simplify our notation.
+Denote by $\qoi$ the (potentially vector-valued) QoI map from the solution space of the model to the space of observable data.
+
+Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI predicted by the model.
+The QoI map depends on $\param$ through the dependency of $u$ on $\param$, so we write $\qlam$ to simplify our notation.
 We assume this map is at least piecewise-differentiable.
-The data space $\dspace \subset \RR^d$ is defined as the range of the QoI map $\qoi$, i.e.
+The data space $\dspace \subset \RR^\dimD$ is defined as the range of the QoI map $\qoi$, i.e.
 \[
 \dspace = \qoi(\pspace).
 \]
@@ -33,130 +32,70 @@ In general, these measure allow for the description of probability measures as p
 
 
 \subsection{Problem Formulation and Solution}
-
 We begin with defining the types of forward and inverse problems considered in this thesis.
 
-\begin{defn}[Forward Problem]\label{defn:forward-problem}
-  Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and (at least piecewise-differentiable) QoI map $\qoi$, the \emph{forward problem} is to characterize a measure $\PP_\dspace$ on $(\dspace, \dborel)$ (recalling $\dspace = \qoi(\pspace)$) that satisfies
+\begin{defn}[Stochastic Forward Problem (SFP)]\label{defn:forward-problem}
+  Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and (at least piecewise-differentiable) QoI map $\qoi$, the \emph{stochastic forward problem} is to determine a measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that satisfies
   \begin{equation}\label{eq:forward-problem}
     \PP_\dspace (E) = \PP_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
   \end{equation}
 \end{defn}
 
-\begin{defn}[Inverse Problem]\label{defn:inverse-problem}
-  Given a probability measure $\observedP$ on $(\dspace, \dborel)$ that is absolutely continuous with respect to volume measure $\dmeas$, the \emph{inverse problem} is to determine a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, absolutely continuous with respect to $\pmeas$, satisfying
-
+\begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
+  Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that is absolutely continuous with respect to volume measure $\dmeas$, the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$, absolutely continuous with respect to $\pmeas$, satisfying
   \begin{equation}\label{eq:inverse-problem}
-    \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \observed \Q \, d\dmeas = \observedP(E), \; \forall \; E \in \mathcal{B}_\dspace.
+    \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
   \end{equation}
 
   \noindent Here,
 
   \begin{equation*}
-    \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ and }\; \observed := \frac{d\observedP}{d\dmeas}
+    \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ and }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
   \end{equation*}
-  denote the Radon-Nikodym derivatives (i.e., pdfs) of $\updatedP$ and $\observedP$, respectively.
+  denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, respectively.
   Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
 \end{defn}
 
-In measure-theoretic terms, $\PP_\pspace$ is a pull-back measure of $\observedP$.
-From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\observedP$.
-In other words, the solution we seek to the inverse problem is constrained by a forward problem.
+\subsubsection{The Stochastic Inverse Problem (SIP)}
+
+In measure-theoretic terms, $\PP_\dspace$ in Definition~\ref{defn:forward-problem} is a push-forward measure of $\PP_\pspace$, and in Definition~\ref{defn:inverse-problem}, $\PP_\pspace$ is a pull-back measure of $\PP_\dspace$.
+From the perspective of a forward problem, we seek $\PP_\pspace$ such that its \emph{push-forward measure is equivalent to} $\PP_\dspace$.
+In other words, \emph{the solution we seek to the inverse problem is constrained by a forward problem.}
 Below, we formalize some of the vocabulary involved in the formulation and solution of the stochastic inverse problem.
+We refine the concept of push-forward measures as solutions to the SFP mentioned in the introduction, formally introducing the requisite vocabulary of \emph{initial}, \emph{observed}, and \emph{predicted} densities.
+This helps frame the SIP more clearly as the direct inversion of the SFP.
 
 \begin{defn}[Observed Distribution]\label{defn:observed}
-  The density $\observed$ in \eqref{eq:inverse-problem} represents the uncertainty in QoI data and is referred to as the \emph{observed distribution} (or density), and is the Radon-Nikodym derivative of the \emph{observed measure} $\observedP$ with respect to the volume measure $\dmeas$.
+  The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data
+  If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed distribution} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the volume measure $\dmeas$.
 \end{defn}
-
-The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
-In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP$ on $\pspace$ given the specification of an observed density.
-However, there are many applications of interest where $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both.
-
-
-The specific nuances of this relationship are discussed in \ref{chapter:02} and \ref{chapter:03} in greater detail.
-Here, we simply note that the construction of \eqref{eq:update} requires only the forward-problem construction of $\predicted$, since $\initial$ and $\observed$ are given \emph{a priori}.
-Additional properties are given in \ref{sec:properties} alongside the conditions for the existence and uniqueness of an update of the form given by \eqref{eq:inverse-problem}.
-
-
 
 %%%%%%%%%%%%%%%%%%%
 
+The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
+In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP_\pspace$ given the specification of an observed density.
+However, there are many applications of interest where $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both.
 
+%%%%%%%%%%%%%%%%%%%
 
-A typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
-To help build intuition about these differences, we summarize key details about these inverse problems and their solutions before presenting an example that highlights differences in solutions.
-
-%As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
-%  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
-%  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
-%  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
-%  cockayneoatessullivangirolami} is designed to quantify epistemic sources of uncertainty.
-%These conceptual differences have significant impacts on the solutions to inverse problems formulated within these distinctive frameworks.
-%We provide more details below to further clarify these impacts for the reader.
-%An example is then used to illustrate the differences, which is also helpful for building intuition.
-%Moreover, the details provided below play a vital role in Section~\ref{sec:estimation} where features of the observation-consistent framework are used to motivate its extension to point estimation problems.
-
-
-%The Bayesian inversion framework  is perhaps the most
-%popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-%As discussed in the introduction, the typical Bayesian framework focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-
-
-\subsubsection{The stochastic inverse problem (SIP)}
-
-We first define the concept of push-forward measures as solutions to the SFP mentioned in the introduction.
-This helps frame the SIP more clearly as the direct inversion of the SFP.
-\begin{definition}[Stochastic Forward Problem (SFP)]\label{def:forward-problem}
-  Given an initial (i.e., initially specified) probability measure $\initialP$ on $\pspace$, the SFP is the determination of the push-forward probability measure $\predictedP$ on $\dspace$, defined by
-\begin{equation*}
-\predictedP(E) := \initialP(Q^{-1}(E)),
-\end{equation*}
-for all events $E\subset\dspace$.
-\end{definition}
-
-We often refer to the push-forward of the initial measure as the {\em predicted} measure since it may be constructed before any observed data are known.
-This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
-\begin{definition}[Stochastic Inverse Problem (SIP)]\label{def:inverse-problem}
-Given an observed probability measure $\observedP$ on $\dspace$, the SIP is to determine a pullback probability measure, denoted $\mathbb{P}_\pspace$, on $\pspace$, which is observation-consistent in the sense that
-\begin{equation}\label{eq:data-consistent}
-\mathbb{P}_\pspace(Q^{-1}(E)) = \observedP(E),
-\end{equation}
-for all events $E\subset\dspace$.
-\end{definition}
-
-Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP, but rather there is a class of pullback measures that solve the SIP.
+Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in \ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
 In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
 An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
 
-In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension, and is stable with respect to perturbations in the initial and observed probability measures.
-We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details.
-Here, we simply summarize the density-based solution to the SIP as:
-\begin{equation}\label{eq:updated-pdf}
-	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
-\end{equation}
-The densities (i.e., Radon-Nikodym derivatives) $\initial$ and $\observed$ are associated with the specification of $\initialP$ and $\observedP$, respectively.
-The density $\predicted$ is associated with the predicted measure $\predictedP$.
-In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
+In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension
+The solution to the SIP presented there is a direct inversion of a SFP; we introduce the following definitions to connect the result to general forms presented in \ref{defn:forward-problem} and \ref{defn:inverse-problem}:
 
-In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
-A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
-Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
-This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
-Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
-
-
-%%%%%%%%%%%%%%%%%%%%%
-
-To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data.
 
 \begin{defn}[Initial Distribution]\label{defn:initial}
-  The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{initial distribution} (or density).
-  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$.
+  The role of the density $\PP_\pspace$ in \eqref{eq:forward-problem} is defined by the specification of the \emph{initial measure}, $\initialP$, which represents any prior beliefs about parameters before observations on QoI are taken into account.
+  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\observed$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the volume measure $\pmeas$.
 \end{defn}
 
-To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
-In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
+
+To construct a solution to the SIP, we push-forward the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
+In other words, we first solve the forward problem of \eqref{eq:forward-problem} to construct a solution to the inverse problem of \eqref{eq:inverse-problem}.
+We refer to the push-forward of the initial measure as the \emph{predicted measure} since it may be constructed before any observed data are known.
+This also helps to distinguish it from the {\em observed} measure used in the formulation of the SIP.
 To make this precise, we use the following:
 
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
@@ -168,3 +107,66 @@ To make this precise, we use the following:
   which should be recognizable from the definition of the forward problem.
   In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
 \end{defn}
+
+%%%%%%%%%%%%%%%%%%%
+Here, we summarize the density-based solution to the SIP, known as the \emph{updated density} as:
+\begin{equation}\label{eq:updated-pdf}
+	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
+\end{equation}
+The densities (i.e., Radon-Nikodym derivatives), $\initial$ and $\observed$ are associated with the specification of $\initialP$ and $\observedP$, respectively.
+The density $\predicted$ is associated with the predicted measure $\predictedP$.
+In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
+
+%%%%%%%%%%%%%%%%%%%
+We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details.
+For now, we note that the solution in \eqref{eq:updated-pdf} is stable with respect to perturbations in the initial and observed probability measures.
+The specific nuances of this relationship are discussed in the subsequent Section~\ref{sec:properties} and throughout Chapter~\ref{chapter:mud} in greater detail.
+Here, we simply note that the construction of \eqref{eq:update} requires only the forward-problem construction of $\predicted$, since $\initial$ and $\observed$ are given \emph{a priori}.
+Additional properties are given in \ref{sec:properties} alongside the conditions for the existence and uniqueness of an update of the form given by \eqref{eq:updated-pdf}.
+%%%%%%%%%%%%%%%%%%%
+
+In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
+A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
+Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
+This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
+Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
+
+
+%%%%%%%%%%%%%%%%%%%
+
+
+\subsubsection{The Deterministic Inverse Problem (DIP)}
+A typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
+This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
+To make the distinction between the two approaches more clear, we introduce the following two definitions to frame the problems addressed by the Bayesian framework:
+
+
+\begin{defn}[Deterministic Forward Problem (DFP)]
+  Given a space $\pspace$, and (at least piecewise-differentiable) QoI map $\qoi$, the \emph{deterministic forward problem} is to determine the values, $\q \in \dspace$ that satisfy
+  \begin{equation}
+    \q = \qlam \; \forall \; \param \in \pspace
+  \end{equation}
+\end{defn}
+
+\begin{defn}[Deterministic Inverse Problem (DIP) Under Uncertainty]
+  Given a noisy datum $d = \q + \eps$, $\q \in \dspace$, the \emph{deterministic inverse problem} is to determine the parameter $\param \in \pspace$ which minimizes
+  \begin{equation}
+    \norm{\qoi(\param) - d}
+  \end{equation}
+  where $\eps$ is a random variable drawn from a distribution representing the uncertainty in observations.
+\end{defn}
+
+In the above definition, $\eps$ is some unobservable perturbation to the true output, arising from epistemic uncertainty (e.g. the precision of available measurement equipment).
+The Bayesian inversion framework  is perhaps the most popular approach in the UQ community for incorporating uncertainties in inverse solutions.
+As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
+ Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
+ AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
+ 0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
+ cockayneoatessullivangirolami} is designed to quantify epistemic sources of uncertainty.
+These conceptual differences have significant impacts on the solutions to inverse problems formulated within these distinctive frameworks.
+% To help build intuition about these differences, we summarize key details about the SIP and its solution before presenting an example that highlights differences in solutions.
+We provide more details in Section~\ref{sec:compare} to further clarify these impacts for the reader.
+%An example is then used to illustrate the differences, which is also helpful for building intuition.
+Moreover, the details provided below play a vital role in Section~\ref{sec:estimation} where features of the data-consistent framework are used to motivate its extension to point estimation problems.
+
+\FloatBarrier
