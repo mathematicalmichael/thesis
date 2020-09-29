@@ -27,9 +27,9 @@ Let $d$ denote the ``noisy'' data obtained on $Q(\paramref)$, which is often rep
 	d = Q(\paramref) + \xi,
 \end{equation*}
 where $\xi$ is a random variable used to model the measurement error that is often assumed to follow a Gaussian distribution.
-Then, the data-likelihood function, often written as a conditional density, $L_\dspace(\q)\, |\, \param)$, is formed.
+Then, the data-likelihood function, often written as a conditional density, $L_\dspace(\q \, |\, \param)$, is formed.
 This describes the differences in relative likelihoods that the data could have been generated from a particular $\param$.
-Ideally, the largest values of $L_\dspace(\q)\, | \, \param)$ occur whenever $\param$ is a ``good'' approximation to the true parameter $\paramref$.
+Ideally, the largest values of $L_\dspace(\q \, | \, \param)$ occur whenever $\param$ is a ``good'' approximation to the true parameter $\paramref$.
 The data-likelihood function is distinct from the observed density used in the observation-consistent framework.
 
 The next ingredient in the Bayesian framework is the specification of a prior density denoted by $\pi_\text{prior}(\param)$.
@@ -87,7 +87,7 @@ $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(\q)}{\predict
 $
 &
 $
-	\displaystyle \pi_{\text{post}}(\param\,|\,\q) = \frac{\prior(\param)L_\dspace(\q)\,|\,\param)}{\int_{\Lambda} L_\dspace(\q)\, |\, \param)  \prior(\param) d\pmeas}
+	\displaystyle \pi_{\text{post}}(\param\,|\,\q) = \frac{\prior(\param)L_\dspace(\q \,|\,\param)}{\int_{\Lambda} L_\dspace(\q \, |\, \param)  \prior(\param) \, d\pmeas}
 $
  \\ & \\ \hline
 \end{tabular}
