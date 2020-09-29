@@ -6,7 +6,7 @@ To illustrate the differences in the two densities, we explore the impact of thi
 %%%%%
 
 
-
+\begin{ex}
 Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$.
 For the observation-consistent framework, we assume $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$.
 The push-forward of initial PDF, the observed PDF, and the updated PDF are shown in Fig.~\ref{fig:bayes-comparison}.
@@ -42,67 +42,37 @@ However, the push-forward of the posterior is bi-modal and does not match the ob
 The takeaway to the above discussion and example is that each density is solving a {\em different} inverse problem.
 The posterior density is intended to provide point estimates of a true parameter value whereas the updated density is intended to quantitatively characterize natural variations in parameter values.
 
+\end{ex}
+
+\begin{ex}
 Suppose we reformulated this example slightly to make the role of data more central.
 Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
 In this case, the objective is to use the posterior or updated density to produce an estimate of $\paramref$.
-In the next section, we motivate the use of the maximal updated density point as a means of providing a useful point estimate to parameters.
 
+[TK - little more setup here and then a figure based on the notebook (this is an evening's worth of research/work to do)]
+\end{ex}
 
-%A critical component in the Bayesian framework is the prior density, which encodes any knowledge or assumptions about them input (parameter) space that we may wish to impose before any data are observed.
-%In some cases, the prior and initial densities may be both specified and interpreted identically.
-%However, in the Bayesian framework, the impact of the prior on the posterior density is perhaps best understood as a regularization term that makes the inverse problem well--posed by penalizing parameters uninformed by the data.
-%Ideally, the prior should not interfere with well--informed parameters, i.e., parameters informed by the data.
-%{Unfortunately, well--informed parameters are not known a priori and none of the existing prior elicitation approaches avoid polluting data--informed directions in the parameter space.}
 
 
 
 %%%%%
 
-
-\begin{ex}
-Consider
-\begin{equation}
-u(\param) = \param^p
-\end{equation}
-for $p$ chosen as either 1 or 5.
-For both approaches, the prior and initial density is given by a uniform distribution on $U[-1,1]$.
-In the Data-Consistent Inversion framework, $\observed \sim \mathcal{N}(0.25,0.1^2)$.
-In the statistical Bayesian framework, we take $\q=0.25$ as the datum and assume an additive error noise model with distribution $\mathcal{N}(0,0.1^2)$ so that the likelihood, $L_\dspace(\q | \param)$, matches the observed density as a function of $\param$.
-
-When $p=1$, we have $\predicted = \frac{1}{2} = C$.
-Since $\observed\Q = L_\dspace(\q|\param)$ and $\predicted$ agrees with the normalizing constant $C$, the posterior and update agree on $\pspace$ (we show the push-forwards in the right plot of Figure~\ref{fig:comparison}).
-When $p=5$, the non-linearity of the model causes the push-forward of $\initial$ to be non-constant, so the two approaches now yield differing solutions, as seen in the left plot of Figure~\ref{fig:comparison}).
-The push-forward of the posterior associated with the statistical Bayesian framework is influenced by the push-forward of the prior in a way that the push-forward of the updated density avoids.
-
-\begin{figure}
-\begin{minipage}{.45\textwidth}
-		\includegraphics[width=\linewidth]{./images/comparison1}
-\end{minipage}
-\begin{minipage}{.45\textwidth}
-		\includegraphics[width=\linewidth]{./images/comparison5}
-\end{minipage}
-\caption{
-In each plot, the black dotted line represents the prior (initial), while the solid line represents the push-forward.
-The push-forwards of the posterior (updated) densities are shown as a green (blue) dotted line.
-The likelihood (observed density) is shown as a solid red line.
-(Left): $p = 1$, the push-forwards of the solutions are identical because a linear map results in a constant push-forward of a uniform prior.
-(Right): $p = 5$, the non-linearity of the map causes the solutions to be different and thus the push-forwards to also be different.
-}
-\label{fig:comparison}
-\end{figure}
-
-% [TK - removed paragraph] We can see in Figure~\ref{fig:comparison} that the two approaches pose different questions and thus yield different results.
-% The Data-Consistent Inversion framework seeks to recreate the observed density, which it does for both $p=1$ and $p=5$, but the Bayesian approach is a combination of both the observed and the push-forward of the prior.
-[TK - a lot of this discussion is well-covered in the intro to the mud paper... let's move it here??]
 In summary, it is not the goal of Bayesian inference to construct a pullback distribution.
 Bayesian inverse problems are fundamentally posed as parameter-identification, not distribution estimation.
 However, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it [TK - cite more] \cite{Smith}.
 This defines what is commonly referred to a as a Hierarchical Bayesian Inverse Problem.
 More complex densities can be approximated by mixture models.
+
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
 No such compromise is required in the Data-Consistent Inversion framework.
 Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approach described in \cite{BE13} or \cite{BJW18}.
 
-\end{ex}
+The Hierarchical Bayesian framework casts a distribution-estimation problem in the context of parameter identification.
+As a complementary line of reasoning, one can ask what it means to cast a parameter identification problem in a distribution-estimation context.
+In the next chapter, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
+Before making such a connection, we must establish that the framework in which such a question is asked is rigorously defined.
+In the next section, we finish presenting the Data-Consistent Framework by summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} to the SIP.
+
+\FloatBarrier
