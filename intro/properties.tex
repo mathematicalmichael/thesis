@@ -1,53 +1,36 @@
 \subsection{Properties and Assumptions of Consistent Update}\label{sec:properties}
 
-To construct a solution $\updatedP$ satisfying \eqref{eq:inverse-problem}, we adopt a Bayesian perspective of combining prior beliefs with data.
-
-\begin{defn}[Initial Distribution]\label{defn:initial}
-  The density $\initial$ is used to represent any prior beliefs about parameters before observations on QoI taken into account, and is referred to as the \emph{initial distribution} (or density).
-  It can also be given as a measure $\initialP$, in which case $\initial$ is the Radon-Nikodym derivative of $\initialP$ with respect to the given volume measure $\pmeas$.
-\end{defn}
-
-To construct $\updated$, we ``push-forward'' the prior (initial) beliefs using the QoI map to compare to the evidence provided by $\observed$.
-In other words, we first solve the forward problem of \eqref{defn:forward-problem} to construct a solution to the inverse problem.
-To make this precise, we use the following:
-
-\begin{defn}[Predicted Distribution]\label{defn:predicted}
-  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
-  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
-  \begin{equation}\label{eq:predicted}
-    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel,
-  \end{equation}
-  which should be recognizable from the definition of the forward problem.
-  In other words, $\predictedP$ is the solution to the push-forward problem given $\initialP$.
-\end{defn}
-
-
 The stochastic inverse problem is defined as finding a measure $\PP_\pspace$ such that the push-forward of it matched $\observedP$.
-The following assumption guarantees a solution to the stochastic inverse problem.
-It implies that any event which is assigned a positive probability by the observations must also be assigned a positive probability of occurring by the initial beliefs.
+The following assumption guarantees a solution to the stochastic inverse problem in the form of an update to the initial distribution.
+It implies that any event which is assigned a positive probability by the observations must also have a positive predicted probability.
 
-\begin{assumption}[Predictability Assumption]\label{as:pred}
+\begin{assumption}[Predictability Assumption (Theoretical Form)]\label{as:predicted-theoretical}
   The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\observed$.
 \end{assumption}
 
-If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial) have a priori ruled that almost surely these events should not occur.
+If this is unsatisfied, one source of information (the data) suggests certain events are probable while another source of information (the model and initial beliefs) have a priori ruled that almost surely these events should not occur.
 Therefore, either initial beliefs, the model under consideration, or the description of uncertainty encoded in $\predicted$ should be subjected to a critical reevaluation.
 
-
-The requirement given in Assumption~\ref{as:pred} is guaranteed if the following is satisfied:
-\begin{equation}\label{eq:pred}
+The following form establishes a practical form of \ref{as:predicted-theoretical} which states that the predicted measure must dominate the observed.
+\begin{assumption}[Predictability Assumption (Practical Form)]\label{as:predicted-practical}
+The requirement given in Assumption~\ref{as:predicted-theoretical} is guaranteed if the following is satisfied:
+\begin{equation}\label{eq:pred-pract}
   \exists \; C>0 \text{ such that } \observed (d) \leq C \predicted(d) \text{ for a.e. } d\in \dspace,
 \end{equation}
-where it is understood that $d = \qlam$ for some $\param \in \pspace$.
-Now, assuming \eqref{eq:pred} holds, we restate the following theorem from \cite{BJW18} based upon the disintegration of measures:
+where it is understood that $\q = \qlam$ for some $\param \in \pspace$.
+\end{assumption}
+
+Assumption~\ref{as:predicted-practical} is particularly useful in that it is the same condition required for rejection sampling to work.
+This allows us to sample from the updated density using the initial density when we have i.i.d. initial samples available by evaluating the outputs of $\param_\iparam$ under $\qoi$ through the ratio of observed to predicted densities\footnote{ TK - I know analytically how this works and this isn't quite it, it's the RN deriv of the initial combining with the integrand, but this is an interesting intuitive explanation, so let's give it a go: The reason this is possible is that the latter is equivalent to sampling from the observed using samples from the predicted due to the consistency of the updated solution (divide both sides of \eqref{eq:update} by $\initial$ to see the equivalence of ratios).}.
+Now, assuming \eqref{eq:pred-pract} holds, we state the following theorem from \cite{BJW18} based upon the disintegration of measures:
 
 
 \begin{thm}[Existence and Uniqueness]
-  For any set $A\in \pborel$, the solution $\updatedP$ given defined by
+  For any set $A\in \pborel$, the probability measure $\updatedP$ defined by
   \begin{equation}\label{eq:dci_sol}
-    \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\q}{\predicted\q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
+    \updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\lam \frac{\observed\Q}{\predicted\Q} \, d\mu_{\pspace, d} \lam \right ) \, d\dmeas(d), \; \forall \; A \in \pborel
   \end{equation}
-  is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of a prior (initial) probability measure $P_\pspace$ on $(\pspace, \pborel)$.
+  is a consistent solution to the stochastic inverse problem given in (\ref{eq:inverse-problem}), and is uniquely defined up to the specification of the initial probability measure $P_\pspace$ on $(\pspace, \pborel)$.
   Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
 
@@ -56,24 +39,22 @@ The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_
 $\updatedP(\pspace) = 1$.
 \end{cor}
 
-These definitions are combined to form the \emph{updated density}, originally derived in \cite{BJW18}:
+These definitions are combined to identify the form of the \emph{updated density}, originally derived in \cite{BJW18}:
 
 \begin{defn}[Updated Distribution]\label{defn:updated}
-  A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density given by the Radon-Nikodym derivative,
+  A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density
   \begin{equation}\label{eq:update}
-    \updated \lam = \initial \lam \frac{\observed \q }{\predicted \q }, \; \forall \; \param \in \pspace.
+    \updated \lam = \initial \lam \frac{\observed \Q }{\predicted \Q }, \; \forall \; \param \in \pspace.
   \end{equation}
 \end{defn}
 
-Corollary~\ref{cor:int} is critical to understanding some significant differences between the statistical Bayesian updated density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods}.
-Moreover, this Corollary provides the basis for a useful numerical diagnostic that informs us about the quality of a solution based on finite sampling and density estimation.
+Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical Bayesian posterior density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods} as well as other places throughout this thesis.
+Moreover, this Corollary provides the basis for a useful numerical diagnostic that assesses both the quality of a numerical approximation of $\updated$ based on finite sampling and density estimation sa well as any potential violations of the predictability assumption.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
-
-We first recall the Total Variation (TV) metric on the space of probability measures, defined as
+The Total Variation (TV) metric on a space of probability measures, absolutely continuous with respect to a dominating measure $\mu$ is defined as
 \begin{equation}\label{eq:tv}
 d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
 \end{equation}
@@ -109,20 +90,18 @@ This next definition and result are useful in analyzing the sensitivity of the u
   \end{equation}
 \end{defn}
 
+The following important stability theorem is also proven in \cite{BJW18}
+
 \begin{thm}
   $\updatedP$ is stable with respect to perturbations to $\initialP$
   \label{thm:stableinitial}
 \end{thm}
 
-Taken together, these stability results provide assurance that the updated density we obtain is accurate up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying prior assumptions using $\initialP$.
+Taken together, these stability results provide assurance that the updated density we obtain is accurate up to the level of experimental error polluting $\observedP$ and error in incorrectly specifying initial assumptions using $\initialP$.
 Given that specifying the definition of a ``true'' initial density is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
-However, generating samples from $\updatedP$ requires a numerical approximation to $\predictedP$, which introduces additional errors in $\updatedP$.
-If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
-\[
-\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\q} },
-\]
-where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\updatedP}$.
+However, generating samples from $\updatedP$ generally requires a numerical approximation to the predicted distribution, which introduces additional errors in $\updatedP$.
 In Section~\ref{sec:approx}, the TV metric is used to bound the error in the updated density in terms of the error in the approximation to the push-forward of the initial.
+
 
 
 
@@ -151,55 +130,65 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 %The computational object associated with $\predicted$ is stored for re-use and can be evaluated at locations in $\dspace$ other than $\sett{d_i}{i=1}{N}$.
 %This procedure should be thought of as a characterization of the data space given the prior assumptions encoded in $\initial$.
 
+If $\widehat{\predicted}$ denotes a computational approximation to the push-forward of the initial density obtained with $\widehat{\predicted}$ substituted for $\predicted$ in \eqref{eq:dci_sol}, then the conditional densities from the Disintegration Theorem are given as
+\[
+\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted\Q} },
+\]
+where $\widehat{\PP_{\pspace, d}}$ denotes the disintegration of $\widehat{\updatedP}$.
 
-Using the previous notation, we let $\widehat{\predicted(d)}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated density $\updated$.
-As before, we assume the following for the approximation of the push-forward of the initial density:
-\begin{assumption}\label{as:predx}
+
+We assume the following for the approximation of the push-forward of the initial density:
+\begin{assumption}\label{as:predicted-theoreticalx}
 There exists some $C>0$ such that
 \[
 \observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
 \]
 \end{assumption}
 
-If this assumption is satisfied, we have the following theorem from \cite{BJW18}:
-\begin{thm}
+If this assumption is satisfied, then from \cite{BJW18}, we have the following:
+\begin{thm}\label{thm:predicted_bound}
   The error in the approximate updated density is bounded above:
   \begin{equation}\label{eq:predicted_bound}
     d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
   \end{equation}
-  where the $C$ is the constant taken from Assumption \ref{as:predx}.
+  where the $C$ is the constant taken from Assumption \ref{as:predicted-theoreticalx}.
 \end{thm}
 
-In practice, we perform a forward propagation of samples from $\pspace$ to $\dspace$ and compute an approximation of $\predicted$ using density estimation~\cite{BJW18}.
-Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve for any sample other than the ones already propagated to approximate $\predicted$.
+A straightforward approach to construct $\widehat{\predicted}$ is to use a forward propagation of samples from $\pspace$ to $\dspace$ and then apply kernel density estimation (KDE)~\cite{BJW18}.
+Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve per sample.
+WHile this allows us to incorporate sophisticated sampling techniques such as Markov-Chain Monte-Carlo (MCMC)~\cite{Smith, Tarantola_book} to generate samples according to the updated distribution, we often opt for a simpler route based on rejection sampling by re-using the initial set of propagated samples.
+This avoids any additional model evaluations (as would be required by techniques relying on proposal samples such as MCMC).
 We leverage the re-use of samples in the results herein extensively.
 
-In summary, the \textbf{accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.}
-Throughout this proposal, we utilize a Gaussian (KDE), which converges at a rate of $\mathcal{O}(N^{-4/(4+d)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+d)})$ in $L^1$-error, where $d$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
+By Theorem~\ref{thm:predicted_bound}, the accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.
+Throughout this proposal, we utilize a KDE with a Gaussian kernel to produce the non-parametric estimates of $\predicted$.
+Such KDEs are known to converge at a rate of $\mathcal{O}(N^{-4/(4+\dimD)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+\dimD)})$ in $L^1$-error, where $\dimD$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
 
 %For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
 %We let
 %\[
-%\updated\lam = \initial \lam r\q, \text{ where } r\q = \frac{\observed\q}{\predicted\q}
+%\updated\lam = \initial \lam r\Q, \text{ where } r\Q = \frac{\observed\Q}{\predicted\Q}
 %\]
 %
-%Many standard calculations about the updated density involve integrals of functions of $r\q$ with respect to the prior.
+%Many standard calculations about the updated density involve integrals of functions of $r\Q$ with respect to the prior.
 %For any measurable function $f$, we establish the connection of calculating quantities over $\pspace$ with those over $\dspace$ by leveraging the following identity from measure theory:
 %\[
-%\int_\pspace f\left( r\q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
+%\int_\pspace f\left( r\Q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
 %\]
 %
 %We use several throughout this proposal, including the integral of the updated density:
 %\[
-%I(\updated ) = \int_\pspace r\q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
+%I(\updated ) = \int_\pspace r\Q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
 %\]
 %which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated.
 %
 %Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
 %\begin{equation}\label{eq:KLdiv}
-%\text{KL}(\initial : \updated ) = \int_\pspace r\q \log r\q \, d\initialP = \text{KL}(\observed : \predicted ),
+%\text{KL}(\initial : \updated ) = \int_\pspace r\Q \log r\Q \, d\initialP = \text{KL}(\observed : \predicted ),
 %\end{equation}
 %i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
 
 
-Where possible, we express $\predicted$ analytically for purposes of demonstration (especially for comparing numerical solutions to the exact solutions).
+In some examples (particularly those in the appendix), we express $\predicted$ analytically for purposes of demonstration.
+Such examples are especially useful for comparing numerical solutions to the exact solutions.
+[TK - the identity examples were what this referred to but those have been stripped out]
