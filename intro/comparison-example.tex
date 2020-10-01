@@ -32,8 +32,8 @@ However, the push-forward of the posterior is bi-modal and does not match the ob
 
 \begin{figure}[htbp]
 \centering
-   \includegraphics[width=0.49\linewidth]{figures/cbayes_comp_sbayes_50000_paramdens_nonlinear-standalone.pdf}
-   \includegraphics[width=0.49\linewidth]{figures/cbayes_comp_sbayes_50000_outdens_nonlinear-standalone.pdf}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-1.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-1.png}
  \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
  (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
  \label{fig:bayes-comparison}
@@ -48,9 +48,24 @@ The posterior density is intended to provide point estimates of a true parameter
 Suppose we reformulated this example slightly to make the role of data more central.
 Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
+We draw $S=5, 10, \text{ and}, 20$ samples to form the estimate of the mean and the likelihood function, and show the results in Figure~\ref{fig:bayes-comparison-convergence}
 In this case, the objective is to use the posterior or updated density to produce an estimate of $\paramref$.
 
-[TK - little more setup here and then a figure based on the notebook (this is an evening's worth of research/work to do)]
+\begin{figure}[htbp]
+\centering
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-5.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-5.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-10.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-10.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-20.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-20.png}
+ \caption{(Top to Bottom): $S=5, 10, \text{ and}, 20$ samples are used to solve the SIP and BIP for comparison. (Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
+ (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
+ \label{fig:bayes-comparison-convergence}
+\end{figure}
+
+We find that the updated distribution becomes more centered around the true parameter value $\paramref$, but the uncertainty in the estimate does not change.
+By contrast, the posterior increases in confidence alongside the likelihood function.
 \end{ex}
 
 
