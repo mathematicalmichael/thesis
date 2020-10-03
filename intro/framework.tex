@@ -4,15 +4,15 @@ For more details on the original sources and derivations,  we refer the interest
 To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
 Denote by $\pspace$ the space of physically relevant parameters for the model.
 
-Let $u$ be the solution to a model $\M(u, \param) = 0$, perhaps of a physical system such as the amount of contaminant in a subsurface.
+Let $u$ be the solution to a model $\M(u, \param) = 0$, perhaps of a physical system.
 In this context, $\param$ represents a parameter into such a model, e.g. the permeability of the medium in the subsurface through which a contaminant is spreading.
 Such parameters are often uncertain, and we begin the quantification of uncertainty by identifying the set of all physically plausible parameters denoted by $\pspace\subset\RR^\dimP$.
-Since different choices of $\param \in \pspace$ often lead to different model solutions, we write $u\lam$ to make this dependence explicit.
+Since different choices of $\param \in \pspace$ often lead to different model solutions, we write $u\lam$ to make this dependence on the parameter space explicit.
 
-We cannot in general observe the entire solution $u(\param)$.
-Instead, we are often limited in our ability to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. the contaminant levels at a specific well at a particular time).
-We let $\qoi$ denote the QoI map from the solution space of the model to the space of observable data.
-Denote by $\qoi$ the (potentially vector-valued) QoI map from the solution space of the model to the space of observable data.
+In general, we cannot observe the entire solution $u(\param)$, due to physical inaccessibility or practical limitations.
+For example, one cannot observe air pressure throughout a room, but one can perform experiments and take measurements to infer pressure at specific locations within the room.
+Put more concretely, we are often limited in our ability to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. using equipment to take measurements in specific locations).
+We let $\qoi$ denote the (potentially vector-valued) QoI map from the solution space of the model to the space of observable data.
 
 Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI predicted by the model.
 The QoI map depends on $\param$ through the dependency of $u$ on $\param$, so we write $\qlam$ to simplify our notation.
