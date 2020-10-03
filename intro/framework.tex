@@ -11,7 +11,7 @@ Since different choices of $\param \in \pspace$ often lead to different model so
 
 In general, we cannot observe the entire solution $u(\param)$, due to physical inaccessibility or practical limitations.
 For example, one cannot observe air pressure throughout a room, but one can perform experiments and take measurements to infer pressure at specific locations within the room.
-Put more concretely, we are often limited in our ability to observe data related to some quantities of interest (QoI), defined as functionals of $u\lam$ (e.g. using equipment to take measurements in specific locations).
+Put more concretely, we are often limited in our ability to observe data related to some QoI, defined as functionals of $u\lam$ (e.g. using equipment to take measurements in specific locations).
 We let $\qoi$ denote the (potentially vector-valued) QoI map from the solution space of the model to the space of observable data.
 
 Then, given $\param \in \pspace$, we obtain $u\lam$ and compute $\qoi(u\lam)$ to get the QoI predicted by the model.
@@ -26,7 +26,7 @@ In other words, we use $\dspace$ to denote the space of all physically plausible
 
 Let $\pborel$ and $\dborel$ denote (the Borel) $\sigma$-algebras on $\pspace$ and $\dspace$, respectively.
 The map $\qoi$ between measurable spaces $(\pspace, \pborel)$ and $(\dspace, \dborel)$ is immediately measurable by the smoothness assumption.
-Then, equipping $\pspace$ and $\dspace$ with (dominating) measures $\pmeas$ and $\dmeas$, respectively, is the final ingredient for defining probability density functions (pdfs) on the measure spaces $(\pspace, \pborel, \pmeas)$ and $(\dspace, \dborel, \dmeas)$.
+Then, equipping $\pspace$ and $\dspace$ with (dominating) measures $\pmeas$ and $\dmeas$, respectively, is the final necessary component for defining probability density functions (pdfs) on the measure spaces $(\pspace, \pborel, \pmeas)$ and $(\dspace, \dborel, \dmeas)$.
 In practice, $\pmeas$ and $\dmeas$ are often taken to be Lebesgue volume measures when $\pspace$ and $\dspace$ are finite-dimensional~\cite{BET+14, BJW18}.
 In general, these measure allow for the description of probability measures as probability density functions defined by Radon-Nikodym derivatives.
 
@@ -66,7 +66,7 @@ We refine the concept of push-forward measures as solutions to the SFP mentioned
 This helps frame the SIP more clearly as the direct inversion of the SFP.
 
 \begin{defn}[Observed Distribution]\label{defn:observed}
-  The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data
+  The role of the density $\PP_\dspace$ in \eqref{eq:inverse-problem} is defined by the specification of the \emph{observed measure}, $\observedP$, which represents the uncertainty in QoI data.
   If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed distribution} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the volume measure $\dmeas$.
 \end{defn}
 
@@ -80,7 +80,7 @@ However, there are many applications of interest where $\qoi$ fails to be a bije
 
 Unless the map $Q$ is a bijection, we do not expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in \ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
 In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
-An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partition of $\dspace$.
+An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partitioning of $\dspace$ according to some (finite) index set $\mathcal{I}$.
 
 In \cite{BJW18a}, an alternative density-based approach is presented that is computationally simpler to implement, scales well with increasing parameter dimension
 The solution to the SIP presented there is a direct inversion of a SFP; we introduce the following definitions to connect the result to general forms presented in \ref{defn:forward-problem} and \ref{defn:inverse-problem}:
@@ -118,7 +118,7 @@ The density $\predicted$ is associated with the predicted measure $\predictedP$.
 In other words, constructing $\updated$ as a solution to the SIP requires a solution to the SFP.
 
 %%%%%%%%%%%%%%%%%%%
-We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details.
+We refer the interested reader to \cite{BJW18a} for the theoretical and algorithmic details of implementing the solution to the SIP, though some are summarized in \ref{sec:properties}.
 For now, we note that the solution in \eqref{eq:updated-pdf} is stable with respect to perturbations in the initial and observed probability measures.
 The specific nuances of this relationship are discussed in the subsequent Section~\ref{sec:properties} and throughout Chapter~\ref{chapter:mud} in greater detail.
 Here, we simply note that the construction of \eqref{eq:update} requires only the forward-problem construction of $\predicted$, since $\initial$ and $\observed$ are given \emph{a priori}.
@@ -126,9 +126,9 @@ Additional properties are given in \ref{sec:properties} alongside the conditions
 %%%%%%%%%%%%%%%%%%%
 
 In order to ensure that $\updated$ is in fact a density, a predictability assumption is required \cite{BJW18a}.
-A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for (almost every) $q\in\dspace$.
+A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for $q\in\dspace \text{ a.e}$.
 Conceptually, we interpret the predictability assumption as stating that we are able to predict all the of the observed data.
-This also helps to frame the special role of $\initial$ in the SIP as compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
+This also helps to frame the special role of $\initial$ in the SIP compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
 Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
 
 
