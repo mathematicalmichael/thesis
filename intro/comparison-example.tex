@@ -1,7 +1,8 @@
 \subsection{Illustrative Example}
 We note there are problems one can formulate where the observed density corresponds directly to a normalized likelihood function familiar to Bayesian statisticians, as we demonstrate below.
-One difference between $\updated$ and $\posterior$ is the use of normalizing constant $C$ in $\posterior$ not present in $\updated$, as explained by Corollary~\ref{cor:int} above.
-To illustrate the differences in the two densities, we explore the impact of this difference in the example below, taken from \cite{BJW18}.
+One difference between $\updated$ and $\posterior$ is the use of normalizing constant $C$ in $\posterior$ not present in $\updated$, which has a function in its denominator .
+The property of $\updated$ that allows this is explained by Corollary~\ref{cor:int} below.
+To illustrate the differences in the two densities, we first explore the impact of this difference in the example below, taken from \cite{BJW18}.
 
 %%%%%
 
@@ -45,7 +46,7 @@ The posterior density is intended to provide point estimates of a true parameter
 \end{ex}
 
 \begin{ex}
-Suppose we reformulated this example slightly to make the role of data more central.
+We reformulated the previous example to make the role of data collection more central.
 Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
 We draw $S=5, 10, \text{ and}, 20$ samples to form the estimate of the mean and the likelihood function, and show the results in Figure~\ref{fig:bayes-comparison-convergence}
@@ -86,10 +87,10 @@ However, the operative word here is \emph{assume}; in order to capture a density
 No such compromise is required in the Data-Consistent Inversion framework.
 Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approach described in \cite{BE13} or \cite{BJW18}.
 
-The Hierarchical Bayesian framework casts a distribution-estimation problem in the context of parameter identification.
+The Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
 As a complementary line of reasoning, one can ask what it means to cast a parameter identification problem in a distribution-estimation context.
 In the next chapter, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
-Before making such a connection, we must establish that the framework in which such a question is asked is rigorously defined.
+Before making this connection, we must establish that the framework in which such a question is asked is rigorously defined.
 In the next section, we finish presenting the Data-Consistent Framework by summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} to the SIP.
 
 \FloatBarrier

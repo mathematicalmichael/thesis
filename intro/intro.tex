@@ -2,16 +2,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview of Uncertainty Quantification}\label{sec:intro}
 
-The last several decades have seen an increasing reliance upon quantitative predictions from computational, simulation-based models of physical systems to inform engineering design, predict the behavior of physical systems, and even shape public policy, e.g., see [TK - need citation] for just a few such examples.
-It is therefore more important than ever to quantify, and reduce whenever possible, the uncertainties impacting such models.
+In the last several decades, there has been an increasing reliance on quantitative predictions from computational, simulation-based models of physical systems to inform engineering design, predict the behavior of physical systems, and even shape public policy, e.g., see [TK - need citation] for just a few such examples.
+It is therefore more important than ever to quantify, and whenever possible, reduce, the uncertainties impacting such models.
 Unfortunately, many key characteristics governing system behavior, described as model inputs (referred to here as parameters), are often hidden from direct observation.
-When observable model output data are sensitive to variations in these parameters, we formulate and solve inverse problems using this output data to quantify uncertainties in parameters.
+When observable model output data are sensitive to variations in these parameters, we formulate and solve inverse problems using the output data to quantify uncertainties in parameters.
 Inverse problems therefore play a vital role in the uncertainty quantification (UQ) community.
 
 In UQ, uncertainties are categorized as being either aleatoric (i.e., irreducible) or epistemic (i.e., reducible) in nature, which are often quantitatively described and interpreted in distinct ways.
-Below, we use abstractions of conceptual examples to distinguish how both types of uncertainties arise in parameters and impact the type of inverse problem that is solved to quantify these uncertainties.
+Below, we use abstractions of conceptual examples to distinguish how both types of uncertainties arise in parameters, and subsequently impact the type of inverse problem that is solved to quantify these uncertainties.
 % and their associated inverse problems while simultaneously comparing and contrasting methodologies for solving these problems.
-This further serves to highlight the contributions of this work.
+This distinction further serves to highlight the contributions of this work.
 
 Consider modeling the manufacturing process of an engineered system involving various electrical or mechanical components.
 The intrinsic variability in component properties, e.g., due to impurities in raw materials used in their construction, are aleatoric in nature.
@@ -19,7 +19,7 @@ The intrinsic variability in component properties, e.g., due to impurities in ra
 Component properties define a sample space (the set of all possible outcomes), and combining this sample space with a description of measurable events along with a probability measure defines a probability space.
 Scalar-valued model parameters associated with component properties defines a random vector (i.e., a measurable function) from this probability space of components into the parameters required by the model.
 Subsequently, the mapping from parameters to observable model outputs defines what we refer to as a Quantities of Interest (QoI) map.
-Observation of a probability measure on the range of the QoI map leads to the formulation of a stochastic inverse problem (SIP) where the goal is to pullback the observed probability measure onto the space of parameters.
+Observation of a probability measure on the range of the QoI map leads to the formulation of a stochastic inverse problem (SIP), where the goal is to pullback the observed probability measure onto the space of parameters.
 Conceptually, a pullback measure is observation-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
 
 While it is possible to construct explicit approximations to observation-consistent measures (e.g., see \cite{BET+14}), this becomes computationally intractable for high-dimensional parameter spaces or QoI maps.
@@ -33,17 +33,18 @@ In other words, the initial probability measure serves to regularize the space o
 
 The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \cite{Dellacherie_Meyer_book} as the central tool in establishing existence, uniqueness, and stability of solutions.
 Updated probability measures often have complex structures that are not well approximated by a family of parametrically defined distributions (e.g., Gaussian).
-This further distinguishes this approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \cite{}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
+This attribute of the solution further distinguishes this measure-theoretic approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \cite{Smith, Tarantola_book}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
 Subsequently, solutions to the SIP using Bayesian approaches will not, in general, produce solutions (defined as posterior distributions) whose push-forward matches the observed distribution (see Section 7.2 in \cite{BJW18a} for an example comparing the approaches).
 In fact, the push-forward of the posterior is not even of general interest in most Bayesian paradigms.
-Instead, the posterior predictive, defining the distribution of possible unobserved values is of more interest \cite{}, which is constructed as a conditional distribution on the observations but makes practical use of the posterior through a marginalization.
-These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community is intended to solve an inverse problem involving epistemic uncertainty as we describe below and expand upon in Section~\ref{sec:compare}.
+Instead, the posterior predictive, which defines the distribution of possible unobserved values is of central interest \cite{Smith}.
+The posterior predictive is constructed as a conditional distribution on the observations but makes practical use of the posterior through a marginalization.
+These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community solves an inverse problem involving epistemic uncertainty, as we describe below and expand upon in Section~\ref{sec:compare}.
 
 In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
   Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
   AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
   0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
-  cockayneoatessullivangirolami}, one of the initial assumptions is that data obtained on a QoI are polluted by measurement error, i.e., data are ``noisy.''
+  cockayneoatessullivangirolami}, one of the initial assumptions is that data obtained on a QoI are polluted by measurement error, i.e., the data are ``noisy.''
   Measurement errors can theoretically be reduced using improved measurement instruments (i.e., they are epistemic in nature).
   A data-likelihood function is used to express the relative likelihoods that all of the data came from a particular choice of the parameter.
   Encoding any initial assumptions about which parameters are more likely than others as a prior density allows the formal construction of a posterior density as a conditional density that describes the difference in relative likelihoods of any parameter value given the data.
@@ -54,8 +55,10 @@ The Bernstein-von Mises theorem provides conditions under which the posterior wi
 
 {\bf Add short paragraph discussing the connection of deterministic optimization approaches in estimating MAP points, which strengthens the perspective that the Bayesian inverse problem is used to produce point estimates.}
 
-Returning to the abstract example of a manufacturing process, the typical Bayesian paradigm described above is most applicable to a specific instance of the manufactured system.
-In other words, suppose a single system is extracted from the end of the production line, we subject this system to experiments for which we collect data on the system response, and we are interested in using this data to determine the precise parameter values associated with this single system.
-The Bayesian framework is fundamentally designed to address such a problem while the observation-consistent framework as presented in \cite{BJW18a, BJW18b, BWY20} is not.
+Returning to the hypothetical example of modeling a manufacturing process, the typical Bayesian paradigm described above is most applicable to a specific instance of the manufactured system.
+In other words, suppose a single system is extracted from the end of the production line.
+We subject this system to experiments for which we collect data on the system response, and we are interested in using this data to determine the precise parameter values associated with this single system.
+The Bayesian framework is fundamentally designed to address such a problem while the measure-theoretic framework as presented in \cite{BJW18a, BJW18b, BWY20} is not.
 The latter is designed to describe the holistic natural variability among the outputs of the aforementioned system, not an individual output from the manufacturing line.
 
+\FloatBarrier
