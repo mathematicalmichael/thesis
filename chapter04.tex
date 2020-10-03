@@ -1,11 +1,11 @@
-\chapter{\uppercase{Impact of Geometry of Output Quantities on Consistent Solutions} \label{chapter:03}}
+\chapter{\uppercase{Impact of Geometry of Output Quantities on Consistent Solutions} \label{chapter:geometry}}
 
-Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of set-valued solutions to stochastic inverse problems with respect to their ability to be well-approximated by Monte-Carlo integration.
+Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of solutions to stochastic inverse problems with respect to their ability to be well-approximated by Monte-Carlo integration.
 However, the results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the stochastic inverse problem is unaffected.
 We focus on the accuracy of the consistent solutions to the SIP.
-It is illustrative to begin witgh the original set-based approximations to solutions developed in \cite{} [TK - cite] as teh dependence of solutions on skewness is more explicit than in the density-based approach.
+It is illustrative to begin witgh the original set-based approximations to solutions developed in \cite{} [TK - cite] as the dependence of solutions on skewness is more explicit than in the density-based approach.
 
 %%%%%
 
@@ -55,68 +55,12 @@ The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined 
 In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition (SVD) of the Jacobian $J_{\param,\qoi}$, i.e., we randomly sample $J_{\param,\qoi}$ and compute the SVDs.
 In general, we approximate $\overline{S_\qoi}$ with Monte-Carlo approximations.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We demonstrate the effect of skewness on the explicit measure theoretic approach in the following example.
-
-\subsubsection{Motivating Example}
-
-\begin{ex}
-\label{ex:skewness}
-Consider the following family of linear maps:
-\begin{equation}\label{eq:qmap2}
-\left \lbrace \qoi^{(s)} =  \mat{cc}{1 & 0 \\ \sqrt{s^2 - 1}& 1 } \right \rbrace_{s\in S},
-\end{equation}
-for $S=\set{1,2,4}$. These maps are designed to control the global skewness (since it is equal to local skewness in a linear map), while preserving the measures of sets between $\pspace$ and $\dspace$.
-More specifically, the support of $\updatedP$ associated with each QoI map using uniform observed measures have equal $\pmeas$-measure, which isolates the impact of accuracy solely to the skewness of the QoI map.
-
-The skewness of these maps is given by the index $s$, so $\qoi^{(1)}$ is $1$, the skewness of $\qoi^{(2)}$ is $2$, and $S_{\qoi^{(4)}} = 4$.
-
-
-
-\begin{figure}[ht]
-\begin{minipage}{.65\textwidth}
-\begin{table}[H]
-\begin{tabular}{ c | c | c | c }
-N & $\qoi^{(a)}$ & $\qoi^{(b)}$ & $\qoi^{(c)}$\\ \hline \hline
-$200$ & $2.97E-01$ & $3.42E-01$ & $5.28E-01$\\ \hline
-
-$400$ & $2.00E-01$ & $2.41E-01$ & $3.79E-01$\\ \hline
-
-$800$ & $1.59E-01$ & $1.78E-01$ & $2.88E-01$\\ \hline
-
-$1600$ & $1.06E-01$ & $1.31E-01$ & $1.93E-01$\\ \hline
-
-$3200$ & $8.38E-02$ & $9.39E-02$ & $1.41E-01$\\ \hline
-
-$6400$ & $6.14E-02$ & $6.40E-02$ & $1.05E-01$\\ \hline
-
-\end{tabular}
-\end{table}
-
-\end{minipage}
-\begin{minipage}{.65\textwidth}
-		\includegraphics[width=\linewidth]{./images/Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
-\end{minipage}
-\caption{The results of $d_\text{TV}(\updatedPxNM, \updatedPxNN)$.}
-\label{fig:skew}
-\end{figure}
-
-It is evident in Figure~\ref{fig:skew} that skewness has a direct impact on the number of samples required to achieve a given accuracy.
-We see that the measure induced by $\qoi^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $\qoi^{(2)}$ does.
-The effect is even more pronounced when compared against $\qoi^{(4)}$.
-
-This provided a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}, where it is demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\pmeas$-measure of the {\em symmetric difference} of the inverse sets.
-
-\end{ex}
-
-The example above motivates a number of research directions involving how to resolve approximation errors.
-How the Data Consistent Inversion framework handles the skewness in QoI maps is unclear and requires numerical studies to investigate, which we perform herein [TK - cite where].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% discussion of convergence
 
 \subsection{Convergence}
-Second, and perhaps most importantly, since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
+Since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
 The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
 Thus, convergence of a sequence of probability measures under the Total Variation metric implies that the QoI's will also converge component-wise in $\RR$.
 In other words, convergence in the Total Variation metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure.
@@ -136,7 +80,7 @@ It is a combination of computational ease of implementation and theoretical impl
 
 
 \input{ch03/set_accuracy}
-\input{ch03/sample_accuracy}
+% \input{ch03/sample_accuracy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -161,7 +105,7 @@ The analysis of this problem differs significantly from the ones in (cite: butle
 By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
 
 
-\input{ch03/heatrod.tex}
+\input{set-based/heatrod.tex}
 \FloatBarrier
 
 \input{ch03/decay.tex}
