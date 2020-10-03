@@ -194,3 +194,10 @@ Similarly, we follow \cite{BJW18} to write the commonly used metric for Informat
 \text{KL}(\initial : \updated ) = \int_\pspace r\Q \log r\Q \, d\initialP = \text{KL}(\observed : \predicted ),
 \end{equation}
 i.e., the KL-divergence between the initial and updated density is equal to the KL-divergence between the observed and the predicted densities.
+
+[TK - attempting a transition...]
+Taken together, the results summarized in this section demonstrate that the Data-Consistent framework and density-based solution \eqref{eq:dci_sol} have been rigorously constructed and studied.
+They give an experimenter assurance that there are not unexpected consequences for small mistakes in problem formulation.
+In the following chapter, we provide a similar sense of assurance for a central practical consideration involved in this work: that the results depend on computational implementations of the aforementioned theory, i.e., software.
+We directly address how to establish a complementary level of rigor to the implementation of the work as was invested in the construction of the theory.
+We leverage modern advances in software engineering with an emphasis on results being reproducible in an accessible manner.
