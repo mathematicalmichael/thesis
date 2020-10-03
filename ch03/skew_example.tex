@@ -1,21 +1,21 @@
-%%%% 2D Skewness Example %%%%%% 
+%%%% 2D Skewness Example %%%%%%
 \subsection{Impact of Skewness on Accuracy}\label{ex:skewness}
-In this example, we demonstrate the key point of this study: the magnitude of skewness between QoI impacts accuracy by orders of magnitude, and thus in optimizing the choice of a QoI map, it is in our interest to pursue the minimization of skewness. 
+In this example, we demonstrate the key point of this study: the magnitude of skewness between QoI impacts accuracy by orders of magnitude, and thus in optimizing the choice of a QoI map, it is in our interest to pursue the minimization of skewness.
 This is especially true in problems where the number of random samples we are permitted to use is constrained by the computational cost of model evaluations.
 
 %Thus, any map can be thought of as a piecewise-defined linear map, and the results we present in this example, while applying to all of $\pspace$ in these cases, can be applied solely to the support of each local linear approximation.
-%Capturing the geometry of sets (improving accuracy) on each of these subdomains thus guarantees a desired result on the entirety of the domain. 
+%Capturing the geometry of sets (improving accuracy) on each of these subdomains thus guarantees a desired result on the entirety of the domain.
 
-To illustrate this point, we first define the linear maps 
+To illustrate this point, we first define the linear maps
 \begin{equation}\label{eq:qmap2}
 \qspace_S := \left \lbrace Q^{(s)} =  \mat{cc}{1 & 0 \\ \sqrt{s^2 - 1}& 1 } \right \rbrace_{s\in S},
 \end{equation}
-for $S=\set{1,2,4}$ because they allow us to control the global skewness (since it is equal to local skewness in a linear map) while preserving the measures of sets between $\pspace$ and $\dspace$. 
+for $S=\set{1,2,4}$ because they allow us to control the global skewness (since it is equal to local skewness in a linear map) while preserving the measures of sets between $\pspace$ and $\dspace$.
 More specifically, the support of the solution to the SIP associated with each QoI map has equal $\mu_\pspace$-measure, which isolates the impact of accuracy solely to the skewness of the QoI map.
-We show what the component row vectors of these maps in Figure~\ref{fig: skewmapvecs} and note the skewness is determined by the ratio of the magnitude of the black line to its projection onto the vertical axis (and each of these projects directly on to the unit vector).  
+We show what the component row vectors of these maps in Figure~\ref{fig: skewmapvecs} and note the skewness is determined by the ratio of the magnitude of the black line to its projection onto the vertical axis (and each of these projects directly on to the unit vector).
 The skewness of these maps is given by the index $s$, so $Q^{(1)}$ is $1$, the skewness of $Q^{(2)}$ is $2$, and $S_{Q^{(4)}} = 4$.
 
-The maps chosen for this example are expository ones that provide valuable insight despite their simplicity. 
+The maps chosen for this example are expository ones that provide valuable insight despite their simplicity.
 For example, when solving many physics-based problems, local linear approximations are often used to simplify model evaluation and guide optimization procedures.
 
 
@@ -39,17 +39,17 @@ For example, when solving many physics-based problems, local linear approximatio
 \begin{table}[H]
 \begin{tabular}{ c | c | c | c }
 N & $Q^{(1)}$ & $Q^{(2)}$ & $Q^{(4)}$\\ \hline \hline
-$200$ & $1.35E-01$ & $2.03E-01$ & $3.12E-01$\\ \hline 
- 
-$400$ & $9.96E-02$ & $1.47E-01$ & $2.15E-01$\\ \hline 
- 
-$800$ & $7.19E-02$ & $1.04E-01$ & $1.53E-01$\\ \hline 
- 
-$1600$ & $5.27E-02$ & $7.49E-02$ & $1.10E-01$\\ \hline 
- 
-$3200$ & $3.70E-02$ & $5.25E-02$ & $7.52E-02$\\ \hline 
- 
-$6400$ & $2.76E-02$ & $3.86E-02$ & $5.54E-02$\\ \hline 
+$200$ & $1.35E-01$ & $2.03E-01$ & $3.12E-01$\\ \hline
+
+$400$ & $9.96E-02$ & $1.47E-01$ & $2.15E-01$\\ \hline
+
+$800$ & $7.19E-02$ & $1.04E-01$ & $1.53E-01$\\ \hline
+
+$1600$ & $5.27E-02$ & $7.49E-02$ & $1.10E-01$\\ \hline
+
+$3200$ & $3.70E-02$ & $5.25E-02$ & $7.52E-02$\\ \hline
+
+$6400$ & $2.76E-02$ & $3.86E-02$ & $5.54E-02$\\ \hline
 \end{tabular}
 \end{table}
 \end{minipage}
@@ -60,12 +60,9 @@ $6400$ & $2.76E-02$ & $3.86E-02$ & $5.54E-02$\\ \hline
 \label{fig:M1_2d}
 \end{figure}
 
-We see in Figure~\ref{fig:M1_2d} that skewness has a very direct impact on the number of samples required to achieve a particular value for the Total Variation distance. 
-We can see that the measure induced by $Q^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $Q^{(2)}$ does. 
+We see in Figure~\ref{fig:M1_2d} that skewness has a very direct impact on the number of samples required to achieve a particular value for the Total Variation distance.
+We can see that the measure induced by $Q^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $Q^{(2)}$ does.
 The effect is even more pronounced when compared against $Q^{(4)}$.
 It appears that if the ratio of skewness between two maps is 2, then the more-skewed map will require at least twice as many random samples to approximate the set on a a well-resolved discretization with the same error tolerance.
 
 This provides a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}, where it was demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\mu_\pspace$-measure of the {\em symmetric difference} of the inverse sets.
-
-
-

@@ -1,7 +1,35 @@
 Total Variation\subsection{Example: Thermal Conductivity on a 1D Heat Rod}\label{ex:heat-set-sample-accuracy}
+In this example we demonstrate that where measurements are taken have an impact on the ability to accurately approximate the solution to the SIP.
+In addition, we show that when nonlinearities are present in the map, the location of the true parameter distribution or value have an equally compelling impact.
+This impact is due to the fact that skewness is a local property that is averaged out over $\pspace$ to give an average measure of geometrically distinct information.
+We set up the following nonlinear problem involving heating a theoretical 1-D rod to make these takeaways clear.
 
-Consider the one-dimensional heat equation with homogeneous Neumann boundary conditions on the unit interval presented in \ref{ex:heat-set-sample}.
+Consider the one-dimensional heat equation with homogeneous Neumann boundary conditions on the unit interval:
 
+\begin{equation}
+\begin{split}
+\rho c \frac{\partial T}{\partial t} = \nabla \cdot ( \kappa \nabla T) + f(x), \quad & x\in (0,1), t\in (0,1) \\
+f(x) = A e^\frac{- (x-0.5)^2}{w} \Chi_{[0,0.5]}(t)
+\end{split}
+\end{equation}
+\emph{Alternative setup: }
+
+\begin{equation}
+\begin{cases}
+\rho c \frac{\partial T}{\partial t} = \nabla \cdot ( \kappa \nabla T) + f(x,t), & \text{if } x\in \Omega \\
+\frac{\partial T}{\partial \vec{n}} = 0 & \text{if } x\in \partial \Omega
+\end{cases}
+\end{equation}
+where $\Omega = (0,1)\times (0,1)$ is the space-time interior and $f(x,t) = A e^\frac{- (x-0.5)^2}{w} \Chi_{[0,0.5]}(t)$.
+
+Here, we interpret the following problem as heating the middle of an infinitesimally thin unit-length rod for half a second with a heat-source modeled by a Gaussian curve with amplitude $A=50$ and variance of $w=0.05$.
+This heat source is turned on at the beginning of the experiment and turned off halfway through the 1-second duration.
+
+The rod is subdivided in two, and each half has an uncertain thermal diffusivity $\kappa \in [0.01, 0.2]$.
+This yields a two-dimensional parameter space $\param = (\param_1, \param_2) \in [0.01, 0.2]^2$, where $\param_1$ represents the thermal diffusion on the left-half and $\param_2$ is the $\kappa$ for the right half.
+
+Two measurement locations along the rod are used for taking a measurement
+We assume a uniform density for each observation with a side--length of $0.1$ and attempt to identify a set which contains our true reference value of $\paramref = (0.15, 0.05)$.
 
 The quantities of interest we study are four point-evaluations of the state variable, at spatial location 0.25, 0.51, 0.67, and 0.98 along the rod.
 Choosing any pair of them for the inversion yields six possible quantities of interest maps.

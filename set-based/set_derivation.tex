@@ -1,6 +1,6 @@
 To properly summarize the set-based solution, we define several measure/probability spaces and refer to the schematic given in Figure \ref{fig:scheme} in order to illustrate the steps and spaces required in the formulation and solution of the SIP.
 For a more extensive review, we refer the reader to \cite{BBE11}, \cite{BES12}, and \cite{BET+14}.
-Additional background and extensions of this theory are available in the PhD theses of Lindley Graham (UT Austin), Scott Walsh (CUD), Lei Yang (CSU) [TK - cite 3].
+Additional background and extensions of this theory are available in the PhD theses of Lindley Graham (UT Austin), Scott Walsh (UCD), Lei Yang (CSU) [TK - cite 3].
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
@@ -41,7 +41,7 @@ The ``push-forward'' measure $\dmeas$ on ${(\dspace, \dborel)}$ is defined as
 In practice, when $\dmeas$ is absolutely continuous with respect to the $\dimD$--dimensional Lebesgue measure, we substitute the Lebesgue measure for $\dmeas$.
 
 The final step in (S1) involves the specification of a probability measure $\dataP$ (absolutely continuous with respect to $\dmeas$) on ${(\dspace, \dborel)}$ to model the uncertainty in data.
-This leads to the SIP from Def.~\eqref{defn:inverse-problem}: determine a probability measure $\paramP$ on ${(\pspace, \pborel)}$ such that 
+This leads to the SIP from Def.~\eqref{defn:inverse-problem}: determine a probability measure $\paramP$ on ${(\pspace, \pborel)}$ such that
 
 \begin{equation}\label{eq:inverse_measure}
 \paramP \left ( \qoi^{-1}(E)\right ) = \dataP(E) \; \forall \; E \in \dborel.
@@ -53,7 +53,7 @@ This equation implies that any solution is uniquely determined on the induced co
 \end{equation}
 which is summarized as step (S2) of Fig.~\ref{fig:scheme}.
 However, for sets $A \in \pborel \setminus \cborel$, more information is required than is provided in Eq.~\eqref{eq:inverse_measure} in order to determine $\paramP (A)$.
-When solutions are given by densities, we form a family of conditional densities using an initial density to do this.
+When solutions to the SIP are given by densities, we form a family of conditional densities using an initial density.
 In the set-based approach, we do not assume an initial density on $(\pspace, \pborel)$.
 Instead, we consider approximations of contour events.
 Below, we describe these structures and the relationship to the Disintegration theorem.
@@ -61,7 +61,7 @@ Below, we describe these structures and the relationship to the Disintegration t
 By the Implicit Function Theorem, if $\qlam \in C^1 (\pspace)$ and we let $\data\in\dspace$ be a fixed datum, $\qoi^{-1}(q)$ exists as a $(\nparams-\ndata)$\--dimensional manifold (possibly piecewise-defined) that we refer to as a \emph{generalized contour} \cite{BET+14}.
 These generalized contours can be indexed by a $\dimD$--dimensional manifold (also possibly piecewise-defined) of dimension $\ndata$ called a \emph{transverse parameterization} that intersects each contour once and only once.
 In \cite{BET+14}, it is shown that transverse parameterizations are guaranteed to exist and can be approximated by a finite number of $\dimD$---dimensional hyperplanes when $\pspace$ is compact.
-In general, the transverse parameterization is not unique. 
+In general, the transverse parameterization is not unique.
 
 We let $\LL$ denote any particular transverse parameterization.
 Each $\ell\in\LL$ corresponds to a unique generalized contour $\CC_\ell \in \pspace$ and each point $\param\in\pspace$ belongs to a unique $\CC_\ell\in\pspace$.
@@ -88,8 +88,8 @@ The standard ansatz is given by
 Thus, we have defined a unique solution to the SIP on ${(\pspace, \pborel)}$, completing step (S3) in Fig.~\ref{fig:scheme}.
 
 In the absence of other information about differences in relative likelihoods of parameters, the standard ansatz effectively implies a uniform distribution describing the initial state of uncertainty about the input parameters\footnote{In the event that $\pspace$ is compact.}.
-In this context, the measure $\paramP$ can be viewed as updating an initial uniform distribution on $\pspace$ in directions informed by the Quantity of Interest map, given uncertain data characterized by $\dataP$.
-However, unlike the density-based approach that utilizes the pushforward of an initial density in the construction of a solution, the ansatz is imposed only on contours.
+In the vocabulary of the density-based approach, the measure $\paramP$ can be viewed as updating an initial uniform measure on $\pspace$ in directions informed by the Quantity of Interest map, given uncertain data characterized by $\dataP$.
+However, unlike the density-based approach that utilizes the pushforward of an initial density in the construction of a solution, the ansatz is imposed only on contours in $\pspace$.
 Moreover, this does not assume any absolute continuity of probability measures.
 
 \vfill

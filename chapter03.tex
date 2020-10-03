@@ -16,3 +16,15 @@ The rest of this chapter is outlined as follows.
 {\bf This is done last.}
 
 \input{body.tex}
+
+\subsection{Conclusions}
+We have demonstrated that the Data-Consistent framework can be used in order to cast a parameter-identification problem.
+Much like how Hierarchical Bayesian approaches cast a distribution-estimation problem in a parameter-identification context, we have shown that the complement can also be accomplished.
+Enabled by the definition of a particular form of QoI map which can incorporate an arbitrary stream of data, we can leverage a distribution-estimation framework to solve a parameter-identification problem.
+To do so, we recast the problem of solving for a true parameter estimate into one involving the accurate identification of a distribution on the residuals errors predicted by a single parameter.
+The role of the QoI was central in accomplishing this reformulation, as the distribution being estimated is a direct consequence of the statistical properties of the form of $\qoi$'s equation.
+
+In Chapter~\ref{chapter:geometry}, we study in abstract the role of $\qoi$ on the solution to the SIP in the natural context of distribution-estimation.
+We introduce measures of the QoI map's geometric properties that are directly related to our ability to accurately approximate the distribution using numerical approximation.
+Later, in Chapter~\ref{chapter:vector-valued} we leverage this new awareness of the properties of the QoI maps and connect it to the goal of parameter identification in the context of the map \eqref{eq:qoi_WME}.
+We will demonstrate that the way in which we use available data to construct $\qoi$ has a direct consequence on the accuracy of our parameter estimate as more data is incorporated.
