@@ -21,7 +21,7 @@ where it is understood that $\q = \qlam$ for some $\param \in \pspace$.
 \end{assumption}
 
 Assumption~\ref{as:predicted-practical} is particularly useful in that it is the same condition required for rejection sampling to work.
-This allows us to sample from the updated density using the initial density when we have i.i.d. initial samples available by evaluating the outputs of $\param_\iparam$ under $\qoi$ through the ratio of observed to predicted densities\footnote{ TK - I know analytically how this works and this isn't quite it, it's the RN deriv of the initial combining with the integrand, but this is an interesting intuitive explanation, so let's give it a go: The reason this is possible is that the latter is equivalent to sampling from the observed using samples from the predicted due to the consistency of the updated solution (divide both sides of \eqref{eq:update} by $\initial$ to see the equivalence of ratios).}.
+This allows us to sample from the updated density using the initial density when we have independent identically distributed (i.i.d.) initial samples available by evaluating the outputs of $\param_\iparam$ under $\qoi$ through the ratio of observed to predicted densities\footnote{ TK - I know analytically how this works and this isn't quite it, it's the RN deriv of the initial combining with the integrand, but this is an interesting intuitive explanation, so let's give it a go: The reason this is possible is that the latter is equivalent to sampling from the observed using samples from the predicted due to the consistency of the updated solution (divide both sides of \eqref{eq:update} by $\initial$ to see the equivalence of ratios).}.
 Now, assuming \eqref{eq:pred-pract} holds, we state the following theorem from \cite{BJW18} based upon the disintegration of measures:
 
 
@@ -49,16 +49,20 @@ These definitions are combined to identify the form of the \emph{updated density
 \end{defn}
 
 Corollary~\ref{cor:int} is critical to understanding some significant differences between the classical Bayesian posterior density~\cite{Smith} and the updated density density given by \eqref{eq:update}, which we discuss in Section~\ref{sec:othermethods} as well as other places throughout this thesis.
-Moreover, this Corollary provides the basis for a useful numerical diagnostic that assesses both the quality of a numerical approximation of $\updated$ based on finite sampling and density estimation sa well as any potential violations of the predictability assumption.
+Moreover, this Corollary provides the basis for a useful numerical diagnostic that assesses both the quality of a numerical approximation of $\updated$ based on finite sampling and density estimation as well as any potential violations of the predictability assumption.
+
+[TK - loose attempt at a transition]
+We next turn our attention to attributes of the Data-Consistent framework which make it appealing for use in solving inverse problems.
+Namely, we summarize the stability results first presented in \cite{BJW18} that demonstrate that approximation errors in the updated density are well understood within the measure-theoretic foundation on which the approach is constructed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Stability of the Consistent Solution}\label{sec:stability}
 The Total Variation (TV) metric on a space of probability measures, absolutely continuous with respect to a dominating measure $\mu$ is defined as
 \begin{equation}\label{eq:tv}
-d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
+d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{\pp_f - \pp_g} \, d\mu,
 \end{equation}
-where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $\PP_f, \PP_g$, respectively.
+where $\pp_f,\pp_g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$), associated with measures $\PP_f, \PP_g$, respectively.
 The stability results below are all with respect to the TV metric, which is widely used in the literature and is also known as \emph{statistical distance}~\cite{GS02, Smith, Silverman}.
 We first define stability with respect to perturbations in the data.
 
@@ -156,39 +160,44 @@ If this assumption is satisfied, then from \cite{BJW18}, we have the following:
 
 A straightforward approach to construct $\widehat{\predicted}$ is to use a forward propagation of samples from $\pspace$ to $\dspace$ and then apply kernel density estimation (KDE)~\cite{BJW18}.
 Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve per sample.
-WHile this allows us to incorporate sophisticated sampling techniques such as Markov-Chain Monte-Carlo (MCMC)~\cite{Smith, Tarantola_book} to generate samples according to the updated distribution, we often opt for a simpler route based on rejection sampling by re-using the initial set of propagated samples.
+While this allows us to incorporate sophisticated sampling techniques such as Markov-Chain Monte-Carlo (MCMC)~\cite{Smith, Tarantola_book} to generate samples according to the updated distribution, we often opt for a simpler route based on rejection sampling by re-using the initial set of propagated samples.
 This avoids any additional model evaluations (as would be required by techniques relying on proposal samples such as MCMC).
 We leverage the re-use of samples in the results herein extensively.
 
 By Theorem~\ref{thm:predicted_bound}, the accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.
-Throughout this proposal, we utilize a KDE with a Gaussian kernel to produce the non-parametric estimates of $\predicted$.
-Such KDEs are known to converge at a rate of $\mathcal{O}(N^{-4/(4+\dimD)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+\dimD)})$ in $L^1$-error, where $\dimD$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
-
-%For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
-%We let
-%\[
-%\updated\lam = \initial \lam r\Q, \text{ where } r\Q = \frac{\observed\Q}{\predicted\Q}
-%\]
-%
-%Many standard calculations about the updated density involve integrals of functions of $r\Q$ with respect to the prior.
-%For any measurable function $f$, we establish the connection of calculating quantities over $\pspace$ with those over $\dspace$ by leveraging the following identity from measure theory:
-%\[
-%\int_\pspace f\left( r\Q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
-%\]
-%
-%We use several throughout this proposal, including the integral of the updated density:
-%\[
-%I(\updated ) = \int_\pspace r\Q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
-%\]
-%which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated.
-%
-%Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
-%\begin{equation}\label{eq:KLdiv}
-%\text{KL}(\initial : \updated ) = \int_\pspace r\Q \log r\Q \, d\initialP = \text{KL}(\observed : \predicted ),
-%\end{equation}
-%i.e., the KL-divergence between the prior and updated density is equal to the KL-divergence between the observed density and the push-forward of the prior.
-
-
+Throughout this thesis, we utilize a KDE with a Gaussian kernel to produce the non-parametric estimates of $\predicted$\footnote{
 In some examples (particularly those in the appendix), we express $\predicted$ analytically for purposes of demonstration.
 Such examples are especially useful for comparing numerical solutions to the exact solutions.
-[TK - the identity examples were what this referred to but those have been stripped out]
+}.
+Such KDEs are known to converge at a rate of $\mathcal{O}(N^{-4/(4+\dimD)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+\dimD)})$ in $L^1$-error, where $\dimD$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ [TK - references for convergence rates].
+
+For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
+We let
+\[
+\updated\param = \initial \param r\Q, \text{ where } r\Q = \frac{\observed\Q}{\predicted\Q}
+\]
+
+Many standard calculations about the updated density involve integrals of functions of $r\Q$ with respect to the prior.
+For any measurable function $f$, we establish the connection of calculating quantities over $\pspace$ with those over $\dspace$ by leveraging the following identity from measure theory:
+\[
+\int_\pspace f\left( r\Q \right ) \, d\initialP = \int_\dspace f\left( r(d) \right ) \, d\predictedP
+\]
+
+We use several throughout this thesis, including the integral of the updated density:
+\[
+I(\updated ) = \int_\pspace r\Q \, d\initialP = \int_\dspace r(d) \, d\predictedP ,
+\]
+which we can use to validate that $I(\updated) \approx 1$ in order to numerically validate that the assumption given in \eqref{eq:predicted_bound} was not violated.
+
+Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
+\begin{equation}\label{eq:KLdiv}
+\text{KL}(\initial : \updated ) = \int_\pspace r\Q \log r\Q \, d\initialP = \text{KL}(\observed : \predicted ),
+\end{equation}
+i.e., the KL-divergence between the initial and updated density is equal to the KL-divergence between the observed and the predicted densities.
+
+[TK - attempting a transition...]
+Taken together, the results summarized in this section demonstrate that the Data-Consistent framework and density-based solution \eqref{eq:dci_sol} have been rigorously constructed and studied.
+They give an experimenter assurance that there are not unexpected consequences for small mistakes in problem formulation.
+In the following chapter, we provide a similar sense of assurance for a central practical consideration involved in this work: that the results depend on computational implementations of the aforementioned theory, i.e., software.
+We directly address how to establish a complementary level of rigor to the implementation of the work as was invested in the construction of the theory.
+We leverage modern advances in software engineering with an emphasis on results being reproducible in an accessible manner.
