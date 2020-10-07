@@ -1,8 +1,7 @@
 \subsection{Illustrative Example}
-We note there are problems one can formulate where the observed density corresponds directly to a normalized likelihood function familiar to Bayesian statisticians, as we demonstrate below.
-One difference between $\updated$ and $\posterior$ is the use of normalizing constant $C$ in $\posterior$ not present in $\updated$, which has a function in its denominator .
-The property of $\updated$ that allows this is explained by Corollary~\ref{cor:int} below.
-To illustrate the differences in the two densities, we first explore the impact of this difference in the example below, taken from \cite{BJW18}.
+Despite the differences in the statistical interpretations, we formulate a problem where $\observed$ and $\initial$ match the forms of $L_\dspace$ and $\prior$.
+However, we still observe differences between $\updated$ and $\posterior$ due to the use of a normalizing constant $C$ in $\posterior$ and the use of $\predicted$ in $\updated$.
+We explore the impact of this difference in the example below, taken from \cite{BJW18}.
 
 %%%%%
 
@@ -84,13 +83,14 @@ More complex densities can be approximated by mixture models.
 
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
-No such compromise is required in the Data-Consistent Inversion framework.
+No such compromise is required in the DCI framework.
 Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approach described in \cite{BE13} or \cite{BJW18}.
 
-The Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
-As a complementary line of reasoning, one can ask what it means to cast a parameter identification problem in a distribution-estimation context.
-In the next chapter, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
-Before making this connection, we must establish that the framework in which such a question is asked is rigorously defined.
-In the next section, we finish presenting the Data-Consistent Framework by summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} to the SIP.
+It is important to note that Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
+As a complementary line of reasoning, we seek to formulate a parameter identification problem in a DCI framework.
+We revisit the results with a focus on parameter estimation using $\updated$. [TK - not sure what Troy's comment here means]
+
+In the Chapter~\ref{chapter:mud}, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
+Before we proceed, we finish presenting some summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} in the next section.
 
 \FloatBarrier
