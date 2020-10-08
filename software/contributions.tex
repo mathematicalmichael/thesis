@@ -53,16 +53,20 @@ FeNiCS is available through conda but only on x86, and no ARM-based docker image
 The aforementioned \emph{unit tests} provide a framework for guaranteeing the behavior of programs or individual methods when instructions are followed.
 \emph{Functional tests} encompass more complicated behavior, stringing together several methods/modules to ensure code runs as its author intended, and are usually included when referring to unit testing.
 ``How to write a test'' is a question that depends highly on the particular functionality, but the premise is always the same.
+In test-driven development, one first writes the expected syntax of commands that the end-user would be running, nested inside a special Python class from the {\tt unittest} standard library.
+These test cases are then used to build out the functionality in the code, gradually moving failing tests into a state of passing. 
+There is much to be said about unit testing, but in the interest of focus, we present an excerpt from the Python documentation, as learning by example is helpful to those unfamiliar with the concept of unit testing. 
 
-[TK - maybe show a really basic example of a set/get method and the test for that?]
+[TK - show a really basic example of a set/get method and the test for that?]
 
+We refer the reader to the mud and bet github repositories and the {\tt tests/} directory within them for specific examples of tests written for the software used in and developed for this thesis. 
 %%%%%%%%%%%
 
 \subsubsection{Code Coverage}\label{sec:code-coverage}
 
 Code coverage refers to the proportion of lines of code that were run during the process of testing (consisting of unit and functional tests).
 The goal is not necessarily to achieve 100\% coverage, but rather to make sure that the most crucial use-cases are checked.
-Generally speaking, coverage in the 75-85\% range is industry-standard.
+Generally speaking, coverage in the 75-85\% range is considered acceptable.
 
 [TK - flesh out a bit more, talk about Codecov, the specific service we use, how it won't be used for the scripts in this thesis].
 
