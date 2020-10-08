@@ -24,7 +24,7 @@ The parameters required for the variations are passed as optional arguments, and
 The makefiles are particularly useful in that they track dependencies, so if changes are made to a plotting script, running {\tt make} will re-create only the figures which leverage that changed code.
 
 
-We illustrate with a specific example: to visually demonstrate the implicitly-defined sets of nearest-neighbors in two-dimensional unit domain, we rely on Voronoi-cell diagrams.
+We illustrate with a specific example: to visually demonstrate nearest-neighbors in two-dimensional unit domain, we rely on Voronoi-cell diagrams.
 One Python file (\bashinline{images/voronoi_unit_domain.py}) contains the methods required to draw a single figure; however, there are many occasions where variation on a plot may be necessary (for example, labels, different line widths).
 To accommodate the need for different variations of similar plots, we utilize the argument-parsing package \pythoninline{argparse}, part of the Python standard library, to enable command-line positional and optional arguments \footnote{We equip each function with default values so that the syntax \bashinline{python example.py} without any additional arguments will work, but specific examples rely on optional arguments to be passed accordingly.}.
 We include associated (wrapper) files with descriptive names, such as \bashinline{images/make_voronoi_diagrams.sh} that repeatedly call the relevant Python file(s) and passes arguments (such as {\tt num} for ``number of samples'').
