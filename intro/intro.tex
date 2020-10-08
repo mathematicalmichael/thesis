@@ -41,9 +41,9 @@ The posterior predictive is constructed as a conditional distribution on the obs
 These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community solves an inverse problem involving epistemic uncertainty, as we describe below and expand upon in Section~\ref{sec:compare}.
 
 In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
-  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
+  Kennedy_O_JRSSSB_2001, Tarantola_book, MNR07, CDS10, starktenorio,
   AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
-  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,
+  0266-5611-30-11-110301, ROM:CMW_2016, Stuart10,
   cockayneoatessullivangirolami}, one of the initial assumptions is that data obtained on a QoI are polluted by measurement error, i.e., the data are ``noisy.''
   Measurement errors can theoretically be reduced using improved measurement instruments (i.e., they are epistemic in nature).
   A data-likelihood function is used to express the relative likelihoods that all of the data came from a particular choice of the parameter.
@@ -51,12 +51,18 @@ In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
 
 It is common to use specific point estimators such as the maximum a--posteriori (MAP) point given by the mode of the posterior as the actual solution to the inverse problem.
 The posterior is then re-interpreted as providing descriptions of uncertainty in that specific point estimate.
-The Bernstein-von Mises theorem provides conditions under which the posterior will become concentrated around the single true parameter in the limit of infinite data\cite{Smith}.
+The Bernstein-von Mises theorem \cite{vonmises} provides conditions under which the posterior will become concentrated around the single true parameter in the limit of infinite data \cite{Smith}.
 
 Returning to the hypothetical example of modeling a manufacturing process, the typical Bayesian paradigm described above is most applicable to a specific instance of the manufactured system.
 In other words, suppose a single system is extracted from the end of the production line.
 We subject this system to experiments for which we collect data on the system response, and we are interested in using this data to determine the precise parameter values associated with this single system.
-The Bayesian framework is fundamentally designed to address such a problem while the measure-theoretic framework as presented in \cite{BJW18a, BJW18b, BWY20} is not.
-The latter is designed to describe the holistic natural variability among the outputs of the aforementioned system, not an individual output from the manufacturing line.
+The Bayesian framework is fundamentally designed to address such a problem while the measure-theoretic framework as presented in \cite{BJW18, BWY20} is not.
+The SIP is concerned with modeling the variability in the outputs of the production line as a collection, which is of particular interest to quality control.
+
+The main contributions of this thesis are the extension of the SIP framework to address the reduction of epistemic uncertainty.
+This is accomplished by formulating parameter identification problems as ones involving pullbacks of distributions of residuals.
+In the following section we provide background and history for the SIP and subsequently define the Deterministic Inverse Problem (DIP), which is the term we use to refer to the problem addressed by the Bayesian framework.
+We then compare the two frameworks and provide some illustrative examples to establish the key differences between them.
+The chapter will conclude with a summary of the assumptions, properties, and stability of the solutions to the SIP which will be considered throughout this thesis.
 
 \FloatBarrier
