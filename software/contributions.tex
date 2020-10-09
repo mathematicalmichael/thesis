@@ -54,12 +54,12 @@ The aforementioned \emph{unit tests} provide a framework for guaranteeing the be
 \emph{Functional tests} encompass more complicated behavior, stringing together several methods/modules to ensure code runs as its author intended, and are usually included when referring to unit testing.
 ``How to write a test'' is a question that depends highly on the particular functionality, but the premise is always the same.
 In test-driven development, one first writes the expected syntax of commands that the end-user would be running, nested inside a special Python class from the {\tt unittest} standard library.
-These test cases are then used to build out the functionality in the code, gradually moving failing tests into a state of passing. 
-There is much to be said about unit testing, but in the interest of focus, we present an excerpt from the Python documentation, as learning by example is helpful to those unfamiliar with the concept of unit testing. 
+These test cases are then used to build out the functionality in the code, gradually moving failing tests into a state of passing.
+There is much to be said about unit testing, but in the interest of focus, we present an excerpt from the Python documentation, as learning by example is helpful to those unfamiliar with the concept of unit testing.
 
 [TK - show a really basic example of a set/get method and the test for that?]
 
-We refer the reader to the mud and bet github repositories and the {\tt tests/} directory within them for specific examples of tests written for the software used in and developed for this thesis. 
+We refer the reader to the mud and bet github repositories and the {\tt tests/} directory within them for specific examples of tests written for the software used in and developed for this thesis.
 %%%%%%%%%%%
 
 \subsubsection{Code Coverage}\label{sec:code-coverage}
@@ -81,7 +81,7 @@ The use of CI in BET is similar to that of many software packages written in Pyt
 Github Actions came out [TK - date] during the final year of writing this thesis, and provided a convenient way to orchestrate and check on the status of continuous-integration and deployment
 
 \subsubsection{Continuous Deployment to DockerHub and PyPi}
-Give an intro to CD principles. Relevant here because the {\tt mud} Python library which implements the analytical expressions presented here and is a shared library for many of the examples, particularly in Chapter~\ref{chapter:mud}.
+Todo[TK - Give an intro to CD principles]. Relevant here because the {\tt mud} Python library which implements the analytical expressions presented here and is a shared library for many of the examples, particularly in Chapter~\ref{chapter:mud}.
 This library leverages all of the aforementioned principles and components, and additionally automatically publishes to the PyPi registry, allowing anyone to {\tt pip install mud} to resolve \emph{most} of the dependencies of novel contributions presented here.
 A similar effort is underway for CD in BET, though the version(s) used here have already been published ({\tt pip install bet}).
 Even as changes are made after this thesis is published, readers of this work can rest assured that the results are still reproducible because Github Actions validates all of it on a weekly schedule.
