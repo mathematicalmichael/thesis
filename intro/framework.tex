@@ -1,6 +1,6 @@
 \subsection{Terminology, notation, and the inverse problems}
 We provide a summary of the notation, definitions, problem-formulation, and assumptions that reoccur throughout this work.
-For more details on the original sources and derivations,  we refer the interested reader to \cite{BES12, BE13, BET+14}.
+For more details on the original sources and derivations,  we refer the interested reader to \cite{BES12, BE13, BET+14, BJW18, BWY20}.
 To make comparisons more clear, we first introduce shared notation between the SIP and Bayesian inverse problems.
 Denote by $\pspace$ the space of physically relevant parameters for the model.
 
@@ -24,7 +24,7 @@ In other words, we use $\dspace$ to denote the space of all physically plausible
 
 
 Let $\pborel$ and $\dborel$ denote (the Borel) $\sigma$-algebras on $\pspace$ and $\dspace$, respectively.
-The $\sigma$-algebras represent the set of all measurable events, or events for which it makes sense to assign probability to occurring.
+The $\sigma$-algebras is a collection of subsets which is paired with $\pspace$ to form a Borel space in order to represent the set of all measurable events, or events for which it makes sense to assign probability to occurring.
 The map $\qoi$ between measurable spaces $(\pspace, \pborel)$ and $(\dspace, \dborel)$ is immediately measurable by the smoothness assumption.
 Then, equipping $\pspace$ and $\dspace$ with (dominating) measures $\pmeas$ and $\dmeas$, respectively, is the final necessary component for constructing probability density functions (pdfs) from probability measures defined on the measure spaces $(\pspace, \pborel, \pmeas)$ and $(\dspace, \dborel, \dmeas)$.
 In practice, $\pmeas$ and $\dmeas$ are often taken to be Lebesgue measures when $\pspace$ and $\dspace$ are finite-dimensional~\cite{BET+14, BJW18}.
@@ -71,13 +71,13 @@ This helps frame the SIP more clearly as the direct inversion of the SFP.
 
 %%%%%%%%%%%%%%%%%%%
 
-% The map $\qoi$ impacts the structure of the update since the underlying data space $\dspace$ itself depends on $\qoi$, and both densities on $(\dspace, \dborel)$ are evaluated at $\qlam$.
+The map $\qoi$ impacts the structure of any solution to the SIP since the underlying data space $\dspace$ itself depends on $\qoi$.
 In the event that the map $\qoi$ is a bijection, then the consistency condition \eqref{eq:inverse-problem} defines a unique measure $\PP_\pspace$ given the specification of an observed density.
 However, there are many applications of interest where $\qoi$ fails to be a bijection, either due to differences in the dimensions of the parameter and data spaces, nonlinearities inherent in the model itself, or both.
 
 %%%%%%%%%%%%%%%%%%%
 
-Therefore, wee do not generallyexpect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in Definition~\ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
+Therefore, we do not generally expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in Definition~\ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
 In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
 An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partitioning of $\dspace$ according to some (finite) index set $\mathcal{I}$.
 In \cite{BJW18a}, a density-based approach is presented that is computationally simpler to implement, and scales well with increasing parameter dimension

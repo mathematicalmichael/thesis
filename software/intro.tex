@@ -6,13 +6,14 @@ The latter seeks to generate new knowledge and may write a set of example script
 By contrast, the motivations of a software engineer are related to resiliency.
 Not only must they ensure the code works as expected given a myriad of ways users may interact with it, but it is necessary to write the code in a manner compatible with maintaining it into the future.
 Much of the work of writing ``good software'' is concerned with writing appropriate documentation to express the intended usage and logic underlying architectural decisions.
-There are many ways to write a functioning program to demonstrate a proof-of-concept, but creating something that is \emph{user-friendly}, guaranteed to be free of mistakes, and scales across different computational environments/resources requires an entirely different approach.
+There are many ways to write a functioning program to demonstrate a proof-of-concept, but creating something that is \emph{user-friendly}, guaranteed to be free of mistakes, and scales across different computational environments/resources, requires an entirely different approach.
 
 Decisions made early in the software design cycle have lasting impacts on future features and functionality.
-Rigor is added to libraries through the writing of \emph{unit tests}, and use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible.
-Code that only runs on the author's computer is impractical, since any thorough critique requires independent verification.
-Without proper context and architecture, new ideas that are implemented in programs are unlikely to be adopted.
-
+Rigor is added to libraries through the writing of \emph{unit tests}, and eventually \emph{functional tests}, which validate individual components and entire workflows, respectively.
+The use of \emph{continous integration} ensures that the download and installation process is predictable and reproducible by running the requisite steps (and tests) in a cloud environment as an independent verification that code executes as expected.
+Code that only runs on the author's computer is impractical, since any thorough critique requires validation by an independent third party, a role that cloud servers are able to play with increasing regularity at no financial cost to the developer.
+Without proper context and an understandable architecture, new ideas that are implemented in programs are unlikely to be adopted.
+Having continuous integration (and deployment for packaging the software), tests, and documentation allows a repository of code to be used and contributed to by the larger community.
 
 This thesis is concerned not only with a demonstration of novel mathematical content\---showcasing new ways to make inferences from noisy data in a novel Data-Consistent framework\---it also serves to document the process of ensuring that the work is \textbf{fully reproducible}.
 In mathematics, reproducibility is ensured through the use of proofs, which motivate the original work presented here.
@@ -21,13 +22,14 @@ Mathematics is implemented on computers through software.
 We are therefore concerned with ensuring the expected functionality of that software, which aligns with our training as mathematicians; we care deeply about making sure things are rigorous.
 
 In short, we want to make sure that theory aligns with practice, and that both live up to high standards of intellectual scrutiny.
-Every computational result, illustrative figure, table, plot, etc. presented in this thesis is associated with the scripts that generate them, and are included in the  repository for this document [TK - cite].
-It is written in \LaTeX~(which is itself a programming language), and presents its own software dependencies in addition to those required to run the scripts to generate the images and tables.
-To address this concern, we leverage \emph{Travis}, a continuous integration service [TK-cite], to ensure that all figures can be generated and the \LaTeX\, document compiles into a PDF.
+Every computational result, illustrative figure, table, plot, etc. presented in this thesis is associated with the scripts that generate them, and are included in the  repository for this document [TK - cite your github].
+It is written in \LaTeX~(which is itself a programming language), and presents its own software dependencies in addition to the Python-related ones required to run the scripts to generate the images and tables.
+To address this concern, we leverage \emph{Travis} and \emph{Github Actions}, two continuous integration services [TK-maybe cite someone/thing that explains CI as a service?], to ensure that all figures can be generated and the \LaTeX\, document compiles into a PDF.
 
+[TK - need better transition to Docker]\footnote{ Here is the jist of how the rest of this goes: CI lets us know the code can be installed and validated, but Docker makes dependency-resolution easy and platform-agnostic. Docker Hub adds convenience of storage. That's cool, but what if you don't have control of the computer you're using, just a web browser (like in a public library?). For that there is the Binder Project. Binder leverages Docker + Jupyter + Cloud to give anyone a free ephemeral server resource to try out software via the browser }.
 The same care is taken to ensure the reproducibility of all numerical results based on software.
 An \emph{image} that contains a fully pre-built Linux software environment within which one can compile the thesis and run the code is available through the Docker Cloud registry [TK -cite].
 The latter enables the ability to generate this thesis document in its entirety on any software platform that supports Docker (Windows, MacOS, Linux).
 A cloud service called Binder [ TK - cite mybinder.org] allows one-click deployments in any web-browser, removing the need for any installation whatsoever for anyone wanting to reproduce the contents of this document.
 
-
+\FloatBarrier

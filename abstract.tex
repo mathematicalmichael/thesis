@@ -1,13 +1,13 @@
-This work presents novel developments in the solution of stochastic inverse problems (SIPs) in a Data-Consistent Inversion (DCI) framework.
-DCI is an approach grounded in measure theory which leverages push-forward and pull-back measures to update initial descriptions of uncertainty.
-Previous work focused on transforming distributions based on the differences between push-forward and observed measures, in contrast to popular Bayesian approach of updating prior beliefs with likelihood functions [TK - cite Bayesian popularity].
+This work presents novel developments in the formulation and solution of stochastic inverse problems (SIPs) within a Data-Consistent Inversion (DCI) framework.
+This framework is grounded in measure theory.
+It leverages push-forward and pull-back measures to update initial descriptions of uncertainty.
+Consistent solutions are defined as distributions utilizing the ratios of observed and push-forward densities, which distinguishes DCI from the popular Bayesian approach of updating prior beliefs with likelihood functions.
 
-A major contribution of this thesis is the extension of the Data-Consistent Inversion framework to address problems that seek to quantify uncertainties around a single ``true'' parameter from the aggregation and use of noisy data.
+A major contribution of this thesis is the extension of the DCI framework to address problems that seek to quantify uncertainties around a single ``true'' parameter from the aggregation and use of noisy data.
 Earlier developments focused on problems that quantified parameter variability inherent to natural processes (such as manufacturing or experimental setup), leaving no need to presume the existence of a single parameter value that explained variations in observational data.
-However, many scientific problems are inherently grounded in such a belief, which motivated this extension of the DCI framework to address such scenarios in hopes of providing a feasible alternative to Bayesian Likelihood approaches.
+However, many scientific problems are inherently grounded in such a belief, which motivated this extension of the DCI framework to address such scenarios and providing a feasible alternative to Bayesian approaches.
 
-As such, this work sits at the intersection of applied mathematics, science, and computation.
-The scientific ``laboratory'' in which we perform our (simulated) experiments is the computer.
-Since computation plays such an integral part in the process of answering the aforementioned questions, a considerable amount of attention is also devoted to addressing software development.
-A novel method whose implementation is difficult to use is unlikely to see widespread adoption, so in the interest of making our work as accessible as possible, a significant portion of this thesis is devoted to mathematical software development.
-This thesis demonstrates in detail how the open-source tools we developed are built and made accessible to the broader scientific community.
+This work sits at the intersection of applied mathematics, science, and computation.
+The scientific ``laboratory'' in which we perform the (simulated) experiments is the computer.
+A novel method whose implementation is difficult to use is unlikely to see widespread adoption, so in the interest of making this work as accessible as possible, a significant portion of this thesis is devoted to mathematical software development.
+This thesis demonstrates how open-source tools are leveraged and built to be made accessible to the broader scientific community.
