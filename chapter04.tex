@@ -3,13 +3,17 @@
 Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of solutions to SIPs with respect to their ability to be well-approximated with random sampling.
 The results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
 
+\input{set-based/skewness.tex}
+
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the SIP is unaffected.
 We focus on the accuracy of the consistent solutions to the SIP.
 It is illustrative to begin with the original set-based approximations to solutions developed in \cite{BGE+15, BET+14, MBD+15} as the dependence of solutions on skewness is more explicit than in the density-based approach.
 While the content of this chapter is concerned with estimating distributions and not individual parameter estimates, we remind the reader that the solutions to the SIP are inherently densities.
 In Chapter~\ref{chapter:mud}, we used these densities to produce a parameter estimate, and so we are motivated to study the accuracy of these solutions to the SIP.
 
+
 %%%%%
+
 
 \section{Set-Based Inversion for Consistent Measures}\label{sec:set-based}
 % Intro
@@ -21,41 +25,6 @@ In Chapter~\ref{chapter:mud}, we used these densities to produce a parameter est
 
 % Descriptions of Error
 \input{set-based/set_error.tex}
-
-\section{Skewness and Information Content}\label{sec:skewness}
-In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
-In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$.
-An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\pmeas$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy is proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
-This is a version of the so-called curse-of-dimension for the set-based approach.
-
-Skewness is explored further in \cite{Walsh} in the context of optimal experimental design.
-There, an additional geometric property of $\qoi$ related to the \emph{precision} in the solution of the associated stochastic inverse problem is introduced and quantified.
-For completeness, we define skewness below and refer the interested reader to \cite{BGE+15, BPW17, Walsh} for more details.
-
-\begin{defn}
-For any QoI map $\qoi$, $\param \in \pspace$, and a specified row vector $\bf{j}_k$ of the Jacobian $J_{\param, Q}$, we define
-\begin{equation}
-S_\qoi(J_{\param,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
-\label{eq:skewness}
-\end{equation}
-
-We define the \textbf{local skewness} of a map $\qoi$ at a point $\pspace$ as
-\begin{equation}
-S_\qoi(\param) := \max_{1\leq k \leq d} S_\qoi(J_{\param,Q}, \bf{j}_k).
-\label{eq:localskewness}
-\end{equation}
-\end{defn}
-
-\begin{defn}
-The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined as
-\begin{equation}
-\overline{S_Q} := \frac{1}{\mu_{\pspace}(\pspace)} \int_\pspace S_Q (\param) \, d\mu_{\pspace}
-\label{eq:avgskew}
-\end{equation}
-\end{defn}
-
-In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition (SVD) of the Jacobian $J_{\param,\qoi}$, i.e., we randomly sample $J_{\param,\qoi}$ and compute the SVDs.
-In general, we approximate $\overline{S_\qoi}$ with Monte-Carlo approximations.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
