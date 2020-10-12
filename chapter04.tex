@@ -63,6 +63,8 @@ In general, we approximate $\overline{S_\qoi}$ with Monte-Carlo approximations.
 %%%% discussion of convergence
 
 \subsection{Convergence}
+To study the accuracy of the solutions to SIPs using QoI maps with different skewness values (or number of available model evaluations), we need to select a metric on the space of probability measures.
+Rates of convergence depend on this choice.
 Since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
 The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
 Thus, convergence of a sequence of probability measures under the Total Variation metric implies that the QoI's will also converge component-wise in $\RR$.
@@ -82,7 +84,7 @@ Taking $f = \Chi_A$, this leads to the following implication:
 It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Total Variation as the metric used in the numerical results of Section \ref{sec:ch03-set} and \ref{sec:ch03-sample}.
 
 
-\input{ch03/set_accuracy}
+\input{set-based/set_accuracy}
 % \input{ch03/sample_accuracy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
