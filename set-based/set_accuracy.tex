@@ -3,9 +3,9 @@
 %%%%%%%%%%%%%% discretization discussion, software contribution in later section
 
 In this section, we address how we measure the distance between measures that are defined on different spaces.
-We want to ensure that the questions we ask the computer to answer make sense mathematically is of critical importance in order to present rigorous numerical results.
+We want to ensure that the questions we ask the computer to answer make sense mathematically in order to present rigorous numerical results.
 There is a correspondence between the objects from measure theory that are involved in the SIP, and the finite-state counterparts in the algorithmic implementation.
-
+Therefore,
 
 
 
@@ -15,12 +15,11 @@ $$
 	\BB_{\pspace,\nsamps} = \sigma\left(\set{\VV^{(j)}}_{j=1}^{\nsamps}\right).
 $$
 $\BB_{\pspace, \nsamps}\subset \BB_\pspace$ and the events $A\in B_{\pspace, \nsamps}$ represent the $A\in\BB_\pspace$ for which we can ``easily'' compute probabilities and make inferences.
-While Algorithm~\ref{alg:inv_density} ultimately defines a probability measure implicitly on $(\pspace,\BB_\pspace)$, computationally this is almost never done and the measures are only interrogated on the computational algebra associated with the set of samples.
+While Algorithm~\ref{alg:inv_density} ultimately defines a probability measure implicitly on $(\pspace,\BB_\pspace)$, computationally this is almost never done; instead, the measures are only interrogated on the computational algebra associated with the finite set of samples.
 
 Different sets $S_k = \set{\param{(i)}}_{i=1}^{\nsamps_k}$, where the $\param^{(i)}$'s and $\nsamps_k$'s may be completely different for each $k$, will lead to different measures computed from Algorithm~\ref{alg:inv_density}.
 Each $S_k$ induces a computational algebra which we index using the notation $\BB_{k}$ for simplicity, where it is understood that $\BB_k = \BB_{\pspace, \nsamps_k}$.
-
-This poses an immediate problem with respect to a computational approach to computing $d_H$: how do we compare measures $\PP_{\pspace, \ndiscs, \nsamps_1}$ and $\PP_{\pspace, \ndiscs, \nsamps_2}$ which may be defined on completely different computational algebras (even if $\nsamps_1=\nsamps_2$)?
+The fact that solutions are defined on different spaces poses an immediate problem with respect to a computational approach to computing $d_H$: how do we compare measures $\PP_{\pspace, \ndiscs, \nsamps_1}$ and $\PP_{\pspace, \ndiscs, \nsamps_2}$ which may be defined on completely different computational algebras (even if $\nsamps_1=\nsamps_2$)?
 See Figure~\ref{fig:voronoi_issues} for an illustration of such a scenario.
 
 \begin{figure}[ht]
@@ -81,24 +80,22 @@ This is demonstrated in Algorithm~\ref{alg:totvar_disc}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%
 \section{Numerical Results and Analysis}\label{sec:ch03-examples}
-
-
-We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
+%
+%
+We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that
 \begin{equation}\label{eq:newobjective}
 d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
 \end{equation}
 where $\tau$ is some designated tolerance.
-
-Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
-The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
-To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
-
+%
+% Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
+% The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
+% To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
+%
 The reason for this is because as the work of \cite{BGE+15} has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
-Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
-
-The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
+Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, as we will see in the following examples.
 By phrasing our analysis in terms of metrics, we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
 
 

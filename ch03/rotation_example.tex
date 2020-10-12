@@ -10,11 +10,11 @@ If we apply a rotation $\qoi$, then the Jacobians $J_{\qoi, \param}$ are also su
 Since rotations are unitary operators, the norms given in Eq.~\eqref{eq:skewness} used to define skewness are unaffected.
 \end{proof}
 
-To demonstrate this, we define the space of QoI maps $\qspace = \set{ \qoiA , \qoiB, \qoiC }$, where all three are linear maps with the same local skewness $S_\qoi (\param) = 1 \; \forall \param \in \pspace$.
+To demonstrate this Lemma numerically, we define the space of QoI maps $\qspace = \set{ \qoiA , \qoiB, \qoiC }$, where all three are linear maps with the same local skewness $S_\qoi (\param) = 1 \; \forall \param \in \pspace$.
 The map $\qoiA$ is the identity and the other two, $\qoiB$ and $\qoiC$ are rotations of $\qoiA$ by randomly chosen angles.
 Following the algorithmic outline above, we perform a convergence study to $\PP_{\pspace,\bar{\nsamps}}$ with results summarized in Figure~\ref{fig:M1orth}.
 The convergence rates and expected errors in the SIPs associated with each of these maps are virtually indistinguishable.
-Thus, it appears that in light of Proposition~\ref{prop:rot_invariance} and these numerical results, the accuracy of the numerical solution to the SIP is invariant under rotations to the QoI map.
+In light of Proposition~\ref{prop:rot_invariance} and these numerical results, we can conclude that the accuracy of the numerical solution to the SIP is invariant under rotations to the QoI map.
 
 \begin{figure}[h]
 \begin{minipage}{.5\textwidth}
@@ -41,3 +41,5 @@ $6400$ & $2.56E-02$ & $2.53E-02$ & $2.51E-02$\\ \hline
 \caption{The results of $d^2_H(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \bar{\nsamps}})$.}
 \label{fig:M1orth}
 \end{figure}
+
+\vfill
