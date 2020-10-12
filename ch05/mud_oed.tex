@@ -1,14 +1,15 @@
 \section{Optimal Experimental Design Considerations}
 
-In this section we return to the nonlinear examples presented in the previous chapter and address the choices made in experimental design.
-By revisiting the examples at the end of the previous chapter, we demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point.
-Furthermore, we want to show that the choices made in the experimental design of previous examples were made for reasons of convenience of exposition, and that changing these assumptions does not fundamentally change the takeaway message: the MUD point is a viable alternative estimator for parameter identification.
+In this section we return to the nonlinear examples presented in the previous chapter and address some choices made in how the experiment was performed.
+By revisiting the examples, we demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point.
+Furthermore, we want to show that the choices made in the experimental design of previous examples were made for reasons of convenience of exposition.
+Changing these assumptions does not later the viability of the MUD point as an alternative estimator for use parameter identification problems.
 
 We study the impact of more precise measurement devices on the convergence rates for the parameter estimates.
 First we return the problem of estimating the rate of exponential decay by incorporating measurements taken in time into the WME map from [TK - ch4 section here].
 To complement these results, we show them alongside ones generated with equipment that measures at twice the temporal frequency.
 
-Next, we study the same question of the impact of measurement precision for the PDE problem introduced in [TK - ch4 section here].
+Next, we study the same question of the impact of measurement precision for the PDE problem introduced in \ref{subsec:pde-example}.
 A similar complementary problem is solved where information about the sensitivity of measurement locations is used to inform improved placement of a hundred sensors.
 In this example, we walk through the sorts of analyses a modeler might conduct in order to select an experimental design through simulation and show a significant improvement in the accuracy of the MUD point.
 
@@ -16,13 +17,11 @@ In this example, we walk through the sorts of analyses a modeler might conduct i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ODE Example Revisited}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Different Measurement Equipment}
-
 One way by which modelers can improve the quality of parameter estimates is by collecting more data.
 We consider what would happen if our measurement equipment were able to capture twice as many observations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Different Measurement Equipment}
 Instead of using equipment that operates at $100$Hz, we take $200$ measurements every second, resulting in 400 equispaced observations for $t \in (1,3)$.
 All other choices involved in the experiment (assumed equipment tolerance, number of trials, parameter samples), are kept the same.
 We refer to this setup wit faster measurement equipment as the ``alternative'' design.
@@ -54,7 +53,7 @@ We show the resulting error plots for convergence in the right half of Figures~\
   \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_obs_mean}
   \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_obs_var}
 
-  \caption{Convergence of the MUD point given $N=1E4$ model evaluations for increasing numbers of observations for randomly placed sensors.
+  \caption{Convergence of the MUD point given $N=1E3$ model evaluations for increasing numbers of observations for randomly placed sensors.
   Convergence rates are estimated using first-order linear regressions in $\text{log}_{10}$-space.
   $100$Hz equipment demonstrates a reduction of uncertainty and improvement in precision as $S$ increases towards $200$.
   We observe the same rates of convergence for the alternative equipment and note the (slightly) lower overall error for equal numbers of measurements ($S=200$ corresponding to $t\in (1,2)$ in this formulation).
@@ -74,8 +73,8 @@ This implies that we can achieve similar results with a shorter observational wi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Impact of Equipment Precision}
-We expect that a method designed to address parameter estimation would see an improvement in accuracy  if the data is collected with more precise instruments.
 To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
+We expect that a method designed to address parameter estimation would see an improvement in accuracy  if the data is collected with more precise instruments.
 Here we show that this is indeed the case for the time-series example introduced earlier by considering choices of $\tau = 0.1, 0.05, 0.01, \text{ and } 0.005$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.
 We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ measurements and study the error in our estimate of $\paramref$.
 
@@ -86,16 +85,16 @@ We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ mea
   \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_mean}
   \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_std_var}
 
-  \caption{[TK - FIX THE TITLES (manually specified). This is supposed to be at t=1.375]. Convergence of the MUD point given $N=1E4$ model evaluations incorporating measurements at a fixed point in time.
+  \caption{Convergence of the MUD point given $N=1E3$ model evaluations incorporating measurements at a fixed point in time.
   As more precise measurements are incorporated, the accuracy and precision of the MUD solution improves.
   }
   \label{fig:ode-convergence-std}
 \end{figure}
 
-In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise (lower tolerance), for both the $100$Hz (ode) and $200$Hz (ode-alt) variants of sensor.
+In Figure~\ref{fig:ode-convergence-std}, we study the absolute error's mean and variance as our measurement equipment gets more precise (lower tolerance), for both the $100$Hz (ode) and $200$Hz (ode-alt) variants of sensors we are simulating.
 In the left half of the figure, we find that the convergence rates for the two designs are nearly identical but the equipment which records twice as many measurements has a persistent reduction in error.
 The right half shows the convergence in variance of the absolute error, and the vertical displacement between the two designs is visually difficult to distinguish.
-However, as evidenced in the legends, the alternative design (faster equipment) exhibits an increase in the rate of convergence from 1.87 to 1.92.
+However, as evidenced in the legend annotations of Fig~\ref{fig:ode-convergence-std}, the alternative design (faster equipment) exhibits an increase in the rate of convergence from 1.87 to 1.92.
 
 We have shown that the Data--Consistent approach to solving parameter identification problems manages to generalize to problems involving time-series data from a single Quantity of Interest.
 We now turn our attention to an example where instead of temporal measurements, we incorporate spatial data to solve another 1-D parameter identification problem.
@@ -106,7 +105,8 @@ We now turn our attention to an example where instead of temporal measurements, 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Elliptic PDE Example}\label{sec:pde-example}
-
+We make a slight modification to the Poisson problem from \ref{subsec:nonlinear-example} to make it into a one-dimensional parameter identification problem.
+We briefly summarize the experimental set-up again for convenience of the reader.
 Consider the following Poisson problem defined on a unit domain $\Omega$:
 \begin{equation}\label{eq:pde-equation}
 \begin{cases}
@@ -146,8 +146,8 @@ In the rightmost histogram of Figure~\ref{fig:pde-response}, we plot the data ge
   \includegraphics[width=0.675\linewidth]{figures/pde/pde_qoi_response}
 \caption{(Left): The function response surface for $u$ solving \eqref{eq:pde-equation} with $S=100$ measurement locations highlighted in white.
 The twenty most sensitive location markers are filled.
-(Center): The derivative $\partial M_i / \partial \param$ is computed for the hundred measurement locations and the distribution of the resulting collection of slopes is plotted.
-(Right): The values of the response surface at the hundred measurements is shown. The true parameter value $\paramref$ is highlighted with a vertical line, and the values of the response surface conditioned on $\paramref$ are used to form the histogram plotted vertically on the right. Many measurements are near zero.
+(Right): The derivative $\partial M_i / \partial \param$ is computed for the hundred measurement locations and the distribution of the resulting collection of slopes is plotted.
+(Center): The values of the response surface at the hundred measurements is shown. The true parameter value $\paramref$ is highlighted with a vertical line, and the values of the response surface conditioned on $\paramref$ are used to form the histogram plotted vertically on the right. Many measurements are near zero.
 }
 \label{fig:pde-response}
 \end{figure}
@@ -158,7 +158,7 @@ However, some of the sensors have steep slopes, which suggests higher sensitivit
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\FloatBarrier
+% \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Informed Sensor Placement}
 Instead of placing sensors throughout the square interior of $\Omega$ given by $(0.05, 0.95)^2$, we briefly consider how the convergence results would compare if the subdomain for sensors was better selected
@@ -176,7 +176,7 @@ The first hundred of the thousand sensor locations sampled is shown in the left 
   \includegraphics[width=0.675\linewidth]{figures/pde/pde-alt_qoi_response}
   \caption{The same panels as in Figure~\ref{fig:pde-response} but for the placement of sensors informed by the observations about sensitivity incorporated into the experimental design.
   The alternative placement eliminates redundancy induced by the symmetry of the response surface, and is concentrated in the regions which exhibit more sensitivity to changes in $\param$.
-  As a result of these choices, we observe less measurements near zero (rightmost histogram), and slopes with larger magnitude (center).
+  As a result of these choices, we observe less measurements near zero (bottom histogram), and slopes with larger magnitude (top).
   }
 \label{fig:pde-alt-response}
 \end{figure}
@@ -190,7 +190,7 @@ Whereas the original design had an strong decay in its distribution of measureme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Comparison of Results}
+\subsubsection{Comparison of SIP Solutions with Different QoI Maps} 
 
 We are interested in knowing how the uncertainty around the parameter estimate (the MUD point) changes as we incorporate more (noisy) data.
 To generate convergence plots, we solve the problem repeatedly for $S = 5, 10, 15, 20, 25, 50, 100, 250, 500, \text{ and } 1000$ and take the mean and variance of the twenty trials for each value of $S$.
