@@ -1,13 +1,19 @@
 \chapter{\uppercase{Impact of Geometry of Output Quantities on Consistent Solutions} \label{chapter:geometry}}
 
 Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of solutions to SIPs with respect to their ability to be well-approximated with random sampling.
-However, the results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
+The results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
+
+\input{set-based/skewness.tex}
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the SIP is unaffected.
 We focus on the accuracy of the consistent solutions to the SIP.
-It is illustrative to begin with the original set-based approximations to solutions developed in \cite{} [TK - cite] as the dependence of solutions on skewness is more explicit than in the density-based approach.
+It is illustrative to begin with the original set-based approximations to solutions developed in \cite{BGE+15, BET+14, MBD+15} as the dependence of solutions on skewness is more explicit than in the density-based approach.
+While the content of this chapter is concerned with estimating distributions and not individual parameter estimates, we remind the reader that the solutions to the SIP are inherently densities.
+In Chapter~\ref{chapter:mud}, we used these densities to produce a parameter estimate, and so we are motivated to study the accuracy of these solutions to the SIP.
+
 
 %%%%%
+
 
 \section{Set-Based Inversion for Consistent Measures}\label{sec:set-based}
 % Intro
@@ -20,52 +26,19 @@ It is illustrative to begin with the original set-based approximations to soluti
 % Descriptions of Error
 \input{set-based/set_error.tex}
 
-\section{Skewness and Information Content}\label{sec:skewness}
-In \cite{BGE+15}, the concept of skewness in a QoI map $\qoi$ is introduced, quantified, and related to the accuracy in solving the stochastic inverse problem with a finite number of samples.
-In effect, skewness is a geometric property that describes how the right angles in generalized rectangles belonging to $\dborel$ are transformed by $\qoi^{-1}$.
-An a priori analysis demonstrated that the number of samples from a {\em regular uniform grid} in $\pspace$ required to approximate the $\pmeas$-measure of $\qoi^{-1}(E)$ to a desired level of accuracy is proportional to the skewness of $\qoi$ raised to the ($d-1$) power where $d$ is the dimension of $\dspace$.
-This is a version of the so-called curse-of-dimension for the set-based approach.
-
-Skewness is explored further in \cite{Walsh} in the context of optimal experimental design.
-There, an additional geometric property of $\qoi$ related to the \emph{precision} in the solution of the associated stochastic inverse problem is introduced and quantified.
-For completeness, we define skewness below and refer the interested reader to \cite{BGE+15, BPW17, Walsh} for more details.
-
-\begin{defn}
-For any QoI map $\qoi$, $\param \in \pspace$, and a specified row vector $\bf{j}_k$ of the Jacobian $J_{\param, Q}$, we define
-\begin{equation}
-S_\qoi(J_{\param,Q}, \bf{j}_k) := \frac{\abs{\bf{j}_k} }{\abs{\bf{j}_k^\perp}}.
-\label{eq:skewness}
-\end{equation}
-
-We define the \textbf{local skewness} of a map $\qoi$ at a point $\pspace$ as
-\begin{equation}
-S_\qoi(\param) := \max_{1\leq k \leq d} S_\qoi(J_{\param,Q}, \bf{j}_k).
-\label{eq:localskewness}
-\end{equation}
-\end{defn}
-
-\begin{defn}
-The \textbf{average} \emph{(or \textbf{expected})} \textbf{skewness} is defined as
-\begin{equation}
-\overline{S_Q} := \frac{1}{\mu_{\pspace}(\pspace)} \int_\pspace S_Q (\param) \, d\mu_{\pspace}
-\label{eq:avgskew}
-\end{equation}
-\end{defn}
-
-In \cite{BPW17}, it is shown that $S_\qoi(\param)$ is efficiently computed using a singular value decomposition (SVD) of the Jacobian $J_{\param,\qoi}$, i.e., we randomly sample $J_{\param,\qoi}$ and compute the SVDs.
-In general, we approximate $\overline{S_\qoi}$ with Monte-Carlo approximations.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% discussion of convergence
 
 \subsection{Convergence}
+To study the accuracy of the solutions to SIPs using QoI maps with different skewness values (or number of available model evaluations), we need to select a metric on the space of probability measures.
+Rates of convergence depend on this choice.
 Since the spaces $\pspace$ we are considering are generally bounded and finite, the Total Variation metric metrizes weak convergence (see Thm. 6 in \cite{GS02}).
-The latter property is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
+The latter property of the metric is of notable importance because the QoI maps we study are indeed (component-wise) functionals on the space of model inputs $\pspace$.
 Thus, convergence of a sequence of probability measures under the Total Variation metric implies that the QoI's will also converge component-wise in $\RR$.
 In other words, convergence in the Total Variation metric implies the convergence of the sampled QoI map to the exact QoI map since the map is a linear functional of the probability measure.
-In other words, if $\PP_{\pspace,\ndiscs,\nsamps,h}$ converges to either $\PP_{\pspace,\ndiscs,\nsamps}$, $\PP_{\pspace,\ndiscs}$, or $P_\pspace$ using the Total Variation metric, this implies that the error converged to zero in the numerically computed $\qoi(\param^{(j)})$.
-Thus, convergence in the Total Variation metric implies, in a sense, convergence of the numerical method used to construct the QoI map.
+More formally, if $\PP_{\pspace,\ndiscs,\nsamps,h}$ converges to either $\PP_{\pspace,\ndiscs,\nsamps}$, $\PP_{\pspace,\ndiscs}$, or $P_\pspace$ using the Total Variation metric, this implies that the error converged to zero in the numerically computed $\qoi(\param^{(j)})$.
+Thus, convergence in the Total Variation metric implies convergence of the numerical method used to construct the QoI map.
 Furthermore, recall that weak convergence $\PP_n \to \PP$ is defined to mean
 \[
 \int f \PP_n \to \int f \PP \text{ as } n \to \infty
@@ -76,38 +49,22 @@ Taking $f = \Chi_A$, this leads to the following implication:
 \PP_{\pspace, \ndiscs, \nsamps} \to P_\pspace \implies \PP_{\pspace, \ndiscs, \nsamps} (A) \to P_\pspace (A) \quad \forall{A\in\pborel}.
 \]
 %provided we rigorously define $\P\PP_{\pspace, \ndiscs, \nsamps}$ to measure sets in $\BB_\pspace$, which we proceed to do in the following section\footnote{\bf{I know this is clumsy, but I'm not exactly sure how to phrase this correctly, because it almost seems like this would be true for all $A\in\pspace$ instead. I suppose the omission of the differential operator above is intentionally vague to gloss over this detail. Can we sharpen this up?}}
-It is a combination of computational ease of implementation and theoretical implications that motivates the choice of the Total Variation as the metric used in the numerical results of Section \ref{sec:ch03-set} and \ref{sec:ch03-sample}.
+We choose Total Variation as the metric used in the numerical results of Section~\ref{sec:ch03-set} because of its common use in the literature as the ``statistical distance'' between densities \cite{GS02, Silverman}, and implications for convergence.
 
 
-\input{ch03/set_accuracy}
+\input{set-based/set_accuracy}
 % \input{ch03/sample_accuracy}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \input{set-based/heatrod.tex}
+% \FloatBarrier
+%
+% \input{ch03/decay.tex}
 
-\
-\section{Numerical Results and Analysis}\label{sec:ch03-examples}
-
-
-We have an interest in understanding what values of $\nsamps$ would be appropriate provided we want to resolve $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$ to some desired level of accuracy, below some tolerance so that Equation~\eqref{eq:objective} is effectively satisfied if
-\begin{equation}\label{eq:newobjective}
-d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace,\ndiscs}) < \tau,
-\end{equation}
-where $\tau$ is some designated tolerance.
-
-Recall that this discussion of error is in reference to some fixed $\qoi\in\qspace$ to which Algorithm~\ref{alg:inv_density} is applied.
-The inequality presented in Eq.~\eqref{eq:set-triangleineq} holds for probability measures induced by any map in $\qspace$, though we obscure the dependence on $\qoi$ for the time being.
-To this end, we introduce notation of the form $\PP_{\pspace, \ndiscs, \nsamps}^{\qoi}$ when we want to distinguish between measures constructed from inverting a particular map $\qoi\in\qspace$.
-
-The reason for this is because as the work of (cite: Butler AWR) has shown, the choice of $\qoi$ will influence the number of model solutions necessary to accurately solve the SIP.
-Different choices for $\qoi$ may lead to radically different values for $\nsamps$ in order to achieve the same bound on $d(\PP_{\pspace, \ndiscs, \nsamps}, \PP_{\pspace, \ndiscs})$, and it is the goal of this work to explore this relationship.
-
-The analysis of this problem differs significantly from the ones in (cite: butler, mattis), which bound errors in probability of estimating sets $A\in\pborel$.
-By phrasing our analysis in terms of metrics (discussed more in Section~\ref{sec:metrics}), we may be able to answer more broadly generalizable questions about error, including those regarding convergence rates and global accuracy of our estimates.
-
-
-\input{set-based/heatrod.tex}
-\FloatBarrier
-
-\input{ch03/decay.tex}
+\section{Conclusions}
+In this chapter we introduced the skewness property of QoI maps and demonstrated that for solutions to the SIP, maps which exhibit lower values of skewness exhibit lower overall finite-sampling approximation error against a reference solution.
+We saw that the solutions are invariant to transformations such as rotation (which also holds for translations).
+The latter observation may aid in the selection of optimal maps (i.e., one can disregard the direction of the maps' contours and focus solely on the angles among the generalized contours).
+In the following chapter, we show how the QoI maps in \ref{chapter:mud} constructed from measurements relate to the geometry of the resulting data-spaces and subsequently impacts the solutions to the SIP.
+We demonstrate that an awareness of skewness can help construct maps which are more informative and thus increase the precision of parameter estimates.
 \FloatBarrier
 %%%%%%%%%%%%%%
