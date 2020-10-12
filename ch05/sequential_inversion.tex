@@ -107,10 +107,10 @@ In a few instances, the shuffled approach stumbles on an ordering that accelerat
 These cases exhibit the kind of behavior we saw in the left panel of Fig~\ref{fig:iterative-linear-demo-smart}; in other words, sometimes our random shuffling finds the ``smart'' rows to iterate through.
 Since the ordering has no dependence on iteration number in the approach where we use random rows, we have more opportunities to find these successive orthogonal pairings, and so we see that on average, it takes fewer iterations to achieve the same accuracy.
 
-
-\subsection{Iterated Solutions for a PDE Example}\label{sec:iterated-nonlinear}
-
-Batch-updates is the connection to make here.
-We are going to set up the heatrod example here but place measurement devices throughout and record the measurements at several intervals in time, the point being here that the dimension of the QoI will be higher than the input space but it's okay because we're iterating.
-
-Some systems will be more informative early in time, others late, so the best thing to do is not really something we're going to answer, we're just going to show how this approach \emph{could} work in a situation like this where the data is streaming in over time.
+% 
+% \subsection{Iterated Solutions for a PDE Example}\label{sec:iterated-nonlinear}
+%
+% Batch-updates is the connection to make here.
+% We are going to set up the heatrod example here but place measurement devices throughout and record the measurements at several intervals in time, the point being here that the dimension of the QoI will be higher than the input space but it's okay because we're iterating.
+%
+% Some systems will be more informative early in time, others late, so the best thing to do is not really something we're going to answer, we're just going to show how this approach \emph{could} work in a situation like this where the data is streaming in over time.
