@@ -1,5 +1,6 @@
 
-We demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
+In Chapter~\ref{chapter:geometry}, we introduced the notion of skewness and showed examples of how it impacts the accuracy of approximating SIP solutions with finite sampling.
+Here, we demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
 We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
 Recall how $\qoi^\text{2D}$ was able to better resolve $\paramref$ than $\qoi^\text{1D}$.
 The map $\qoi^\text{2D}$ was presented as an option for taking the same available hundred measurements and using them to form a more informative map.
@@ -7,8 +8,8 @@ In this chapter, we present a more detailed study of the construction of this ma
 
 \section{Extension to Vector-Valued QoI Maps}
 In our first example, we show that a small change in the decision of how to partition the measurements collected on the response surface can induce a 2-dimensional map $\qoi^\text{2D}_\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
-Such a map is more skewed than the one we presented with $\qoi^\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi^\text{1D}$ in the original problem.
-This decreased precision demonstrates that skewness\---although developed in the previous chapter within the context of set-valued solutions\---is still a relevant measure of a map's utility when solving parameter identification problems.
+Such a map is by definition more skewed than the one we presented with $\qoi^\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi^\text{1D}$ in the original problem.
+This decreased precision demonstrates that skewness, although developed in the previous chapter within the context of set-valued solutions, is still a relevant measure of a map's utility when solving parameter identification problems.
 
 The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
 These examples were chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
@@ -16,9 +17,9 @@ The linear examples in Section~\ref{sec:high-dim-linear-example} demonstrate tha
 In those examples, we showed that our ability to resolve a true parameter improved as the gap between input dimension and operator row-rank shrunk.
 
 The rank-deficiency of an operator can be attributed either to ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
-In scenarios where $S>P$ observations are available, we are motivated to somehow leverage the form of Eq.~\eqref{eq:qoi_WME} to construct a vector-valued version incorporating subsets of $S$ for each component.
+In scenarios where $S>P$ observations are available, we are motivated to leverage the form of Eq.~\eqref{eq:qoi_WME} to construct a vector-valued version incorporating subsets of $S$ for each component.
 For example, a system for which spatial measurements are available over time may motivate constructing a scalar-valued WME map for each spatial location.
-If distinctly different observable quantities are available (ones perhaps with different physical units), then these may be collapsed into each component of the map.
+If distinctly different observable quantities are available (e.g., perhaps with different physical units), then these may be collapsed into each component of the map.
 
 The discussion of how to optimally construct such maps is beyond the scope of this work, and would need to take into account nuances involving measurement sensitivities and address combinatorial design-spaces.
 However, we summarize that the extension of the equations presented in Section~\ref{sec:MUD_analysis} follows directly by constructing the resultant $1\times P$ matrices $A$ and scalar-valued $b$ for each component and then stacking them to form a $D\times P$ system, where we are motivated to minimize $P-D$.
