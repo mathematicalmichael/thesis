@@ -1,1 +1,61 @@
-\input{ch03/measuresets}
+% \input{ch03/measuresets}
+%%%%%%%%%%%%
+\section{Alternative Perspective on SIP Solutions in Example\ref{subsec:pde-example}}
+To further underscore the impact of incorporating the extra dimension of information in the data space and the impact it has on the reduction of uncertainty, we turn the reader's attention to Fig.~\ref{fig:pde-highd-2d-scatter}.
+Recall from \ref{subsec:pde-example} that two maps were used to solve the SIP: $\qoi^{1D}$ and $\qoi^{2D}$, and MUD points were shown for twenty realizations of noise for each in Figure~\ref{fig:pde-convergence}.
+In this figure, we use the updated densities from a solution to the SIP from each of $\qoi^{1D}$ and $\qoi^{2D}$ to give an alternative view to that in \ref{fig:pde-convergence} of the feasible region in $\pspace$.
+We normalize our evaluations of the ratio of observed to predicted densities and plot the samples that exceed two thresholds, numerical zero (left), and $1/N$ (right) to give some sense of samples that may come from accept/reject algorithms (since our initial was uniform).
+
+Both scatter-plots exhibit the same geometry, appearing to trace a band through the parameter space.
+Fundamentally, at first glance at the left figure, it is already apparent that half of $\pspace$ has been ruled out, and that the correlation structure between the two knots has been discovered.
+The samples from $\qoi^{2D}$, however, cluster more tightly around the optimal samples (the ``projection'' here refers to the sample which minimizes the 2-norm to the noiseless data).
+The incorporation of two directions instead of one whittles away more of the parameter space as being less relatively likely.
+If we were to perform accept/reject, the resulting set would be fairly well constrained to the upper-lefthand corner of the two-dimensional parameter space.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-16.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-03.png}
+\caption{
+100 measurements
+}
+\label{fig:pde-highd-2d-scatter}
+\end{figure}
+
+%%%%%%%%%%%%
+
+
+We solve our SIP for twenty different realizations of noise to pollute our hundred measurements, and show the resulting solutions for the first twenty and all hundred being used to construct the vector--valued map.
+The resulting functions that are induced by these MUD points are shown in Fig.~\ref{fig:pde-highd-2d-vector-mud}, and we note that solutions are no longer are considering the possibility of the minimum value of $g$ being at the wrong knot point as we saw in Fig.~\ref{fig:pde-highd-2d-scalar-mud}, even when only twenty total data points are used to construct $Q$.
+By the time all hundred measurements are incorporated, the MUD solutions appear to be tracing out curves between the projection function and the interpolant function, a far more accurate set of predictions than those from the scalar--valued map (see \ref{fig:pde-highd-2d-scalar-mud}).
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m20.png}
+  \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+\caption{
+(Top): When vectorizing our QoI map, we find that we are able to achieve more accuracy with fewer measurements. Here, we see far less variation in MUD solutions than in the bottom of Fig.~\ref{fig:pde-highd-2d-scalar-mud}.
+(Bottom): When all 100 measurements are incorporated
+}
+\label{fig:pde-highd-2d-vector-mud}
+\end{figure}
+
+How we incorporate the available data has a dramatic impact on our ability to reduce uncertainty in the parameter space.
+We attempt to illustrate this by requesting the reader juxtapose figures of the initial samples in \ref{fig:pde-highd-initial-2d} to those in \ref{fig:pde-highd-2d-scalar-mud} and \ref{fig:pde-highd-2d-vector-mud}.
+To better quantify the differences between the two types of maps, it is more rigorous to study how close we are to $g$ (in function space).
+Since the approximation $\hat{g}$ that arises from evaluating the MUD point is piecewise-linear, and $g$ is continuous, we use the knot points and the trapezoidal rule to approximate the $L^2$ norm of $\abs{g - \hat{g}}$ (using {\tt scipy}), and plot the resulting histograms for the scalar- and vector-valued $\param$s whose relative ratios exceeded a threshold, and compare them against samples from the initial density, and show the result in Figure~\ref{fig:pde-highd-2d-hist}.
+
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_hist_D2_t5-0E-01}
+\caption{
+Histograms comparing initial samples with the highest probabilities (relative ratio $> 0.5$).
+}
+\label{fig:pde-highd-2d-hist}
+\end{figure}
+
+In \ref{fig:pde-highd-2d-hist}, the histograms have been normalized for comparison, and while the scalar--valued map still does reduce the uncertainty that we started with in our initial density, the vector--valued map is considerably more accurate.
+The multi-modal nature of the scalar--valued histogram plot shows a lack of resolution that is not experienced at all by the vector--valued solution.
+Both QoI maps solve a stochastic inverse problem, but the latter is more respectful of the geometry of the response surface, and so is able to learn significantly more, and bring us modelers far closer to the true function $g$.
+The multi-modal density of probable samples corresponds to the two types of solutions we saw in Figure~\ref{fig:pde-highd-2d-scalar-mud}, but we are after a single parameter estimate of truth.
