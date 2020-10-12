@@ -288,8 +288,8 @@ We now come to the solutions that arise from solving the same five--dimensional 
 The difference in comparison to the example solutions in Fig.~\ref{fig:pde-highd-5d-mud} is stark: no longer are the solutions dramatically under-estimating the local minimum of $g$.
 To the extent to which they fail to adequately to do is due to the insufficient resolution of five knot points; both scalar-- and vector--valued solutions identify the same knot as being the likely minimum, and the latter solution estimates the minima well (horizontal line drawn for reference) in the bottom-right plot.
 
-Once again, we repeat the experiment twenty times to better understand the differences in the solutions relative to possible noise that polluted our measurements.
-We are able to notice some interesting patterns by looking at the curves on the left side of Figure~\ref{fig:pde-highd-5d-alt-mud}.
+Once again, we solve our SIP twenty times (for different realizations of noise), to better understand the sensitivity of the parameter estimates produced by the MUD estimator.
+We observe some interesting patterns in the curves on the left side of Figure~\ref{fig:pde-highd-5d-alt-mud}.
 First, we note that going from scalar-- to vector--valued resolves a significant amount of uncertainty in $\lambda_2$, $\lambda_3$, and $\lambda_4$.
 Namely the QoI map appears to stop considering curves which do not have a sufficiently low minimum value.
 Second, while the vector--valued MUD solution curves appear to capture the general characteristics of $g$ well, a number of them under-estimated the value at $\lambda_5$ quite severely relative to the true value (near zero), which we saw in Figure~\ref{fig:pde-highd-5d-mud} as well.
@@ -317,7 +317,6 @@ Even when only twenty measurements are incorporated into constructing the QoI ma
 }
 \label{fig:pde-highd-5d-alt-mud}
 \end{figure}
-\FloatBarrier
 
 Because we began with a better choice of initial density, both QoI maps resolve the residuals similarly (bottom-left of \ref{fig:pde-highd-5d-alt-mud}), and produce qualitatively similar estimates of the response surface. We attribute this to the fact that the vector--valued samples were used to bound the space, but note the direction was informed by the scalar--valued samples.
 
