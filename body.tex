@@ -8,7 +8,7 @@ We define the maximal updated density (MUD) point as
 \begin{equation}\label{eq:mudpt_inital_defn}
 	\mudpt := \argmax {\updated}(\param).
 \end{equation}
-We motivate the use of the MUD point as an alternative to a the MAP point for parameter estimation problems.
+We motivate the use of the MUD point as an alternative to the MAP point for parameter estimation problems.
 In this section, we assume linear (or affine) QoI maps with Gaussian distributions, which are often used in the UQ literature for providing a common framework for comparing methods and their solutions.
 
 This section is structured into several subsections to help focus the interpretations and results.
@@ -289,7 +289,8 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 We first describe the relationship of MUD, MAP, and least squares estimates to the set-valued inverses of $Q$ in order to establish a conceptual framework for interpreting the numerical results that follow.
 While this discussion is somewhat abstract, we refer to Figure~\ref{fig:regularization} to make these ideas more clear.
 
-The MUD point exists on the generalized contour\footnote{We say generalized contour in this case because if $A$ is a $p$-to-$d$ full rank linear map with $d<p$, then $Q^{-1}(\observedMean)$ exists as a $(p-d)$-dimensional linear hyperplane in $\pspace$.} defined by $Q^{-1}(\observedMean)$.
+The MUD point exists on the generalized contour defined by $Q^{-1}(\observedMean)$.
+We say generalized contour in this case because if $A$ is a $p$-to-$d$ full rank linear map with $d<p$, then $Q^{-1}(\observedMean)$ exists as a $(p-d)$-dimensional linear hyperplane in $\pspace$.
 
 This means that the MUD point retains the ``predictive precision'' of a least squares solution to the inverse problem (i.e., a parameter that minimizes the data-mismatch term $\norm{\observedMean - Q(\param)}_{\observedCov^{-1}}^2$) while incorporating the flexibility of prior beliefs in directions not informed by the QoI.
 This is illustrated in the bottom right plot of Figure~\ref{fig:regularization}.
@@ -438,7 +439,7 @@ Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Below, we consider issues of existence, uniqueness, and convergence of $\mudpt$ for the WME map under certain assumptions.
-In~\ref{sec:Conclusions}, we provide some remarks on how we plan to generalize this analysis in future work.
+In~\ref{sec:conclusions}, we provide some remarks on how we plan to generalize this analysis in future work.
 
 
 For each $1\leq j\leq M$, assume that the observable maps $M_j$ are linear maps of $\param$ (affine maps require minor modifications to the results below).
@@ -513,9 +514,6 @@ Despite these differences, both examples share the following details.
  Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
  Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
  The light red curves are almost indistinguishable in the bottom plot as they all lie nearly on the true signal which demonstrates the overall reduction in variance in MUD estimates around the true signal when using $N=200$ data points.
-	{
-	\color{blue}{First line of legend: ``$\pm 3\sigma$ from True Signal''. Second line of legend: ``True signal''. Third line ``Measurements with $N(0,\sigma^2)$ noise''. Then, fourth line of legend: ``Signals based on $\mudpt$ estimates''. Also, make the red curves dash-dotted and less transparent so that they are easier to distinguish. Maybe use a deeper red. }
-	}
   }
   \label{fig:ode-reference}
 \end{figure}
@@ -525,9 +523,6 @@ Despite these differences, both examples share the following details.
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
   \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
-  {
-  \color{blue}{Change "Proportion of Time Elapsed" to "N" and plot vs $N$. Remove the orange scatter points and curves. Change titles to $\mathbb{E}(\abs{\mudpt - \paramref})$ and $Var(\abs{\mudpt-\paramref})$.}
-  }
   }
   \label{fig:ode-convergence-obs}
 \end{figure}
@@ -561,7 +556,7 @@ In this problem, the uncertain model parameter is now described by an unknown fu
 The focus is on demonstrating that a vector-valued QoI can be constructed from noisy data to produce a MUD point that more accurately reconstructs features of the unknown function.
 As described below, there is an intuitive way to separate the spatial data to construct the distinct components of the vector-valued QoI map.
 While beyond the scope of this work, a future work will consider how to incorporate clustering analysis on the data for less obvious cases where we seek to determine which data points should be utilized to construct the various components of a vector-valued QoI map.
-In the interest of space and clarity, we present representative results for a fixed finite-dimensional representation of the parameter space and forgo the more complicated convergence analysis that requires increasing both the number of data available as well as the dimension of the parameter space.
+In the interest of clarity, we present representative results for a fixed finite-dimensional representation of the parameter space and forgo the more complicated convergence analysis that requires increasing both the number of data available as well as the dimension of the parameter space.
 
 Consider the Poisson problem:
 \begin{equation}\label{eq:pde-equation}
@@ -578,7 +573,7 @@ The forcing function $f$ is taken to be $10\exp{\norm{x - 0.5}^2 / 0.02}$.
 Here, we assume that $g(x_2)$ is unknown, and the goal is to use noisy data to estimate this unknown boundary data.
 In other words, the parameter $\param$ now represents an uncertain function.
 To generate the noisy data, we first use a reference $g(x_2)\propto x_2^2(x_2-1)^5$ with a constant of proportionality chosen to produce a minimum of $-3$ at $x_2=\frac{2}{7}$.
-Then, we compute a reference solution using piecewise-linear finite elements on a triangulation of a $36x36$ mesh.
+Then, we compute a reference solution using piecewise-linear finite elements on a triangulation of a $36\times36$ mesh.
 Random noise is then added to every degree of freedom of this reference solution, and the spatial data are subsequently computed from a fixed set of 100 randomly placed sensors in the subdomain $(0.05, 0.95)^2 \subset \Omega$.
 This process is repeated $20$ times to study the subsequent variation in MUD points due to different realizations of noisy data.
 See the plot of Figure~\ref{fig:pde-Q} for a representative noisy response surface and location of spatial data used across all 20 trials.

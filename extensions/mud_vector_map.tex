@@ -1,4 +1,15 @@
 \section{Extension to Vector-Valued QoI Maps}
+
+We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
+Recall how $\qoi_\text{2D}$ was able to better resolve $\paramref$ than $\qoi_\text{1D}$.
+The map $\qoi_\text{2D}$ was presented as an option for taking the same available hundred measurements and using them to form a more informative map.
+In this chapter, we present a more detailed study of the construction of this map, reflecting a case-study in designing a problem where the QoI map is informative.
+We demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
+
+In our first example, we show that a small change in the decision of how to partition the measurements collected on the response surface can induce a 2-dimensional map $\qoi_\text{2D}^\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
+Such a map is more skewed than the one we presented with $\qoi_\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi_\text{1D}$ in the original problem.
+This decreased precision demonstrates that skewness\---although developed in the previous chapter within the context of set-valued solutions\---is still a relevant measure of a map's utility when solving parameter identification problems.
+
 The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
 These examples were chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
 The linear examples in Section~\ref{sec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
@@ -285,6 +296,8 @@ Instead of looking at high-probability samples as locations in $\pspace$, let us
 \centering
   \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd-alt_initial_D5_m100.png}
 \caption{
+By considering the relationship between the parameters and the types of functions that could be possible given the solution to a 2-D inverse problem, we are able to create a more restricted parameter space in 5-D.
+Knowledege of the behavior of $g$ at the boundaries allows for more than half of each of the three remaining intervals to be ruled out as infeasible regions when we look at high-probability samples from the 2-D SIP solution.
 }
 \label{fig:pde-highd-5d-study}
 \end{figure}

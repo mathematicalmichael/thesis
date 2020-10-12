@@ -1,23 +1,26 @@
 \chapter{\uppercase{Data-Driven Maps and Consistent Inversion For Parameter Estimation} \label{chapter:mud}}
 
-TK - fill in. First, recall/summarize the comparisons in the introduction and that we now study the MUD as an alternative estimator to $\paramref$.
-
 The main contributions of this chapter are as follows.
 We extend the observation-consistent framework to solve problems involving epistemic uncertainties in model parameters.
 This requires constructing QoI maps in an {\em a posteriori} fashion using noisy data, which is a novel way to define QoI maps in the observation-consistent framework.
-The theory of existence, uniqueness, and convergence of maximal updated density (MUD) points are also provided for certain linear data-constructed QoI maps using typical assumptions found in the Bayesian literature.
+The theory of existence, uniqueness, and convergence of maximal updated density (MUD) points are also provided for linear data-constructed QoI maps using typical assumptions found in the Bayesian literature.
 Comparisons to other parameter estimates such as those obtained using a least-squares or Bayesian approach are also provided.
 The applicability of the approach to nonlinear data-constructed QoI maps is also numerically demonstrated for ordinary and partial differential equation models of dynamical and stationary systems.
-While there are several on-going and future research directions that are outside the scope of the current work, we do not wish to hide certain technical challenges in implementing this approach in certain scenarios.
+While there are several on-going and future research directions that are outside the scope of this thesis, we do not wish to hide certain technical challenges in implementing this approach in certain scenarios.
 We therefore address several technical challenges where appropriate to both point out these challenges as well as the heuristics we currently employ to handle these challenges.
 
 
 The rest of this chapter is outlined as follows.
-{\bf This is done last.}
+We first compare the estimators induced by the solutions to the DIP and SIP by taking the point of maximal density of the respective distributions in Section~\ref{sec:estimation}.
+There, we present closed-form derivations for the novel estimator presented in this work: the MUD point.
+In Section~\ref{sec:sec:high-dim-linear-example}, we present an example involving high-dimensional linear maps, connecting rank and dimension to the accuracy and convergence of the estimators.
+Following the example, we show in \ref{sec:data-maps} how a QoI map can be constructed from an arbitrary collection of noisy data.
+We leverage the theory of the MUD point from the earlier section to provide a general framework for reducing epistemic uncertainty in a point-estimate as more data is collected.
+Finally, in Section~\ref{sec:Parameter-identification}, we demonstrate that the presented QoI map can be used to form accurate point estimates by solving the SIP even on nonlinear maps and initial densities which violate the assumptions of the theoretical construction.
 
 \input{body.tex}
 
-\subsection{Conclusions}
+\subsection{Conclusions}\label{sec:conclusions}
 We have demonstrated that the Data-Consistent framework can be used in order to cast a parameter-identification problem.
 Much like how Hierarchical Bayesian approaches cast a distribution-estimation problem in a parameter-identification context, we have shown that the complement can also be accomplished.
 Enabled by the definition of a particular form of QoI map which can incorporate an arbitrary stream of data, we can leverage a distribution-estimation framework to solve a parameter-identification problem.
@@ -27,4 +30,4 @@ The role of the QoI was central in accomplishing this reformulation, as the dist
 In Chapter~\ref{chapter:geometry}, we study in abstract the role of $\qoi$ on the solution to the SIP in the natural context of distribution-estimation.
 We introduce measures of the QoI map's geometric properties that are directly related to our ability to accurately approximate the distribution using numerical approximation.
 Later, in Chapter~\ref{chapter:vector-valued} we leverage this new awareness of the properties of the QoI maps and connect it to the goal of parameter identification in the context of the map \eqref{eq:qoi_WME}.
-We will demonstrate that the way in which we use available data to construct $\qoi$ has a direct consequence on the accuracy of our parameter estimate as more data is incorporated.
+We will demonstrate that the way in which we use available data to construct $\qoi$ has a direct consequence on the accuracy of our parameter estimate as more data is incorporated as is hinted at by the last example above.

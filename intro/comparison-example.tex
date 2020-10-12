@@ -1,8 +1,7 @@
 \subsection{Illustrative Example}
-We note there are problems one can formulate where the observed density corresponds directly to a normalized likelihood function familiar to Bayesian statisticians, as we demonstrate below.
-One difference between $\updated$ and $\posterior$ is the use of normalizing constant $C$ in $\posterior$ not present in $\updated$, which has a function in its denominator .
-The property of $\updated$ that allows this is explained by Corollary~\ref{cor:int} below.
-To illustrate the differences in the two densities, we first explore the impact of this difference in the example below, taken from \cite{BJW18}.
+Despite the differences in the statistical interpretations, we formulate a problem where $\observed$ and $\initial$ match the forms of $L_\dspace$ and $\prior$.
+However, we still observe differences between $\updated$ and $\posterior$ due to the use of a normalizing constant $C$ in $\posterior$ and the use of $\predicted$ in $\updated$.
+We explore the impact of this difference in the example below, taken from \cite{BJW18}.
 
 %%%%%
 
@@ -17,6 +16,17 @@ For the Bayesian inverse problem, we assume $d\in \dspace$ with $d=Q(\paramref)+
 We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
 The posterior and its push-forward are also shown in Fig.~\ref{fig:bayes-comparison}.
 
+
+\begin{figure}[htbp]
+\centering
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-1.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-1.png}
+ \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
+ (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
+ \label{fig:bayes-comparison}
+\end{figure}
+
+
 While the updated and posterior densities in Fig.~\ref{fig:bayes-comparison} share certain similarities (e.g., they are uni-modal with similar locations of the mode), they are otherwise visibly distinct.
 The differences between these densities is made more evident by examining their push-forwards.
 The push-forward of the updated density agrees well with the observed density, which is to be expected.
@@ -30,27 +40,20 @@ However, the push-forward of the posterior is bi-modal and does not match the ob
 %Hierarchical Bayesian methods \cite{} extend this typical framework to problems where aleatoric uncertainties are present, but are still fundamentally developed from a  point estimation perspective.
 %Specifically, prior distributions are specified from a parametric family of distributions, such as Gaussian distributions, and the hyper-parameters used to define that family of distributions, such as the means and variances, become a focal point of estimation by the methodology.
 
-
-\begin{figure}[htbp]
-\centering
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-1.png}
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-1.png}
- \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
- (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
- \label{fig:bayes-comparison}
-\end{figure}
+\end{ex}
 
 The takeaway to the above discussion and example is that each density is solving a {\em different} inverse problem.
 The posterior density is intended to provide point estimates of a true parameter value whereas the updated density is intended to quantitatively characterize natural variations in parameter values.
-
-\end{ex}
+We reformulate the previous example to make the role of data collection more central in the follow example.
 
 \begin{ex}
-We reformulated the previous example to make the role of data collection more central.
-Specifically, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
-For the SIP, we could use the sample mean and variance of this data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution whereas the data-likelihood would involve a product of normal densities.
-We draw $S=5, 10, \text{ and}, 20$ samples to form the estimate of the mean and the likelihood function, and show the results in Figure~\ref{fig:bayes-comparison-convergence}
-In this case, the objective is to use the posterior or updated density to produce an estimate of $\paramref$.
+For the (Bayesian) Deterministic Inverse Problem, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that each datum is given by $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
+For the SIP, we use the sample mean and variance of data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution.
+The observed density and data-likelihood are significantly different from one another, especially as more data are collected.
+The data-likelihood is given by a product of normal densities.
+
+We draw $M=5, 10, \text{ and}, 20$ samples to form estimates of $\observed$ and the likelihood functions.
+We show the results in Figure~\ref{fig:bayes-comparison-convergence}.
 
 \begin{figure}[htbp]
 \centering
@@ -60,15 +63,17 @@ In this case, the objective is to use the posterior or updated density to produc
    \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-10.png}
    \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-20.png}
    \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-20.png}
- \caption{(Top to Bottom): $S=5, 10, \text{ and}, 20$ samples are used to solve the SIP and BIP for comparison. (Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
+ \caption{(Top to Bottom): $S=5, 10, \text{ and}, 20$ samples are used to solve the SIP and DIP for comparison. (Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
  (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
  \label{fig:bayes-comparison-convergence}
 \end{figure}
 
-We find that the updated distribution becomes more centered around the true parameter value $\paramref$, but the uncertainty in the estimate does not change.
-By contrast, the posterior increases in confidence alongside the likelihood function.
-This further illustrates the point made earlier: the BIP and SIP are solving fundamentally different problems (they are addressing different questions).
-As more data is incorporated, the goal of the BIP is to reduce epistemic uncertainty; for the SIP, it is aleotoric.
+For all values of $M$, the push-forward of the initial remains the same, and the push-forward of the update matches the observed.
+By contrast, the posterior increases in confidence alongside the predictions it produces.
+This further illustrates the point made earlier: the DIP and SIP are solving fundamentally different problems (they are addressing different questions).
+The mean of the updated density could be used as an estimator to address the parameter identification problem, but collecting more data does not improve confidence.
+As more data is incorporated, the goal of the DIP is to reduce epistemic uncertainty; for the SIP, it is to quantify the aleotoric uncertainty.
+
 \end{ex}
 
 
@@ -84,13 +89,14 @@ More complex densities can be approximated by mixture models.
 
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
-No such compromise is required in the Data-Consistent Inversion framework.
+No such compromise is required in the DCI framework.
 Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approach described in \cite{BE13} or \cite{BJW18}.
 
-The Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
-As a complementary line of reasoning, one can ask what it means to cast a parameter identification problem in a distribution-estimation context.
-In the next chapter, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
-Before making this connection, we must establish that the framework in which such a question is asked is rigorously defined.
-In the next section, we finish presenting the Data-Consistent Framework by summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} to the SIP.
+It is important to note that Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
+As a complementary line of reasoning, we seek to formulate a parameter identification problem in a DCI framework.
+We revisit the results with a focus on parameter estimation using $\updated$. [TK - not sure what Troy's comment here means]
+
+In Chapter~\ref{chapter:mud}, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
+Before we proceed, we finish presenting some summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} in the next section.
 
 \FloatBarrier
