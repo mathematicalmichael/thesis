@@ -269,17 +269,17 @@ The new initial curves in \ref{fig:pde-highd-alt-initial-5d}\---especially when 
 The slope of the functions considered now all only have a single sign change, a marked improvement over the two or three that many samples from \ref{fig:pde-highd-initial-5d} exhibited.
 We note that such considerations of smoothness could be avoided by parameterizing $g$ with a basis of some sort, but that problem is beyond the scope of this work.
 Another possible improvement would be to incorporate the correlation structure that is present in the three other directions, derivable from a similar SVD-based analysis of the interpolation of the 2-D predictions through the new knot locations.
-However, doing so would require more visual exploration than the authors deem worthwhile to demonstrate the point they are trying to make, which is that better initial densities improve the quality of solutions.
+% However, doing so would require more visual exploration than the authors deem worthwhile to demonstrate the point they are trying to make, which is that better initial densities improve the quality of solutions.
 
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5-alt_m100.png}
-  \includegraphics[width=0.9\linewidth]{figures/pde-highd/pde-highd-alt_comp_exmud_D5_m100.png}
-\caption{
-100 measurements for the revised five--dimensional problem yield substantially better estimates in the eyeball norm.
-}
-\label{fig:pde-highd-5d-alt-example}
-\end{figure}
+% \begin{figure}[htbp]
+% \centering
+%   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_surf_exmud_D5-alt_m100.png}
+%   \includegraphics[width=0.9\linewidth]{figures/pde-highd/pde-highd-alt_comp_exmud_D5_m100.png}
+% \caption{
+% 100 measurements for the revised five--dimensional problem yield substantially better estimates in the eyeball norm.
+% }
+% \label{fig:pde-highd-5d-alt-example}
+% \end{figure}
 
 
 \subsection{Moving to Five Dimensions with more caution}
@@ -294,7 +294,7 @@ First, we note that going from scalar-- to vector--valued resolves a significant
 Namely the QoI map appears to stop considering curves which do not have a sufficiently low minimum value.
 Second, while the vector--valued MUD solution curves appear to capture the general characteristics of $g$ well, a number of them under-estimated the value at $\lambda_5$ quite severely relative to the true value (near zero), which we saw in Figure~\ref{fig:pde-highd-5d-mud} as well.
 
-Even when only twenty measurements are incorporated into constructing the QoI maps, there is a considerable improvement in the predicted boundary conditions when using a better initial density, as seen by comparing the solutions in \ref{fig:pde-highd-5d-alt-mud-20} to \ref{fig:pde-highd-5d-mud-20} or \ref{fig:pde-highd-5d-mud}.
+Even when only twenty measurements are incorporated into constructing the QoI maps, there is a considerable improvement in the predicted boundary conditions when using a better initial density, as seen by comparing the solutions in \ref{fig:pde-highd-5d-alt-mud-20} to \ref{fig:pde-highd-5d-mud}.
 
 \begin{figure}[htbp]
 \centering
@@ -319,7 +319,7 @@ Even when only twenty measurements are incorporated into constructing the QoI ma
 \end{figure}
 \FloatBarrier
 
-Because we began with a better choice of initial density, both QoI maps resolve the residuals similarly (bottom-left of \ref{fig:pde-highd-5d-mud}), and produce qualitatively similar estimates of the response surface. We attribute this to the fact that the vector--valued samples were used to bound the space, but note the direction was informed by the scalar--valued samples.
+Because we began with a better choice of initial density, both QoI maps resolve the residuals similarly (bottom-left of \ref{fig:pde-highd-5d-alt-mud}), and produce qualitatively similar estimates of the response surface. We attribute this to the fact that the vector--valued samples were used to bound the space, but note the direction was informed by the scalar--valued samples.
 
 \subsubsection{Demonstration of Reduction in Uncertainty}
 
