@@ -12,26 +12,26 @@ To illustrate this point, we first define the linear maps
 \end{equation}
 for $S=\set{1,2,4}$ because they allow us to control the global skewness (since it is equal to local skewness in a linear map) while preserving the measures of sets between $\pspace$ and $\dspace$.
 More specifically, the support of the solution to the SIP associated with each QoI map has equal $\mu_\pspace$-measure, which isolates the impact of accuracy solely to the skewness of the QoI map.
-We show what the component row vectors of these maps in Figure~\ref{fig: skewmapvecs} and note the skewness is determined by the ratio of the magnitude of the black line to its projection onto the vertical axis (and each of these projects directly on to the unit vector).
+% We show what the component row vectors of these maps in Figure~\ref{fig: skewmapvecs} and note the skewness is determined by the ratio of the magnitude of the black line to its projection onto the vertical axis (and each of these projects directly on to the unit vector).
 The skewness of these maps is given by the index $s$, so $Q^{(1)}$ is $1$, the skewness of $Q^{(2)}$ is $2$, and $S_{Q^{(4)}} = 4$.
 
-The maps chosen for this example are expository ones that provide valuable insight despite their simplicity.
-For example, when solving many physics-based problems, local linear approximations are often used to simplify model evaluation and guide optimization procedures.
+% The maps chosen for this example are expository ones that provide valuable insight despite their simplicity.
+% For example, when solving many physics-based problems, local linear approximations are often used to simplify model evaluation and guide optimization procedures.
 
-
-\begin{figure}[h]
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=\linewidth]{./images/vector_a.png}
-	\end{minipage}
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=\linewidth]{./images/vector_b.png}
-	\end{minipage}
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=\linewidth]{./images/vector_c.png}
-	\end{minipage}
-\caption{(Left to right):  The component row-vectors of $Q^{(1)}$, $Q^{(2)}$, and $Q^{(4)}$. Our linear maps take $\RR^2$ to $\RR^2$ and can be visualized graphically as the component row-vectors of the matrices representing the transformation. The first row is highlighted in blue. The skewness is then simply equal to the reciprocal of the inverse sine of the angle between these vectors. }
-\label{fig: skewmapvecs}
-\end{figure}
+%
+% \begin{figure}[h]
+% 	\begin{minipage}{.3\textwidth}
+% 		\includegraphics[width=\linewidth]{./images/vector_a.png}
+% 	\end{minipage}
+% 	\begin{minipage}{.3\textwidth}
+% 		\includegraphics[width=\linewidth]{./images/vector_b.png}
+% 	\end{minipage}
+% 	\begin{minipage}{.3\textwidth}
+% 		\includegraphics[width=\linewidth]{./images/vector_c.png}
+% 	\end{minipage}
+% \caption{(Left to right):  The component row-vectors of $Q^{(1)}$, $Q^{(2)}$, and $Q^{(4)}$. Our linear maps take $\RR^2$ to $\RR^2$ and can be visualized graphically as the component row-vectors of the matrices representing the transformation. The first row is highlighted in blue. The skewness is then simply equal to the reciprocal of the inverse sine of the angle between these vectors. }
+% \label{fig: skewmapvecs}
+% \end{figure}
 
 
 \begin{figure}
@@ -61,8 +61,11 @@ $6400$ & $2.76E-02$ & $3.86E-02$ & $5.54E-02$\\ \hline
 \end{figure}
 
 We see in Figure~\ref{fig:M1_2d} that skewness has a very direct impact on the number of samples required to achieve a particular value for the Total Variation distance.
-We can see that the measure induced by $Q^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $Q^{(2)}$ does.
+By comparing adjacent columns in the table, it appears that if the ratio of skewness between two maps is 2, then the more-skewed map will require at least twice as many random samples to approximate the set on a a well-resolved discretization with the same error tolerance.
+We observe that the measure induced by $Q^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $Q^{(2)}$ does.
 The effect is even more pronounced when compared against $Q^{(4)}$.
-It appears that if the ratio of skewness between two maps is 2, then the more-skewed map will require at least twice as many random samples to approximate the set on a a well-resolved discretization with the same error tolerance.
 
-This provides a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}, where it was demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\mu_\pspace$-measure of the {\em symmetric difference} of the inverse sets.
+The fact we can achieve the same accuracy with fewer model evaluations provides a strong motivation for minimizing skewness and reinforces the results from \cite{BPW_2015}.
+There, it was demonstrated that a similar relationship existed in the number of samples required to remove error in inverse set approximations quantified by the $\mu_\pspace$-measure of the {\em symmetric difference} of the inverse sets.
+Rather than study the support of the distributions as was the focus in \cite{BPW_2015}, we turn our attention to a formal measure of accuracy for the densities or measures involved in the solution to the SIP.
+We have shown that the skewness has an impact not only on the symmetric difference error, but also on the approximation error as measured by Total Variation.
