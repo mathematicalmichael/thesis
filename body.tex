@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We define the maximal updated density (MUD) point as
+We formally define the maximal updated density (MUD) point as
 \begin{equation}\label{eq:mudpt_inital_defn}
 	\mudpt := \argmax {\updated}(\param).
 \end{equation}
@@ -70,11 +70,11 @@ Mathematically, this occurs when the smallest eigenvalue value of $\predictedCov
 
 When $\observedCov$ is non-degenerative (i.e., the smallest eigenvalue is positive), the predictability assumption can always be satisfied if $d\leq p$ and $A$ is full rank by choosing $\initialCov$ to have sufficiently large eigenvalues (i.e., if we choose initial variances to be sufficiently large).
 To simplify the theoretical presentation of this section, we assume these conditions are met so that the predictability assumption holds and $\updated$ does in fact define a density.
-However, in Section~\ref{sec:high-dim-linear-example}, we still compute the formal MUD point for a high-dimensional example involving rank-deficient $A$ to demonstrate the overall usefulness of the MUD point even in situations where $\predicted$ may fail to be an actual density.
+However, in Section~\ref{sec:high-dim-linear-example}, we still compute the formal MUD point for a high-dimensional example involving rank-deficient $A$ to demonstrate the overall usefulness of the MUD point even in situations where $\updated$ may fail to be an actual density.
 
 With these assumptions, the parameters that maximize the posterior and updated densities are easily described as the arguments that minimize certain quadratic functionals.
 Specifically, Table~\ref{tab:func_comparisons} presents a scaling of these functionals defined by the negative logarithm of the associated posterior and updated densities.
-Note that the functional, $T(\param)$, obtained from the posterior density is immediately identified as the typical functional used in Tikhonov regularization.
+Note that the functional, $T(\param)$, obtained from the posterior density is immediately identified as the typical functional used in Tikhonov regularization \citep{Tarantola_book}.
 The data-mismatch term defined by
 \begin{equation*}
 	\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2
@@ -89,10 +89,10 @@ However, the functional, $J(\param)$, obtained from the updated density is writt
 \begin{equation*}
 	 \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2
 \end{equation*}
-comes from the {\em predicted} density.
+comes from the predicted density.
+\vfill
 
-\subsection{A low-dimensional example}\label{subsec:low-d-example}
-
+\subsection{A Low-Dimensional Example}\label{subsec:low-d-example}
 To build intuition around the fundamental differences of MAP and MUD points, we consider an example where the linear QoI map is defined by $A=\mat{cc}{1 & 1}$, i.e., the parameter space is 2-dimensional while the data space is 1-dimensional.
 The parameters in the initial and observed densities are given by
 \[
@@ -331,7 +331,7 @@ We consider QoI defined by $A\param+\mathbf{b}$ for $A\in\RR^{k\times 100}$ wher
 To generate the matrices, we first generate $10,000$ independent identically distributed (i.i.d.) random numbers from a $N(0,1)$ distribution that are arranged into a reference $\RR^{100\times 100}$ matrix.
 
 The same distribution is also used for generating the components of the 100-dimensional vectors defining a reference bias vector $\mathbf{b}$ and reference parameter $\paramref$.
-A multivariate Gaussian distribution is used for the initial density, with zero mean and $\initialCov$ chosen as a diagonal covariance with random entries drawn from $U[0.5, 1.5]$ and sorted in descending order.%\footnote{A random seed of $271$ is used so that the covariance in this example matches that in the following, where we perform a similar study but vary the row-rank of $A$ instead of the dimension.}
+A multivariate Gaussian distribution is used for the initial density, with zero mean and $\initialCov$ chosen as a diagonal covariance with random entries drawn from $U[0.5, 1.5]$ and sorted in descending order. %\footnote{A random seed of $271$ is used so that the covariance in this example matches that in the following, where we perform a similar study but vary the row-rank of $A$ instead of the dimension.}
 %We then attempt to recover $\paramref$ with the three solution methods: MUD, MAP, and Least Squares, leveraging analytical solutions for all three since we have posed a linear problem under Gaussian assumptions.
 The prior density is also a zero mean multivariate Gaussian distribution.
 However, to demonstrate the impact of the strength of prior beliefs on the MAP point, we choose the prior covariance to be $\alpha\initialCov$  for $\alpha=0.001, 0.01, 0.1, $ and $10$.
@@ -549,7 +549,7 @@ The right plot demonstrates that the precision (i.e., the variance in the error)
 These results are also visualized in the plots of Figure~\ref{fig:ode-reference} where the distinct red curves in the top plot are the signals associated with the 20 $\mudpt$ estimates associated with the 20 independent trials of $N=20$ noisy measurements.
 However, in the bottom plot, these 20 red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
 
-\FloatBarrier
+% \FloatBarrier
 \subsection{PDE Example}\label{subsec:pde-example}
 
 In this problem, the uncertain model parameter is now described by an unknown function defining the boundary data to a stationary PDE.
@@ -568,7 +568,7 @@ Consider the Poisson problem:
 \end{cases}
 \end{equation}
 where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain; $\Gamma_T$, $\Gamma_B$, $\Gamma_L$, and $\Gamma_R$, denote the top, bottom, left, and right boundaries of this domain, respectively, and $\frac{\partial u}{\partial \mathbf{n}}$ denotes the usual outward normal derivative.
-The forcing function $f$ is taken to be $10\exp{\norm{x - 0.5}^2 / 0.02}$.
+The forcing function $f$ is taken to be $10\exp\left ( \norm{x - 0.5}^2 / 0.02 \right )$.
 
 Here, we assume that $g(x_2)$ is unknown, and the goal is to use noisy data to estimate this unknown boundary data.
 In other words, the parameter $\param$ now represents an uncertain function.
