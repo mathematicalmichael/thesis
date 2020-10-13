@@ -9,7 +9,7 @@ We formally define the maximal updated density (MUD) point as
 	\mudpt := \argmax {\updated}(\param).
 \end{equation}
 We motivate the use of the MUD point as an alternative to the MAP point for parameter estimation problems.
-In this section, we assume linear (or affine) QoI maps with Gaussian distributions, which are often used in the UQ literature for providing a common framework for comparing methods and their solutions.
+In this section, we assume linear (or affine) QoI maps with Gaussian distributions, which are often used in the UQ literature to provide a common framework for comparing methods and their solutions.
 
 This section is structured into several subsections to help focus the interpretations and results.
 In Section~\ref{subsec:Motivation}, we present some useful details, notation, and terminology used for this comparison framework.
@@ -26,23 +26,6 @@ These results are summarized in a theorem of existence and uniqueness of the MUD
 %{\bf Regularization/deterministic optimization connections.
 %The type of problem is now different involving parameter identification under uncertainty}
 
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{|c|c|}
-\hline
-  & \\
-  Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
-      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$
-  \\ & \\ \hline & \\
-  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$
-  \\ & \\
-  \hline
-\end{tabular}
-\caption{Functionals to minimize to obtain $\param$ that maximizes  the updated PDF (left) and the Bayesian posterior PDF (right).
-Here, $T(\param)$ is the typical functional often associated with Tikhonov regularization, and the $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
-  \label{tab:func_comparisons}
-\end{table}
 
 Let $\norm{\mathbf{x}}_C^2 := (\mathbf{x}, \mathbf{x})_C = \mathbf{x}^T C \mathbf{x} $ denote the square of the induced norm associated with a positive-definite operator $C : \RR^n \to \RR^n$ and the usual (Euclidean) inner product.
 In what follows, the inverse covariances associated with non-degenerative multivariate Gaussian distributions will play the role of $C$.
@@ -72,10 +55,30 @@ When $\observedCov$ is non-degenerative (i.e., the smallest eigenvalue is positi
 To simplify the theoretical presentation of this section, we assume these conditions are met so that the predictability assumption holds and $\updated$ does in fact define a density.
 However, in Section~\ref{sec:high-dim-linear-example}, we still compute the formal MUD point for a high-dimensional example involving rank-deficient $A$ to demonstrate the overall usefulness of the MUD point even in situations where $\updated$ may fail to be an actual density.
 
-With these assumptions, the parameters that maximize the posterior and updated densities are easily described as the arguments that minimize certain quadratic functionals.
-Specifically, Table~\ref{tab:func_comparisons} presents a scaling of these functionals defined by the negative logarithm of the associated posterior and updated densities.
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+  & \\
+  Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
+      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$
+  \\ & \\ \hline & \\
+  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$
+  \\ & \\
+  \hline
+\end{tabular}
+\caption{Functionals to minimize to obtain $\param$ that maximizes  the updated PDF (left) and the Bayesian posterior PDF (right).
+Here, $T(\param)$ is the typical functional often associated with Tikhonov regularization, and the $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
+  \label{tab:func_comparisons}
+\end{table}
+
+
+With these assumptions, the parameters that maximize the posterior and updated densities are described as the arguments that minimize certain quadratic functionals.
+Table~\ref{tab:func_comparisons} presents a scaling of these functionals defined by the negative logarithm of the associated posterior and updated densities.
 Note that the functional, $T(\param)$, obtained from the posterior density is immediately identified as the typical functional used in Tikhonov regularization \citep{Tarantola_book}.
-The data-mismatch term defined by
+
+The data-mismatch term given by
 \begin{equation*}
 	\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2
 \end{equation*}
@@ -85,19 +88,25 @@ comes from the data-likelihood/observed density whereas the regularization term 
 \end{equation*}
 comes from the prior/initial density.
 We refer to this term as the Tikhonov regularization term.
-However, the functional, $J(\param)$, obtained from the updated density is written as a modification of the $T(\param)$ function where the subtraction of
+
+The functional, $J(\param)$, obtained from the updated density is written as a modification of the $T(\param)$ function where the subtraction of
 \begin{equation*}
 	 \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2
 \end{equation*}
 comes from the predicted density.
-\vfill
 
+\vfill
+\pagebreak
 \subsection{A Low-Dimensional Example}\label{subsec:low-d-example}
 To build intuition around the fundamental differences of MAP and MUD points, we consider an example where the linear QoI map is defined by $A=\mat{cc}{1 & 1}$, i.e., the parameter space is 2-dimensional while the data space is 1-dimensional.
-The parameters in the initial and observed densities are given by
+
+In this example, the parameters in the initial and observed densities are given by
 \[
 	\initialMean = \mat{cc}{0.25 & 0.25}^\top, \initialCov = \mat{cc}{1 & -0.25 \\ -0.25 & 0.5}, \ \observedMean=1, \text{ and } \observedCov = \mat{c}{0.25}.
 \]
+
+The top row of Fig.~\ref{fig:regularization} shows contour plots in the parameter space for the data-mismatch term (left), Tikhonov regularization term (middle), as well as the functional $T(\param)$ (right).
+Conceptually, the regularization term is a radially symmetric function that penalizes parameters that are far away from the initial mean.
 
 \begin{figure}
   \centering
@@ -129,17 +138,13 @@ The parameters in the initial and observed densities are given by
   \label{fig:regularization}
 \end{figure}
 
-
-The top row of Fig.~\ref{fig:regularization} shows contour plots in the parameter space for the data-mismatch term (left), Tikhonov regularization term (middle), as well as the functional $T(\param)$ (right).
-Conceptually, the regularization term is a radially symmetric function that penalizes parameters that are far away from the initial mean.
-
 The bottom row of Fig.~\ref{fig:regularization} shows contour plots in the parameter space for the data-mismatch term (left), modified regularization term (middle), as well as the functional $J(\param)$ (right).
 Here, we see that the modified regularization term only penalizes the movement of parameters in certain directions away from the initial parameter mean.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{A unifying perspective and closed form solutions}\label{subsec:unifying-perspective}
+\subsection{A Unifying Perspective and Closed Form Solutions}\label{subsec:unifying-perspective}
 
 Assume that the QoI map, $Q$, now takes the slightly more general form
 \begin{equation}\label{eq:qoi_map}
@@ -202,7 +207,7 @@ We therefore first substitute  $\Sigma_\text{post}$ and $\initialCov^{-1}$ in~\e
 	\updatedCov := \left(A^\top \observedCov^{-1} A + R\right)^{-1}.
 \end{equation}
 Since $R$ is not invertible, Woodbury's identity cannot be applied (yet).
-Using~\eqref{eq:eff_reg}, we rewrite this as
+Using~\eqref{eq:eff_reg}, we can form
 \begin{equation}
 	\updatedCov = \left(A^\top \observedCov^{-1} A +  \initialCov^{-1} - \nolinebreak A^\top \predictedCov^{-1} A\right)^{-1},
 \end{equation}
