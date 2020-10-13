@@ -41,18 +41,23 @@ We begin with defining the types of forward and inverse problems considered in t
 \end{defn}
 
 \begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
-  Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that is absolutely continuous with respect to volume measure $\dmeas$, the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$, absolutely continuous with respect to $\pmeas$, satisfying
+  Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$ satisfying
   \begin{equation}\label{eq:inverse-problem}
-    \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
+    \PP_\pspace (\qoi^{-1}(E)) = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
   \end{equation}
 
-  \noindent Here,
+  \noindent Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
+  If $\PP_\pspace$ or $\PP_\dspace$ are absolutely continuous with respect to $\pmeas$, $\dmeas$, respectively, then we write
 
   \begin{equation*}
     \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ and }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
   \end{equation*}
   denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, respectively.
-  Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
+  In such a acase, we can rewrite \ref{eq:forward-problem} and \ref{eq:inverse-problem} using these pdfs. For example, here is a variant of \ref{eq:inverse-problem} using these pdfs:
+
+  \begin{equation*}
+  \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace
+  \end{equation*}
 \end{defn}
 
 \subsubsection{The Stochastic Inverse Problem (SIP)}
