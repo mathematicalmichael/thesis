@@ -180,7 +180,7 @@ Using this $R$, rewrite $J(\param)$ as
 \begin{equation}\label{eq:dci-objective-alt}
 J(\param):= \norm{\observedMean - Q(\param)}_{\observedCov^{-1}}^2 + \norm{\param - \param_0}_{R}^2.
 \end{equation}
-In this form, we identify $R$ as the {\em effective regularization} in $J(\param)$ due to the formulation in the observation-consistent framework.
+In this form, we identify $R$ as the {\em effective regularization} in $J(\param)$ due to the formulation in the data-consistent framework.
 
 
 Observe that if $d=p$, then, by the assumption that $A$ is full-rank, $A$ is invertible.
@@ -269,7 +269,7 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 %The LS solution will lie at the intersection of hyper-balls centered at the origin and the set-valued hyperplanes associated with $Q^{-1}(\observedMean)$, which is visible in Figure~\ref{fig:regularization} in 2-dimensions.
 
 %By contrast, the Tikhonov-regularized solution selects a point that is biased by an initial covariance on $\Lambda$.
-%The observation-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
+%The data-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
 %The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\paramref$.
 
 %There may or may not be good reasons for us to impose a requirement on the norm of the solution.
@@ -282,7 +282,7 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 %Below we demonstrate with a pair of complementary examples involving linear maps which leverage the analytical equations presented in the previous section.
 %We show that regardless of how well-informed your beliefs are, the convergence rate of the MUD solutions as more data is incorporated\---either by dimension or rank)\---will match those of the Least-Squares solutions.
 %Moreover, the MUD solutions are not sensitive to scaling of the initial covariance (how strongly initial beliefs are held), the way that the MAP solution is.
-%This provides a strong motivating factor for the consideration of the observation-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
+%This provides a strong motivating factor for the consideration of the data-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
 
 %\subsection{MUD and MAP points and generalized contours}\label{subsec:gen_contours}
 

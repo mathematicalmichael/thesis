@@ -41,12 +41,12 @@ We summarize again that the MUD point is not impacted by such a scaling of the i
 Not only is it robust to the specification of prior assumptions, but it manages to offer the flexibility of such specifications without paying the additional cost of hyper-parameter optimization that would be required for the Tikhonov solution to achieve comparable results; any choice of $\alpha$ would have sufficed.
 
 By contrast, the Tikhonov-regularized solution selects a point that is biased in directions defined by the initial density (covariance).
-The observation-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
+The data-consistent solution is an update to the initial mean in this same direction but always lies on the contour $Q^{-1}(\observedMean)$.
 The trouble is, none of these regularization approaches actually guarantee that in under-determined problems, the unique solutions that are selected are close to $\paramref$.
 
 We show that regardless of how well-informed your beliefs are, the convergence rate of the MUD solutions as more data is incorporated\---either by dimension or rank)\---will match those of the Least-Squares solutions.
 Moreover, unlike MAP solutions, the MUD point is not sensitive to scaling of the initial covariance (how strongly initial beliefs are held).
-This insensitivity provides a strong motivating factor for the consideration of the observation-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
+This insensitivity provides a strong motivating factor for the consideration of the data-consistent approach within the standard set of solution methods available to scientists and modelers who seek to perform parameter-identification.
 We leave the investigation of more connections to the removal of hyper-parameter estimation to future work.
 
 [TK - can put example here about MCMC extensions, sequence of problems with resampling from updated densities. Have a notebook's worth of results with the Rosenbrock]
