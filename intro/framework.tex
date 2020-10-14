@@ -121,7 +121,7 @@ In order to ensure that $\updated$ is in fact a density, a predictability assump
 A practical form of the predictability assumption is that there exists a constant $C>0$ such that $\observed(q)\leq C\predicted(q)$ for $\text{ a.e} q\in\dspace$.
 Conceptually, we interpret the predictability assumption as stating that we are able to predict the observed data.
 This also helps to frame the special role of $\initial$ in the SIP compared to the role of the prior density used in the Bayesian inverse problem that is discussed below.
-Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular observation-consistent solution.
+Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) define a particular data-consistent solution.
 
 
 %%%%%%%%%%%%%%%%%%%
@@ -129,7 +129,7 @@ Specifically, $\initial$ allows us to perform (1) robust predictions, and (2) de
 
 \subsubsection{The Deterministic Inverse Problem (DIP)}
 A typical Bayesian approach to an inverse problem focuses on first modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, which we denote by $\paramref$.
-This is in contrast to the SIP and its observation-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
+This is in contrast to the SIP and its data-consistent solutions that are defined as pullback measures of an observed probability measure on the QoI.
 To make the distinction between the two approaches more clear, we introduce the following two definitions to frame the problems addressed by the Bayesian framework:
 
 
@@ -150,7 +150,7 @@ To make the distinction between the two approaches more clear, we introduce the 
 
 In the above definition, $\xi$ is some unobservable perturbation to the true output, arising from epistemic uncertainty (e.g. the precision of available measurement equipment).
 The Bayesian inversion framework  is perhaps the most popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
+As mentioned in the introduction, the data-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
  Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
  0266-5611-30-11-110301, ROM:CMW_2016,Stuart10,

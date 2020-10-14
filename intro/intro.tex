@@ -20,14 +20,14 @@ Component properties define a sample space (the set of all possible outcomes), a
 Scalar-valued model parameters associated with component properties defines a random vector (i.e., a measurable function) from this probability space of components into the parameters required by the model.
 Subsequently, the mapping from parameters to observable model outputs defines what we refer to as a Quantities of Interest (QoI) map.
 Observation of a probability measure on the range of the QoI map leads to the formulation of a stochastic inverse problem (SIP), where the goal is to pullback the observed probability measure onto the space of parameters.
-Conceptually, a pullback measure is observation-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
+Conceptually, a pullback measure is data-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
 
-While it is possible to construct explicit approximations to observation-consistent measures in terms of estimating measurable events and their probabilities in the parameter space (e.g., see \cite{BET+14}), such ``set-based'' approximations become computationally intractable for high-dimensional parameter spaces or geometrically complex and/or computationally expensive QoI maps.
+While it is possible to construct explicit approximations to data-consistent measures in terms of estimating measurable events and their probabilities in the parameter space (e.g., see \cite{BET+14}), such ``set-based'' approximations become computationally intractable for high-dimensional parameter spaces or geometrically complex and/or computationally expensive QoI maps.
 A recently developed density-based approach [TK - fix citations]\cite{BJW18a, BJW18b, BWY20} solves the SIP in a novel way by first solving a stochastic forward problem (SFP).
 Specifically, an {\em initial} probability measure is first specified on the parameters to encode any prior knowledge of parameter variability.
 Then, a SFP is solved where the push-forward of the initial probability measure is used to define a {\em predicted} probability measure on the QoI.
 The discrepancy between the predicted and {\em observed} probability measures on the QoI, expressed as a ratio of probability density functions (more generally, Radon-Nikodym derivatives), is then used to {\em update} the initial probability density.
-The {\em updated} probability measure associated with this density is then observation-consistent.
+The {\em updated} probability measure associated with this density is then data-consistent.
 Moreover, the updates to the initial probability measure only occur in directions informed by the QoI.
 In other words, the initial probability measure serves to regularize the space of all pullback measures solving the SIP to produce a unique solution.
 
