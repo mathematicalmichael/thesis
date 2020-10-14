@@ -30,11 +30,11 @@ where $\xi$ is a random variable used to model the measurement error that is oft
 Then, the data-likelihood function, often written as a conditional density, $L_\dspace(\q \, |\, \param)$, is formed.
 This describes the differences in relative likelihoods that the data could have been generated from a particular $\param$.
 Ideally, the largest values of $L_\dspace(\q \, | \, \param)$ occur whenever $\param$ is a close approximation of the true parameter $\paramref$.
-The data-likelihood function is distinct from the observed density used in the observation-consistent framework.
+The data-likelihood function is distinct from the observed density used in the data-consistent framework.
 
 The next step in constructing a Bayesian inverse problem is the specification of a prior density denoted by $\pi_\text{prior}(\param)$.
 The prior describes the different relative likelihoods assumed for the true parameter before data are collected.
-This is also distinct from the role of the {\em initial} density used in the observation-consistent framework.
+This is also distinct from the role of the {\em initial} density used in the data-consistent framework.
 % We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
 
 The posterior density (i.e., the formal solution to the Bayesian inverse problem) is given by a conditional density, denoted by $\pi_\text{post}(\param\, | \, d)$, proportional to the product of the prior and data-likelihood function \citep{Walpole, Berger, Complete, Smith}.
@@ -101,7 +101,7 @@ Then, for any $\param\in C_\q$, we immediately have $\updated(\param)=r(\q)\init
 By contrast, while the posterior does not have to agree with the prior in any direction in parameter space, the prior does impact the structure of the posterior in all directions.
 
 The previous paragraph is not\---and should not be interpreted as\---a criticism of the Bayesian inverse framework.
-It is simply meant to highlight that the observation-consistent and Bayesian frameworks formulate and solve inverse UQ problems from different perspectives and with different (although at times seemingly compatible) assumptions.
+It is simply meant to highlight that the data-consistent and Bayesian frameworks formulate and solve inverse UQ problems from different perspectives and with different (although at times seemingly compatible) assumptions.
 Consequently, the solutions for an inverse problem formulated under either framework may differ significantly.
 As the example (adopted from \cite{BJW18a, BJW18b}) below demonstrates, this is true even if we arbitrarily force the inverse problems to appear as similar as possible.
 
