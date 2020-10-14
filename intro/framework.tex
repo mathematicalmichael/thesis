@@ -83,7 +83,7 @@ However, there are many applications of interest where $\qoi$ fails to be a bije
 %%%%%%%%%%%%%%%%%%%
 
 Therefore, we do not generally expect that there is a unique $\mathbb{P}_\pspace$ solving the SIP in Definition~\ref{defn:inverse-problem}, but rather there is a class of pullback measures that solve the SIP.
-In \cite{BET+14}, a disintegration theorem \cite{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
+In \cite{BET+14}, a disintegration theorem \citep{Chang_Pollard} along with an ansatz is used to establish the existence of solutions to the SIP that are unique up to the choice of ansatz.
 An algorithm is provided in \cite{BET+14} for explicitly approximating pullback measures by applying a specified ansatz to approximations of contour events, i.e., approximations of $Q^{-1}(E_i)$ where $\set{E_i}_{i\in\mathcal{I}}$ is a partitioning of $\dspace$ according to some (finite) index set $\mathcal{I}$.
 In \cite{BJW18a}, a density-based approach is presented that is computationally simpler to implement, and scales well with increasing parameter dimension
 % The solution to the SIP presented there is a direct inversion of a SFP; we introduce the following definitions to connect the result to general forms presented in \ref{defn:forward-problem} and \ref{defn:inverse-problem}:
@@ -155,10 +155,10 @@ To make the distinction between the two approaches more clear, we introduce the 
 
 In the above definition, $\xi$ is some unobservable perturbation to the true output, arising from epistemic uncertainty (e.g. the precision of available measurement equipment).
 The Bayesian inversion framework  is perhaps the most popular approach in the UQ community for incorporating uncertainties in inverse solutions.
-As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \cite{0266-5611-7-5-003,
- Kennedy_O_JRSSSB_2001,Tarantola_book, MNR07, CDS10,starktenorio,
+As mentioned in the introduction, the observation-consistent framework developed in \cite{BJW18a, BJW18b, BWY20} is designed to quantify aleatoric sources of uncertainty while the typical Bayesian framework \citep{0266-5611-7-5-003,
+ Kennedy_O_JRSSSB_2001, MNR07, CDS10, starktenorio,
  AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
- 0266-5611-30-11-110301, ROM:CMW_2016, Stuart_Bayesian,
+ 0266-5611-30-11-110301, ROM:CMW_2016, Stuart10,
  cockayneoatessullivangirolami} is designed to quantify epistemic sources of uncertainty.
 These conceptual differences have significant impacts on the solutions to inverse problems formulated within these distinctive frameworks.
 % To help build intuition about these differences, we summarize key details about the SIP and its solution before presenting an example that highlights differences in solutions.

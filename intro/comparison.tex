@@ -5,8 +5,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % The Bayesian framework poses a different question and seeks a different answer than the Data-Consistent one.
-The objective of the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \cite{Smith, Concrete, Complete}.
-The philosophical underpinnings of Bayesian inference is akin to the asking following:
+The objective of the Bayesian approach is to determine a single ``true'' parameter that explains all of the observed data \citep{Smith, Concrete, Complete, Stuart10, Tarantola_book}.
+The philosophical underpinnings of Bayesian inference is akin to asking the following:
 
 \begin{center}
   \emph{How does one incorporate collected data to shift prior beliefs about specific parameter values?}
@@ -38,7 +38,6 @@ This is also distinct from the role of the {\em initial} density used in the obs
 % We choose them to represent the set of feasible parameters, and rely on Monte-Carlo sampling for both approaches\footnote{Priors in Bayesian inference are sometimes chosen for reasons related to Markov-Chain Monte-Carlo algorithms in order to ensure their balancing of investigation and exploration, or convergence [TK - cite someone]}.
 
 The posterior density (i.e., the formal solution to the Bayesian inverse problem) is given by a conditional density, denoted by $\pi_\text{post}(\param\, | \, d)$, proportional to the product of the prior and data-likelihood function \citep{Walpole, Berger, Complete, Smith}.
-
 In other words,
 \begin{equation*}
 	\posterior(\param\, | \, \q) \propto \prior(\param)L_\dspace(\q\, | \, \param)
@@ -46,7 +45,7 @@ In other words,
 This form of the density follows from Bayes' rule (not from the Disintegration Theorem as with the updated density).
 The posterior can be interrogated to assess the difference in relative likelihoods of a fixed parameter given the observed data.
 Subsequently, the posterior is often used to produce a ``best'' estimate of the true parameter.
-For example, the maximum a posterior (MAP) point is the parameter that maximizes the posterior density.
+For example, the maximum a posteriori (MAP) point is the parameter that maximizes the posterior density.
 
 Unlike the updated density, the posterior is often interrogated indirectly without knowledge of the normalizing constant $C$ required to represent it as a density.
 In other words, the posterior is a density of the form
@@ -55,10 +54,8 @@ In other words, the posterior is a density of the form
     \posterior\lam := \prior\lam \frac{L_\dspace (\q | \param)}{ C },
 \end{equation}
 
-where we use $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
-
-
-where the denominator $C$ is a normalizing constant (known as the \emph{evidence} \cite{Smith}), which ensures the posterior density integrates to one:
+\noindent where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
+There, the denominator $C$ (known as the \emph{evidence} \cite{Smith}), ensures the posterior density integrates to one, and is given by
 \[
 C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 \]
@@ -67,7 +64,7 @@ Note that there are no constraints or requirements that likelihood function be a
 In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\prior(\param) L_\dspace (\q | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
 In other words, $L_\dspace (\q | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data.
 As stated above, $L_\dspace (\q | \param)$ is used to assess the relative likelihood that a single parameter $\param\in\pspace$ explains the observed data, whereas $\observed(\q)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
-In the Bayesian framework, there is a different notion of consistency of solutions, referring to certain asymptotic properties of $\posterior$ in the limit of infinite data \cite{Barron, Silverman}.
+In the Bayesian framework, there is a different notion of consistency of solutions, referring to certain asymptotic properties of $\posterior$ in the limit of infinite data \citep{Barron, Silverman, starktenorio}.
 
 
 
@@ -78,7 +75,7 @@ In the Bayesian framework, there is a different notion of consistency of solutio
 We summarize the posterior and updated densities side-by-side in Table~\ref{tab:dens_comparisons} and comment on a few notable aspects not mentioned above.
 Observe for the posterior density that the data-likelihood function appears in both the numerator and denominator.
 In particular, the data-likelihood function informs the {normalizing constant}, commonly referred to as the evidence term, in the denominator.
-This is in contrast to the denominator of the updated density, which is given by the predicted density, which is in general not a constant, and can be constructed independently of $\observed$
+This is in contrast to the denominator of the updated density, which is given by the predicted density, which is in general not a constant, and can be constructed independently of $\observed$.
 
 \begin{table}[htbp]
 \centering
