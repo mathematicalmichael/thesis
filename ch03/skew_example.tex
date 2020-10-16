@@ -1,6 +1,6 @@
 %%%% 2D Skewness Example %%%%%%
 \subsection{Impact of Skewness on Accuracy}\label{ex:skewness}
-In this example, we demonstrate the key point of this study: the magnitude of skewness between QoI impacts accuracy by orders of magnitude, and thus in optimizing the choice of a QoI map, it is in our interest to pursue the minimization of skewness.
+In this example, we demonstrate the key point of this study: the magnitude of skewness between QoI maps impacts accuracy by orders of magnitude, and thus in optimizing the choice of a QoI map, it is in our interest to pursue the minimization of skewness.
 This is especially true in problems where the number of random samples we are permitted to use is constrained by the computational cost of model evaluations.
 
 %Thus, any map can be thought of as a piecewise-defined linear map, and the results we present in this example, while applying to all of $\pspace$ in these cases, can be applied solely to the support of each local linear approximation.
@@ -56,11 +56,11 @@ $6400$ & $2.76E-02$ & $3.86E-02$ & $5.54E-02$\\ \hline
 \begin{minipage}{.45\textwidth}
 		\includegraphics[width=\linewidth]{./images/Plot-reg_BigN_40000_reg_M_1_rand_I_100000}
 \end{minipage}
-\caption{The results of $d^2_H(\PP_{\pspace, M, N}, \PP_{\pspace,\bar{N}})$.}
+\caption{The results of $d^2_\text{TV}(\PP_{\pspace, M, N}, \PP_{\pspace,\bar{N}})$.}
 \label{fig:M1_2d}
 \end{figure}
 
-We see in Figure~\ref{fig:M1_2d} that skewness has a very direct impact on the number of samples required to achieve a particular value for the Total Variation distance.
+The displaced horizontal lines and accompanying table in Figure~\ref{fig:M1_2d} demonstrate that skewness has a direct impact on the number of samples required to achieve a particular value for the Total Variation distance.
 By comparing adjacent columns in the table, it appears that if the ratio of skewness between two maps is 2, then the more-skewed map will require at least twice as many random samples to approximate the set on a a well-resolved discretization with the same error tolerance.
 We observe that the measure induced by $Q^{(1)}$ requires fewer than half the number of samples to be as accurately resolved as $Q^{(2)}$ does.
 The effect is even more pronounced when compared against $Q^{(4)}$.

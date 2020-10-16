@@ -44,7 +44,7 @@ Since $n$ is small in the numerical examples shown here, we chose $N_{\text{ref}
 %\item[[3]] For every trial $T$ and $N$ value (including $\bar{N}$), the reference parameter $\lambda = (\lambda_1, \lambda_2) = (0.5, 0.5)$ is mapped by $Q$ to $\dspace_\qoi = Q(\pspace)$.
 %\item[3] A uniform distribution with support $[Q(\lambda_1) - 0.05, Q(\lambda_1) + 0.05] \times [Q(\lambda_2) - 0.05, Q(\lambda_2) + 0.05]$ is defined on $\dspace_\qoi$, representing equal uncertainty in each component of our measured functional values.
 \item[[2]] Solve the SIPs using Algorithm~\ref{alg:inv_density} to construct $\set{\PP_{\pspace,M,N}^{(n)}}_{n=1}^{50}$.
-\item[[3]] Use $1E5$ i.i.d.~random samples in the Monte Carlo step of Algorithm~\ref{alg:hellinger_disc} to estimate $\set{d_H^2( \PP_{\pspace,M,N}^{(n)}, \PP_{\pspace,\bar{N}})}_{n=1}^{50}$.
+\item[[3]] Use $1E5$ i.i.d.~random samples in the Monte Carlo step of Algorithm~\ref{alg:totvar_disc} to estimate $\set{d_H^2( \PP_{\pspace,M,N}^{(n)}, \PP_{\pspace,\bar{N}})}_{n=1}^{50}$.
 \item[[4]] Average over all trials $n$ for each $N$ to estimate the {\em expected} Total Variation distance for $N$ samples and analyze convergence to $\PP_{\pspace,\bar{N}}$.
 \item[[5]] Repeat steps [0-a]--[4] for each $\qoi\in\qspace$ under consideration.
 \end{itemize}
