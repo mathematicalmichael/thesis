@@ -1,27 +1,6 @@
 \section{Alternative Perspective on SIP Solutions in Example}\ref{app:pde-example}
-To further underscore the impact of incorporating the extra dimension of information in the data space and the impact it has on the reduction of uncertainty, we turn the reader's attention to Fig.~\ref{fig:pde-highd-2d-scatter}.
-Recall from \ref{subsec:pde-example} that two maps were used to solve the SIP: $\qoi^{1D}$ and $\qoi^{2D}$, and MUD points were shown for twenty realizations of noise for each in Figure~\ref{fig:pde-convergence}.
-In this figure, we use the updated densities from a solution to the SIP from each of $\qoi^{1D}$ and $\qoi^{2D}$ to give an alternative view to that in \ref{fig:pde-convergence} of the feasible region in $\pspace$.
-We normalize our evaluations of the ratio of observed to predicted densities and plot the samples that exceed two thresholds, numerical zero (left), and $1/N$ (right) to give some sense of samples that may come from accept/reject algorithms (since our initial was uniform).
-
-Both scatter-plots exhibit the same geometry, appearing to trace a band through the parameter space.
-Fundamentally, at first glance at the left figure, it is already apparent that half of $\pspace$ has been ruled out, and that the correlation structure between the two knots has been discovered.
-The samples from $\qoi^{2D}$, however, cluster more tightly around the optimal samples (the ``projection'' here refers to the sample which minimizes the 2-norm to the noiseless data).
-The incorporation of two directions instead of one whittles away more of the parameter space as being less relatively likely.
-If we were to perform accept/reject, the resulting set would be fairly well constrained to the upper-lefthand corner of the two-dimensional parameter space.
-
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-16.png}
-  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-03.png}
-\caption{
-100 measurements
-}
-\label{fig:pde-highd-2d-scatter}
-\end{figure}
-
-%%%%%%%%%%%%
-
+To further underscore the impact of incorporating the extra dimension of information in the data space and the impact it has on the reduction of uncertainty, we turn the reader's attention to
+[TK - you cut out the scatterplots here]
 
 We solve our SIP for twenty different realizations of noise to pollute our hundred measurements, and show the resulting solutions for the first twenty and all hundred being used to construct the vector--valued map.
 The resulting functions that are induced by these MUD points are shown in Fig.~\ref{fig:pde-highd-2d-vector-mud}, and we note that solutions are no longer are considering the possibility of the minimum value of $g$ being at the wrong knot point as we saw in Fig.~\ref{fig:pde-highd-2d-scalar-mud}, even when only twenty total data points are used to construct $Q$.
