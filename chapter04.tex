@@ -1,8 +1,16 @@
 \chapter{\uppercase{Impact of Geometry of Output Quantities on Consistent Solutions} \label{chapter:geometry}}
 
-Here, we motivate the reduction of a quantity called \emph{skewness} in pursuit of optimizing the geometry of solutions to SIPs with respect to their ability to be well-approximated with random sampling.
-The results hold for any attempt to approximate densities defined on sets induced by random samples, and thus may be of interest to the larger research community.
+Here, we describe the relationship of a geometric quantity called \emph{skewness} in QoI maps impacts the accuracy of consistent solutions to SIPs approximated with random sampling.
+While prior work has addressed skewness in the context of solving the SIP, its impact on parameter estimation problems formulated within the Data-Consistent framework has not been previously studied.
+We demonstrate that the skewness of a map impacts the \emph{precision} of a parameter estimate.
+This is subsequently utilized in Chapter~\ref{chapter:vector-valued} to aggregate data into different components of a QoI map to more precisely estimate parameter values.
 
+In this chapter, we begin with a definition of skewness and overview of a set-based approach for constructing consistent solutions to SIPs in \ref{sec:skewness}.
+That review is followed by a series of numerical examples which establish fundamental connections between the skewness of QoI maps and the difficulty of accurately approximating solutions with finite sampling.
+Namely, we establish that in addition to the implied invariability of skewness to translations, rotations of maps have no impact on solution accuracy.
+Furthermore, we show that the number of samples required to achieve a predefined level of error is directly proportional to the skewness of the QoI map used to solve the inverse problem.
+
+\section{A Brief Literature Review of Skewness}\label{sec:skewness}
 \input{set-based/skewness.tex}
 
 We demonstrate that the number of samples required to approximate densities using uniform i.i.d.~sampling is proportional to the skewness of the map used for inversion, though the convergence rate of the algorithm used to solve the SIP is unaffected.
