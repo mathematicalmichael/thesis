@@ -5,7 +5,7 @@ Such a reference measure could be either some known distribution taken as truth,
 This would measure the ability of the maps to reconstruct the output probability measure.}
 
 In Figure~\ref{fig:voronoi_sols}, we illustrate the solution to the problem of comparing measures defined on two different (implicitly-defined) $\sa$s shown in Figure~\ref{fig:voronoi_issues}.
-By introducing a third set against which both sample sets of size $\nsamps=50$, are compared, we can leverage theoretical results from Lemma~\ref{lem:measuresets} to rigorously compare solutions to the SIP under different maps.
+By introducing a third set against which both sample sets of size $\nsamps=50$, are compared, we can leverage theoretical results from Lemma~\ref{lem:measuresets} to compare solutions to the SIP under different QoI maps.
 
 \begin{figure}[ht]
 \centering
@@ -25,10 +25,10 @@ Center: A possibly over-resolved reference sample set, generated using $\nsamps 
 \label{fig:voronoi_sols}
 \end{figure}
 
-To isolate the effect of skewness on our ability to approximate sets with finite sampling, we choose our maps so that they preserve the sizes of sets between $\pspace$ and $\dspace$ under the push-forward measure given in Eq.~\eqref{eq:dataspace_pushforward_measure}.
-The sizes of these inverse sets correspond to the average precision of maps $Q$, so we fix our maps to all be equally informative from this perspective; for linear maps, this means they all have the same determinant.
+To isolate the effect of skewness on the ability to approximate sets with finite sampling, we choose the maps so that they preserve the sizes of sets between $\pspace$ and $\dspace$ under the push-forward measure given in Eq.~\eqref{eq:dataspace_pushforward_measure}.
+The sizes of these inverse sets correspond to the average precision of maps $Q$, so we fix the maps to all be equally informative from this perspective; for linear maps, this means they all have the same determinant.
 
-All of our experiments follow the same structure:
+All of our experiments follow the same structure, where $\qspace$ denotes a set of QoI maps under consideration in each example:
 \begin{itemize}
 \item[[0-a]] Select $\qoi\in\qspace$ and define $\PP_{\dspace_\qoi}$ as a uniform distribution centered on a reference QoI value $Q(\paramref)$ for $\paramref$ taken as the midpoint of $\pspace$.
 Note that $\PP_{\dspace_\qoi}$ is exactly discretized with $M=1$ sample, so that
