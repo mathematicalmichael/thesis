@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview of Uncertainty Quantification}\label{sec:intro}
 
-In the last several decades, there has been an increasing reliance on quantitative predictions from computational, simulation-based models of physical systems to inform engineering design, predict the behavior of physical systems, and even shape public policy, e.g., see [TK - need citation] for just a few such examples.
+In the last several decades, there has been an increasing reliance on quantitative predictions from computational, simulation-based models of physical systems to inform engineering design, predict the behavior of physical systems, and even shape public policy, e.g., see \cite{VO14, VO15, BDMV, HV}, for just a few such examples.
 It is therefore more important than ever to quantify, and whenever possible, reduce, the uncertainties impacting such models.
 Unfortunately, many key characteristics governing system behavior, described as model inputs (referred to here as parameters), are often hidden from direct observation.
 When observable model output data are sensitive to variations in these parameters, we formulate and solve inverse problems using the output data to quantify uncertainties in parameters.
@@ -20,27 +20,28 @@ Component properties define a sample space (the set of all possible outcomes), a
 Scalar-valued model parameters associated with component properties defines a random vector (i.e., a measurable function) from this probability space of components into the parameters required by the model.
 Subsequently, the mapping from parameters to observable model outputs defines what we refer to as a Quantities of Interest (QoI) map.
 Observation of a probability measure on the range of the QoI map leads to the formulation of a stochastic inverse problem (SIP), where the goal is to pullback the observed probability measure onto the space of parameters.
-Conceptually, a pullback measure is observation-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
+Conceptually, a pullback measure is data-consistent in the sense that its push-forward through the QoI map matches the observed probability measure.
 
-While it is possible to construct explicit approximations to observation-consistent measures in terms of estimating measurable events and their probabilities in the parameter space (e.g., see \cite{BET+14}), such ``set-based'' approximations become computationally intractable for high-dimensional parameter spaces or geometrically complex and/or computationally expensive QoI maps.
-A recently developed density-based approach [TK - fix citations]\cite{BJW18a, BJW18b, BWY20} solves the SIP in a novel way by first solving a stochastic forward problem (SFP).
+
+While it is possible to construct explicit approximations to data-consistent measures in terms of estimating measurable events and their probabilities in the parameter space (e.g., see \cite{BET+14}), such ``set-based'' approximations become computationally intractable for high-dimensional parameter spaces or geometrically complex and/or computationally expensive QoI maps.
+A recently developed density-based approach \citep{BJW18a, BJW18b, BWY20} solves the SIP in a novel way by first solving a stochastic forward problem (SFP).
 Specifically, an {\em initial} probability measure is first specified on the parameters to encode any prior knowledge of parameter variability.
 Then, a SFP is solved where the push-forward of the initial probability measure is used to define a {\em predicted} probability measure on the QoI.
 The discrepancy between the predicted and {\em observed} probability measures on the QoI, expressed as a ratio of probability density functions (more generally, Radon-Nikodym derivatives), is then used to {\em update} the initial probability density.
-The {\em updated} probability measure associated with this density is then observation-consistent.
+The {\em updated} probability measure associated with this density is then data-consistent.
 Moreover, the updates to the initial probability measure only occur in directions informed by the QoI.
 In other words, the initial probability measure serves to regularize the space of all pullback measures solving the SIP to produce a unique solution.
 
-The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \cite{Dellacherie_Meyer_book} as the central tool in establishing existence, uniqueness, and stability of solutions.
+The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \citep{Dellacherie_Meyer_book} as the central tool in establishing existence, uniqueness, and stability of solutions.
 Updated probability measures often have complex structures that are not well approximated by a family of parametrically defined distributions (e.g., Gaussian).
-This attribute of the solution further distinguishes this measure-theoretic approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \cite{Smith, Tarantola_book}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
+This attribute of the solution further distinguishes this measure-theoretic approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \citep{Smith, Tarantola_book, Wikle1998}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
 Subsequently, solutions to the SIP using Bayesian approaches will not, in general, produce solutions (defined as posterior distributions) whose push-forward matches the observed distribution.
 In fact, the push-forward of the posterior is not even of general interest in most Bayesian paradigms.
 Instead, the posterior predictive, which defines the distribution of possible unobserved values is of central interest \cite{Smith}.
 The posterior predictive is constructed as a conditional distribution on the observations but makes practical use of the posterior through a marginalization.
 These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community solves an inverse problem involving epistemic uncertainty, as we describe below and expand upon in Section~\ref{sec:compare}.
 
-In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
+In a typical Bayesian framework \citep{0266-5611-7-5-003,
   Kennedy_O_JRSSSB_2001, Tarantola_book, MNR07, CDS10, starktenorio,
   AlexanderianPetraStadlerEtAl14, Bui-ThanhGhattas14, Ernst2014,
   0266-5611-30-11-110301, ROM:CMW_2016, Stuart10,
@@ -49,9 +50,9 @@ In a typical Bayesian framework [TK - fix citation]\cite{0266-5611-7-5-003,
   A data-likelihood function is used to express the relative likelihoods that all of the data came from a particular choice of the parameter.
   Encoding any initial assumptions about which parameters are more likely than others as a prior density allows the formal construction of a posterior density as a conditional density that describes the difference in relative likelihoods of any parameter value given the data.
 
-It is common to use specific point estimators such as the maximum a--posteriori (MAP) point given by the mode of the posterior as the actual solution to the inverse problem.
+It is common to use specific point estimators such as the maximum a posteriori (MAP) point given by the mode of the posterior as the actual solution to the inverse problem.
 The posterior is then re-interpreted as providing descriptions of uncertainty in that specific point estimate.
-The Bernstein-von Mises theorem \cite{vonmises} provides conditions under which the posterior will become concentrated around the single true parameter in the limit of infinite data \cite{Smith}.
+The Bernstein-von Mises theorem \citep{vonmises} provides conditions under which the posterior will become concentrated around the single true parameter in the limit of infinite data \citep{Smith}.
 
 Returning to the hypothetical example of modeling a manufacturing process, the typical Bayesian paradigm described above is most applicable to a specific instance of the manufactured system.
 In other words, suppose a single system is extracted from the end of the production line.
@@ -62,7 +63,7 @@ The SIP is concerned with modeling the variability in the outputs of the product
 The main contributions of this thesis are the extension of the SIP framework to address the reduction of epistemic uncertainty.
 This is accomplished by formulating parameter identification problems as ones involving pullbacks of distributions of residuals.
 In the following section we provide background and history for the SIP and subsequently define the Deterministic Inverse Problem (DIP), which is the term we use to refer to the problem addressed by the Bayesian framework.
-We then compare the two frameworks and provide some illustrative examples to establish the key differences between them.
+We then compare the two frameworks and provide some illustrative examples to draw attention to the key differences between them.
 The chapter will conclude with a summary of the assumptions, properties, and stability of the solutions to the SIP which will be considered throughout this thesis.
 
 \FloatBarrier

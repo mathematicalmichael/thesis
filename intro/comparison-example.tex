@@ -1,18 +1,18 @@
 \subsection{Illustrative Example}
 Despite the differences in the statistical interpretations, we formulate a problem where $\observed$ and $\initial$ match the forms of $L_\dspace$ and $\prior$.
 However, we still observe differences between $\updated$ and $\posterior$ due to the use of a normalizing constant $C$ in $\posterior$ and the use of $\predicted$ in $\updated$.
-We explore the impact of this difference in the example below, taken from \cite{BJW18}.
+We explore the impact of this difference in the denominators of the solutions in the following example.
 
 %%%%%
 
 
 \begin{ex}
 Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$.
-For the observation-consistent framework, we assume $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$.
+For the data-consistent framework, we assume $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$.
 The push-forward of initial PDF, the observed PDF, and the updated PDF are shown in Fig.~\ref{fig:bayes-comparison}.
 
 For the Bayesian inverse problem, we assume $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
-%In particular, we assume that $d=0.25$ and follow the process of \cite{Stuart_Bayesian} to form the data-likelihood function so that it matches the observed density.
+%In particular, we assume that $d=0.25$ and follow the process of \cite{Stuart10} to form the data-likelihood function so that it matches the observed density.
 We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
 The posterior and its push-forward are also shown in Fig.~\ref{fig:bayes-comparison}.
 
@@ -49,8 +49,8 @@ We reformulate the previous example to make the role of data collection more cen
 \begin{ex}
 For the (Bayesian) Deterministic Inverse Problem, suppose $Q(\paramref)=0.25$ and noisy measurement data are drawn from a $N(0.25,0.1^2)$, i.e., we assume that each datum is given by $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$.
 For the SIP, we use the sample mean and variance of data to estimate the ``exact'' observed $N(0.25,0.1^2)$ distribution.
-The observed density and data-likelihood are significantly different from one another, especially as more data are collected.
-The data-likelihood is given by a product of normal densities.
+The observed density and data-likelihood become significantly different from one another as more data are collected.
+The data-likelihood is in fact given by a product of normal densities.
 
 We draw $M=5, 10, \text{ and}, 20$ samples to form estimates of $\observed$ and the likelihood functions.
 We show the results in Figure~\ref{fig:bayes-comparison-convergence}.
@@ -70,9 +70,9 @@ We show the results in Figure~\ref{fig:bayes-comparison-convergence}.
 
 For all values of $M$, the push-forward of the initial remains the same, and the push-forward of the update matches the observed.
 By contrast, the posterior increases in confidence alongside the predictions it produces.
-This further illustrates the point made earlier: the DIP and SIP are solving fundamentally different problems (they are addressing different questions).
-The mean of the updated density could be used as an estimator to address the parameter identification problem, but collecting more data does not improve confidence.
-As more data is incorporated, the goal of the DIP is to reduce epistemic uncertainty; for the SIP, it is to quantify the aleotoric uncertainty.
+This further illustrates that the DIP and SIP are fundamentally different problems (they are addressing different questions).
+
+As more data are incorporated, the goal of the DIP is to reduce epistemic uncertainty; for the SIP, it is to quantify the aleotoric uncertainty.
 
 \end{ex}
 
@@ -83,20 +83,21 @@ As more data is incorporated, the goal of the DIP is to reduce epistemic uncerta
 
 In summary, it is not the goal of Bayesian inference to construct a pullback distribution.
 Bayesian inverse problems are fundamentally posed as parameter-identification, not distribution estimation.
-However, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it [TK - cite more] \cite{Smith}.
+However, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it \citep{Smith, Tarantola_book}.
 This defines what is commonly referred to a as a Hierarchical Bayesian Inverse Problem.
 More complex densities can be approximated by mixture models.
 
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
 No such compromise is required in the DCI framework.
-Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approach described in \cite{BE13} or \cite{BJW18}.
+Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approaches described in \cite{BE13} or \cite{BJW18a}.
 
 It is important to note that Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
 As a complementary line of reasoning, we seek to formulate a parameter identification problem in a DCI framework.
-We revisit the results with a focus on parameter estimation using $\updated$. [TK - not sure what Troy's comment here means]
+For example, the mean of the updated density could be used as an estimator to address the parameter identification problem, but collecting more data does not improve confidence if used to estimate $\observed$ as described above.
+We revisit the results with a focus on parameter estimation using $\updated$.
 
 In Chapter~\ref{chapter:mud}, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
-Before we proceed, we finish presenting some summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} in the next section.
+Before we proceed, we finish summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} in the next section.
 
 \FloatBarrier
