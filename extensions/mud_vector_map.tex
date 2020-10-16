@@ -213,7 +213,10 @@ We now explore what would happen if our initial density was constructed with mor
 
 As we proceed from two to five dimensions, being wary of the fact that we are fighting against the curse of dimensionality, we want to be more deliberate with our specification of an initial density.
 
+[TK - write a little bit more here, bring in the content about not considering functions that are too rough]
 Fig.~\ref{fig:pde-highd-2d-scatter}.
+
+\subsection{Motivations for a New Initial Density}
 Recall from \ref{subsec:pde-example} that two maps were used to solve the SIP: $\qoi^{1D}$ and $\qoi^{2D}$, and MUD points were shown for twenty realizations of noise for each in Figure~\ref{fig:pde-convergence}.
 In this figure, we use the updated densities from a solution to the SIP from each of $\qoi^{1D}$ and $\qoi^{2D}$ to give an alternative view to that in \ref{fig:pde-convergence} of the feasible region in $\pspace$.
 We normalize our evaluations of the ratio of observed to predicted densities and plot the samples that exceed two thresholds, numerical zero (left), and $1/N$ (right) to give some sense of samples that may come from accept/reject algorithms (since our initial was uniform).
@@ -258,7 +261,7 @@ However, a thorough exploration of how to best leverage the ratio of observed to
 
 
 \FloatBarrier
-\subsubsection{Capturing Correlation Structure from 2-D SIP Solution}
+\subsection{Capturing Correlation Structure from 2-D SIP Solution}
 For the two remaining directions, we want to capture the correlation structure that we were able to visually identify in Fig.~\ref{fig:pde-highd-2d-scatter} and impose a uniform density over the support of the set.
 To achieve this desired refinement of an initial density, we perform a singular-value decomposition on the likely samples from the scalar--valued 2-D solution, since there are so many more samples\footnote{ The scalar-valued contour was found to better characterize the direction of the equivalence class, suggesting perhaps a justifiable use for solving the problem with it. We could have formed an estimate of the updated density from using the vector--valued QoI and sampled from that instead. Many such approaches can be looked into in the future and are briefly discussed in the last section of this chapter.}.
 The singular vectors are used to transform the vector-valued samples, and a uniform sampling is performed over the rectangular bounding box for these points, shown in the center of Figure~\ref{fig:pde-highd-2d-study}.
@@ -306,7 +309,7 @@ Another possible improvement would be to incorporate the correlation structure t
 % \end{figure}
 
 
-\subsection{Alternative Approach to 5-Dimensional SIP}
+\subsection{SIP Solutions using New Initial Density}
 We now come to the solutions that arise from solving the same five--dimensional inverse problem of interpolating the values of $g$ through equispaced knot points, with both types of maps, in Figure~\ref{fig:pde-highd-5d-alt-mud}.
 The difference in comparison to the example solutions in Fig.~\ref{fig:pde-highd-5d-mud} is stark: no longer are the solutions dramatically under-estimating the local minimum of $g$.
 To the extent to which they fail to adequately to do is due to the insufficient resolution of five knot points.
