@@ -1,11 +1,3 @@
-
-In Chapter~\ref{chapter:geometry}, we introduced the notion of skewness and showed examples of how it impacts the accuracy of approximating SIP solutions with finite sampling.
-Here, we demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
-We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
-Recall how $\qoi^\text{2D}$ was able to better resolve $\paramref$ than $\qoi^\text{1D}$.
-The map $\qoi^\text{2D}$ was presented as an option for taking the same available hundred measurements and using them to form a more informative map.
-In this chapter, we present a more detailed study of the construction of this map, reflecting a case-study in designing a problem where the QoI map is informative.
-
 \section{Skewness and Vector-Valued Data-Constructed QoI Maps}
 In our first example, we show that a small change in the decision of how to partition the measurements collected on the response surface can induce a 2-dimensional map $\qoi^\text{2D}_\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
 Such a map is by definition more skewed than the one we presented with $\qoi^\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi^\text{1D}$ in the original problem.
