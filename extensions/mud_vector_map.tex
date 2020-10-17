@@ -1,14 +1,15 @@
 \section{Skewness and Vector-Valued Data-Constructed QoI Maps}
-In our first example, we show that a small change in the decision of how to partition the measurements collected on the response surface can induce a 2-dimensional map $\qoi^\text{2D}_\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
-Such a map is by definition more skewed than the one we presented with $\qoi^\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi^\text{1D}$ in the original problem.
-This decreased precision demonstrates that skewness, although developed in the previous chapter within the context of set-valued solutions, is still a relevant measure of a map's utility when solving parameter identification problems.
+In our first example, we show that a small change in the decision of how to aggregate the measurements collected on the response surface can induce a 2-dimensional map $\qoi_\text{2D}^\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
+Such a map is, by definition, more skewed than the one we presented with $\qoi_\text{2D}$.
+Therefore, $\qoi_\text{2D}^\prime$ leads to MUD-point solutions that exhibit similar behavior to those obtained with $\qoi_\text{1D}$.
+This decreased precision demonstrates that skewness, although reviewed and analyzed in the previous chapter within the context of accuracy of set-valued solutions, is a relevant measure of a map's utility for use in solving parameter identification problems.
 
 The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
-These examples were chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
+These examples are chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
 The linear examples in Section~\ref{sec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
-In those examples, we showed that our ability to resolve a true parameter improved as the gap between input dimension and operator row-rank shrunk.
+In those examples, we showed that the ability to resolve a true parameter improved as the gap between input dimension and operator row-rank decreased.
 
-The rank-deficiency of an operator can be attributed either to ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
+The rank-deficiency of an operator is attributed to either the ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
 In scenarios where $S>P$ observations are available, we are motivated to leverage the form of Eq.~\eqref{eq:qoi_WME} to construct a vector-valued version incorporating subsets of $S$ for each component.
 For example, a system for which spatial measurements are available over time may motivate constructing a scalar-valued WME map for each spatial location.
 If distinctly different observable quantities are available (e.g., perhaps with different physical units), then these may be collapsed into each component of the map.
