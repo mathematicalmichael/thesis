@@ -1,20 +1,20 @@
 \chapter{\uppercase{Conclusions, Future Work, and Preliminary Results} \label{chapter:future}}
 
 
-\input{ch05/mud_oed.tex}
+In Chapter~\ref{chapter:geometry}, we introduced the notion of skewness and showed examples of how it impacts the accuracy of approximating SIP solutions with finite sampling.
+Here, we demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
+We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
+Recall how $\qoi^\text{2D}$ was able to better resolve $\paramref$ than $\qoi^\text{1D}$.
+The map $\qoi^\text{2D}$ was presented as an option for taking the same available hundred measurements and using them to form a more informative map.
+In this chapter, we present a more detailed study of the construction of this map, reflecting a case-study in designing a problem where the QoI map is informative.
+
+\section{Concluding Remarks}
+
+\section{Future Work and Preliminary Results}
+
+\input{extensions/mud_oed.tex}
 \FloatBarrier
 
-% \
-% \section{Summary of Dissertation}
-%
-% \
-% \section{Conclusions}
-%
-% \
-% \section{Continuity of Research}
-%
-
-\section{Miscellaneous Extensions}
 
 
 \subsection{Leveraging Data in Different Ways}\label{sec:ch05-data}
@@ -51,5 +51,5 @@ We leave the investigation of more connections to the removal of hyper-parameter
 
 [TK - can put example here about MCMC extensions, sequence of problems with resampling from updated densities. Have a notebook's worth of results with the Rosenbrock]
 
-\input{ch05/sequential_inversion.tex}
+\input{extensions/sequential_inversion.tex}
 \FloatBarrier

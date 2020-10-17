@@ -1,12 +1,4 @@
-
-In Chapter~\ref{chapter:geometry}, we introduced the notion of skewness and showed examples of how it impacts the accuracy of approximating SIP solutions with finite sampling.
-Here, we demonstrate how an awareness of skewness can allows us to define a QoI a-priori that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
-We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
-Recall how $\qoi^\text{2D}$ was able to better resolve $\paramref$ than $\qoi^\text{1D}$.
-The map $\qoi^\text{2D}$ was presented as an option for taking the same available hundred measurements and using them to form a more informative map.
-In this chapter, we present a more detailed study of the construction of this map, reflecting a case-study in designing a problem where the QoI map is informative.
-
-\section{Extension to Vector-Valued QoI Maps}
+\section{Skewness and Vector-Valued Data-Constructed QoI Maps}
 In our first example, we show that a small change in the decision of how to partition the measurements collected on the response surface can induce a 2-dimensional map $\qoi^\text{2D}_\prime$ which is ``effectively'' one-dimensional in that the two components provide highly correlated information.
 Such a map is by definition more skewed than the one we presented with $\qoi^\text{2D}$, and so leads to MUD-point solutions that exhibit similar behavior to those that we got when we used $\qoi^\text{1D}$ in the original problem.
 This decreased precision demonstrates that skewness, although developed in the previous chapter within the context of set-valued solutions, is still a relevant measure of a map's utility when solving parameter identification problems.
@@ -209,9 +201,36 @@ We now explore what would happen if our initial density was constructed with mor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Alternative Experimental Approach}
+\section{Improving Parameter Estimates by Solving Sequences of SIPs}
 
 As we proceed from two to five dimensions, being wary of the fact that we are fighting against the curse of dimensionality, we want to be more deliberate with our specification of an initial density.
+
+[TK - write a little bit more here, bring in the content about not considering functions that are too rough]
+Fig.~\ref{fig:pde-highd-2d-scatter}.
+
+\subsection{Motivations for a New Initial Density}
+Recall from \ref{subsec:pde-example} that two maps were used to solve the SIP: $\qoi^{1D}$ and $\qoi^{2D}$, and MUD points were shown for twenty realizations of noise for each in Figure~\ref{fig:pde-convergence}.
+In this figure, we use the updated densities from a solution to the SIP from each of $\qoi^{1D}$ and $\qoi^{2D}$ to give an alternative view to that in \ref{fig:pde-convergence} of the feasible region in $\pspace$.
+We normalize our evaluations of the ratio of observed to predicted densities and plot the samples that exceed two thresholds, numerical zero (left), and $1/N$ (right) to give some sense of samples that may come from accept/reject algorithms (since our initial was uniform).
+
+Both scatter-plots exhibit the same geometry, appearing to trace a band through the parameter space.
+Fundamentally, at first glance at the left figure, it is already apparent that half of $\pspace$ has been ruled out, and that the correlation structure between the two knots has been discovered.
+The samples from $\qoi^{2D}$, however, cluster more tightly around the optimal samples (the ``projection'' here refers to the sample which minimizes the 2-norm to the noiseless data).
+The incorporation of two directions instead of one whittles away more of the parameter space as being less relatively likely.
+If we were to perform accept/reject, the resulting set would be fairly well constrained to the upper-lefthand corner of the two-dimensional parameter space.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-16.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_update_scatter_D2_t1-0E-03.png}
+\caption{
+100 measurements
+}
+\label{fig:pde-highd-2d-scatter}
+\end{figure}
+
+%%%%%%%%%%%%
+
 Let us take a look at the samples that show up in black on the right of Figure~\ref{fig:pde-highd-2d-scatter} from a different perspective.
 These represent samples from the updated density solved by incorporating all 100 measurements.
 
@@ -234,8 +253,8 @@ However, a thorough exploration of how to best leverage the ratio of observed to
 
 
 \FloatBarrier
-\subsubsection{A Better Initial Density}
-For the two remaining directions, we want to capture the correlation structure that we were able to visually identify in Fig.~\ref{fig:pde-highd-2d-example} and impose a uniform density over the support of the set.
+\subsection{Capturing Correlation Structure from 2-D SIP Solution}
+For the two remaining directions, we want to capture the correlation structure that we were able to visually identify in Fig.~\ref{fig:pde-highd-2d-scatter} and impose a uniform density over the support of the set.
 To achieve this desired refinement of an initial density, we perform a singular-value decomposition on the likely samples from the scalar--valued 2-D solution, since there are so many more samples\footnote{ The scalar-valued contour was found to better characterize the direction of the equivalence class, suggesting perhaps a justifiable use for solving the problem with it. We could have formed an estimate of the updated density from using the vector--valued QoI and sampled from that instead. Many such approaches can be looked into in the future and are briefly discussed in the last section of this chapter.}.
 The singular vectors are used to transform the vector-valued samples, and a uniform sampling is performed over the rectangular bounding box for these points, shown in the center of Figure~\ref{fig:pde-highd-2d-study}.
 These generated samples, however, leave $\pspace$ when transformed back to their native space, as seen in the left panel.
@@ -282,7 +301,7 @@ Another possible improvement would be to incorporate the correlation structure t
 % \end{figure}
 
 
-\subsection{Alternative Approach to 5-Dimensional SIP}
+\subsection{SIP Solutions using New Initial Density}
 We now come to the solutions that arise from solving the same five--dimensional inverse problem of interpolating the values of $g$ through equispaced knot points, with both types of maps, in Figure~\ref{fig:pde-highd-5d-alt-mud}.
 The difference in comparison to the example solutions in Fig.~\ref{fig:pde-highd-5d-mud} is stark: no longer are the solutions dramatically under-estimating the local minimum of $g$.
 To the extent to which they fail to adequately to do is due to the insufficient resolution of five knot points.
