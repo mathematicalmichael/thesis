@@ -1,3 +1,6 @@
+figures/*.pkl
+presentation/content/impact.tex
+
 .ipynb_checkpoints/
 *.bbl
 *.blg
