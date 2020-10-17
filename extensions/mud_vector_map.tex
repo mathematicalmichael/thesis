@@ -19,59 +19,8 @@ However, we summarize that the extension of the equations presented in Section~\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \subsection{A Vector-Valued QoI Map}
-% In the PDE example of \ref{sec:pde-example}, we presumed knowledge about the structure of $g$ being a sine curve; we only had to estimate a scaling coefficient for it.
-% To demonstrate the use of the WME QoI in solving inverse problems in higher dimensions, we set up the following series of examples in the same spirit with respect to the model and measurement locations, but presuming less about $g$ than before.
-%
-% We choose a polynomial function $g$ which exhibits similar behavior to the former sine curve, but without the symmetry about $x_2=0.5$, and scale it so that it takes a minimum at the same value as before (at $g = -3$).
-% We selected $g(x) = \alpha x_2^2 (x_2 - 1)^5$, with $\alpha$ chosen to satisfy the aforementioned design specification (so that $g(x)=-3$ for $x=(0,\frac{2}{7})$).
-% Suppose that as modelers, we are told only that $g$ is negative and bounded below by $-4$.
-%
-% We propose beginning to estimate it by placing two knots on the interior of the domain of $g$ and trying to deduce its value at these points.
-% This gives us a parameter space of $\pspace = [-4, 0]$, and over this space we will assume a uniform density again.
-% Our first two knots will be the equispaced points $x = (0,\frac{1}{3}), (0,\frac{2}{3})$, and the family of functions that this spans is visually illustrated in the left half of Figure~\ref{fig:pde-highd-initial-2d}.
-% We also plot the true function and the associated piecewise--linear that comes from interpolating the true $g$.
-% Observe that none of these (purple) functions we are considering to explain the data we collected (from the black curve) really adequately capture the correct dynamics, and that even the piecewise-linear interpolant (red) mis--characterizes the true boundary condition for most of the domain.
-%
-% The rest of the problem setup will be kept the same as the previous example, except that instead of $N=10,000$ parameter space samples, we use $N=1,000$.
-% The reason for this is that we will not be doing the same convergence studies, so we are less interested in exhaustively exploring $\pspace$ than demonstrating that our method can handle a wider variety of inverse problems than the previous examples may suggest.
-
-
-%
-% \subsubsection{A Scalar-Valued QoI Map}
-%
-% Our first inverse problem involves solving the SIP with the same scalar-valued QoI map constructed by incorporating all the measurements into \eqref{eq:qoi_WME}.
-% To give the reader a sense of the ability for this ``basis'' to match the one-hundred measurements used for inversion, we plot the best match of our thousand parameter samples with respect to these measurements in purple in the top half of Figure~\ref{fig:pde-highd-2d-projection}.
-% There, we also plot the closest match to the interpolating piecewise-linear function in green, and note that we have a near-identical match among our thousand parameter samples, though the best predictor of the data we collected is a different sample.
-% We are curious which of these two functions the MUD will more closely resemble.
-% The residual Q-Q plots for the two functions are shown to illustrate the differences in misfit to provide an alternative view to the goodness-of-fit.
-%
-%
-% \begin{figure}
-% \centering
-%   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_proj_D2.png}
-% \caption{ TK - x-axis label needs to be fixed and this figure needs a proper caption.
-% }
-% \label{fig:pde-highd-2d-projection}
-% \end{figure}
-%
-%
-% In the bottom half of \ref{fig:pde-highd-2d-scalar-mud}, we show the MUD solutions arising from twenty trials using different observations of noise.
-% Of particular interest is that the solutions seem to discover one of two types of explanations for the data, seemingly unable to decide which half of the domain represents a better estimate of $g$'s minimum value.
-% As mentioned, this set of solutions comes from collapsing all hundred measurements into a scalar--valued QoI map, which negatively impacts our ability to identify the parameter in the problem, since our SIP is now $2\rightarrow 1$.
-% [TK - cite Troy's result about dimensions from AWR paper] implies that we have an incentive to construct maps which ``close the gap,'' so to speak, between input and output dimension, to fully leverage the geometry of available information.
-% The contour structure of the updated density samples plotted in red in \ref{fig:pde-highd-2d-example}.
-%
-% \begin{figure}
-% \centering
-%   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
-% \caption{ TK - x-axis label needs to be fixed and this figure needs a proper caption.
-% }
-% \label{fig:pde-highd-2d-scalar-mud}
-% \end{figure}
-
 \FloatBarrier
-\subsection{Skewness and Vector-Valued QoI Maps}
+\subsection{Revisiting Example~\ref{subsec:pde-example}}
 
 Suppose that instead of constructing a scalar--valued QoI map, we used the form of \eqref{eq:qoi_WME} to construct a map with two components, yielding a $2 \rightarrow 2$ SIP instead.
 We saw how such an approach could provide any tangible benefit for resolving the uncertainty in our true function $g$ in \ref{subsec:pde-example}, but presented the map $\qoi^\text{2D}$ without discussing how it was selected.
