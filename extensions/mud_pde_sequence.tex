@@ -12,6 +12,20 @@ By making better use of our model-evaluation budget of $1000$ samples for the PD
 Reducing the volume of the support of the initial density will allow the samples drawn from it to better predict the collected data.
 Recall from \ref{subsec:pde-example} that two maps were used to solve the SIP: $\qoi_{1D}$ and $\qoi_{2D}$ and MUD points were shown for representative examples.
 We use the solutions from those examples\---namely the ratio which updates the initial density\---to inform the construction of a new initial density.
+In Figure~\ref{fig:pde-highd-2d-updated}, we plot the initial densities associated with $\qoi_{1D}$ and $\qoi_{2D}$ and remark that the scalar--valued QoI map identifies a contour which appears to trace a straight line through $\pspace$.
+This can be helpful for identifying the correlation structure and defining a lower-dimensional subspace to perform rejection sampling However, the solution that comes from using $\qoi_{2D}$ is better at reducing uncertainty.
+Taken together, these observations can be used to suggest a number of sampling strategies to generate a new initial density.
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_updated_D2_scalar.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_updated_D2_vector.png}
+\caption{
+100 measurements are used to solve the SIP for the PDE problem with $\qoi_{1D}$ and $\qoi_{2D}$.
+}
+\label{fig:pde-highd-2d-updated}
+\end{figure}
+
 By considering the relationship between the parameters and the types of functions that could be possible given the solution to a 2-D inverse problem, we are able to create a more restricted parameter space in five dimensions.
 
 For a detailed discussion of how a new initial density was constructed for this example, we refer the interested reader to Appendix~\ref{app:pde-5d-initial}.
@@ -49,12 +63,13 @@ To the extent to which they fail to adequately to do is due to the insufficient 
 
 \begin{figure}
 \centering
-[TK - change figures to omit Q-Q, change savenames (pair = scalar|vector)]
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m20.png}
-  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D-alt-5-1_m100.png}
-\caption{Solutions to the SIP using one hundred measurements.
-(Top): Scalar-valued solutions for alternative approach to the five-dimensional problem.
-(Bottom): Vector-valued solutions.
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_pair_D5-alt-5-1_m20.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_pair_D5-alt-5-1_m20.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_pair_D5-alt-5-1_m100.png}
+  \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_pair_D5-alt-5-1_m100.png}
+\caption{Solutions to the SIP using one hundred measurements for $\ndata = 20$ (top) and $100$ (bottom).
+(Left): Scalar-valued solutions for alternative approach to the five-dimensional problem.
+(Right): Vector-valued solutions.
 }
 \label{fig:pde-highd-5d-alt-mud}
 \end{figure}
@@ -64,9 +79,9 @@ Owing to the reduced volume of support for the initial density, both QoI maps re
 Since ``unreasonable'' functions are no longer being considered, both maps produce qualitatively similar estimates.
 
 \subsection{Demonstration of Reduction in Uncertainty}
-As a final note on this experiment, we contrast the resulting $L^2$-errors to $g$ \footnote{derived from computational approximation with the trapezoidal rule} of these MUD solutions, to the previous two examples in Figure~\ref{fig:pde-highd-5d-hist}, to show a lineage of learning, so to speak.
+As a final note on this experiment, we contrast the resulting $L^2$-errors to $g$ \footnote{derived from computational approximation with the trapezoidal rule} of these MUD solutions, to the previous two examples in Figure~\ref{fig:pde-highd-5d-hist}.
 With each successive problem, our uncertainty is reduced and our MUD solutions lower in variance and increase in accuracy.
-Note that they appear to be moving towards a value away from zero, which represents a fixed bias (five equispaced knots can only approximate this $g$ so well).
+Note that they appear to be moving towards a value away from zero, which represents a fixed bias (five equispaced knots can only approximate this particular $g$ so well).
 
 \begin{figure}
 \centering
