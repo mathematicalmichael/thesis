@@ -1,14 +1,11 @@
 \section{Extension to Higher Dimensions}\label{sec:mud-higher-dimensions}
-We present a scenario to further underscore the value of considering geometry when constructing a QoI map for use in solving a SIP to perform parameter identification.
-We show that when the dimension of $\pspace$ is higher, the benefit from maximizing the dimension of $\dspace$ is even more considerable than what we observed in the two-dimensional cases.
-In the second example, we illustrate how we could use the solution to the SIP for the two-dimensional case from \ref{subsec:pde-example} to better construct the problem we pose in five dimensions.
-In particular, we show the effect that this refinement of a 5-D parameter space has on the estimated boundary--condition functions $\widehat{g}$ induced by the MUD solutions to the 5-D SIP.
+We now show that when the dimension of $\pspace$ is higher, the benefit from maximizing the dimension of the QoI map is even more considerable than what we observed in the two-dimensional cases as long as we aggregate data into components of the QoI map in a purposeful manner.
+In the second example, we illustrate how we could utilize the solution to the SIP for the two-dimensional case from \ref{subsec:pde-example} to improve the MUD estimate in five dimensions.
 
-Suppose that an experimenter less familiar with parameterization of curves and the problems associated with high-dimensions decided to start with a five--dimensional problem (five knots to describe $g$ instead of two), trying to accomplish greater granularity in the ability to estimate $g$, and imposes the same type of uniform initial density in each direction, yielding a parameter space of $\pspace = [-4, 0]^5$.
-In Figure~\ref{fig:pde-highd-initial}, we show what such initial functions would look like, and note that many of them appear to exhibit fluctuating behavior for which the mesh ($36\times36$) being used to solve the problem, would not be fine enough to resolve.
-This choice of initial density induces a lot of noise into the SIP we are hoping to solve, since ``common sense'' from a modeler's perspective could rule out zig-zag functions from wasting a model-evaluation budget, which we fix at the same $N=1000$ samples as in the previous 2-D problems.
-We address one way these observations can be incorporated into posing a better SIP in the next example.
-To establish a baseline for what we could expect the best possible representations in this peculiar choice of ``basis'' could be, we again find the closest match to the interpolating and to the noiselesss measurement data and plot them alongside residuals in Figure~\ref{fig:pde-5d-proj}.
+Consider a naive implementation in five-dimensions, where the same prior knowledge on the bounds of $g$ inform the choice of a parameter space.
+Suppose $\pspace$ is given by $[-4, 0]^5$, induced by five regularly-spaced knot points in the interior of $x_2 \in (0,1)$ for which a uniform density is assumed in each component.
+In Figure~\ref{fig:pde-highd-initial-5d}, we show what one-thousand such initial functions look like, and note that many of them appear to exhibit fluctuating behavior which may require a finer mesh than the one being used to solve the problem ($36\times36$), in order to reduce numerical errors.
+This choice of initial density induces a lot of ``conceptual'' noise into the SIP, since ``common sense'' from a modeler's perspective could rule out zig-zag functions.
 
 \begin{figure}
 \centering
@@ -19,6 +16,7 @@ One thousand initial parameter samples (our model evaluation ``bugdet'') were us
 \label{fig:pde-highd-initial-5d}
 \end{figure}
 
+%%%%%%%%%%
 
 \begin{figure}[htbp]
 \centering
