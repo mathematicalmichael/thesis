@@ -1,9 +1,32 @@
 \chapter{\uppercase{Extensions and Applications of MUD Points and Skewness Analysis} \label{chapter:vector-valued}}
 
-
+In Chapter~\ref{chapter:geometry}, we introduced the notion of skewness and showed examples of how it impacts the accuracy of approximating SIP solutions with finite sampling.
+Here, we demonstrate how an awareness of skewness allows us to a priori define a QoI that will\---on average\---better resolve $\paramref$ by providing information in mutually distinct directions in $\pspace$.
+We begin by revisiting the example in Section \ref{subsec:pde-example} involving the Poisson problem and uncertain boundary condition $g$.
+Recall that $\qoi_\text{2D}$ is able to better resolve $\paramref$ than $\qoi_\text{1D}$.
+The map $\qoi_\text{2D}$ is presented as an alternative option for aggregating the same one hundred measurements and using them to construct a more informative 2D map.
+In this chapter, we present a more detailed study of the construction of this map, reflecting a case-study in designing a problem where the QoI map is informative.
 
 \input{extensions/mud_vector_map.tex}
 \FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
+\input{extensions/mud_pde_geometry.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{extensions/mud_pde_5d.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{extensions/mud_pde_sequence.tex}
+\FloatBarrier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Conclusions}
 
