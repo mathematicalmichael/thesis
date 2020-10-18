@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import matplotlib
+matplotlib.rcParams['mathtext.fontset'] = 'stix'
+matplotlib.rcParams['font.family'] = 'STIXGeneral'
+matplotlib.backend = 'Agg' 
 from fenics import plot as _plot
 from newpoisson import poisson # function evaluation (full response surface)
 
