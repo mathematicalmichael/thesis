@@ -24,12 +24,11 @@ The choice of which partitioning method to use is akin to the following question
 \end{center}
 
 We use heuristics and an understanding of skewness to help address this question.
-We first sample the predicted data spaces using simulated spatial data associated with $1000$ parameter samples to build intuition about the underlying geometry induced by these maps.
-
-[TK - motivate WHY you are about to do this. Predicted vs. Observed, What is happening?]
-
-[TK - rewrite the whole subset of measurements process more clearly.]
-We repeat this process for three subsets of the measurements (using the first samples in each half of $\Omega$ according to the random index assigned to them), and demonstrate the two resulting sets of relationship in the bottom half of Figure~\ref{fig:pde-highd-2d-geometry}.
+For the data-constructed (WME) QoI map, the observed distribution for which we seek a pullback measure is fixed as a standard multivariate Gaussian, independent of the number of measurements that were used.
+The initial density is also a fixed quantity, implying that any differences in the updated density will be attributed to differences in the predicted density.
+To understand how the precision of the MUD estimate will change as more measurements are incorporated into the map, we visualize the data spaces induced by the WME QoI for increasing number of measurements $\ndata = 20, 60, \text{ and } 100$.
+We sample the predicted data spaces using simulated spatial data associated with $1000$ parameter samples.
+To build intuition about how the underlying geometry induced by these maps changes, we plot the scatter-plots representing a visualization of the associated data spaces in the bottom half of Figure~\ref{fig:pde-highd-2d-geometry}.
 This figure also shows the associated designs against the noisy response surface as a backdrop.
 
 First, we note that the inclusion of more data points has the effect of dilating (and to some extent rotating) the induced data space for both QoI maps.
@@ -41,10 +40,10 @@ More work is required to find a good solution to the SIP, since there are more m
 %%%%%%%%%%
 $\qoi_\text{2D}^\prime$ has much higher skewness than $\qoi_\text{2D}$, as is visually evident by the near-perfect correlation between its component values seen in the right plot of Fig~\ref{fig:pde-highd-2d-geometry}.
 The two component maps of $\qoi_\text{2D}$ contain almost the same information, so we can expect there to be little difference between MUD points arising from using $\qoi_\text{2D}^\prime$ when compared to using the scalar--valued map.
-We compare these two solutions for an instance of the SIP in Figure~\re{fig:pde-highd-2d-scalar-vs-alt}.
+We compare these two solutions for an instance of the SIP in Figure~\ref{fig:pde-highd-2d-scalar-vs-alt}.
 
-\begin{figure}
 [TK - fix figure]
+\begin{figure}
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_geom_D2.png}
 \caption{
 Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$ (left) compared to using $\qoi_\text{2D}^\prime$, juxtaposed against a plot of $g$.
