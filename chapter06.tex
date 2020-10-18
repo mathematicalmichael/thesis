@@ -2,29 +2,6 @@
 
 
 \section{Concluding Remarks}
-
-
-\section{Future Work and Preliminary Results}
-
-\input{extensions/mud_oed.tex}
-\FloatBarrier
-
-
-
-\subsection{Leveraging Data in Different Ways}\label{sec:ch05-data}
-Mention the other map we can use (SSE) here.
-
-\subsection{Addressing Model Assumptions}\label{sec:ch05-variance}
-Both the maps required us to have knowledge of the variance in the measurements.
-What if we got it wrong?
-\emph{What if we don't know the variance? How does mis-estimating it affect our solutions?}
-In this section we pose some questions and provide a brief hint at a research direction but really we do not have adequate time to flesh out the answers to these, just acknowledge that they're similar concerns shared by the Bayesians.
-
-Multiplicative noise - handled in a straightforward way, maybe put an example here and leave it at that? Put it in appendix?
-
-
-\subsection{Machine-Learning Enhancements}\label{sec:ch05-ml}
-
 Recall that in the previous chapter we demonstrated that the MUD solution retains the accuracy of least-squares solutions while simultaneously offering the flexibility of specifying initial beliefs.
 Normally in order to incorporate such beliefs, practitioners in the machine-learning field would perform Tikhonov regularization, usually with the inclusion of a hyper-parameter which scales the additional parameter-space norm in the objective function.
 Mathematically, this scaling factor applied to the norm is equivalent to scaling the matrix representation of the initial (prior) covariance.
@@ -44,6 +21,27 @@ This insensitivity provides a strong motivating factor for the consideration of 
 We leave the investigation of more connections to the removal of hyper-parameter estimation to future work.
 
 [TK - can put example here about MCMC extensions, sequence of problems with resampling from updated densities. Have a notebook's worth of results with the Rosenbrock]
+
+
+
+\section{Future Work and Preliminary Results}
+
+\input{extensions/mud_oed.tex}
+\FloatBarrier
+
+
+
+%\subsection{Leveraging Data in Different Ways}\label{sec:ch05-data}
+%Mention the other map we can use (SSE) here.
+%
+%\subsection{Addressing Model Assumptions}\label{sec:ch05-variance}
+%Both the maps required us to have knowledge of the variance in the measurements.
+%What if we got it wrong?
+%\emph{What if we don't know the variance? How does mis-estimating it affect our solutions?}
+%In this section we pose some questions and provide a brief hint at a research direction but really we do not have adequate time to flesh out the answers to these, just acknowledge that they're similar concerns shared by the Bayesians.
+%
+%Multiplicative noise - handled in a straightforward way, maybe put an example here and leave it at that? Put it in appendix?
+
 
 \input{extensions/sequential_inversion.tex}
 \FloatBarrier
