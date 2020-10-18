@@ -1,11 +1,13 @@
 \section{Extension to Higher Dimensions}\label{sec:mud-higher-dimensions}
-We now show that when the dimension of $\pspace$ is higher, the benefit from maximizing the dimension of the QoI map is even more considerable than what we observed in the two-dimensional cases as long as we aggregate data into components of the QoI map in a purposeful manner.
+We now show that when the dimension of $\pspace$ is higher, the benefit from maximizing the dimension of the QoI map is even more considerable than what we observed in the two-dimensional cases, as long as we aggregate data into components of the QoI map in a purposeful manner.
+In the first example, we demonstrate the impact of increasing the volume of the parameter space while fixing all other attributes of the inverse problem.
 In the second example, we illustrate how we could utilize the solution to the SIP for the two-dimensional case from \ref{subsec:pde-example} to improve the MUD estimate in five dimensions.
 
-Consider a naive implementation in five-dimensions, where the same prior knowledge on the bounds of $g$ inform the choice of a parameter space.
+\subsection{A SIP with a Naive Initial Density}
+Consider a naive implementation in five dimensions, where the same prior knowledge on the bounds of $g$ inform the choice of a parameter space.
 Suppose $\pspace$ is given by $[-4, 0]^5$, induced by five regularly-spaced knot points in the interior of $x_2 \in (0,1)$ for which a uniform density is assumed in each component.
 In Figure~\ref{fig:pde-highd-initial-5d}, we show what one-thousand such initial functions look like, and note that many of them appear to exhibit fluctuating behavior which may require a finer mesh than the one being used to solve the problem ($36\times36$), in order to reduce numerical errors.
-This choice of initial density induces a lot of ``conceptual'' noise into the SIP, since ``common sense'' from a modeler's perspective could rule out zig-zag functions.
+This choice of initial density induces a lot of ``conceptual'' noise into the SIP, since ``common sense'' from a modeler's perspective could rule out functions which zig-zag excessively.
 
 \begin{figure}
 \centering
@@ -16,54 +18,41 @@ One thousand initial parameter samples (our model evaluation ``bugdet'') were us
 \label{fig:pde-highd-initial-5d}
 \end{figure}
 
-%%%%%%%%%%
 
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=0.675\linewidth]{figures/pde-highd/pde-highd_proj_D5}
-\caption{
-}
-\label{fig:pde-5d-proj}
-\end{figure}
+We solve the SIP for both scalar-- and vector--valued QoI maps.
+The latter is constructed with horizontal bands\---which correspond to the partitioning of $\Omega$ into components of the QoI map\---shown in the left of Figure \ref{fig:pde-highd-5d-example}.
+We refer to this map as $\qoi_\text{5D}$, and $\qoi_\text{1D}$ will again represent the scalar--valued map.
+In the right half of Figure~\ref{fig:pde-highd-5d-example}, the MUD solutions for $\qoi_\text{5D}$ and $\qoi_\text{1D}$ are shown in parameter space for a representative SIP.
+The scalar-valued MUD misidentifies the location of $g$'s minimum value, but the vector-valued QoI is able to resolve the general qualitative behavior.
 
-Observe that in Figure~\ref{fig:pde-5d-proj}, both the closest fit in parameter and measurement space fail to resolve the true function behavior at $\lambda_5$ (the interpolating piecewise--linear is shown again for reference), and both place a minimum at $\lambda_2$.
-The lines here are in some sense, the best that can be solved for with this design, and is helpful for comparing against our MUD solutions.
-Of particular interest is that both functions under-estimate $g$ at $\lambda_2$ by a large margin.
-Nevertheless, we pursue the solution for demonstration purposes and solve the SIP for both scalar-- and vector--valued QoI maps, the latter constructed with horizontal bands shown in the bottom left of Figure \ref{fig:pde-highd-5d-example}.
-
-\begin{figure}[htbp]
+\begin{figure}
 \centering
   \includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_sensors_D5}
   \includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D5_m100}
 \caption{
-(Top): Layout for 5-D vector--valued map and comparison of the two MUD solutions in parameter space.
-(Bottom): The response surfaces predicted by the two QoI maps alongside the noisy response surface that generated the simulated collected data.
+(Left): Layout for 5-D vector--valued map and comparison of the two MUD solutions in parameter space.
+(Right): Example MUD solutions for $\qoi_\text{5D}$ and $\qoi_\text{1D}$.
 }
 \label{fig:pde-highd-5d-example}
 \end{figure}
 
-In Figure~\ref{fig:pde-highd-5d-example}, the scalar-- and vector--valued MUD solutions are shown for the noisy surface plotted in the top-center, with associated predicted response surfaces flanking it.
-In the bottom-center plot, we can see that the scalar-valued MUD completely misidentifies the location of $g$'s minimum value, but the vector-valued QoI is able to resolve the behavior much better.
-In Figure~\ref{fig:pde-highd-5d-mud} we plot the results from twenty repeated trials (perturbations of noise) when using all hundred measurements, and observe the same difference in going from scalar-- to vector--valued solutions for the 75--dimensional example that we saw in 2 dimensions with \ref{fig:pde-MUD}\footnote{See Appendix~\ref{app:pde-example} for examples of the twenty MUD-solutions using different numbers of measurements.}.
+In Figure~\ref{fig:pde-highd-5d-mud} we plot the results from twenty repeated trials (perturbations of noise) when using all hundred measurements, and observe the same difference in going from scalar-- to vector--valued solutions for the five--dimensional example that we saw in two dimensions with \ref{fig:pde-highd-2d-vector-mud}.
+In the left half of Figure~\ref{fig:pde-highd-5d-mud}, the scalar-valued QoI is unable to differentiate between resolving residual discrepancies in different locations in $\Omega$.
+By contrast, the vector-valued QoI shown to the right is constructed with respect to the flow of information in the system, and so many more of the twenty trials land closer to the true minimum value of $g$.
+The solutions for the vector-valued approach instead explore the available knots (at $x_2=1/6$ and $1/3$), nearest the actual minimum value of $2/7$ instead, a much more valuable area of $\Lambda$ to explore.
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D5-1_m100}
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_pair_D5-5_m100}
-\caption{
-(Top): Scalar-valued solutions.
-(Bottom): Vector-valued solutions.
+\caption{ SIP solutions using $\qoi_\text{5D}$ and $\qoi_\text{1D}$ for twenty realizations of noise polluting the hundred measurements used to construct the map.
+(Left): Scalar-valued solutions.
+(Right): Vector-valued solutions.
 }
 \label{fig:pde-highd-5d-mud}
 \end{figure}
 
-By increasing the number of QoI, more directions of uncertainty are resolved in the parameter space.
-Since any solution in the equivalence class is valid for the SIP, the scalar-valued solutions are significantly more sensitive to noise, and so the solutions often appear to identify functions with a minimum on the wrong half of the spatial domain.
-In the left half of Figure~\ref{fig:pde-highd-5d-mud}, the scalar-valued QoI is unable to differentiate between resolving residual discrepancies in different locations in $\Omega$.
-By contrast, the vector-valued QoI shown below it is again constructed with respect to the flow of information in the system, and so many more of the twenty trials land closer to the true minimum value of $g$.
-The solutions for the vector-valued approach instead explore the available knots (at $x_2=1/6$ and $1/3$), nearest the actual minimum value of $2/7$ instead, a much more valuable area of $\Lambda$ to explore.
 
-Perhaps unsurprisingly given the poorly-designed initial density (equal intervals for each parameter), our MUD solutions still do not really trace out the interpolants or projections from Fig~\ref{fig:pde-5d-proj} that it should to approximate $g$.
-At the very least, we would hope to accurately estimate the location and value of $g$'s minima.
-Recall from \ref{subsec:pde-example} that we previously solved a two-dimensional version of this problem, which could have been used to inform a much smaller region of two of the five directions to explore.
-We now explore what would happen if our initial density was constructed with more care (without needing to use any model evaluations), since we saw from earlier examples that if DCI is initialized at a good initial mean, it has a chance of outperforming least-squares solutions in resolving discrepancy in truth.
+Recall from \ref{subsec:pde-example} that we previously solved a two-dimensional version of this problem.
+We leverage the effort involved in solving this first problem in order to better refine the approximation of $g$ in \ref{sec:mud-pde-sequence} below.
+By using the former SIP solution results to define a much smaller region of $\pspace$ to explore, the results from the second SIP can improve considerably.
