@@ -11,7 +11,9 @@ An illustration of the partitioning for both methods are shown in the top half o
   \includegraphics[width=0.475\linewidth]{figures/pde-highd/pde-highd_sensors-alt_D2.png}
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_geom_D2.png}
 \caption{
-(Bottom): The vector-valued QoI map is constructed for all $N=10,000$ parameter evaluations and the two resulting vectors are plotted against one another for both methods of partitioning $\Omega$.
+Comparison of $\qoi_\text{2D}$ (left) and $\qoi_\text{2D}^\prime$ (right).
+Partitioning of $\Omega$ into the two components of each map is shown in the top half of the figure.
+In the bottom half, the vector-valued QoI map is constructed for all $N=1000$ parameter evaluations using $\ndata=20, 60, \text{ and } 100$ measurements, and the two resulting component vectors are plotted against one another for both methods of partitioning $\Omega$.
 }
 \label{fig:pde-highd-2d-geometry}
 \end{figure}
@@ -31,15 +33,24 @@ We repeat this process for three subsets of the measurements (using the first sa
 This figure also shows the associated designs against the noisy response surface as a backdrop.
 
 First, we note that the inclusion of more data points has the effect of dilating (and to some extent rotating) the induced data space for both QoI maps.
-Recall that the observed distribution remains a standard Gaussian, regardless of the number of data points used to construct the map.
-In two dimensions, this observed distribution becomes a multivariate normal distribution instead, which can be visually thought of as a circular ``target'' located in the middle of each of the scatter-plots in Fig.~\ref{fig:pde-highd-2d-geometry}.
-As more measurements are incorporated, the size of that target relative to the rest of the space becomes increasingly small since the data manifolds dilate.
-Another analogy is of trying to find a needle in successively larger piles of hay.
+Fig.~\ref{fig:pde-highd-2d-geometry}.
+
 More work is required to find a good solution to the SIP, since there are more measurements with which the model must agree.
 
-The second implication of the two ways in which the maps can be formed is more visually evident, as the two quantities of interest that arise from a vertical bisection of $\Omega$ are nearly perfectly correlated.
-In other words, $\qoi^\text{2D}_\prime$ has much higher skewness than $\qoi^\text{2D}$.
-The two maps are presenting almost the same information (the shapes are very slim parallelograms), and so we fundamentally can already expect there to be very little difference between MUD points arising from using this map when compared to using the scalar--valued map.
+
+%%%%%%%%%%
+$\qoi_\text{2D}^\prime$ has much higher skewness than $\qoi_\text{2D}$, as is visually evident by the near-perfect correlation between its component values seen in the right plot of Fig~\ref{fig:pde-highd-2d-geometry}.
+The two component maps of $\qoi_\text{2D}$ contain almost the same information, so we can expect there to be little difference between MUD points arising from using $\qoi_\text{2D}^\prime$ when compared to using the scalar--valued map.
+We compare these two solutions for an instance of the SIP in Figure~\re{fig:pde-highd-2d-scalar-vs-alt}.
+
+\begin{figure}
+[TK - fix figure]
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_geom_D2.png}
+\caption{
+Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$ (left) compared to using $\qoi_\text{2D}^\prime$, juxtaposed against a plot of $g$.
+}
+\label{fig:pde-highd-2d-scalar-vs-alt}
+\end{figure}
 
 By contrast, the map induced by a horizontal split (bottom left of Fig. \ref{fig:pde-highd-2d-geometry}) provides new information in each component.
 While there is some correlation (the manifolds are not rectangular), a far greater proportion of samples will fall within the practical support of the observed distribution, which qualifies them as possible solutions to the SIP.
