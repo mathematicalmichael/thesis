@@ -37,7 +37,7 @@ def pcwInt(xvals, yvals, d=1):
 
     
 
-def poisson(gamma, mesh=None, nx=36, ny=36, width=1):
+def poissonModel(gamma, mesh=None, nx=36, ny=36, width=1):
     """
     `gamma` is scaling parameter for left boundary condition
     `n_x` and `n_y` are the number of elements for the horizontal/vertical axes of the mesh
@@ -85,11 +85,9 @@ def poisson(gamma, mesh=None, nx=36, ny=36, width=1):
     # Define boundary condition
     u0 = fin.Constant(0.0)
     if isinstance(gamma, int) or isinstance(gamma, float): # 1-D case
-        u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma, kappa=0.0, degree=2)
+        #u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma, kappa=0.0, degree=2)
         # the function below will have a min at (2/7, -gamma) by design (scaling factor chosen via calculus)
-    elif len(gamma) == 1:
-        u_L = fin.Expression(f"pow(x[1], 2) * pow(x[1] - 1, 5) * gamma", gamma=gamma[0]*823543/12500, degree=3)
-        #u_L = fin.Expression("-gamma*sin((2*kappa+1)*pi*x[1])", gamma=gamma[0], kappa=0.0, degree=2)
+        u_L = fin.Expression(f"pow(x[1], 2) * pow(x[1] - 1, 5) * gamma", gamma=gamma*823543/12500, degree=3)
     else: # Higher-D case
 #         if gamma is None:
 #             u_L = fin.Expression(highDstr(gamma), gamma=3.0, kappa=0.0, degree=2)
@@ -143,7 +141,7 @@ def poisson_sensor_model(sensors, gamma, nx, ny, mesh=None):
     assert sensors.shape[1] == 2, "pass with shape (num_sensors, 2)"
     num_sensors = sensors.shape[0]
     
-    u = poisson(gamma, mesh, nx=nx, ny=ny)
+    u = poissonModel(gamma, mesh, nx=nx, ny=ny)
     q = [u(xi,yi) for xi,yi in sensors]
 #     q = []
 #     V = u.function_space()

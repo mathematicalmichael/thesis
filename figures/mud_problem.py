@@ -4,8 +4,7 @@ import numpy as np
 from mud.plot import make_2d_unit_mesh
 from mud.util import std_from_equipment
 
-from newpoisson import poisson_sensor_model
-# from newpoisson import poisson # function evaluation (full response surface)
+from poisson import poisson_sensor_model
 from fenics import FunctionSpace, RectangleMesh, Point, Function
 import pickle
 
@@ -151,7 +150,7 @@ def main_ode(num_trials,
         model    = makeDecayModel(sensors, lam_true)
         qoi_true = model() # no args evaluates true param
         np.random.seed(seed)
-        lam = np.random.rand(int(1E4)).reshape(-1,1)
+        lam = np.random.rand(int(1E3)).reshape(-1,1)
         qoi = model(lam)
 
         def mud_wrapper(num_obs, sd):
@@ -187,7 +186,7 @@ def main_ode(num_trials,
         _re = (regression_err_mean, slope_err_mean, regression_err_vars, slope_err_vars, sd_means, sd_vars, num_sensors)
         res.append((_prefix, _in, _rm, _re))
 
-        plot_decay_solution(measurements, solutions, makeDecayModel, fsize=fsize,
+        plot_decay_solution(solutions, makeDecayModel, fsize=fsize,
                             end_time=t_max, lam_true=lam_true, qoi_true=qoi_true,
                             sigma=sigma, time_vector=sensors, prefix=_prefix)
 
