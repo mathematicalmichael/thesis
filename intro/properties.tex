@@ -52,12 +52,12 @@ Now, assuming \eqref{eq:pred-pract} holds, we state the following theorem from \
   Here, $\mu_{\pspace, d}$ denotes the disintegration of the dominating measure $\mu_\pspace$.
 \end{thm}
 
-The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_sol} has no normalization constant because it is in fact a density (i.e., it integrates to $1$), which is summarized in Corollary 3.1 in \cite{BJW18} and restated in simplified form below:
+The updated density \eqref{eq:update} in the iterated integral in \eqref{eq:dci_sol} has no normalization constant because it is in fact a density (i.e., it integrates to $1$), which is summarized in Corollary 3.1 in \cite{BJW18a} and restated in simplified form below:
 \begin{cor}\label{cor:int}
 $\updatedP(\pspace) = 1$.
 \end{cor}
 
-These definitions are combined to identify the form of the \emph{updated density}, originally derived in \cite{BJW18}:
+These definitions are combined to identify the form of the \emph{updated density}, originally derived in \cite{BJW18a}:
 
 \begin{defn}[Updated Distribution]\label{defn:updated}
   A solution satisfying \eqref{eq:dci_sol} is referred to as an updated distribution, with an updated density
@@ -84,7 +84,7 @@ The stability results below are all with respect to the TV metric, which is wide
 We first define stability with respect to perturbations in the data.
 
 \begin{defn}[Stability of Updated Densities I]\label{defn:stableobs}
-  Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred}.
+  Given $\initialP$ and $\observedP$, let $\widehat{\observedP}$ be any perturbation to $\observedP$ on $(\dspace, \dborel)$ satisfying \eqref{eq:pred-pract}.
   Let $\updatedP$ and $\widehat{\updatedP}$ denote the consistent solutions associated with $\observedP$ and $\widehat{\observedP}$, respectively.
   We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
   \begin{equation}
@@ -182,10 +182,7 @@ This avoids any additional model evaluations (as would be required by techniques
 We leverage the re-use of samples in the results herein extensively.
 
 By Theorem~\ref{thm:predicted_bound}, the accuracy of the computed updated density relies on the accuracy of the approximation of the push-forward of the initial.
-Throughout this thesis, we utilize a KDE with a Gaussian kernel to produce the non-parametric estimates of $\predicted$\footnote{
-In some examples (particularly those in the appendix), we express $\predicted$ analytically for purposes of demonstration.
-Such examples are especially useful for comparing numerical solutions to the exact solutions.
-}.
+Throughout this thesis, we utilize a KDE with a Gaussian kernel to produce the non-parametric estimates of $\predicted$.
 Such KDEs are known to converge at a rate of $\mathcal{O}(N^{-4/(4+\dimD)})$ in mean-squared error and $\mathcal{O}(N^{-2/(4+\dimD)})$ in $L^1$-error, where $\dimD$ is the dimension of $\dspace$, and $N$ is the number of samples from $\initial$ propagated through $\qoi$ \citep{Silverman}.
 
 For simplicity, we introduce the following notation to capture the role of the ratio involved in \eqref{eq:dci_sol} to demonstrate properties we can leverage for generating samples from $\updated$.
@@ -223,9 +220,9 @@ We leverage modern advances in software engineering with an emphasis on results 
 \input{software/intro.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Outline of Next Chapters}\label{sec:outline}
-In Chapter~\ref{chapter:mud}, we propose a way by which parameter identification can be performed in the DCI framework by posing the problem as a SIP for which a pull-back measure is sought.
-Central to how this contribution is accomplished is the definition of the QoI map.
+\section{Outline of Remaining Chapters}\label{sec:outline}
+In Chapter~\ref{chapter:mud}, we propose a way by which parameter identification can be performed in the DCI framework by posing the problem as a SIP and maximizing $\updated$.
+Central to how this contribution is accomplished in practice is the definition of a data-constructed QoI map.
 The impact of a QoI's inherent geometric properties on our ability to approximate solutions to SIPs using finite sampling is then summarized in Chapter~\ref{chapter:geometry}.
-Our focus there is on the property called skewness, which is connected to the QoI maps introduced in \ref{chapter:mud} through a case study of a PDE-based example in Chapter~\ref{chapter:vector-valued}.
+The focus there is on the property called skewness, which is connected to the QoI maps introduced in \ref{chapter:mud} through a case study of a PDE-based example in Chapter~\ref{chapter:vector-valued}.
 Finally, we provide some concluding remarks and directions for future research in Chapter~\ref{chapter:future} alongside several examples demonstrating preliminary results for novel extensions of the work presented in this thesis.
