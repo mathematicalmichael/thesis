@@ -32,12 +32,12 @@ The {\em updated} probability measure associated with this density is then data-
 Moreover, the updates to the initial probability measure only occur in directions informed by the QoI.
 In other words, the initial probability measure serves to regularize the space of all pullback measures solving the SIP to produce a unique solution.
 
-The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \citep{Dellacherie_Meyer_book} as the central tool in establishing existence, uniqueness, and stability of solutions.
+The SIP and its solution methodologies are based on rigorous measure theory using the Disintegration Theorem \citep{Dellacherie_Meyer_book, Chang_Pollard} as the central tool in establishing existence, uniqueness, and stability of solutions.
 Updated probability measures often have complex structures that are not well approximated by a family of parametrically defined distributions (e.g., Gaussian).
 This attribute of the solution further distinguishes this measure-theoretic approach from typical Bayesian-inspired approaches, e.g., Hierarchical Bayesian methods \citep{Smith, Tarantola_book, Wikle1998}, that specify prior distributions from a parametric family of distributions along with additional prior distributions on the so-called hyper-parameters introduced by this parametric family (e.g., the means and variances of a Gaussian).
 Subsequently, solutions to the SIP using Bayesian approaches will not, in general, produce solutions (defined as posterior distributions) whose push-forward matches the observed distribution.
 In fact, the push-forward of the posterior is not even of general interest in most Bayesian paradigms.
-Instead, the posterior predictive, which defines the distribution of possible unobserved values is of central interest \cite{Smith}.
+Instead, the posterior predictive, which defines the distribution of possible unobserved values is of central interest \citep{Smith}.
 The posterior predictive is constructed as a conditional distribution on the observations but makes practical use of the posterior through a marginalization.
 These differences are actually not surprising when one considers that the Bayesian inverse problem that is perhaps most familiar in the UQ community solves an inverse problem involving epistemic uncertainty, as we describe below and expand upon in Section~\ref{sec:compare}.
 

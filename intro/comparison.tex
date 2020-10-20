@@ -19,7 +19,7 @@ However, the Data-Consistent approach reflects the goal of constructing a distri
   \emph{How does one update initial beliefs in such a way that the modified predictions match the description of uncertainty in observed data?}
 \end{center}
 
-We now develop a typical Bayesian inverse problem following the framework described in \cite{Stuart10, Smith}, in order to make a formal comparison to the Data-Consistent inverse problem.
+We now develop a typical Bayesian inverse problem following the framework described in \cite{Stuart10, Smith}, in order to make a formal comparison to the Data-Consistent SIP.
 
 \subsubsection{The Bayesian Inverse Problem}
 Let $d$ denote the ``noisy'' data obtained on $Q(\paramref)$, which is often represented as
@@ -54,8 +54,8 @@ In other words, the posterior is a density of the form
     \posterior\lam := \prior\lam \frac{L_\dspace (\q | \param)}{ C },
 \end{equation}
 
-\noindent where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:update}.
-There, the denominator $C$ (known as the \emph{evidence} \cite{Smith}), ensures the posterior density integrates to one, and is given by
+\noindent where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:updated-pdf}.
+Here, the denominator $C$ (known as the \emph{evidence} \cite{Smith}), ensures the posterior density integrates to one, and is given by
 \[
 C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 \]
@@ -63,7 +63,7 @@ C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 Note that there are no constraints or requirements that likelihood function be a density.
 In fact, $L_\dspace$ need not even be in $L^1(\pspace)$ since it is actually only the product $\prior(\param) L_\dspace (\q | \param)$ that is required to be in $L^1(\pspace)$ to form a posterior.
 In other words, $L_\dspace (\q | \param)$ and $\observed(\qlam)$ can model completely different things with respect to uncertainty in the data.
-As stated above, $L_\dspace (\q | \param)$ is used to assess the relative likelihood that a single parameter $\param\in\pspace$ explains the observed data, whereas $\observed(\q)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
+As stated above, $L_\dspace (\q | \param)$ is used to assess the relative likelihood that a single parameter $\param\in\pspace$ explains all of the observed data, whereas $\observed(\qlam)$ describes the relative likelihood of a predicted datum associated with $\param\in\pspace$.
 In the Bayesian framework, there is a different notion of consistency of solutions, referring to certain asymptotic properties of $\posterior$ in the limit of infinite data \citep{Barron, Silverman, starktenorio}.
 
 

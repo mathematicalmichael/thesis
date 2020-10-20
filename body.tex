@@ -68,7 +68,7 @@ However, in Section~\ref{sec:high-dim-linear-example}, we still compute the form
   \\ & \\
   \hline
 \end{tabular}
-\caption{Functionals to minimize to obtain $\param$ that maximizes  the updated PDF (left) and the Bayesian posterior PDF (right).
+\caption{Functionals to minimize to obtain $\param$ that maximizes  the updated PDF (bottom) and the Bayesian posterior PDF (top).
 Here, $T(\param)$ is the typical functional often associated with Tikhonov regularization, and the $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
   \label{tab:func_comparisons}
 \end{table}
@@ -310,7 +310,6 @@ The weights of this convex sum, which determine the position of the MAP point on
 This is seen by comparing the location of the MAP point in the top right plot of Figure~\ref{fig:regularization} to the line segment connecting the initial mean to the MUD point in the bottom right plot of this same figure.
 The impact of this is also explored in the following examples.
 
-%\subsection{Example setup}\label{subsec:linear_examples}
 
 \begin{figure}[htbp]
   \includegraphics[width=0.475\linewidth]{figures/lin/lin-dim-cov-convergence}
@@ -529,7 +528,7 @@ Despite these differences, both examples share the following details.
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
   \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   }
-  \label{fig:ode-convergence-obs}
+  \label{fig:ode-convergence}
 \end{figure}
 
 Consider the exponential decay problem with uncertain decay rate $\param$:
@@ -549,10 +548,11 @@ Noisy data are simulated over the interval $t \in [1,3]$ assuming a $100$Hz meas
 An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\paramref = 0.5$, and a particular realization of noisy data shown as perturbed points around it.
 
 For 20 different realizations of $N=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ noisy measurement data, we construct $Q_\text{WME}$ with $u(t;\param)$ replacing $M_j(\param)$ in~\eqref{eq:qoi_WME}, estimate $\mudpt$, and analyze the statistical error in these estimates of $\paramref$.
-In the left plot of Figure~\ref{fig:ode-convergence-obs}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\paramref$) decreases.
+In the left plot of Figure~\ref{fig:ode-convergence}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\paramref$) decreases.
 The right plot demonstrates that the precision (i.e., the variance in the error) is also reduced by using more data.
 These results are also visualized in the plots of Figure~\ref{fig:ode-reference} where the distinct red curves in the top plot are the signals associated with the 20 $\mudpt$ estimates associated with the 20 independent trials of $N=20$ noisy measurements.
-However, in the bottom plot, these 20 red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
+However, in the bottom plot, these $20$ red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
+In Appendix~\ref{ext:ode-example}, we repeat this problem with measurement equipment that operates at double the temporal frequency and show how this change impacts the MUD solutions.
 
 % \FloatBarrier
 \subsection{PDE Example}\label{subsec:pde-example}
@@ -626,7 +626,7 @@ The sample from $\pspace$ which best predicts the hundred noiseless measurements
 
 \begin{figure}[htbp]
 \centering
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_convergence.png}
+    \includegraphics[width=0.45\linewidth]{figures/pde-highd/pde-highd_convergence.png}
 \caption{
 A plot of the variance in 2-norm of MUD solutions acquired from solving the SIP with $Q_{1D}$ and $Q_{2D}$ as more measurements are incorporated.
 The solid black line represents $Q_{1D}$ and the dashed blue line represents $Q_{2D}$.
