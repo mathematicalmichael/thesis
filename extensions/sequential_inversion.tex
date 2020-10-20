@@ -1,32 +1,30 @@
-
-\section{Sequential Inversion}\label{sec:ch05-sequential}
-
-The DCI framework relies on evaluating the ration function $r(\param)$ in $\dimD$--dimensional QoI space, so we turn our attention to addressing the challenges associated with the growth of this space.
+\section{Sequential Inversion}\label{sec:sequential}
+The DCI framework relies on evaluating the ratio function $r(\param)$ in $\dimD$--dimensional QoI space, so we turn our attention to addressing the challenges associated with the growth of this space.
 As $\dimD$ increases, we must approximate a push-forward distribution with perhaps a fixed number of samples (from model evaluations) $\nsamps$, which represents a considerable source of error since the convergence rate for kernel density estimation with Gaussian kernels is $\mathcal{O} (N^{2+\dimD})$.
 
 For example, consider a time-dependent problem for which hundreds of spatial sensors are providing streams of data.
-Approximating a hundred-dimensional space with $\nsamps = 1E3$ or $1E4$ samples (as we have been using for demonstrations), is wrought with problems.
-However, either of these values for $\nsamps$ would be sufficient to estimate a one-dimensional distribution.
+Approximating a $100$-dimensional space with $\nsamps = 1E3$ or $1E4$ samples (as we have been using for demonstrations), poses a problem for any density approximation method.
+However, either of these values for $\nsamps$ are generally sufficient to estimate a one-dimensional distribution.
 In some sense, approximating a QoI at each location over time is reasonable, but doing so for all of them simultaneously is not.
-To this end, we propose to investigate an approach to solving the parameter estimation problem by performing inversion through a sequence of scalar-valued QoIs rather than employ a vector-valued approach.
+To this end, we propose an approach to solving the parameter estimation problem by performing inversion through a sequence of scalar-valued QoIs rather than employ a vector-valued approach.
 
 Any choice of dimension below $\dimD$ would suffice, but this sequential-scalar-valued approach provides a starting place and admits a simplicity in exposition.
-By choosing a dimension of one, the focus of the examples can be restricted to solely the order in which QoIs are inverted; it avoids the additional complexity of enumerating the combinations of QoI when dimensions can vary.
-We also choose to use a linear map for convenience so that we can use the analytical solutions presented in the previous chapter without concern for approximation error.
-Furthermore we omit measurement error from polluting our observations so that all the inverse contours intersect at a point.
+By choosing a dimension of one, the focus of the examples is restricted to solely the order in which the QoIs are inverted; it avoids the additional complexity of enumerating the combinations of QoI when dimensions can vary.
+We also choose to use a linear map for convenience so that we can use the analytical solutions presented in Chapter~\ref{chapter:mud} without concern for approximation error.
+Furthermore, we omit measurement error from polluting the observations so that all the inverse contours intersect at a point.
 In the event that there is measurement error, each contour will be displaced, so the collection of contours will form a convex hull whose volume is proportional to the approximation error.
 By omitting measurement error, we simulate scalar-valued QoI which are constructed with sufficient number of measurements so as to ameliorate the impact of misidentifying each contour's location in $\pspace$.
 
-With each iteration in the sequence of inverse problems, we are trying to explain measurements that constitute a single QoI at the expense of accuracy in others.
+With each iteration in the sequence of inverse problems, we explain measurements that constitute a single QoI at the expense of accuracy in others.
 By contrast, the vector-valued approach seeks accuracy in all of the directions of observations simultaneously.
 This trade off is all about efficiency, since 1-dimensional problems are computationally ``cheap,'' we can iterate through many more of them for the same computational cost.
-Since by the time we finish iterating through all available QoI, the error in $Q^{(1)}$ may have been allowed to drift quite significantly away from its solution contour through the sequence of inverting through $Q^{(1)}, Q^{(2)}, \dots Q^{(100)}$.
-To address this, we perform multiple passes through our set of QoI.
+By the time we finish iterating through all available QoI, the estimate obtained from $Q^{(1)}$ may have drifted significantly away from its solution contour through the sequence of inverting through $Q^{(1)}, Q^{(2)}, \dots Q^{(100)}$.
+To address this, we perform multiple passes through the set of QoI.
 Borrowing from other sequential algorithms, these ``epochs'' will allow us to iterate until the solution stops changing by some predefined relative threshold, representing a lack of ``learning'' through continued effort.
 
 
 \subsection{Motivating Linear Example}
-We study the following motivating two-dimensional example with QoI defined by ten equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
+We study the following motivating two-dimensional example with QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
 We first plot the result of a single epoch in the left panel of Fig.~\ref{fig:iterative-linear-demo}.
 
 \begin{figure}
@@ -63,7 +61,7 @@ We observe that in Fig~\ref{fig:iterative-linear-demo-pair}, that there is much 
 The reason for this difference is that there is more mutually distinct information between successive iterations of a pair of random rows of $A$ than there is between adjacent rows, as measured by the angle between the solution contours.
 
 \subsection{Connection to Skewness}
-If we are careful with how we construct our maps or choose our iteration strategy, we can achieve considerably more accurate solutions with the same computational cost.
+If we are careful with how we construct maps or choose an iteration strategy, we can achieve considerably more accurate solutions with the same computational cost.
 Had the choice of QoI components corresponded to a pair of rows that were orthogonal, the initial mean would converge to the reference value in a single epoch (two iterations), since there is no redundancy in information whatsoever.
 This is equivalent to saying that we have an incentive to select rows that induce a QoI map with unit skewness.
 
@@ -80,8 +78,8 @@ This is equivalent to saying that we have an incentive to select rows that induc
 
 
 We show this in the left half of Figure~\ref{fig:iterative-linear-demo-smart} for two QoI maps with orthogonal pairs of components.
-If instead no a priori analysis of the rows of $A$ and iteration through the available QoI at random is the chosen ordering, a lot more accuracy is achieved with only ten iterations.
-We show this in the right half of Fig~\ref{fig:iterative-linear-demo-smart}, which exhibits a more accurate estimate compared to \ref{fig:iterative-linear-demo} at the same computational cost.
+If instead no a priori analysis of the rows of $A$ and iteration through the available QoI at random is the chosen ordering, more accuracy is achieved with only ten iterations.
+We show this in the right-half of Fig~\ref{fig:iterative-linear-demo-smart}, which exhibits a more accurate estimate compared to \ref{fig:iterative-linear-demo} at the same computational cost.
 
 
 \subsection{Comparisons and Convergence Results}
@@ -106,10 +104,10 @@ The latter approach is similar to the second in that the same problems are solve
   \label{fig:iterative-convergence-comparison}
 \end{figure}
 
-In Figure~\ref{fig:iterative-convergence-comparison}, it is shown that using the rows of $A$ sequentially performs very poorly (the error struggles to get past a single decimal place of accuracy), which aligns with ``spiraling'' seen in Figure~\ref{fig:iterative-linear-demo} where the first few epochs were plotted.
+In Figure~\ref{fig:iterative-convergence-comparison}, it is shown that using the rows of $A$ sequentially performs very poorly (the error struggles to get past a single decimal place of accuracy), which aligns with ``spiraling'' seen in Figure~\ref{fig:iterative-linear-demo} where the first few epochs are plotted.
 Shuffling the rows but requiring that every tenth iteration to use the same row (i.e., ensure same ordering for each epoch), leads to a considerable improvement by which sixteen decimal places of accuracy are achieved in under $100$ iterations.
 In a few instances, the shuffled approach stumbles on an ordering that accelerates convergence, likely due to orthogonal pairs of rows in the shuffled order.
-These cases exhibit the kind of behavior we saw in the left panel of Fig~\ref{fig:iterative-linear-demo-smart}; in other words, sometimes our random shuffling finds the ``smart'' rows to iterate through.
+These cases exhibit the kind of behavior seen in the left panel of Fig~\ref{fig:iterative-linear-demo-smart}; in other words, sometimes random shuffling finds the ``smart'' rows to iterate through.
 Since the ordering has no dependence on iteration number in the approach where we use random rows, we have more opportunities to find these successive orthogonal pairings, and so we see that on average, it takes fewer iterations to achieve the same accuracy.
 
 %

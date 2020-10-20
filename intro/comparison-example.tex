@@ -71,31 +71,28 @@ We show the results in Figure~\ref{fig:bayes-comparison-convergence}.
 For all values of $M$, the push-forward of the initial remains the same, and the push-forward of the update matches the observed.
 By contrast, the posterior increases in confidence alongside the predictions it produces.
 This further illustrates that the DIP and SIP are fundamentally different problems (they are addressing different questions).
-
 As more data are incorporated, the goal of the DIP is to reduce epistemic uncertainty; for the SIP, it is to quantify the aleotoric uncertainty.
 
 \end{ex}
 
 
-
-
 %%%%%
 
 In summary, it is not the goal of Bayesian inference to construct a pullback distribution.
-Bayesian inverse problems are fundamentally posed as parameter-identification, not distribution estimation.
+Bayesian inverse problems are fundamentally posed as parameter-identification problems, not distribution estimation problems.
 However, one could assume that a posterior on $\pspace$ can be expressed as a Gaussian distribution, and solve for the most likely mean and standard deviation that characterizes it \citep{Smith, Tarantola_book}.
 This defines what is commonly referred to a as a Hierarchical Bayesian Inverse Problem.
-More complex densities can be approximated by mixture models.
 
+More complex densities can be approximated by mixture models.
 For example, one can assume that the posterior can be given by a linear combination of four Gaussian distributions, and solve for eight parameter values (four standard deviations and means).
 However, the operative word here is \emph{assume}; in order to capture a density using a Bayesian framework, one needs to impose some sort of explicit structure on the posterior.
-No such compromise is required in the DCI framework.
+No such assumption is required in the DCI framework.
 Distributions (or measures) can be solved for directly, regardless of any nonlinear/non-parameteric structure by leveraging the measure-theoretic approaches described in \cite{BE13} or \cite{BJW18a}.
 
-It is important to note that Hierarchical Bayesian inverse problem casts a distribution-estimation problem in the context of parameter identification.
+It is important to note that Hierarchical Bayesian inverse problem still casts a distribution-estimation problem in the context of parameter identification.
 As a complementary line of reasoning, we seek to formulate a parameter identification problem in a DCI framework.
-For example, the mean of the updated density could be used as an estimator to address the parameter identification problem, but collecting more data does not improve confidence if used to estimate $\observed$ as described above.
-We revisit the results with a focus on parameter estimation using $\updated$.
+For example, the mean of the updated density could be used as an estimator to address the parameter identification problem.
+However, collecting more data does not improve confidence if used to estimate $\observed$ as described above unless we revisit the results with a focus on parameter estimation by considering alternative data-driven ways to construct the QoI (and subsequently $\observed$).
 
 In Chapter~\ref{chapter:mud}, we motivate the use of the maximal updated density point (maximizing the update), as a means of providing a useful point estimate to parameters.
 Before we proceed, we finish summarizing key results about the stability and numerical convergence of the updated solution \eqref{eq:updated-pdf} in the next section.

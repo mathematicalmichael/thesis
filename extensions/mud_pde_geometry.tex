@@ -1,9 +1,8 @@
 \subsection{Revisiting Example~\ref{subsec:pde-example}}
-
-Recall that aggregating spatial data into two separate components on $\qoi_\text{2D}$ provided a tangible benefit for resolving the uncertainty in the true function $g$ in Example~\ref{subsec:pde-example}.
+Recall that aggregating spatial data into two separate components on $\qoi_\text{2D}$ provides a tangible benefit for resolving the uncertainty in the true function $g$ as seen in Example~\ref{subsec:pde-example}.
 However, we did not present how the map $\qoi_\text{2D}$ was selected.
 To explore the impact of various choices in how data may be aggregated into components of a QoI map, we propose two methods for splitting the measurements into two subsets to construct the respective components of the map according to \eqref{eq:qoi_WME}.
-An illustration of the partitioning for both methods are shown in the top half of Figure~\ref{fig:pde-highd-2d-geometry}; a bisection of $\Omega$ into vertically-oriented halves is used to form $\qoi_\text{2D}^\prime$ and (as before), horizontal ones for $\qoi_\text{2D}$.
+An illustration of the partitioning for both methods is shown in the top half of Figure~\ref{fig:pde-highd-2d-geometry}; a bisection of $\Omega$ into vertically-oriented halves is used to form $\qoi_\text{2D}^\prime$ and (as before) horizontal ones for $\qoi_\text{2D}$.
 
 \begin{figure}
 \centering
@@ -32,11 +31,11 @@ We sample the predicted data spaces using simulated spatial data associated with
 To build intuition about how the underlying geometry induced by these maps changes, we plot the scatter-plots representing a visualization of the associated data spaces in the bottom half of Figure~\ref{fig:pde-highd-2d-geometry}.
 This figure also shows the associated designs against the noisy response surface as a backdrop.
 The inclusion of more data points has the effect of dilating (and to some extent rotating) the induced data space for both QoI maps.
-More work is required to find a good solution to the SIP, since there are more measurements with which the model must agree.
+This dilation is expected based on Corollary~\ref{cor:MUD_wme} where it is established (for linear maps), that the predictability assumption is satisfied once enough data are obtained.
 
 $\qoi_\text{2D}^\prime$ has much higher skewness than $\qoi_\text{2D}$, as is visually evident by the near-perfect correlation between its component values seen in the right plot of Fig~\ref{fig:pde-highd-2d-geometry}.
 The most notable difference between the scatterplots is the difference in diameters (reference the axis labels) for each data space, a fact attributable to the difference in skewness.
-The two component maps of $\qoi_\text{2D}$ contain almost the same information, so we can expect there to be little difference between MUD points arising from using $\qoi_\text{2D}^\prime$ when compared to using the scalar--valued map.
+The two component maps of $\qoi_\text{2D}^\prime$ contain almost the same information, so we can expect there to be little difference between MUD points arising from using $\qoi_\text{2D}^\prime$ when compared to using the scalar--valued map.
 We compare these two solutions for an instance of the SIP in Figure~\ref{fig:pde-highd-2d-scalar-vs-alt}.
 
 \begin{figure}
@@ -48,10 +47,9 @@ Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$
 \end{figure}
 
 By contrast, the map induced by a horizontal split (bottom left of Fig. \ref{fig:pde-highd-2d-geometry}) provides new information in each component.
-While there is some correlation (the manifolds are not rectangular), a far greater proportion of samples will fall within the practical support of the observed distribution, which qualifies them as possible solutions to the SIP.
+While there is some correlation (the predicted data spaces are not rectangular), a far greater proportion of samples will fall within the practical support of the observed distribution, which qualifies them as possible solutions to the SIP.
 More information is learned with the inclusion of each component using this design than would be with the vertical split.
-Had we performed an analysis of average skewness, we could have discovered these geometric implications without visual inspection.
-Using a quantitative measure such as skewness allows us to scale the assessment to higher-dimensional parameter and data spaces.
+Using a quantitative measure such as average skewness allows us to scale the assessment to higher-dimensional parameter and data spaces when visual inspection is not possible.
 
 We focus attention on comparing higher-dimensional QoI maps constructed from aggregating data separated into more horizontal bands to scalar QoI maps (as proxies for highly-skewed maps), and note that a more thorough discussion of constructing QoI maps that induce desirable geometric properties is of interest for future work.
 In \ref{sec:mud-higher-dimensions} and \ref{sec:mud-pde-sequence}, the ``vector--valued'' map will refer to the one with data aggregated into separate horizontal bands.
