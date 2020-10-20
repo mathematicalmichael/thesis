@@ -11,13 +11,13 @@ We let $\BB_{\pspace, \nsamps}$ denote the \emph{computational algebra} generate
 $$
 	\BB_{\pspace,\nsamps} = \sigma\left(\set{\VV^{(j)}}_{j=1}^{\nsamps}\right).
 $$
-$\BB_{\pspace, \nsamps}\subset \BB_\pspace$ and the events $A\in B_{\pspace, \nsamps}$ represent the $A\in\BB_\pspace$ for which we can ``easily'' compute probabilities and make inferences.
+$\BB_{\pspace, \nsamps}\subset \BB_\pspace$ and the events $A\in B_{\pspace, \nsamps}$ represent the $A\in\BB_\pspace$ for which we can compute probabilities and make inferences.
 While Algorithm~\ref{alg:inv_density} ultimately defines a probability measure implicitly on $(\pspace,\BB_\pspace)$, computationally this is almost never done; instead, the measures are only interrogated on the computational algebra associated with the finite set of samples.
 
 Different sets $S_k = \set{\param^{(i)}}_{i=1}^{\nsamps_k}$, where the $\param^{(i)}$'s and $\nsamps_k$'s may differ for each $k$, will lead to different measures computed from Algorithm~\ref{alg:inv_density}.
 Each $S_k$ induces a computational algebra which we index using the notation $\BB_{k}$ for simplicity, where it is understood that $\BB_k = \BB_{\pspace, \nsamps_k}$.
 The fact that solutions are defined on different sub-$\sa$s poses an immediate problem with respect to a computational approach to computing the distances between measures $\PP_{\pspace, \ndiscs, \nsamps_1}$ and $\PP_{\pspace, \ndiscs, \nsamps_2}$ even if $\nsamps_1=\nsamps_2$.
-See Figure~\ref{fig:voronoi_issues} for an illustration of such a scenario.
+See Figure~\ref{fig:voronoi_issues} for an example illustration of this scenario.
 
 \begin{figure}[ht]
 \centering
@@ -34,7 +34,7 @@ Two different Voronoi partitions induced by $\nsamps_1 = \nsamps_2 = 25 $ unifor
 \end{figure}
 
 
-The proof of the following Lemma describes how to ``computationally extend'' {\em any} probability measure defined on a computational algebra to the full $\sa$ $\pborel$, which we exploit in Algorithm~\ref{alg:totvar_disc}.
+The proof of the following Lemma describes how to extend {\em any} probability measure defined on a computational algebra to the full $\sa$ $\pborel$, which we exploit in Algorithm~\ref{alg:totvar_disc}.
 
 \begin{lem}
 \label{lem:measuresets}
@@ -42,7 +42,7 @@ Let $\mu$ be a measure on $(\pspace, \BB_\pspace)$, $\set{\VV^{(j)}}_{j=1}^{\nsa
 Assume $\mu (\VV^{(j)}) > 0 \; \forall \; j=1,\hdots, \nsamps$.
 Then, there exists a probability measure $\eta$ on $(\pspace, \BB_\pspace)$ such that $\eta(A) = \eta_\nsamps(A) \; \forall \; A\in\BB_{\pspace, \nsamps}$.
 \end{lem}
-In the proof below, we use $\eta_\nsamps$ and $\mu$ to construct a type of ``discrete'' Radon-Nikodym derivative of $\eta$.
+In the proof below, we use $\eta_\nsamps$ and $\mu$ to construct a type of discrete Radon-Nikodym derivative of $\eta$.
 This is motivated by the formal structure of solutions given by Algorithm~\ref{alg:inv_density}.
 The proof of Lemma~\ref{lem:measuresets} can be found in Appendix~\ref{app:measuresets}, but the two key equations involved are reproduced here for later reference:
 
