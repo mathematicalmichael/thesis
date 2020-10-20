@@ -1,9 +1,9 @@
-\section{ODE Example Revisited}\label{ext:ode-example}
+\chapter{ODE Example Revisited}\label{ext:ode-example}
 One way by which modelers can improve the quality of parameter estimates is by collecting more data.
 We consider what would happen if our measurement equipment were able to capture twice as many observations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Different Measurement Equipment}
+\section{Different Measurement Equipment}
 Instead of using equipment that operates at $100$Hz, we take $200$ measurements every second, resulting in 400 equispaced observations for $t \in (1,3)$.
 All other choices involved in the experiment (assumed equipment tolerance, number of trials, parameter samples), are kept the same.
 We refer to this setup wit faster measurement equipment as the ``alternative'' design.
@@ -54,7 +54,7 @@ This implies that we can achieve similar results with a shorter observational wi
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Impact of Equipment Precision}
+\subsection{Impact of Equipment Precision}
 To achieve higher precision in the estimate of the MUD point, one can use more precise measurement equipment.
 We expect that a method designed to address parameter estimation would see an improvement in accuracy  if the data is collected with more precise instruments.
 Here we show that this is indeed the case for the time-series example introduced earlier by considering choices of $\tau = 0.1, 0.05, 0.01, \text{ and } 0.005$ for $\mathbb{P}( \abs{\xi} < \tau ) = 99\%$ to select our $\sigma$ in our normal additive noise model.

@@ -2,12 +2,12 @@
 
 In this section we return to the nonlinear examples presented in the previous chapter and address some choices made in how the experiment was performed.
 By revisiting the examples, we demonstrate that the decisions made regarding measurement equipment and/or location have an impact on the reduction of uncertainty and accuracy of the MUD point.
-Furthermore, we want to show that the choices made in the experimental design of previous examples were made for reasons of convenience of exposition.
-Changing these assumptions does not later the viability of the MUD point as an alternative estimator for use parameter identification problems.
+Furthermore, we show that the choices made in the experimental design of previous examples are made for reasons of convenience of exposition.
+Changing these assumptions does not alter the viability of the MUD point as an alternative estimator for use parameter identification problems.
 We study the impact of more precise measurement devices on the convergence rates for the parameter estimates in Appendix \ref{ext:ode-example} for the problem in \ref{subsec:ode-example} of estimating the rate of exponential decay.
 To complement these results, we show them alongside ones generated with equipment that measures at twice the temporal frequency.
 
-We highlight how an awareness of another geometric property of QoI maps---relating to their sensitivity with respect to $\param$---can help improve the accuracy of the MUD estimate.
+In Section~\ref{sec:pde-oed-example}, we also highlight how an awareness of another geometric property of QoI maps---relating to their sensitivity with respect to $\param$---can help improve the accuracy of the MUD estimate.
 By placing sensors in locations which exhibit greater sensitivity to the parameter for which the SIP is solved, experimenters can achieve a considerable improvement in the precision of estimating $\paramref$ with an equal number of measurements collected.
 A similar complementary problem is solved where information about the sensitivity of measurement locations is used to inform improved placement of a hundred sensors.
 In this example, we walk through the sorts of analyses a modeler might conduct in order to select an experimental design through simulation and show a significant improvement in the accuracy of the MUD point.
@@ -18,10 +18,10 @@ In this example, we walk through the sorts of analyses a modeler might conduct i
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Elliptic PDE Example}\label{sec:pde-example}
+\subsection{Elliptic PDE Example}\label{sec:pde-oed-example}
 We make a slight modification to the Poisson problem from \ref{subsec:pde-example} to make it into a one-dimensional parameter identification problem.
 This choice is primarily motivated by the goal of using visual aids to demonstrate slopes corresponding to different measurement locations.
-We briefly summarize the experimental set-up again for the reader's convenience
+We briefly summarize the experimental set-up again for the reader's convenience.
 Consider the following Poisson problem defined on a unit domain $\Omega$:
 \begin{equation}\label{eq:pde-equation}
 \begin{cases}
@@ -33,18 +33,17 @@ Consider the following Poisson problem defined on a unit domain $\Omega$:
 \end{equation}
 where $(x_1, x_2) \in \Omega = (0,1)^2$, $\Gamma_T$ is the top, $\Gamma_B$ is the bottom, $\Gamma_L$ and $\Gamma_R$ left and right, respectively.
 $\frac{\partial u}{\partial \mathbf{n}}$ denotes the outward normal direction.
-We select $g=\param \sin(\pi x_2)$, and show the response surface for our given choice of $\param = 3$ in the left of Figure~\ref{fig:pde-response}, with darker colors representing more negative values.
-Our initial density is chosen to be uniform over the interval $\Lambda = (1,5)$.
-$f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$
+We select $g=\param \sin(\pi x_2)$, and show the response surface for $\param = 3$ in the left of Figure~\ref{fig:pde-response}, with darker colors representing more negative values.
+The initial density is chosen to be uniform over the interval $\Lambda = (1,5)$, and $f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$.
 
 
-We are interested in demonstrating the impact of incorporating more measurements on our ability to estimate $\paramref$.
+We demonstrate the impact of incorporating more measurements on the ability to estimate $\paramref$.
 %This poses a problem for this particular experimental design since it will heavily rely on the way in which the sensor grid is indexed.
 %One could place a regular grid of sensors in the interior of $\Omega$ to simulate a structured sensor array.
 %However, observe that the response surface shown on the left panel of Figure~\ref{fig:pde-response} exhibit vertical symmetry about the line $x_2=0.5$ (as a result of our choice of $g$).
 %For example, if the first half of indexed sensors corresponded to the bottom half of $\Omega$, the incorporation of the second half will be equivalent to having repeated observations.
 %To avoid these problems, we instead simulate the sensors as being placed randomly (drawn from uniform distributions), in the interior so that index-dependence becomes irrelevant and probability theory ensures the lack of truly redundant measurement locations.
-In \cite{Walsh}, the geometric quantity known as \emph{scaling} inherent to QoI maps is studied with respect to its impact on the accuracy of solutions to SIPs.
+In \cite{Walsh}, the geometric quantity known as \emph{scaling} inherent to QoI maps is studied with respect to its impact on the precision of solutions to SIPs.
 This property corresponds to the average local linear response of the QoI map with respect to changes in $\param$.
 In short, if a QoI map (such as one induced by a single measurement), exhibits larger slopes on average over $\pspace$, then it has greater scaling and by implication, more predictive precision.
 We demonstrate how an awareness of the QoI's scaling can inform the construction of a more optimal QoI map by way of better selecting the locations of measurement devices.
@@ -57,7 +56,7 @@ Such a graphical comparison of QoI maps can be done without prior knowledge of t
 \subsubsection{Uninformed Sensor Placement}
 First we show that using the sensor-placement strategy introduced in \ref{subsec:pde-example} results in many locations that provide little information to reduce uncertainty in the parameter space.
 We consider a selection of $S=1000$ measurement locations in the interior of the response surface chosen by sampling a uniform density over the set $(0.05, 0.95)^2 \subset \Omega$.
-We show only the first hundred measurement locations in plots for visual clarity.
+We show only the first $100$ measurement locations in plots for visual clarity.
 In the rightmost histogram of Figure~\ref{fig:pde-response}, we plot the data generated by each simulated sensor location, and note that many values are near zero as a result of being near boundaries or the right-side of $\Omega$.
 
 \begin{figure}
@@ -67,8 +66,8 @@ In the rightmost histogram of Figure~\ref{fig:pde-response}, we plot the data ge
   \includegraphics[width=0.45\linewidth]{figures/pde/pde_qoi_response}
 \caption{(Left): The function response surface for $u$ solving \eqref{eq:pde-equation} with $S=100$ measurement locations highlighted in white.
 The twenty most sensitive location markers are filled.
-(Right): The derivative $\partial M_i / \partial \param$ is computed for the hundred measurement locations and the distribution of the resulting collection of slopes is plotted.
-(Center): The values of the response surface at the hundred measurements is shown. The true parameter value $\paramref$ is highlighted with a vertical line, and the values of the response surface conditioned on $\paramref$ are used to form the histogram plotted vertically on the right. Many measurements are near zero.
+(Right): The derivative $\partial M_i / \partial \param$ is computed for the $100$ measurement locations and the distribution of the resulting collection of slopes is plotted.
+(Center): The values of the response surface at the measurements is shown. The true parameter value $\paramref$ is highlighted with a vertical line, and the values of the response surface conditioned on $\paramref$ are used to form the histogram plotted vertically on the right. Many measurements are near zero.
 }
 \label{fig:pde-response}
 \end{figure}
@@ -89,7 +88,7 @@ In the left panel of Figure~\ref{fig:pde-response}, the most sensitive measureme
 Furthermore, the response surface exhibits horizontal symmetry, so we restrict locations to the bottom half of $\Omega$.
 These two observations can inform a new bounding box for consideration of where measurements should be taken.
 We perform the same experiment for sensors placed in $(0.05, 0.25)\times(0.05, 0.5)$ (measurement locations drawn from a uniform distribution over this region), and refer to this as the \emph{alternative} experimental design.
-The first hundred of the thousand sensor locations sampled is shown in the left panel of \ref{fig:pde-alt-response} and we remark that the most sensitive ones (highlighted) cluster near the center of the left boundary, where the response surface is most negative.
+The first $100$ of the $1000$ sensor locations sampled is shown in the left panel of \ref{fig:pde-alt-response} and we remark that the most sensitive ones (highlighted) cluster near the center of the left boundary, where the response surface is most negative.
 
 
 \begin{figure}
@@ -130,12 +129,11 @@ Consider the convergence plots in Figure~\ref{fig:pde-convergence-obs}, which de
 \end{figure}
 
 We show the mean absolute error in the left half of Figure~\ref{fig:pde-convergence-obs} and remark that two decimal places of accuracy can be achieved with approximately $250$ samples instead of the $1000$ required in the left-half.
-
 In Appendix~\ref{ext:pde-tolerance}, we show these results for an experiment conducted with equipment of varying precision.
 
 The convergence results for the original experimental design demonstrate that even randomly placed sensors in the interior of $\Omega$ are suitable for parameter estimation.
-However, when we considered sensors that were placed with knowledge about the physical system being studied, more information was learned from our measurement equipment by placing sensors in different locations.
-Using our alternative experimental design, we saw a reduction of uncertainty in both Figures~\ref{fig:pde-convergence-obs} and \ref{fig:pde-convergence-std}, represented by the persistent vertical displacement between the regression lines for convergence.
+However, when we considered sensors that are placed with knowledge about the physical system being studied, more information is learned from the measurement equipment by placing sensors in different locations.
+Using the alternative experimental design, we see a reduction of uncertainty in both Figures~\ref{fig:pde-convergence-obs} and \ref{fig:pde-convergence-std}, represented by the persistent vertical displacement between the regression lines for convergence.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

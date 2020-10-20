@@ -1,9 +1,7 @@
-\section{Alternative Perspective on SIP Solutions in Example}\ref{app:pde-example}
-To further underscore the impact of incorporating the extra dimension of information in the data space and the impact it has on the reduction of uncertainty, we turn the reader's attention to
-[TK - you cut out the scatterplots here]
+\chapter{Alternative Perspective on SIP Solutions in Example}\ref{app:pde-example}
 
 We solve our SIP for twenty different realizations of noise to pollute our hundred measurements, and show the resulting solutions for the first twenty and all hundred being used to construct the vector--valued map.
-The resulting functions that are induced by these MUD points are shown in Fig.~\ref{fig:pde-highd-2d-vector-mud}, and we note that solutions are no longer are considering the possibility of the minimum value of $g$ being at the wrong knot point as we saw in Fig.~\ref{fig:pde-highd-2d-scalar-mud}, even when only twenty total data points are used to construct $Q$.
+The resulting functions that are induced by these MUD points are shown in Fig.~\ref{fig:pde-highd-2d-vector-mud}, and we note that solutions are no longer are considering the possibility of the minimum value of $g$ being at the wrong knot point as we see in Fig.~\ref{fig:pde-highd-2d-scalar-mud}, even when only twenty total data points are used to construct $Q$.
 By the time all hundred measurements are incorporated, the MUD solutions appear to be tracing out curves between the projection function and the interpolant function, a far more accurate set of predictions than those from the scalar--valued map (see \ref{fig:pde-highd-2d-scalar-mud}).
 
 \begin{figure}[htbp]
@@ -35,4 +33,4 @@ Histograms comparing initial samples with the highest probabilities (relative ra
 In \ref{fig:pde-highd-2d-hist}, the histograms have been normalized for comparison, and while the scalar--valued map still does reduce the uncertainty that we started with in our initial density, the vector--valued map is considerably more accurate.
 The multi-modal nature of the scalar--valued histogram plot shows a lack of resolution that is not experienced at all by the vector--valued solution.
 Both QoI maps solve a stochastic inverse problem, but the latter is more respectful of the geometry of the response surface, and so is able to learn significantly more, and bring us modelers far closer to the true function $g$.
-The multi-modal density of probable samples corresponds to the two types of solutions we saw in Figure~\ref{fig:pde-highd-2d-scalar-mud}, but we are after a single parameter estimate of truth.
+The multi-modal density of probable samples corresponds to the two types of solutions we see in Figure~\ref{fig:pde-highd-2d-scalar-mud}, but we are after a single parameter estimate of truth.
