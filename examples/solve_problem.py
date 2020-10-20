@@ -58,9 +58,9 @@ if __name__ == "__main__":
     parser.add_argument('--mc_points', default=0, type=int,
                 help="""
                     Number of samples (default: 0) in calculation of
-                    volumes using Monte-Carlo emulation (integration).
+                    volumes using Monte Carlo emulation (integration).
                     If given as <100, it will revert to None.
-                    If None, or not supplied, default to using the Monte-Carlo
+                    If None, or not supplied, default to using the Monte Carlo
                     assumption (volumes = 1/num_samples).
                     """)
 

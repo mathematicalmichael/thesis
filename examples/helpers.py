@@ -34,7 +34,7 @@ def baseline_discretization(model,
 
     # Estimate volumes of Voronoi cells associated with the parameter samples
     if isinstance(n_mc_points, int):
-        print("Using Monte-Carlo assumption for volumes.")
+        print("Using Monte Carlo assumption for volumes.")
         input_set.estimate_volume(n_mc_points=n_mc_points)
     else:
         input_set.estimate_volume_mc()

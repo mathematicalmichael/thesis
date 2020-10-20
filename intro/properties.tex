@@ -131,7 +131,7 @@ In Section~\ref{sec:approx}, the TV metric is used to bound the error in the upd
 %Since we are given $\initial$ and $\observed$, the computation of $\predicted$ is the only aspect of the Consistent Bayesian framework that needs to be approximated.
 %Since there are few restrictions on the structure of the map $\qoi$ that defines $\predicted$, there is in general no explicit expression from which we can generate samples, so we use a numerical approximation to the probability density function.
 %
-%For simplicity, we simply propagate Monte-Carlo samples from the prior and use a kernel density estimate (usually Gaussian\footnote{In this proposal, all results are generated using this kernel, though six kernels common to density estimation are implemented in the ConsistentBayes Python package [TK - cite Silverman and your github].}).
+%For simplicity, we simply propagate Monte Carlo samples from the prior and use a kernel density estimate (usually Gaussian\footnote{In this proposal, all results are generated using this kernel, though six kernels common to density estimation are implemented in the ConsistentBayes Python package [TK - cite Silverman and your github].}).
 %
 %We summarize this in the following algorithm:
 %
@@ -177,7 +177,7 @@ If this assumption is satisfied, then from \cite{BJW18a}, we have the following:
 
 A straightforward approach to construct $\widehat{\predicted}$ is to use a forward propagation of samples from $\pspace$ to $\dspace$ and then apply kernel density estimation (KDE)~\citep{BJW18a}.
 Then, we may evaluate $\updated$ directly for any sample of $\pspace$ at the cost of one model solve per sample.
-While this allows us to incorporate sophisticated sampling techniques such as Markov-Chain Monte-Carlo (MCMC)~\citep{Smith, Tarantola_book} to generate samples according to the updated distribution, we often opt for a simpler route based on rejection sampling by re-using the initial set of propagated samples.
+While this allows us to incorporate sophisticated sampling techniques such as Markov-Chain Monte Carlo (MCMC)~\citep{Smith, Tarantola_book} to generate samples according to the updated distribution, we often opt for a simpler route based on rejection sampling by re-using the initial set of propagated samples.
 This avoids any additional model evaluations (as would be required by techniques relying on proposal samples such as MCMC).
 We leverage the re-use of samples in the results herein extensively.
 
@@ -203,7 +203,7 @@ I(\updated ) = \int_\pspace r\Q \, d\initialP = \int_\dspace r(\q) \, d\predicte
 \]
 which we can use to validate that $I(\updated) = 1$ in order to numerically validate that the predictability assumption given in \eqref{eq:predicted_bound} was not violated.
 The sample average of $r(\q)$ can be used to estimate $I(\updated)$.
-This convenience is afforded by the fact that the i.i.d. samples provide us with the ability to take a Monte-Carlo estimate of the integral.
+This convenience is afforded by the fact that the i.i.d. samples provide us with the ability to take a Monte Carlo estimate of the integral.
 
 % Similarly, we follow \cite{BJW18} to write the commonly used metric for Information Gain, the Kullback-Liebler (KL) divergence:
 % \begin{equation}\label{eq:KLdiv}
