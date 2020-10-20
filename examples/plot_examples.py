@@ -1,6 +1,11 @@
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
+import matplotlib
+matplotlib.rcParams['mathtext.fontset'] = 'stix'
+matplotlib.rcParams['font.family'] = 'STIXGeneral'
+matplotlib.rcParams['font.size'] = 24
+matplotlib.backend = 'Agg'
 # plt.rcParams['figure.figsize'] = 10,10
 # plt.rcParams['font.size'] = 16
 # plt.rcParams['figure.figsize'] = 5,5
