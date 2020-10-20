@@ -7,14 +7,13 @@ This decreased precision demonstrates that skewness\---although reviewed and ana
 The examples in Sections~\ref{subsec:ode-example} and \ref{subsec:pde-example} motivate the use of a data-constructed QoI in order to incorporate an arbitrary number of measurements in a system into a scalar-valued map.
 These examples are chosen so that $\text{dim}({\Lambda}) = 1$ for simplicity and to establish a baseline for convergence results.
 The linear examples in Section~\ref{sec:high-dim-linear-example} demonstrate that the DCI framework maintains the accuracy of least-squares while incorporating initial beliefs for higher-dimensional linear maps.
-In those examples, we showed that the ability to resolve a true parameter improved as the gap between input dimension and operator row-rank decreased.
+In those examples, we show that the ability to resolve a true parameter improves as the gap between input dimension and operator row-rank decreases.
 
 The rank-deficiency of an operator is attributed to either the ill-conditioning of an operator $A:P\to P$, or when $P>D$ for a full-rank $A:P\to D$.
 In scenarios where $S>P$ observations are available, we are motivated to leverage the form of Eq.~\eqref{eq:qoi_WME} to construct a vector-valued version of the QoI map incorporating subsets of $S$ for each component.
 For example, a system for which spatial measurements are available over time may motivate constructing a scalar-valued QoI map using the WME functional for each spatial location.
-If distinctly different observable quantities are available (e.g., perhaps with different physical units), then these may be collapsed into each component of the map.
+If distinct observable quantities are available (e.g., perhaps with different physical units), then these may be collapsed into each component of the map.
 
-The discussion of how to optimally construct such maps is beyond the scope of this work, and is highly problem specific.
-To properly review the topic would need to take into account nuances involving measurement sensitivities and address combinatorial design-spaces.
+The discussion of how to optimally construct such maps is beyond the scope of this work, and is highly problem specific, requiring nuances involving measurement sensitivities and combinatorial design-spaces.
 However, we summarize that the extension of the equations presented in Section~\ref{sec:MUD_analysis} follows directly by constructing the resultant $1\times P$ matrices $A$ and scalar-valued $b$ for each component and then stacking them to form a $D\times P$ system, where we are motivated to minimize $P-D$.
-The choice of how to form each of the (up to) $\dimP$ components will directly impact the precision of our parameter estimate.
+The choice of how to form each of the (up to) $\dimP$ components will directly impact the precision of the parameter estimate.
