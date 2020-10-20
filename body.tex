@@ -315,10 +315,9 @@ The impact of this is also explored in the following examples.
   \includegraphics[width=0.475\linewidth]{figures/lin/lin-dim-cov-convergence}
   \includegraphics[width=0.475\linewidth]{figures/lin/lin-rank-cov-convergence}
 \caption{
-  Non-identity covariance
-  (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map (there's a name for these...).
-  (Right): Error for increasing row-rank of $A$.
-  (Bottom): Corresponding residuals between the least squares solution obtained through `numpy`'s `linalg.pinv` module and the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}.
+	Relative errors between $\paramref$ and (i) the least squares solution obtained through {\tt numpy}'s {\tt linalg.pinv} module, (ii) the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}, and (iii) the MAP point.
+  (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map.
+  (Right): Error for increasing row-rank of $A$, generated with Gaussian vectors and a SVD.
 }
 \label{fig:lin-error}
 \end{figure}
