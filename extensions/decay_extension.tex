@@ -1,6 +1,7 @@
 \chapter{ODE Example Revisited}\label{ext:ode-example}
 One way by which modelers can improve the quality of parameter estimates is by collecting more data.
 We consider what would happen if our measurement equipment were able to capture twice as many observations.
+Furthermore, we verify computationally that using more precise measurement equipment improves the precision of the MUD estimate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Different Measurement Equipment}
@@ -28,7 +29,7 @@ By the time all measurements are used, the stability of the solutions\---with re
 \end{figure}
 
 To quantify accuracy and stability of the MUD solutions, we solve the problem for the same choices of $S$ as the original problem (with the addition of $S=400$).
-We show the resulting error plots for convergence in the right half of Figures~\ref{fig:ode-convergence-obs}, juxtaposed against the original experimental design with $100$Hz equipment.
+We show the resulting error plots for convergence in the right half of Figures~\ref{fig:ode-convergence-alt}, juxtaposed against the original experimental design with $100$Hz equipment.
 
 \begin{figure}[htbp]
   \centering
@@ -43,7 +44,7 @@ We show the resulting error plots for convergence in the right half of Figures~\
   \label{fig:ode-convergence-alt}
 \end{figure}
 
-The convergence rates are similar (shown in the legend of \ref{fig:ode-convergence-obs}), and reduction in uncertainty is almost negligible at a given $S$.
+The convergence rates are similar (shown in the legend of \ref{fig:ode-convergence}), and reduction in uncertainty is almost negligible at a given $S$.
 However, we note that in the alternative setup, for an equal number of measurements, the time elapsed is half of that in the original due to the different equipment being used.
 To this end, we estimate convergence rates with respect to the time elapsed in the experiment rather than number of measurements used, and notice that the alternative setup (orange) exhibits much lower error at a given point of time.
 This implies that we can achieve similar results with a shorter observational window by using equipment that allows for faster observations.
