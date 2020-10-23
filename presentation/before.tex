@@ -8,25 +8,93 @@
 \section{Notation and Terminology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Broad Goals of Uncertainty Quantification}
+\centering
+    \emph{Why does any of this matter?}
+	\vskip 20pt
+
+    \begin{itemize}
+        \item Quantify and reduce uncertainty (aleotoric, epistemic)
+	    \vskip 20pt
+	    \item Be \emph{accurate} and \emph{precise}
+	    \vskip 20pt
+	    \item Make inferences and predictions
+	    \vskip 20pt
+	    \item Design ``efficient'' experiments
+	    \vskip 20pt
+	    \item Collect and use data ``intelligently''
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Notation and Terminology}
+\begin{itemize}
+	\item State variable: $u$ {\color{gray}(e.g. heat, energy, pressure, deflection)}
+	\vskip 10pt
+	\item<.-> Parameters: $\lambda$ {\color{gray}(e.g. source term, diffusion, boundary data)}
+	\vskip 10pt
+		\item Deterministic model: $\mathcal{M} (u, \lambda) = 0$, $$\mathcal{M}:\lambda \to u(\lambda)$$
+
+	\item Quantity of Interest map \tdeepred{(QoI)} - at least pcw differentiable \vskip 5pt
+		\begin{itemize}
+		\item Functional of the solution $$q: u(\lambda) \to \RR$$
+		\item Can be vector valued $$Q = \mat{c}{q_1\\ q_2\\ \vdots \\ q_d}$$
+		\item<.-> $Q(\lambda) := Q(u(\lambda))$
+	\end{itemize}
+
+\end{itemize}
+
+\end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Measure Theory 101}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[t]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{A QoI Map relates Inputs to Outputs}
 %\vskip 25pt
 \centering
 \begin{figure}
 \centering
 
-The one with the background on inverse problems.
+\begin{tikzpicture}[node distance=2cm, auto,]
+ %nodes
+ 
+% dummy figure to make everything look nice
+\node[] (dummy) {};
 
+\node[right=of dummy] (data) {$\dspace$};
+  
+\node[punkt, inner sep=5pt, below=of dummy] (model) {Model \\ (PDE)}
+ 	edge[pil,->, bend right=25] node[right] {$Q(u\lam)$} (data);
+
+\node[left=of dummy] (pspace) {$\Lambda$}
+   edge[pil,->, bend right=45] node[left] {$u\lam$} (model)
+   edge[pil,->, bend left=45] node[above] {$Q\lam$} (data);
+   
+\end{tikzpicture}
+
+\vspace{1em}
+\emph{Defining the Quantity of Interest Map}
 \end{figure}
 
 \end{frame}
 
-\input{content/intro_slides.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Measure Theory 101}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}[t]
+% %\vskip 25pt
+% \centering
+% \begin{figure}
+% \centering
+% 
+% The one with the background on inverse problems.
+% 
+% \end{figure}
+% 
+% \end{frame}
+
+%\input{content/intro_slides.tex}
 \input{content/problem_formulation.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
