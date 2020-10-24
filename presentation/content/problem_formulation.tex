@@ -21,21 +21,23 @@
   \end{equation}
 \end{defn}
 
+The above is known as the \emph{consistency condition}.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
 \begin{defn}[Consistent Solution]\label{defn:consistent-solution}
-  \noindent Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
-  If $\PP_\pspace$ or $\PP_\dspace$ are absolutely continuous with respect to $\pmeas$ or $\dmeas$, respectively, then we write
+  \noindent Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem}.
+
+  If $\PP_\pspace$ or $\PP_\dspace$ absolutely continuous w.r.t $\pmeas$ or $\dmeas$, resp, then we write
 
   \begin{equation*}
     \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ or }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
   \end{equation*}
-  to denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, respectively.
+  to denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, resp.
 
-  In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs. For example, here is a variant of \eqref{eq:inverse-problem} using these pdfs:
+  In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs:
   \begin{equation*}
   \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
   \end{equation*}
