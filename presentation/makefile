@@ -23,7 +23,7 @@ VPATH=content/
 # dependency list: if changes detected in dependency, rebuild target
 TEXFILES := \
 	$(FILENAME) \
-	before now after intro_slides comparison problem_formulation \
+	before now after content/intro_slides content/comparison content/problem_formulation \
 	$(shell cat presentation.tex | grep input | sed 's|\\input{||g' | sed 's|[}%]||g' | sed 's|.tex||g')
 
 

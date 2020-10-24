@@ -2,21 +2,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
-\begin{defn}[Inverse Problem]\label{defn:consistency}
-Given $\observedP$ on $(\dspace, \dborel)$ the \textbf{inverse problem} is to determine a probability measure $\updatedP$ on $(\pspace, \pborel)$ such that 
-
-	\begin{equation}\label{eq:inv}
-		\updatedP(Q^{-1}(E)) = \observedP(E),
-	\end{equation}
-for all events $E \in \mathcal{B}_\dspace$, where
-
-	\begin{equation*}
-		\updated = \frac{d\updatedP}{d\mu_\pspace} \;\text{ and }\; \observed = \frac{d\observedP}{d\mu_\dspace}.
-	\end{equation*}
-\eqref{eq:inv} defines a \tdeepred{``Consistent Solution,''} yields a \tdeepred{Consistency Condition.}
+\begin{defn}[Stochastic Forward Problem (SFP)]\label{defn:forward-problem}
+  Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and QoI map $\qoi$, the \emph{stochastic forward problem} is to determine a measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that satisfies
+  \begin{equation}\label{eq:forward-problem}
+    \PP_\dspace (E) = \PP_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
+  \end{equation}
 \end{defn}
 
-Note: {\scriptsize We use the notation $\PP$ and $\pi$ throughout this work to relate measures to their associated densities (i.e., Radon-Nikodym derivatives), which exist under the assumption of a dominating (Lebesgue) volume measure $\mu$.}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+
+\begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
+  Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$ satisfying
+  \begin{equation}\label{eq:inverse-problem}
+    \PP_\pspace (\qoi^{-1}(E)) = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
+  \end{equation}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+\begin{defn}[Consistent Solution]\label{defn:consistent-solution}
+  \noindent Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
+  If $\PP_\pspace$ or $\PP_\dspace$ are absolutely continuous with respect to $\pmeas$ or $\dmeas$, respectively, then we write
+
+  \begin{equation*}
+    \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ or }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
+  \end{equation*}
+  to denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, respectively.
+  In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs. For example, here is a variant of \eqref{eq:inverse-problem} using these pdfs:
+
+  \begin{equation*}
+  \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
+  \end{equation*}
+\end{defn}
+
 \end{frame}
 
 
