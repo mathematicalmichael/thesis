@@ -10,17 +10,19 @@
 \end{defn}
 
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-
 
 \begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
   Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$ satisfying
   \begin{equation}\label{eq:inverse-problem}
     \PP_\pspace (\qoi^{-1}(E)) = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
   \end{equation}
+\end{defn}
 
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
@@ -32,15 +34,15 @@
     \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ or }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
   \end{equation*}
   to denote the Radon-Nikodym derivatives (i.e., pdfs) of $\PP_\pspace$ and $\PP_\dspace$, respectively.
-  In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs. For example, here is a variant of \eqref{eq:inverse-problem} using these pdfs:
 
+  In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs. For example, here is a variant of \eqref{eq:inverse-problem} using these pdfs:
   \begin{equation*}
   \PP_\pspace (\qoi^{-1}(E)) = \int_{\qoi^{-1}(E)} \pp_\pspace \lam \, d\pmeas = \int_E \pp_\dspace \Q \, d\dmeas = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
   \end{equation*}
+
 \end{defn}
 
 \end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Perspectives}
