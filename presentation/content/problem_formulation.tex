@@ -58,21 +58,23 @@ The above is known as the \emph{consistency condition}.
 \begin{frame}[t]
 
 \begin{defn}[Initial Distribution]\label{defn:initial}
-  When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the initial measure $\initialP$.
-  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the measure $\pmeas$.
+  When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the \emph{initial measure} $\initialP$.
+
+  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ w.r.t the measure $\pmeas$.
 \end{defn}
 
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
-  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
+ The \emph{predicted distribution} (or density) is the push-forward density of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
 
-  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
-  \begin{equation}\label{eq:predicted}
+  Given as the Radon-Nikodym derivative (w.r.t $\dmeas$) of the pushforward measure
+ \begin{equation}\label{eq:predicted}
     \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
   \end{equation}
 \end{defn}
 
 
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{\it The one where we define the solution to the SIP.}
@@ -84,6 +86,40 @@ We now have all of the definitions required to summarize the density-based solut
 \end{equation}
 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
+
+Bayesian approach: modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, $\paramref$.
+
+\vskip 10pt
+
+\begin{defn}[Deterministic Forward Problem (DFP)]
+  Given a space $\pspace$, and QoI map $\qoi$, the \emph{deterministic forward problem} is to determine the values, $\q \in \dspace$ that satisfy
+  \begin{equation}
+    \q = \qlam, \; \forall \; \param \in \pspace.
+  \end{equation}
+\end{defn}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{defn}[Deterministic Inverse Problem (DIP) Under Uncertainty]
+  Given a noisy datum (or data-vector) $d = \q + \xi$, $\q \in \dspace$, the \emph{deterministic inverse problem} is to determine the parameter $\param \in \pspace$ which minimizes
+  \begin{equation}
+    \norm{\qoi(\param) - d}
+  \end{equation}
+  where $\xi$ is a random variable (or vector) drawn from a distribution characterizing the uncertainty in observations due to measurement errors.
+\end{defn}
+
+In the above definition, $\xi$ is some unobservable perturbation to the true output, arising from epistemic uncertainty (e.g. the precision of available measurement equipment).
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Perspectives}
