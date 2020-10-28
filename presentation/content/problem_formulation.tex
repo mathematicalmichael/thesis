@@ -22,6 +22,13 @@
 \end{defn}
 
 The above is known as the \emph{consistency condition}.
+
+\begin{defn}[Observed Distribution]\label{defn:observed}
+  When the measure $\PP_\dspace$ in \eqref{eq:inverse-problem} quantifies the characterization of uncertainty in the QoI data, it is referred to as the \emph{observed measure}, $\observedP$.
+
+  If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed density} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the measure $\dmeas$.
+\end{defn}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,6 +50,38 @@ The above is known as the \emph{consistency condition}.
   \end{equation*}
 
 \end{defn}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+\begin{defn}[Initial Distribution]\label{defn:initial}
+  When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the initial measure $\initialP$.
+  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ with respect to the measure $\pmeas$.
+\end{defn}
+
+\begin{defn}[Predicted Distribution]\label{defn:predicted}
+  The push-forward density of $\initial$ under the map $\qoi$ is denoted as $\predicted$, and is referred to as the \emph{predicted distribution} (or density).
+
+  It is given as the Radon-Nikodym derivative (with respect to $\dmeas$) of the push-forward probability measure \eqref{eq:forward-problem} given by
+  \begin{equation}\label{eq:predicted}
+    \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
+  \end{equation}
+\end{defn}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we define the solution to the SIP.}
+
+We now have all of the definitions required to summarize the density-based solution to the SIP, known as the \emph{updated density} as:
+\vskip 10pt
+\begin{equation}\label{eq:updated-pdf}
+	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
+\end{equation}
 
 \end{frame}
 
