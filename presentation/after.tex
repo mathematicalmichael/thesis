@@ -37,11 +37,28 @@ $N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[t]
+
+The one with the small problems in many batches.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch.png}
+  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs.png}
+
+  \caption{
+  Dotted lines show the solution contours for each row of the operator $A$.
+  (Left): First epoch for iterating through 10 QoI.
+  (Right): Three more epochs allows our estimate to get much closer to the true value.
+  }
+  \label{fig:iterative-linear-demo}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[t]
 %\vskip 25pt
 \begin{figure}
 \centering
-
-The one with the small problems in large batches.
 
 \only<1>{
 \begin{figure}
@@ -62,7 +79,8 @@ The one with the small problems in large batches.
   \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
   \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-rand.png}
   \caption{
-  If we are careful with how we construct our maps or choose our iteration strategy, we can achieve considerably more accurate solutions with the same computational cost.
+  (Left): Subsets of available QoI components can be chosen to exhibit minimal redudancy and lead to expedited convergence.
+  (Right): Random components of the QoI map used for each iterative step. This leads to an overall similar level of precision in this example, without the need to use gradients.
   }
   \label{fig:iterative-linear-demo-smart}
 \end{figure}
@@ -74,7 +92,7 @@ The one with the small problems in large batches.
   \includegraphics[width=0.95\linewidth]{figures/iterative/10D-convergence-comparison.png}
   \caption{
   20 initial means are chosen and iterated on for three approaches for ordering QoI.
-  Individual experiments are transparent and the mean error is shown as solid lines.
+  Individual experiments are transparent and the mean error is shown as a solid line for each approach.
   }
   \label{fig:iterative-convergence-comparison}
 \end{figure}
@@ -109,14 +127,13 @@ You don't. But I enabled you to check for yourself.
 	\item Each change is validated for reproducibility
 	\item {\tt makefile} for convenience ({\tt make <filename>})
 	\begin{itemize}
-		\item dissertation (\LaTeX)
-		\item presentation (beamer)
+		\item dissertation + presentation (\LaTeX, themes, style files)
 		\item every example, convergence result (Python)
 		\item every image in every figure
 	\end{itemize}
-	\item Unit tests aid in ensuring integrity of functions
 	\item PyPi published implementation of main methods: {\tt pip install mud}
-	\item Docker guarantees software runtime (on {\tt x86}, {\tt armv8} forthcoming): \\ {\tt docker pull mathematicalmichael/python:thesis}({\tt latex:thesis})
+	\item Unit tests aid in ensuring integrity of functions
+	\item Docker guarantees software runtime (ran on {\tt x86} and {\tt arm}) \\ {\tt docker pull mathematicalmichael/python:thesis}({\tt latex:thesis})
 \end{itemize}
 
 \end{figure}
