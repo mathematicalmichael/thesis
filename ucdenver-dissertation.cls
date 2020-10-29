@@ -138,7 +138,7 @@
     \@committeeMembers \\[1in]
   \end{center}
   \begin{flushright}
-    Date \underline{\@submitDate}
+    Date: \@submitDate
   \end{flushright}
   \vspace*{\fill}
 }
@@ -146,19 +146,20 @@
 %% formatting committee page
 \newcommand{\makeprefacepage}{
   \newpage
-  \begin{flushleft} 
+  \begin{flushleft}
   \@authorLast{}, \@authorFirst{} \@authorMiddle{} (Ph.D., \@program) \\
   { \doublespacing \@title \par Thesis directed by \@advisorTitle{} \@advisor \par }
   \end{flushleft}
   \medskip
   \begin{center}
   {\bf ABSTRACT}\\
-  \end{center} 
+  \end{center}
   \hskip \parindent
+  \raggedright   %% ragged right edges in abstract
   {\doublespacing \@preface \par }
   \vfill
   \begin{flushright}
-  The form and content of this abstract are approved. I recommend its publication.
+  The form and content of this abstract are approved. We recommend its publication.
   \end{flushright}
   \begin{flushright}
   \hfill Approved: \@advisor
@@ -213,20 +214,21 @@
 
 %% hyperlink formatting
 \hypersetup{%
-    hyperindex = {true},
+    % hyperindex = {true}, % unecessary
     colorlinks = {true},
     linktocpage = {true},
     plainpages = {false},
-    linkcolor = {blue},
-    citecolor = {blue},
-    urlcolor = {blue},
+    linkcolor = {black},
+    citecolor = {black},
+    urlcolor = {black},
     pdfstartview = {Fit},
     pdfpagemode = {UseOutlines},
     pdfview = {XYZ null null null}
 }
 \urlstyle{same}
 
-%% table of contents 
+%% table of contents
+\setcounter{tocdepth}{3} % subsubsection level
 \renewcommand{\@tocrmarg}{2.55em plus1fil}
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
@@ -251,7 +253,7 @@
 
 \renewcommand*\l@section{\vspace{12pt}\@dottedtocline{1}{1.5em}{2.3em}}
 \renewcommand*\l@subsection{\vspace{12pt}\@dottedtocline{2}{3.0em}{3.2em}}
-\renewcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
+\renewcommand*\l@subsubsection{\vspace{12pt}\@dottedtocline{3}{4.5em}{4.1em}} % added vspace, which was missing and made 7.0 into 4.5 for em to make indents equal throughout (JH)
 \renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
 \renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
 
@@ -301,7 +303,7 @@
     \if@restonecol\twocolumn\fi
     \doublespacing
     }
-    
+
 %% custom list of figures
 \renewcommand\listfigurename{LIST OF FIGURES}
 \newcommand{\ucdlistfigureheader}[1]{\newpage%
@@ -325,7 +327,7 @@
 %\vspace*{\fill}
     \doublespacing
     }
-    
+
 %% we override the abstract command to avoid a new page
 \renewenvironment{abstract}{%
     \small
@@ -423,13 +425,13 @@
 % subsubsection
 \newcommand{\ucdsubsubsec}[2][default]{%
   \refstepcounter{subsubsection}%
-  \addcontentsline{toc}{subsubsection}{\thesubsubsection\space #1}
+  \addcontentsline{toc}{subsubsection}{\hspace{7em}\thesubsubsection\space #1}
   {\@afterindentfalse\@afterheading\singlespacing\normalsize\textbf{\thesubsubsection\space #2}} \nopagebreak
   \vskip \postSskip \nopagebreak}
 \newcommand{\ucdsubsubsecnn}[1]{%
   {\@afterindentfalse\@afterheading\singlespacing{\normalsize\textbf #1}} \nopagebreak
   \vskip \postSskip \nopagebreak}
-  
+
 \renewcommand{\chapter}{\secdef \ucdchapter \ucdchapternn}
 \renewcommand{\part}{\secdef \ucdpart \ucdpartnn}
 \renewcommand{\section}{\secdef \ucdsec \ucdsecnn}
