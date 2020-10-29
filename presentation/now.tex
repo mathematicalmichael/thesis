@@ -5,20 +5,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
+
 \centering
-\vskip 24pt
 We formally define the maximal updated density (MUD) point as
 \begin{equation}\label{eq:mudpt_inital_defn}
 	\mudpt := \argmax {\updated}(\param).
 \end{equation}
 
-\vskip 24pt
-We motivate the use of the MUD point as an alternative to the MAP point for parameter estimation problems.
-
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}[t]{\it The one where we create a unifying framework.}
 
 Let $\norm{\mathbf{x}}_C^2 := (\mathbf{x}, \mathbf{x})_C = \mathbf{x}^T C \mathbf{x}$. \\
 
@@ -56,7 +53,7 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
   $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}$
 &
   $\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}$
-\\
+\\ \\
 \hline
   & \\
   Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
@@ -67,11 +64,11 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 & \\
   \hline
 \end{tabular}
-\caption{The $\param$ which minimizes these functionals also maximizes the updated PDF (left) and the Bayesian posterior PDF (right).
-
-$T(\param)$ is the typical functional often associated with Tikhonov regularization.
-
-The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
+% \caption{The $\param$ which minimizes these functionals also maximizes the updated PDF (left) and the Bayesian posterior PDF (right).
+%
+% $T(\param)$ is the typical functional often associated with Tikhonov regularization.
+%
+% The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from the predicted density that serves as ``unregularization'' in data--informed directions.}
   \label{tab:func_comparisons}
 \end{table}
 
@@ -89,17 +86,16 @@ The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{\it The one where an example highlights a key difference.}
 
-\centering
-Consider a linear QoI map is defined by $A=\mat{cc}{1 & 1}$. \\
-2-D input, 1-D output $\implies$ rank-deficient
+\begin{itemize}
+\item $A=\mat{cc}{1 & 1}$
+\item 2-D input, 1-D output $\implies$ rank-deficient
+\end{itemize}
+\bigskip
 
-\vskip 12pt
-
-Parameters in the initial and observed densities are given by
 \begin{equation*}
 \begin{split}
-	\initialMean = \mat{cc}{0.25 & 0.25}^\top, \\
-  \initialCov = \mat{cc}{1 & -0.25 \\ -0.25 & 0.5}, \\
+	\initialMean = \mat{cc}{0.25 & 0.25}^\top \\ \\
+  \initialCov = \mat{cc}{1 & -0.25 \\ -0.25 & 0.5} \\ \\
   \observedMean=1, \text{ and } \observedCov = \mat{c}{0.25}
 \end{split}
 \end{equation*}
@@ -139,8 +135,8 @@ Parameters in the initial and observed densities are given by
     \\
     \hline
   \end{tabular}
-
-  \caption{Gaussian data mismatch for a 2-to-1 linear map (left plots). Gaussian initial/prior induce different regularization terms (middle plots), which leads to different optimization functions (right plots) and parameter estimates.}
+  %
+  % \caption{Gaussian data mismatch for a 2-to-1 linear map (left plots). Gaussian initial/prior induce different regularization terms (middle plots), which leads to different optimization functions (right plots) and parameter estimates.}
   \label{fig:regularization}
 \end{figure}
 
@@ -154,9 +150,7 @@ Parameters in the initial and observed densities are given by
 \subsection{Closed-Form Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
-%\vskip 25pt
-\centering
+\begin{frame}
 
 The posterior covariance is formally given by
 
@@ -164,13 +158,13 @@ The posterior covariance is formally given by
 \Sigma_\text{post} := ( A^\top {\Sigma}_\text{obs}^{-1} A + \initialCov^{-1} )^{-1}.
 \end{equation}
 
-Applying Woodbury identity and~\eqref{eq:predictCov}, we rewrite the posterior covariance:
+Using Woodbury identity and~\eqref{eq:predictCov}:
 
 \begin{equation}\label{eq:map_cov_analytical}
 \Sigma_\text{post} = \initialCov - \initialCov A^\top \left[\predictedCov + \observedCov\right]^{-1} A \initialCov
 \end{equation}
 
-Can now interpret $\Sigma_\text{post}$ as a rank $d$ correction (or update) of $\initialCov$. \\
+Interpretation: $\Sigma_\text{post}$ as a rank $d$ correction (or update) of $\initialCov$
 $\predictedCov + \observedCov$ is invertible because it is the sum of two s.p.d matrices. \\
 We rewrite the closed form expression for the MAP poing given in \cite{Tarantola_book} as
 
@@ -182,7 +176,7 @@ We rewrite the closed form expression for the MAP poing given in \cite{Tarantola
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 We define
 \begin{equation}\label{eq:eff_reg}
@@ -228,22 +222,31 @@ Substituting~\eqref{eq:updatedCov_final} into~\eqref{eq:mud-point-analytical-alt
 
 \end{frame}
 
-\begin{frame}[t]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
 
-\centering
-Predictability assumption:\\
-smallest predicted > largest observed (eigenvalues of covariances)
 
 \vskip 12pt
 \begin{thm}\label{thm:MUD_existence_uniqueness}
 Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
 If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
 \begin{enumerate}[(a)]
-\item There exists a unique parameter, denoted by $\mudpt$, that maximizes $\updated$.
+\item There exists a unique $\mudpt$.
 \item $Q(\mudpt) = \observedMean$.
 \item If $d=p$, $\mudpt$ is given by $A^{-1}$. If $d<p$, $\mudpt$ is given by~\eqref{eq:mud-point-analytical-final} and the covariance associated with this point is given by~\eqref{eq:updatedCov_final}.
 \end{enumerate}
 \end{thm}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\it The one where we address a key assumption}
+
+\begin{itemize}
+\item Predictability Assumption: $\predicted$ is a dominating measure for $\observed$
+\item Linear case: involves eigenvalues of covariances
+\item min eigenvalue $\predictedCov$ > max eigenvalue $\observedCov$
+\end{itemize}
 
 \end{frame}
 
@@ -254,17 +257,16 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 \begin{frame}[t]{\it The one where we show how rank and dimension impact our solutions.}
 %\vskip 25pt
 \centering
-\centering
 Example: scaling random diagonal initial covariances
 
 \begin{figure}[htbp]
   \includegraphics[width=0.475\linewidth]{figures/lin/lin-dim-cov-convergence}
   \includegraphics[width=0.475\linewidth]{figures/lin/lin-rank-cov-convergence}
-\caption{
-	Relative errors between $\paramref$ and (i) the least squares solution obtained through {\tt numpy}'s {\tt linalg.pinv} module, (ii) the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}, and (iii) the MAP point.
-  (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map.
-  (Right): Error for increasing row-rank of $A$, generated with Gaussian vectors and a SVD.
-}
+% \caption{
+% 	Relative errors between $\paramref$ and (i) the least squares solution obtained through {\tt numpy}'s {\tt linalg.pinv} module, (ii) the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}, and (iii) the MAP point.
+%   (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map.
+%   (Right): Error for increasing row-rank of $A$, generated with Gaussian vectors and a SVD.
+% }
 \label{fig:lin-error}
 \end{figure}
 
@@ -276,7 +278,7 @@ Example: scaling random diagonal initial covariances
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[t]{\it The one where we leverage this framework for general streams of data.}
-\centering
+
 Suppose $\exists \; d$ measurement devices generating repeated noisy data. \\
 \vskip 12pt
 For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device. \\
@@ -300,7 +302,7 @@ We now construct a $d$-dimensional vector-valued map from data obtained on the $
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map.}
-\centering
+
 
 The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
 
@@ -320,7 +322,7 @@ Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a
 
 
 \begin{frame}[t]{\it The one where measurements impact the predictability assumption.}
-\centering
+
 The $j$th diagonal component of the predicted covariance matrix is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
 
 Then, the associated predicted variance is given by
@@ -424,16 +426,22 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{itemize}
-\item $g(x_2)$ is unknown, and the goal is to use noisy data to estimate this unknown boundary data.
-\item In other words, the parameter $\param$ now represents an uncertain function.
-\item To generate the noisy data, we use $g(x_2)\propto x_2^2(x_2-1)^5$
+
+\item $g(x_2)$ is uncertain parameter, i.e., the parameter is an uncertain function.
+\bigskip
+\item To generate the noisy data, we use $g(x_2)\propto x_2^2(x_2-1)^5$.
+\bigskip
 \item Constant of proportionality chosen so $\min{g}=-3$ at $x_2=\frac{2}{7}$.
+\bigskip
 \item Piecewise-linear finite elements on a triangulation of a $36\times36$ mesh.
+\bigskip
 \item 100 randomly placed sensors in the subdomain $(0.05, 0.95)^2 \subset \Omega$.
+\bigskip
 \item Repeated $20$ times to study the subsequent variation in MUD points due to different realizations of noisy data.
+\bigskip
 \end{itemize}
 
 \end{frame}

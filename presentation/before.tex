@@ -15,7 +15,7 @@
     \begin{itemize}
 	    \item Make inferences and predictions
 	    \vskip 20pt
-        \item Quantify and reduce uncertainty (aleotoric, epistemic)
+        \item Quantify and reduce uncertainties (aleotoric, epistemic)
 	    \vskip 20pt
 	    \item Be \emph{accurate} and \emph{precise}
 	    \vskip 20pt
@@ -27,20 +27,18 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{The one where we define the letters we use and what they mean.}
+\begin{frame}[t]{\it The one where we define the letters we use and what they mean.}
 \begin{itemize}
 	\item State variable: $u$ {\color{gray}(e.g. heat, energy, pressure, deflection)}
 	\vskip 10pt
 	\item<.-> Parameters: $\lambda$ {\color{gray}(e.g. source term, diffusion, boundary data)}
 	\vskip 10pt
-		\item Deterministic model: $\mathcal{M} (u, \lambda) = 0$, $$\mathcal{M}:\lambda \to u(\lambda)$$
+		\item Model: $\mathcal{M} (u, \lambda) = 0$, so $u(\param)$
 
-	\item Quantity of Interest map \tdeepred{(QoI)} - at least pcw differentiable \vskip 5pt
-		\begin{itemize}
-		\item Functional of the solution $$q: u(\lambda) \to \RR$$
-		\item Can be vector valued $$Q = \mat{c}{q_1\\ q_2\\ \vdots \\ q_d}$$
-		\item<.-> $Q(\lambda) := Q(u(\lambda))$
-	\end{itemize}
+	\item Quantity of Interest \tdeepred{(QoI)} map, (piecewise smooth) \vskip 5pt
+		$$Q = \mat{c}{q_1\\ q_2\\ \vdots \\ q_\dimD}, \; \text{ where } \; q_i: u(\lambda) \to \RR$$
+
+We write $Q(\lambda) := Q(u(\lambda))$ to make the dependence on $\param$ explicit
 
 \end{itemize}
 
@@ -62,7 +60,7 @@
 
 \node[right=of dummy] (data) {$\dspace = \qoi(\pspace)$};
 
-\node[punkt, inner sep=5pt, below=of dummy] (model) {Model \\ (PDE)}
+\node[punkt, inner sep=5pt, below=of dummy] (model) {Model \\ (e.g., PDE)}
  	edge[pil,->, bend right=25] node[right] {$Q(u\lam)$} (data);
 
 \node[left=of dummy] (pspace) {$\Lambda$}
@@ -71,8 +69,6 @@
 
 \end{tikzpicture}
 
-\vspace{1em}
-\emph{Defining the Quantity of Interest Map}
 \end{figure}
 
 \end{frame}
@@ -142,8 +138,9 @@ The \emph{posterior} is a conditional density, denoted by $\pi_\text{post}(\para
 \end{equation}
 
 \noindent where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:updated-pdf}.
+\bigskip
 
-\emph{evidence} term $C$ ensures the posterior density integrates to one; given by
+The \emph{evidence} term $C$ ensures the posterior density integrates to one:
 \[
 C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 \]
@@ -151,59 +148,67 @@ C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we provide an illustrative example.}
+\begin{frame}{\it The one where we provide an illustrative example.}
 
 \begin{itemize}
 \item Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
+\bigskip
 \item $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$
+\bigskip
 \item $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$
-\item We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
+\bigskip
+\item $\prior = \initial$ and $d=0.25$ so $L_\dspace = \observed$
 \end{itemize}
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we provide an illustrative example.}
+\begin{frame}{\it The one where we provide an illustrative example.}
 
 \begin{figure}
 \centering
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-1.png}
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-1.png}
- \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
- (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-1.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-1.png}
+ % \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
+ % (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
  \label{fig:bayes-comparison}
 \end{figure}
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we provide an illustrative example.}
+\begin{frame}{\it The one where we provide an illustrative example.}
 
 \centering
 \emph{What happens as we collect more data?}
-\vskip 10pt
-One approach: \\
+\bigskip
+
 SIP: Use $N$ to estimate mean of observed \\
 DIP: likelihood function incorporates more data
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\it The one where we provide an illustrative example.}
 
 \begin{figure}
 \centering
    \only<1>{
-	 \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-5.png}
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-5.png}
+	 \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-5.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-5.png}
 	 }
 	 \only<2>{
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-10.png}
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-10.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-10.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-10.png}
 	 }
 	 \only<3>{
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-20.png}
-   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-20.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-20.png}
+   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-20.png}
 	 }
  \label{fig:bayes-comparison-convergence}
 \end{figure}
 
-SIP and DIP solutions for varying $N$ for comparison.
 
 \end{frame}

@@ -11,38 +11,38 @@
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 
-\begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
-  Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$ satisfying
-  \begin{equation}\label{eq:inverse-problem}
-    \PP_\pspace (\qoi^{-1}(E)) = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
+\begin{defn}[Stochastic Forward Problem (SFP)]\label{defn:forward-problem}
+  Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and QoI map $\qoi$, the \emph{stochastic forward problem} is to determine a measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that satisfies
+  \begin{equation}\label{eq:forward-problem}
+    \PP_\dspace (E) = \PP_\pspace \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
   \end{equation}
 \end{defn}
 
-The above is known as the \emph{consistency condition}.
-
-\begin{defn}[Observed Distribution]\label{defn:observed}
-  When the measure $\PP_\dspace$ in \eqref{eq:inverse-problem} quantifies the characterization of uncertainty in the QoI data, it is referred to as the \emph{observed measure}, $\observedP$.
-
-  If a dominating measure $\mu_\dspace$ exists on $(\dspace, \dborel)$, the \emph{observed density} $\observed$ is given by the Radon-Nikodym derivative of $\observedP$ with respect to the measure $\dmeas$.
+\begin{defn}[Stochastic Inverse Problem (SIP)]\label{defn:inverse-problem}
+Given a probability measure, $\PP_\dspace$, on $(\dspace, \dborel)$ the \emph{stochastic inverse problem} is to determine a probability measure, $\PP_\pspace$, on $(\pspace, \pborel)$ satisfying
+\begin{equation}\label{eq:inverse-problem}
+\PP_\pspace (\qoi^{-1}(E)) = \PP_\dspace(E), \; \forall \; E \in \mathcal{B}_\dspace.
+\end{equation}
 \end{defn}
+
+Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency condition}.
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
-\begin{defn}[Consistent Solution]\label{defn:consistent-solution}
-  \noindent Any probability measure $\PP_\pspace$ satisfying \eqref{eq:inverse-problem} is referred to as a \emph{consistent solution} to the inverse problem, and \eqref{eq:inverse-problem}.
-
+\begin{defn}[Consistent Solution and Density]\label{defn:consistent-solution}
   If $\PP_\pspace$ or $\PP_\dspace$ absolutely continuous w.r.t $\pmeas$ or $\dmeas$, resp, then we write
 
   \begin{equation*}
     \pp_\pspace := \frac{d\PP_\pspace}{d\pmeas} \;\text{ or }\; \pp_\dspace := \frac{d\PP_\dspace}{d\dmeas}
   \end{equation*}
   to denote the Radon-Nikodym derivatives of $\PP_\pspace$ and $\PP_\dspace$, resp.
+  \bigskip
 
   In such a case, we can rewrite \eqref{eq:forward-problem} and \eqref{eq:inverse-problem} using these pdfs:
   \begin{equation*}
@@ -55,7 +55,7 @@ The above is known as the \emph{consistency condition}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{defn}[Initial Distribution]\label{defn:initial}
   When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the \emph{initial measure} $\initialP$.
@@ -63,6 +63,11 @@ The above is known as the \emph{consistency condition}.
   If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ w.r.t the measure $\pmeas$.
 \end{defn}
 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
  The \emph{predicted distribution} (or density) is the push-forward density of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
 
@@ -76,8 +81,21 @@ The above is known as the \emph{consistency condition}.
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\begin{defn}[Observed Distribution]\label{defn:observed}
+When $\PP_\dspace$ in \eqref{eq:inverse-problem} quantifies the characterization of uncertainty in the QoI data, it is referred to as the \emph{observed measure}, $\observedP$.
+\bigskip
+
+Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym derivative $\observedP$ w.r.t. $\dmeas$ is referred to as the  \emph{observed density} $\observed$.
+\end{defn}
+
+\end{frame}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we define the solution to the SIP.}
+\begin{frame}{\it The one where we define the solution to the SIP.}
 
 We now have all of the definitions required to summarize the density-based solution to the SIP, known as the \emph{updated density} as:
 \vskip 10pt
@@ -269,7 +287,7 @@ We now have all of the definitions required to summarize the density-based solut
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Practical Considerations}
+\begin{frame}{Practical Considerations}
 
 \begin{itemize}
 	\item We approximate $\predicted$ using density estimation on forward propagation of samples from $\initial$
@@ -282,5 +300,6 @@ We now have all of the definitions required to summarize the density-based solut
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-4/(4+\dimD)})$ in mean-squared error
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error
 	\end{itemize}
+  \item Stable w.r.t. perturbations in the Total Variation metric
 \end{itemize}
 \end{frame}
