@@ -510,6 +510,22 @@ Despite these differences, both examples share the following details.
 \FloatBarrier
 
 \subsection{ODE Example}\label{subsec:ode-example}
+Consider the exponential decay problem with uncertain decay rate $\param$:
+$$
+\begin{cases}
+\frac{\partial u}{\partial t} & = \param u(t), \ 0<t\leq 3, \\ u(0) &= 0.75,
+\end{cases}
+$$
+with solution
+\begin{equation}
+u(t;\param) = u_0\exp(-\param t), \; u_0 = 0.75 ,
+\end{equation}
+and measurements begin at $t=1$.
+
+The initial uncertainty in the decay rate is given by a uniform density on $\param \in \Lambda = (0, 1)$, and $10,000$ samples from this density are used to estimate the push-forward and updated densities as well as the MUD points.
+Noisy data are simulated over the interval $t \in [1,3]$ assuming a $100$Hz measurement sensor.
+An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\paramref = 0.5$, and a particular realization of noisy data shown as perturbed points around it.
+
 \begin{figure}[htb]
   \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution.png}
   \includegraphics[width=\linewidth]{figures/ode/ode_200_reference_solution.png}
@@ -521,6 +537,9 @@ Despite these differences, both examples share the following details.
   \label{fig:ode-reference}
 \end{figure}
 
+For 20 different realizations of $N=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ noisy measurement data, we construct $Q_\text{WME}$ with $u(t;\param)$ replacing $M_j(\param)$ in~\eqref{eq:qoi_WME}, estimate $\mudpt$, and analyze the statistical error in these estimates of $\paramref$.
+In the left plot of Figure~\ref{fig:ode-convergence}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\paramref$) decreases.
+
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
@@ -530,24 +549,6 @@ Despite these differences, both examples share the following details.
   \label{fig:ode-convergence}
 \end{figure}
 
-Consider the exponential decay problem with uncertain decay rate $\param$:
-$$
-\begin{cases}
-\frac{\partial u}{\partial t} & = \param u(t), \ 0<t\leq 3, \\ u(0) &= 0.75,
-\end{cases}
-$$
-with solution
-\begin{equation}
-  u(t;\param) = u_0\exp(-\param t), \; u_0 = 0.75 ,
-\end{equation}
-and measurements begin at $t=1$.
-
-The initial uncertainty in the decay rate is given by a uniform density on $\param \in \Lambda = (0, 1)$, and $10,000$ samples from this density are used to estimate the push-forward and updated densities as well as the MUD points.
-Noisy data are simulated over the interval $t \in [1,3]$ assuming a $100$Hz measurement sensor.
-An example of this setup is shown in Figure~\ref{fig:ode-reference}, with the solid line representing the ``true'' signal obtained by evaluating the solution for $\paramref = 0.5$, and a particular realization of noisy data shown as perturbed points around it.
-
-For 20 different realizations of $N=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ noisy measurement data, we construct $Q_\text{WME}$ with $u(t;\param)$ replacing $M_j(\param)$ in~\eqref{eq:qoi_WME}, estimate $\mudpt$, and analyze the statistical error in these estimates of $\paramref$.
-In the left plot of Figure~\ref{fig:ode-convergence}, we observe that as more data are used that the accuracy (defined by the mean error between $\mudpt$ and $\paramref$) decreases.
 The right plot demonstrates that the precision (i.e., the variance in the error) is also reduced by using more data.
 These results are also visualized in the plots of Figure~\ref{fig:ode-reference} where the distinct red curves in the top plot are the signals associated with the 20 $\mudpt$ estimates associated with the 20 independent trials of $N=20$ noisy measurements.
 However, in the bottom plot, these $20$ red curves are fairly indistinguishable to the naked eye from the true signal when using $N=200$ noisy measurements.
@@ -577,7 +578,7 @@ The forcing function $f$ is taken to be $10\exp\left ( \norm{x - 0.5}^2 / 0.02 \
 
 Here, we assume that $g(x_2)$ is unknown, and the goal is to use noisy data to estimate this unknown boundary data.
 In other words, the parameter $\param$ now represents an uncertain function.
-To generate the noisy data, we first use a reference $g(x_2)\propto x_2^2(x_2-1)^5$ with a constant of proportionality chosen to produce a minimum of $-3$ at $x_2=\frac{2}{7}$.
+To generate the noisy data, we use a reference $g(x_2)\propto x_2^2(x_2-1)^5$ with a constant of proportionality chosen to produce a minimum of $-3$ at $x_2=\frac{2}{7}$.
 Then, we compute a reference solution using piecewise-linear finite elements on a triangulation of a $36\times36$ mesh.
 Random noise is then added to every degree of freedom of this reference solution, and the spatial data are subsequently computed from a fixed set of 100 randomly placed sensors in the subdomain $(0.05, 0.95)^2 \subset \Omega$.
 This process is repeated $20$ times to study the subsequent variation in MUD points due to different realizations of noisy data.
