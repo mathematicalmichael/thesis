@@ -1,4 +1,4 @@
-%% The `ucdenver-dissertation.cls' is used for formatting a PhD thesis 
+%% The `ucdenver-dissertation.cls' is used for formatting a PhD thesis
 %% for the Department of Biostatistics & Informatics,
 %% University of Colorado Denver.
 %% It may be applicable to other students in the Graduate School
@@ -10,7 +10,7 @@
 %%         Michael Pilosov
 %%
 %%
-%% Package 'ucdenver-dissertation' to use with LaTeX2e 
+%% Package 'ucdenver-dissertation' to use with LaTeX2e
 %% License: GPL-2
 %% Copyright: (C) University of Colorado Denver
 %% Author: Sarah Kreidler
@@ -42,7 +42,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{framed}
 \RequirePackage{appendix}
- 
+
 
 %%
 %% The following preamble elements are required to properly create
@@ -109,7 +109,7 @@
   {\MakeUppercase{\@title}} \\
   by \\
   \MakeUppercase{\@authorFirst{}\ \@authorMiddle{}\ \@authorLast{}} \\
-  \@education \\[3in] 
+  \@education \\[3in]
   A thesis submitted to the \\
   Faculty of the Graduate School of the \\
   University of Colorado in partial fulfillment \\
@@ -117,9 +117,9 @@
   Doctor of Philosophy \\
   \@program\ Program \\
   \@date \\
-\end{center} 
+\end{center}
 \vspace*{\fill}
-  
+
 }
 
 %% formatting committee page
@@ -238,7 +238,7 @@
     \begingroup
       \parindent \z@ \rightskip \@tocrmarg
       \parfillskip -\rightskip
-      \leavevmode 
+      \leavevmode
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       #1\nobreak
@@ -350,11 +350,11 @@
   \kern-3\p@
   \hrule\@width.4\columnwidth
   \kern2.6\p@}
-  
+
 \usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
 
-  
+
 %% sections, subsections, and subsubsections
 \newlength{\preXLskip}
 \newlength{\preLskip}
