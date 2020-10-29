@@ -16,9 +16,9 @@ The true signal is well-recovered even with a small subset of the data collected
 By the time all measurements are used, the stability of the solutions\---with respect to the noise that may have polluted them\---is evidenced by the fact that the red lines representing solutions disappear against the backdrop of the true signal in black.
 
 \begin{figure}[htbp]
-  \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode-alt_20_reference_solution}
-  \includegraphics[width=\linewidth]{figures/ode/ode-alt_400_reference_solution}
+  \includegraphics[width=\linewidth]{figures/ode/ode_20_reference_solution.png}
+  \includegraphics[width=\linewidth]{figures/ode/ode-alt_20_reference_solution.png}
+  \includegraphics[width=\linewidth]{figures/ode/ode-alt_400_reference_solution.png}
   \caption{Gray lines are the initial parameter samples.
   The true signal (black) is well-recovered by the MUD estimates (red).
   (Top): First twenty measurements used to solve the original problem.
@@ -33,8 +33,8 @@ We show the resulting error plots for convergence in the right half of Figures~\
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_obs_mean}
-  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_obs_var}
+  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_obs_mean_comp.png}
+  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_obs_var_comp.png}
 
   \caption{Convergence of the MUD point given $N=1E3$ model evaluations for increasing numbers of observations for randomly placed sensors.
   Convergence rates are estimated using first-order linear regressions in $\text{log}_{10}$-space.
@@ -65,8 +65,8 @@ We sequentially incorporate $S=5, 10, 15, 20, 25, 50, 100, \text{ and } 200$ mea
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_mean}
-  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_std_var}
+  \includegraphics[width=0.475\linewidth]{figures/ode/ode_convergence_mud_std_mean.png}
+  \includegraphics[width=0.425\linewidth]{figures/ode/ode_convergence_mud_std_var.png}
 
   \caption{Convergence of the MUD point given $N=1E3$ model evaluations incorporating measurements at a fixed point in time.
   As more precise measurements are incorporated, the accuracy and precision of the MUD solution improves.
