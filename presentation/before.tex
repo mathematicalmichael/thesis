@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -10,7 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{\it The one where we describe why any of this matters.}
 \centering
-	Broad Goals of Uncertainty Quantification: 
+	Broad Goals of Uncertainty Quantification:
 	\vskip 10pt
     \begin{itemize}
 	    \item Make inferences and predictions
@@ -23,7 +23,7 @@
 	    \vskip 20pt
 	    \item Collect and use data ``intelligently''
     \end{itemize}
-    
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,19 +56,19 @@
 
 \begin{tikzpicture}[node distance=2cm, auto,]
  %nodes
- 
+
 % dummy figure to make everything look nice
 \node[] (dummy) {};
 
 \node[right=of dummy] (data) {$\dspace = \qoi(\pspace)$};
-  
+
 \node[punkt, inner sep=5pt, below=of dummy] (model) {Model \\ (PDE)}
  	edge[pil,->, bend right=25] node[right] {$Q(u\lam)$} (data);
 
 \node[left=of dummy] (pspace) {$\Lambda$}
    edge[pil,->, bend right=45] node[left] {$u\lam$} (model)
    edge[pil,->, bend left=45] node[above] {$Q\lam$} (data);
-   
+
 \end{tikzpicture}
 
 \vspace{1em}
@@ -86,11 +86,11 @@
 % \centering
 % \begin{figure}
 % \centering
-% 
+%
 % The one with the background on inverse problems.
-% 
+%
 % \end{figure}
-% 
+%
 % \end{frame}
 
 %\input{content/intro_slides.tex}
@@ -111,4 +111,3 @@ The one where we distinguish ourselves from the Bayesians.
 \end{figure}
 
 \end{frame}
-
