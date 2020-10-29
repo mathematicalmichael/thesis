@@ -9,7 +9,7 @@ Choose a discretization partition $\set{D_\idisc}_{\idisc=1}^{\ndiscs}$ of $\dsp
 	\For{$\idisc = 1, \hdots, \ndiscs$}{
 			Compute $p_{\dspace, \idisc} = \dataP(D_\idisc)$.
 	}
-	Choose samples $\set{\param^{(\iparam)}}_{\iparam=1}^{\nsamps} \subset \pspace$, which implicitly defines a Voronoi-cell partition $\set{\VV_\iparam}_{\iparam=1}^{\nsamps}$ of $\pspace$.\\
+ 	Choose samples $\set{\param^{(\iparam)}}_{\iparam=1}^{\nsamps} \subset \pspace$, which implicitly defines a Voronoi-cell partition $\set{\VV_\iparam}_{\iparam=1}^{\nsamps}$ of $\pspace$.\\
 	\For{$\iparam = 1, \hdots, \nsamps$}{
 	Compute $\qoi_\iparam = \qoi(\param^{(\iparam)})$.\\
 	Let $\OO_\idisc = \set{\iparam: \qoi_\iparam \in D_\idisc}$.\\
