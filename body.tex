@@ -33,7 +33,7 @@ In what follows, the inverse covariances associated with non-degenerative multiv
 %either attached to the Gaussian initial (prior) $\mathcal{N}(\param_0, \initialCov)$, observed $\mathcal{N}(\observedMean, \observedCov)$, or predicted $\mathcal{N}(Q(\param_0), \predictedCov)$ distributions.
 %So, $C$ will play the roles of $\observedCov^{-1}$, $\initialCov^{-1}$, and $\predictedCov^{-1}$.
 
-Suppose that both the initial and prior densities are both given by the same $\mathcal{N}(\param_0, \initialCov)$ distribution.
+Suppose that the initial and prior densities are both given by the same $\mathcal{N}(\param_0, \initialCov)$ distribution.
 Additionally, suppose the map $Q$ is linear and that the data-likelihood and observed densities are both given by the same $\mathcal{N}(\observedMean, \observedCov)$ distribution.
 
 The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times p}$, and that the predicted density follows a $\mathcal{N}(Q(\param_0), \predictedCov)$ distribution where
@@ -410,7 +410,7 @@ Also, we again see that the MAP estimates are impacted by the strength of prior 
 \section{Data-constructed QoI maps and MUD points}\label{sec:data-maps}
 
 Suppose there exists $d$ measurement devices for which repeated noisy data are obtained.
-For each $1\leq j\leq N$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device, and denote by $N_j$ the number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
+For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device, and denote by $N_j$ the number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
 Let $d_{j,i}$ denote the $i$th noisy datum obtained for the $j$th measurement where $1\leq i\leq N_j$.
 To simplify the presentation and some of the resulting notation, we assume an unbiased additive error model for the measurement noise with independent identically distributed (i.i.d.) Gaussian errors so that
 \begin{equation}\label{eq:obs_data_error}
@@ -445,7 +445,7 @@ Below, we consider issues of existence, uniqueness, and convergence of $\mudpt$ 
 In~\ref{sec:conclusions}, we provide some remarks on how we plan to generalize this analysis in future work.
 
 
-For each $1\leq j\leq M$, assume that the observable maps $M_j$ are linear maps of $\param$ (affine maps require minor modifications to the results below).
+For each $1\leq j\leq d$, assume that the observable maps $M_j$ are linear maps of $\param$ (affine maps require minor modifications to the results below).
 For notational simplicity below, assume that $M_j$ is written explicitly as a $1\times p$ row vector and that the $d$-vectors form a linearly independent set.
 Then, it is possible to rewrite $Q_{\text{WME}}(\param)$ as
 \begin{equation}
@@ -464,7 +464,7 @@ Since $A(\mathbf{N})\initialCov A(\mathbf{N})^\top$ defines a predicted covarian
 The off-diagonal components of the predicted covariance (which are dictated in large part by the structure of the measurement operators $M_j$) dictate how much larger than $1$ each diagonal component must be to ensure the predictability assumption holds.
 However, we demonstrate below that this will happen once a minimum number of data points $N_\text{min}$ are obtained for each measurement.
 
-First, observe that the $j$th diagonal component of the predicted covariance matrix is  given by the predicted variance associated with using the scalar-valued map $Q_{\text{WME},j}$.
+First, observe that the $j$th diagonal component of the predicted covariance matrix is given by the predicted variance associated with using the scalar-valued map $Q_{\text{WME},j}$.
 Then, the associated predicted variance is given by
 \begin{equation}
 	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top
