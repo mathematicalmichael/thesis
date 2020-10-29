@@ -1,79 +1,398 @@
-@book{ConstantineActiveSubpsaces,
-  author = {Constantine, P.},
-  title = {Active Subspaces: Emerging Ideas for Dimension Reduction in Parameter Studies},
-  publisher = {SIAM},
-  year = {2015}
+@article{JNME19,
+author = {Mattis, Steven A. and Butler, Troy},
+title = {Enhancing piecewise-defined surrogate response surfaces with adjoints on sets of unstructured samples to solve stochastic inverse problems},
+journal = {International Journal for Numerical Methods in Engineering},
+volume = {119},
+number = {10},
+pages = {923-940},
+keywords = {adjoint problems, a posteriori error estimate, inverse problems, Monte Carlo methods, surrogate modeling, uncertainty quantification},
+doi = {10.1002/nme.6078},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/nme.6078},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/nme.6078},
+abstract = {Summary Many approaches for solving stochastic inverse problems suffer from both stochastic and deterministic sources of error. The finite number of samples used to construct a solution is a common source of stochastic error. When computational models are expensive to evaluate, surrogate response surfaces are often employed to increase the number of samples available for approximating the solution. This leads to a reduction in finite sampling errors while the deterministic error in the evaluation of each sample is potentially increased. The pointwise accuracy of sampling the surrogate is primarily impacted by two sources of deterministic error: the local order of accuracy in the surrogate and the numerical error from the numerical solution of the model. In this work, we use adjoints to simultaneously give a posteriori error and derivative estimates in order to construct low-order, piecewise-defined surrogates on sets of unstructured samples. Several examples demonstrate the computational gains of this approach in obtaining accurate estimates of probabilities for events in the design space of model input parameters. This lays the groundwork for future studies on goal-oriented adaptive refinement of such surrogates.},
+year = {2019}
+}
+@book{Hunter,
+  title={Applied Analysis},
+  author={Hunter, J.K. and Nachtergaele, B.},
+  isbn={9789810241919},
+  lccn={00051304},
+  url={https://books.google.com/books?id=oOYQVeHmNk4C},
+  year={2001},
+  publisher={World Scientific}
+}
+@article{JWW17,
+	title={{Optimal Experimental Design} Using a {Consistent {Bayesian}} Approach},
+	author={Walsh SN, Wildey TM, Jakeman JD.},
+	publisher={ASME},
+	journal = {ASME J. Risk Uncertainty Part B},
+	year = {2017},
+	doi = {10.1115/1.4037457},
+	url= {http://risk.asmedigitalcollection.asme.org/article.aspx?articleid=2647609}
 }
 
 
 
-@manual{pyBET,
-	author = "Butler, Troy and Graham, Lindley and Matthis, Steven A.",
-	howpublished = "online",
-	timestamp = "2015.07.04",
-	title = "{BET Package}",
-	url = "http://ut-chg.github.io/BET",
-	note = " http://ut-chg.github.io/BET",
-	year = "2015"
+@article{Babuska04,
+author = {Babuska, I. and Tempone, R. and Zouraris, G.},
+title = {Galerkin Finite Element Approximations of Stochastic Elliptic Partial Differential Equations},
+journal = {SIAM Journal on Numerical Analysis},
+volume = {42},
+number = {2},
+pages = {800-825},
+year = {2004},
+doi = {10.1137/S0036142902418680},
+
+URL = {
+        https://doi.org/10.1137/S0036142902418680
+
+},
+eprint = {
+        https://doi.org/10.1137/S0036142902418680
+
+}
+
+}
+
+@article{MFMC18,
+author="Peherstorfer, Benjamin
+and Gunzburger, Max
+and Willcox, Karen",
+title="Convergence analysis of multifidelity Monte Carlo estimation",
+journal="Numerische Mathematik",
+year="2018",
+month="Jul",
+day="01",
+volume="139",
+number="3",
+pages="683--707",
+abstract="The multifidelity Monte Carlo method provides a general framework for combining cheap low-fidelity approximations of an expensive high-fidelity model to accelerate the Monte Carlo estimation of statistics of the high-fidelity model output. In this work, we investigate the properties of multifidelity Monte Carlo estimation in the setting where a hierarchy of approximations can be constructed with known error and cost bounds. Our main result is a convergence analysis of multifidelity Monte Carlo estimation, for which we prove a bound on the costs of the multifidelity Monte Carlo estimator under assumptions on the error and cost bounds of the low-fidelity approximations. The assumptions that we make are typical in the setting of similar Monte Carlo techniques. Numerical experiments illustrate the derived bounds.",
+issn="0945-3245",
+doi="10.1007/s00211-018-0945-7",
+url="https://doi.org/10.1007/s00211-018-0945-7"
 }
 
 
-@article{BE1,
-    AUTHOR = {Breidt, J. and Butler, T. and Estep, D.},
-    TITLE  = {A measure-theoretic computational method for inverse sensitivity problems {I}: Method and Analysis},
-    JOURNAL = {SIAM Journal on Numerical Analysis},
-    YEAR = {2011},
-    VOLUME = {49},
-    PAGES = {1836-1859}
-}
+@article{Chaudhry18,
+author = {Chaudhry, J. and Burch, N. and Estep, D.},
+title = {Efficient Distribution Estimation and Uncertainty Quantification for Elliptic Problems on Domains with Stochastic Boundaries},
+journal = {SIAM/ASA Journal on Uncertainty Quantification},
+volume = {6},
+number = {3},
+pages = {1127-1150},
+year = {2018},
+doi = {10.1137/17M112230X},
 
-@article{BE2,
-    AUTHOR = {Butler, T. and Estep, D. and Sandelin, J.},
-    TITLE  = {A computational measure-theoretic approach to inverse sensitivity problems {II}: A posteriori error analysis},
-    JOURNAL = {SIAM Journal on Numerical Analysis},
-    YEAR = {2012},
-    volume = {50},
-    pages = {22-45}
-}
+URL = {
+        https://doi.org/10.1137/17M112230X
 
-@article{BEreview,
-    AUTHOR = {Butler, T. and Estep, D.},
-    TITLE  = {A numerical method for solving a stochastic inverse problem for parameters},
-    JOURNAL = {Annals of Nuclear Energy},
-    YEAR = {2013},
-    volume = {52},
-    pages = {86-94}
-}
+},
+eprint = {
+        https://doi.org/10.1137/17M112230X
 
-@PHDTHESIS{Troysthesis,
-        AUTHOR             = {T. Butler},
-        SCHOOL             = {Department of Mathematics, Colorado State University, Fort Collins, CO 80523},
-        TITLE              = {Computational Measure Theoretic Approach to Inverse Sensitivity Analysis: Methods and Analysis},
-        YEAR               = {2009}
+}
 }
 
 
-@article{BE3,
-    AUTHOR = {Butler, T. and Estep, D. and Tavener, S. and Dawson, C. and J.J. Westerink},
-    TITLE  = {A measure-theoretic computational
-    method for inverse sensitivity problems {III}:
-    Multiple output quantities of interest},
-    pages = {174-202},
-    volume = {2},
-	journal = {SIAM/ASA Journal on Uncertainty Quantification},
-    YEAR = {2014},
+@article{Amaral17,
+ author = {Amaral, Sergio and Allaire, Douglas and Willcox, Karen},
+ title = {Optimal ${L}_2$-norm Empirical Importance Weights for the Change of Probability Measure},
+ journal = {Statistics and Computing},
+ issue_date = {May 2017},
+ volume = {27},
+ number = {3},
+ month = may,
+ year = {2017},
+ issn = {0960-3174},
+ pages = {625--643},
+ numpages = {19},
+ url = {https://doi.org/10.1007/s11222-016-9644-3},
+ doi = {10.1007/s11222-016-9644-3},
+ acmid = {3057474},
+ publisher = {Kluwer Academic Publishers},
+ address = {Hingham, MA, USA},
+ keywords = {Change of measure, Density ratio, Empirical measure, Importance weight, Quadratic program, Radon---Nikodym theorem},
 }
 
-@article{BDW2,
-    AUTHOR = {Butler, T. and Dawson, C. and Wildey, T.},
-    TITLE  = {Propagation of uncertainties using improved surrogate models},
-    JOURNAL = {SIAM/ASA Journal on Uncertainty Quantification},
-     YEAR = {2013},
-    Volume = {1},
-   pages = {164-191}
+@book{Scott92,
+  title={Multivariate Density Estimation: Theory, Practice, and Visualization},
+  author={Scott, D.W.},
+  isbn={9780471547709},
+  lccn={lc91043950},
+  series={A Wiley-interscience publication},
+  url={https://books.google.com/books?id=7crCUS\_F2ocC},
+  year={1992},
+  publisher={Wiley}
 }
 
-@article{BDW1,
+@book{Lawson95,
+  title={Solving Least Squares Problems},
+  author={Lawson, C.L. and Hanson, R.J.},
+  isbn={9780898713565},
+  lccn={95035178},
+  series={Classics in Applied Mathematics},
+  url={https://books.google.com/books?id=AEwDbHp50FgC},
+  year={1995},
+  publisher={Society for Industrial and Applied Mathematics}
+}
+
+
+@book{Silverman,
+	title={Density Estimation for Statistics and Data Analysis},
+  author = {B.W. Silverman},
+  isbn={0412246201},
+  url={https://books.google.com/books/about/Density_Estimation_for_Statistics_and_Da.html},
+  year={1986},
+  pages={70-72},
+  publisher={Chapman and Hall}
+}
+
+
+@book{Smith,
+ author = {Smith, Ralph C.},
+ title = {Uncertainty Quantification: Theory, Implementation, and Applications},
+ year = {2013},
+ isbn = {161197321X, 9781611973211},
+ publisher = {Society for Industrial and Applied Mathematics},
+ address = {Philadelphia, PA, USA}
+}
+
+@book{Walpole,
+  title={Probability \& Statistics for Engineers \& Scientists},
+  author = {R. Walpole, R. Myers, S. Myers and K. Ye},
+  isbn={9788131715529},
+  url={https://books.google.com/books?id=tAs50bpeX9oC},
+  year={2007},
+  publisher={Pearson Education}
+}
+
+@book{Berger,
+	title={Statistical Decision Theory and {Bayesian} Analysis},
+	author={J.O. Berger},
+	isbn={0387960988},
+	year={1985},
+	url={https://www.springer.com/us/book/9780387960982},
+	doi={10.1007/978-1-4757-4286-2},
+	publisher={Springer-Verlag}
+}
+
+@article{Complete,
+	doi={10.1137/100788604},
+	title={Estimating Parameters in Physical Models through {Bayesian} Inversion: A Complete Example},
+	author={M. Allmaras and W. Bangareth and J.M. Linhart and J. Polanco and F. Wang and K. Wang and J. Webster and S. Zedler},
+	year={2013},
+	publisher={SIAM Review},
+	url={https://epubs.siam.org/doi/pdf/10.1137/100788604}
+}
+
+@article{Concrete,
+	doi={10.1137/130929230},
+	title={Statistics of Parameter Estimates: A Concrete Example},
+	author={O. Aguilar, M. Allmaras, W. Bangerth and L. Tenorio},
+	year={2015},
+	publisher={SIAM Review},
+	url={https://epubs.siam.org/doi/pdf/10.1137/130929230}
+}
+
+@article{silverman1982,
+author = "Silverman, B. W.",
+doi = "10.1214/aos/1176345872",
+fjournal = "The Annals of Statistics",
+journal = "Ann. Statist.",
+month = "09",
+number = "3",
+pages = "795--810",
+publisher = "The Institute of Mathematical Statistics",
+title = "On the Estimation of a Probability Density Function by the Maximum Penalized Likelihood Method",
+url = "https://doi.org/10.1214/aos/1176345872",
+volume = "10",
+year = "1982"
+}
+
+@article{vonmises,
+author = "von Mises, R. and Doob, J. L.",
+doi = "10.1214/aoms/1177731750",
+fjournal = "Annals of Mathematical Statistics",
+journal = "Ann. Math. Statist.",
+month = "06",
+number = "2",
+pages = "215--217",
+publisher = "The Institute of Mathematical Statistics",
+title = "Discussion of Papers on Probability Theory",
+url = "https://doi.org/10.1214/aoms/1177731750",
+volume = "12",
+year = "1941"
+}
+
+
+@article{Xiu_04,
+author = {Xiu, Dongbin and Karniadakis, George Em},
+title = {Supersensitivity due to uncertain boundary conditions},
+journal = {International Journal for Numerical Methods in Engineering},
+volume = {61},
+number = {12},
+pages = {2114-2138},
+keywords = {generalized polynomial chaos, stochastic Burgers' equation, supersensitivity, random boundary conditions},
+doi = {10.1002/nme.1152},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/nme.1152},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/nme.1152},
+abstract = {Abstract We study the viscous Burgers' equation subject to perturbations on the boundary conditions. Two kinds of perturbations are considered: deterministic and random. For deterministic perturbations, we show that small perturbations can result in O(1) changes in the location of the transition layer. For random perturbations, we solve the stochastic Burgers' equation using different approaches. First, we employ the Jacobi-polynomial-chaos, which is a subset of the generalized polynomial chaos for stochastic modeling. Converged numerical results are reported (up to seven significant digits), and we observe similar ‘stochastic supersensitivity’ for the mean location of the transition layer. Subsequently, we employ up to fourth-order perturbation expansions. We show that even with small random inputs, the resolution of the perturbation method is relatively poor due to the larger stochastic responses in the output. Two types of distributions are considered: uniform distribution and a ‘truncated’ Gaussian distribution with no tails. Various solution statistics, including the spatial evolution of probability density function at steady state, are studied. Copyright © 2004 John Wiley \& Sons, Ltd.}
+}
+
+@article{Barron,
+author = "Barron, Andrew and Schervish, Mark J. and Wasserman, Larry",
+doi = "10.1214/aos/1018031206",
+fjournal = "The Annals of Statistics",
+journal = "Ann. Statist.",
+month = "04",
+number = "2",
+pages = "536--561",
+publisher = "The Institute of Mathematical Statistics",
+title = "The consistency of posterior distributions in nonparametric problems",
+url = "https://doi.org/10.1214/aos/1018031206",
+volume = "27",
+year = "1999"
+}
+
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+@book{Raschka,
+ author = {Raschka, Sebastian},
+ title = {Python Machine Learning},
+ year = {2015},
+ isbn = {1783555130, 9781783555130},
+ publisher = {Packt Publishing}
+}
+
+
+@article{anasol,
+author = {O’Malley, D. andVesselinov, V.},
+year = {2014},
+month = {06},
+pages = {},
+title = {Analytical solutions for anomalous dispersion transport},
+volume = {68},
+journal = {Advances in Water Resources}
+}
+
+@article{BDMV,
+author = {Mattis, S. and Butler, T. and Dawson, C. and  Estep, D. and Vesselinov, V.V.},
+year = {2015},
+month = {08},
+pages = {},
+title = {Parameter estimation and prediction for groundwater contamination based on measure theory},
+volume = {51},
+journal = {Water Resources Research}
+}
+
+@article{HV,
+author = {Harp, D.R. and Vesselinov, V.V.},
+year = {2013},
+month = {},
+pages = {159--168},
+title = {Contamination remediation decision analysis using information gap theory},
+volume = {27},
+journal = {Stoch. Environ. Res. Risk Assess.}
+}
+
+@book{Haim,
+title={Info-gap decision theory: decisions under severe uncertainty},
+publisher={Elsevier},
+city={Amsterdam},
+year={2006},
+author={Ben-Haim, Y.}
+}
+
+@article{Risk,
+title={A {Bayesian} approach to integrate temporal data into probabilistic risk analysis of monitored NAPL remediation},
+journal = {Advances in Water Resources},
+volume={36},
+year={2012},
+pages={108--120},
+author={Fern\`andez-Garcia, D. and Bolster, D. and Sanchez-Vila, X. and Tartakovsky, D.M.}
+}
+
+@article{VO15,
+author = {O'Malley, D. and Vesselinov, V.V.},
+year = {2015},
+month = {07},
+pages = {7080--7089},
+title = {{Bayesian}-information-gap decision theory with an application to CO2 sequestration},
+volume = {51},
+journal = {Water Resources Research}
+}
+
+@article{VO14,
+author = {O'Malley, D. and Vesselinov, V.V.},
+year = {2015},
+month = {04},
+pages = {607--621},
+title = {A Combined Probabilistic/Nonprobablistic Decision Analysis for Contaminant Remediation},
+volume = {2},
+journal = {SIAM Journal on Uncertainty Quantification}
+}
+
+
+@phdthesis{Walsh,
+author={Walsh, S.},
+title={Simulation-based optimal experimental design: theories, algorithms, and practical considerations},
+school={University of Colorado, Denver},
+year={2017},
+addendum={unpublished thesis},
+note={http://digital.auraria.edu/AA00006563/00001}
+}
+
+%--------- start of Butler references ------------------
+
+@article{BJW18a,
+author = {T. Butler and J. Jakeman and T. Wildey},
+title = {Combining Push-Forward Measures and Bayes' Rule to Construct Consistent Solutions to Stochastic Inverse Problems},
+journal = {SIAM Journal on Scientific Computing},
+volume = {40},
+number = {2},
+pages = {A984-A1011},
+year = {2018},
+doi = {10.1137/16M1087229},
+URL = {https://doi.org/10.1137/16M1087229},
+eprint = {https://doi.org/10.1137/16M1087229}
+}
+
+@article{BJW18b,
+author = {T. Butler and J. Jakeman and T. Wildey},
+title = {Convergence of Probability Densities Using Approximate Models for Forward and Inverse Problems in Uncertainty Quantification},
+journal = {SIAM Journal on Scientific Computing},
+volume = {40},
+number = {5},
+pages = {A3523–A3548},
+year = {2018},
+doi = {10.1137/18M1181675},
+URL = {https://doi.org/10.1137/18M1181675},
+eprint = {https://epubs.siam.org/doi/abs/10.1137/18M1181}
+}
+
+@article{BWY20,
+	title = {Data-Consistent Inversion for Stochastic Input-to-Output Maps},
+	author = {Butler, Troy and Wildey, Timothy and Yen, Tian Yu},
+	abstractNote = {Data-consistent inversion is a recently developed measure-theoretic framework for solving a stochastic inverse problem involving models of physical systems. The goal is to construct a probability measure on model inputs (i.e., parameters of interest) whose associated push-forward measure matches (i.e., is consistent with) a probability measure on the observable outputs of the model (i.e., quantities of interest). Previous implementations required the map from parameters of interest to quantities of interest to be deterministic. This work generalizes this framework for maps that are stochastic, i.e., contain uncertainties and variation not explainable by variations in uncertain parameters of interest. Generalizations of previous theorems of existence, uniqueness, and stability of the data-consistent solution are provided while new theoretical results address the stability of marginals on parameters of interest. A notable aspect of the algorithmic generalization is the ability to query the solution to generate independent identically distributed samples of the parameters of interest without requiring knowledge of the so-called stochastic parameters. This work therefore extends the applicability of the data-consistent inversion framework to a much wider class of problems. This includes those based on purely experimental and field data where only a subset of conditions are either controllable or can be documented between experiments while the underlying physics, measurement errors, and any additional covariates are either uncertain or not accounted for by the researcher. Finally, numerical examples demonstrate application of this approach to systems with stochastic sources of uncertainties embedded within the modeling of a system and a numerical diagnostic is summarized that is useful for determining if a key assumption is verified among competing choices of stochastic maps.},
+	doi = {10.1088/1361-6420/ab8f83},
+	journal = {Inverse Problems},
+	place = {United States},
+	year = {2020},
+	month = {5},
+	url = {https://doi.org/10.1088/1361-6420/ab8f83}
+}
+
+@article{BDW11,
     AUTHOR = {Butler, T. and Dawson, C. and Wildey, T.},
     TITLE  = {A posteriori error analysis of stochastic differential equations using polynomial chaos expansions},
     JOURNAL = {SIAM Journal on Scientific Computing},
@@ -82,7 +401,31 @@
     PAGES = {1267-1291}
 }
 
-@article{Butler2012a,
+@article{BBE11,
+	Author = {Breidt, J. and Butler, T. and Estep, D.},
+	Doi = {10.1137/100785946},
+	Journal = {SIAM Journal on Numr. Anal.},
+	Number = {5},
+	Pages = {1836--1859},
+	Publisher = {SIAM},
+	Title = {{A Measure-Theoretic Computational Method for Inverse Sensitivity Problems I: Method and Analysis}},
+	Volume = {49},
+	Year = {2011},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1137/100785946}}
+
+@article{BES12,
+	Author = {Butler, T. and Estep, D. and Sandelin, J.},
+	Doi = {10.1137/100785958},
+	Journal = {SIAM Journal on Numr. Anal.},
+	Number = {1},
+	Pages = {22--45},
+	Publisher = {SIAM},
+	Title = {{A Computational Measure Theoretic Approach to Inverse Sensitivity Problems II: A Posteriori Error Analysis}},
+	Volume = {50},
+	Year = {2012},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1137/100785958}}
+
+@article{BJ12,
     AUTHOR = {Butler, T. and Juntunen, M.},
     TITLE  = {Reparameterization for statistical state estimation applied to differential equations},
     JOURNAL = {Journal of Computational Physics},
@@ -91,7 +434,7 @@
     pages = {2641-2654}
 }
 
-@article{Butler2012b,
+@article{BAD+12,
 		AUTHOR = {Butler, T. and   Altaf, M.U. and Dawson, C. and Hoteit, I. and Luo, X. and Mayo, T.},
 		TITLE = {Data Assimilation within the Advanced Circulation {(ADCIRC)} Modeling Frameowork for Hurricane Storm Surge Forecasting},
 		JOURNAL = {Monthly Weather Review},
@@ -100,34 +443,7 @@
 		pages = {2215-2231}
 }
 
-@article{Altaf2013,
-		AUTHOR = {Altaf, M.U. and Butler, T.  and Dawson, C. and Hoteit, I. and Luo, X. and Mayo, T.},
-		TITLE = {Improving Short-Range Ensemble Kalman Storm Surge Forecasting Using Robust Adaptive Inflation},
-		YEAR = {2013},
-		JOURNAL = {Monthly Weather Review},
-		volume={141},
-		pages={2705-2720}
-}
-
-@article{Altaf2014,
-		AUTHOR = {Altaf, M.U. and Butler, T.  and Mayo, T. and Luo, X. and Dawson, C. and Heemink, A.W. and Hoteit, I.},
-		TITLE = {A Comparison of ensemble Kalman filters for storm surge assimilation},
-		YEAR = {2014},
-		JOURNAL = {Monthly Weather Review},
-		volume = {142},
-		pages = {2899-2914}
-}
-
-@article{Mayo2014,
-    AUTHOR = {Mayo, T and Butler, T. and Dawson, C. and Hoteit, I.},
-    TITLE = {Data assimilation within the Advanced Circulation {(ADCIRC)} modeling framework for the estimation of Manning’s friction coefficient},
-    JOURNAL = {Ocean Modelling},
-    YEAR = {2014},
-    VOLUME = {76},
-    PAGES = {43-58}
-}
-
-@article{BCW,
+@article{BCW12,
 		AUTHOR = {Butler, T. and Constantine, P. and Wildey, T.},
 		TITLE = {A posteriori error analysis of parameterized linear systems using spectral methods},
 		JOURNAL = {SIAM Journal on Matrix Analysis and Applications},
@@ -136,108 +452,985 @@
 		pages = {195-209}
 }
 
-@article{ButlerWildey2014,
-		AUTHOR = {Butler, T. and Wildey, T.},
-		TITLE = {Utilizing Response Surface Approximations and Error Estimates to Accurately Predict Probabilities of Events},
-		NOTE = {In preparation}
+@article{ABD+13,
+		AUTHOR = {Altaf, M.U. and Butler, T.  and Dawson, C. and Hoteit, I. and Luo, X. and Mayo, T.},
+		TITLE = {Improving Short-Range Ensemble Kalman Storm Surge Forecasting Using Robust Adaptive Inflation},
+		YEAR = {2013},
+		JOURNAL = {Monthly Weather Review},
+		volume={141},
+		pages={2705-2720}
 }
 
-@article{BET,
-		AUTHOR = {Butler, T. and Estep, D. and Tavener, S. and Wildey, T. and Dawson, C. and Graham, L.},
-		TITLE = {Solving Stochastic Inverse Problems using Sigma-Algebras on Contour Maps},
-		NOTE = {{arXiv} preprint {arXiv:1407.3851}},
-		YEAR = {2015}
+@article{BE13,
+	Author = {T. Butler and D. Estep},
+	Doi = {10.1016/j.anucene.2012.05.016},
+	Journal = {Ann. Nucl. Energy},
+	Number = {0},
+	Pages = {86-94},
+	Title = {A numerical method for solving a stochastic inverse problem for parameters},
+	Volume = {52},
+	Year = {2013},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/j.anucene.2012.05.016}}
+
+@article{BDW13,
+  Title                    = {Propagation of Uncertainties Using Improved Surrogate Models},
+  Author                   = {Troy Butler and Clint Dawson and Tim Wildey},
+  Journal                  = {SIAM/ASA Journal on Uncertainty Quantification},
+  Year                     = {2013},
+  Pages                    = {164-191},
+  Volume                   = {1},
 }
 
-@article{Butler2015a,
-	AUTHOR = {Butler, T. and Huhtala, A. and Juntunen, M.},
-	TITLE = {Quantifying Uncertainty in Material Damage from Vibrational Parameters},
-        JOURNAL = {Journal of Computational Physics},
-        YEAR = {2015},
-        VOLUME = {283},
-	PAGES = {414-435}
+
+@article{ABM+14,
+		AUTHOR = {Altaf, M.U. and Butler, T.  and Mayo, T. and Luo, X. and Dawson, C. and Heemink, A.W. and Hoteit, I.},
+		TITLE = {A Comparison of ensemble Kalman filters for storm surge assimilation},
+		YEAR = {2014},
+		JOURNAL = {Monthly Weather Review},
+		volume = {142},
+		pages = {2899-2914}
 }
 
-@article{Butler2015b,
-	AUTHOR = {Butler, T. and Graham, L. and Estep, D. and Dawson, C. and Westerink, J.J.},
-	TITLE = {Definition and solution of a stochastic inverse problem for the Manning's n parameter field in hydrodynamic models},
-        JOURNAL = {Advances in Water Resources},
-        YEAR = {2015},
-        VOLUME = {78},
-	PAGES = {60-79}
+@article{MBD+14,
+    AUTHOR = {Mayo, T and Butler, T. and Dawson, C. and Hoteit, I.},
+    TITLE = {Data assimilation within the Advanced Circulation {(ADCIRC)} modeling framework for the estimation of Manning’s friction coefficient},
+    JOURNAL = {Ocean Modelling},
+    YEAR = {2014},
+    VOLUME = {76},
+    PAGES = {43-58}
 }
 
-@article{Butler2015c,
-	AUTHOR = {Mattis, S. and Butler, T. and Dawson, C. and Estep, D. and Vesselinov, V.V.},
-	TITLE = {Parameter estimation and prediction for groundwater contamination based on measure theory},
-        JOURNAL = {Water Resources Research},
-        YEAR = {2015},
-        note = {In press}
+@article{BET+14,
+	Author = {Butler, T. and Estep, D. and Tavener, S. and Dawson, C. and Westerink, J.},
+	Doi = {10.1137/130930406},
+	Eprint = {http://dx.doi.org/10.1137/130930406},
+	Journal = {SIAM/ASA Journal on Uncertainty Quantification},
+	Note = {doi:10.1137/130930406},
+	Number = {1},
+	Pages = {174-202},
+	Title = {{A Measure-Theoretic Computational Method for Inverse Sensitivity Problems III: Multiple Quantities of Interest}},
+	Url = {http://dx.doi.org/10.1137/130930406},
+	Volume = {2},
+	Year = {2014},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1137/130930406}}
+
+@unpublished{BET+14-arxiv,
+	Author = {Butler, Troy and Estep, Don and Tavener, Simon and Wildey, Timothy and Dawson, Clint and Graham, Lindley},
+	Doi = {arXiv:1407.3851},
+	Note = {In preparation},
+	Title = {{Solving Stochastic Inverse Problems using Sigma-Algebras on Contour Maps}},
+	Year = {2014},
+	Bdsk-Url-1 = {http://arxiv.org/pdf/1407.3851}}
+
+@article{BHJ15,
+	title = "Quantifying uncertainty in material damage from vibrational data",
+	journal = "Journal of Computational Physics ",
+	volume = "283",
+	number = "",
+	pages = "414 - 435",
+	year = "2015",
+	note = "",
+	issn = "0021-9991",
+	doi = "http://dx.doi.org/10.1016/j.jcp.2014.12.011",
+	url = "http://www.sciencedirect.com/science/article/pii/S0021999114008195",
+	author = "T. Butler and A. Huhtala and M. Juntunen"}
+
+@article{BGE+15,
+	Author = {T. Butler and L. Graham and D. Estep and C. Dawson and J.J. Westerink},
+	Doi = {doi:10.1016/j.advwatres.2015.01.011},
+	Issn = {0309-1708},
+	Journal = {Advances in Water Resources},
+	Keywords = {Manning's n coefficient},
+	Number = {0},
+	Pages = {60 - 79},
+	Title = {Definition and solution of a stochastic inverse problem for the Manning's $n$ parameter field in hydrodynamic models},
+	Volume = {78},
+	Year = {2015},
+	Bdsk-Url-1 = {http://www.sciencedirect.com/science/article/pii/S0309170815000135},
+	Bdsk-Url-2 = {http://dx.doi.org/10.1016/j.advwatres.2015.01.011}}
+
+@article{MBD+15,
+  Title                    = {Parameter estimation and prediction for groundwater contamination based on measure theory},
+  Author                   = {Steven A Mattis and Troy D Butler and Clint N Dawson and Don Estep and Velimir V Vessilinov},
+  Journal                  = {Water Resources Research},
+  Year                     = {2015},
+  Pages                    = {7608-7629},
+  Volume                   = {51},
+  Doi                      = {10.1002/2015WR017295}
 }
 
-@book{GhanemSpanos,
-	AUTHOR	= {R. Ghanem and P. Spanos},
-	TITLE		= {Stochastic {F}inite {E}lements: {A Spectral Approach}},
-	publisher = {Springer Verlag, New York},
-	YEAR		= {2002}
+@article{GBW+16,
+	Author = {L. Graham and T. Butler and S. Walsh and C. Dawson and J.J. Westerink},
+	Journal = {Monthly Wea. Rev.},
+	Title = {A Measure-Theoretic Algorithm for Estimating Bottom Friction in a Coastal Inlet: Case Study of Bay St. Luois during Hurricane Gustav (2008)},
+	Year = {2016},
+	Note = {In Revision}
 }
 
-@article{KFD,
-    AUTHOR = {Kees C. and Farthing M. and Dawson C.},
-    TITLE  = {Locally conservative, stabilized finite element methods for variably saturated flow},
-    JOURNAL = {Computer Methods in Applied Mechanics and Engineering},
-    YEAR = {2008},
-    VOLUME = {197},
-    PAGES = {4610-4625}
+@article{BGM+16,
+	Title = "A Measure-Theoretic Interpretation of Sample Based Numerical Integration with Applications to Inverse and Prediction Problems Under Uncertainty",
+	Author = "T. Butler and L. Graham and S. Mattis and S. Walsh",
+	Year = {2016},
+	Note = {In Revision}
 }
 
-@article{MDKF,
-    AUTHOR = {Mattis S. and Dawson C. and Kees C. and Farthing M.},
-    TITLE  = {Numerical modeling of drag for flow through vegetated domains and porous structures},
-    JOURNAL = {Advances in Water Resources},
-    YEAR = {2012},
-    VOLUME = {39},
-    PAGES = {44-59}
+@article{BPW17,
+	Title="Simulation-Based Optimal Experimental Design: A Measure-Theoretic Perspective",
+	Author = "T. Butler and M. Pilosov and S. Walsh",
+	Year = {2017},
+	Note = {In Review},
+	url = {https://auraria.summon.serialssolutions.com/#!/search?bookMark=ePnHCXMw42JgAfZbU0EXEgMTk6WZhakJJ4NOcGYu9DYqXVDpnKKQD8wQuYk5Csjn2CukgBct8ABNAHa_uBkU3FxDnD10E0tB3cbEeOh4RnwSaO-opYkJ6KpzgkoAGuQr2g}
 }
 
-@article{MDKF2,
-    AUTHOR = {Mattis S. and Dawson C. and Kees C. and Farthing M.},
-    TITLE  = {An immersed structure approach for fluid-vegetation interaction},
-    JOURNAL = {Advances in Water Resources},
-    YEAR = {2015},
-    VOLUME = {80},
-    PAGES = {1-16}
+@article{BM17,
+	Title="Enhanced surrogate modeling with adjoints for goal-oriented measure-theoretic inversion",
+	Author = "T. Butler and S. Mattis",
+	Year = {2017},
+	Note = {http://digital.auraria.edu/IR00000052/00001}
 }
 
-@book{Dellacherie_Meyer,
+@article{GBD+17,
+author = {Lindley Graham and Troy Butler and Scott Walsh and Clint Dawson and Joannes J. Westerink},
+title = {A Measure-Theoretic Algorithm for Estimating Bottom Friction in a Coastal Inlet: Case Study of Bay St. Louis during Hurricane Gustav (2008)},
+journal = {Monthly Weather Review},
+volume = {145},
+number = {3},
+pages = {929-954},
+year = {2017},
+doi = {10.1175/MWR-D-16-0149.1},
+
+URL = {
+        http://dx.doi.org/10.1175/MWR-D-16-0149.1
+
+},
+eprint = {
+        http://dx.doi.org/10.1175/MWR-D-16-0149.1
+
+},
+    abstract = {The majority of structural damage and loss of life during a hurricane is due to storm surge, thus it is important for communities in hurricane-prone regions to understand their risk due to surge. Storm surge in particular is largely influenced by coastal features such as topography/bathymetry and bottom roughness. Bottom roughness determines how much resistance there is to the flow. Manning’s formula can be used to model the bottom stress with the Manning’s n coefficient, a spatially dependent field. Given a storm surge model and a set of model outputs, an inverse problem may be solved to determine probable Manning’s n fields to use for predictive simulations.The inverse problem is formulated and solved in a measure-theoretic framework using the state-of-the-art Advanced Circulation (ADCIRC) storm surge model. The use of measure theory requires minimal assumptions and involves the direct inversion of the physics-based map from model inputs to output data determined by the ADCIRC model. Thus, key geometric relationships in this map are preserved and exploited. By using a recently available subdomain implementation of ADCIRC that significantly reduces the computational cost of forward model solves, the authors demonstrate the method on a case study using data obtained from an ADCIRC hindcast study of Hurricane Gustav (2008) to quantify uncertainties in Manning’s n within Bay St. Louis. However, the methodology is general and could be applied to any inverse problem that involves a map from model input to output quantities of interest.}
+}
+
+
+%--------- end of Butler references ------------------
+@article{GS02,
+    author = {Alison L. Gibbs and Francis Edward Su},
+    title = {On choosing and bounding probability metrics},
+    journal = {INTERNAT. STATIST. REV. },
+    year = {2002},
+    pages = {419--435}
+}
+
+
+%---------- start of {Bayesian} references -------------
+@article{Stuart10,
+	author = {A. M. Stuart},
+	title = {{Inverse problems: A {Bayesian} perspective}},
+	journal = {Acta Numerica},
+	volume = {19},
+	pages = {451-559},
+	doi = {10.1017/S0962492910000061},
+	year = {2010}
+}
+
+@article{CDS10,
+author = "S.L. Cotter and M. Dashti and A.M. Stuart",
+title = "Approximation of {Bayesian} Inverse Problems",
+journal = "SIAM Journal of Numerical Analysis",
+volume = "48",
+year = "2010",
+pages = "322-345",
+}
+
+@book{Tarantola_book,
+	Author = {Tarantola, Albert},
+	Publisher = {siam},
+	Title = {{Inverse Problem Theory and Methods for Model Parameter Estimation}},
+	Year = {2005}}
+
+%---------- end of {Bayesian} references -------------
+
+@article{0266-5611-7-5-003,
+  author={B. Fitzpatrick},
+  title={Bayesian analysis in inverse problems},
+  journal={Inverse Problems},
+  volume={7},
+  number={5},
+  pages={675},
+  url={http://stacks.iop.org/0266-5611/7/i=5/a=003},
+  year={1991}
+}
+
+@inbook{starktenorio,
+title = {A Primer of Frequentist and {B}ayesian Inference in Inverse Problems},
+author = {Stark, P. B. and Tenorio, L.},
+publisher = {John Wiley \& Sons, Ltd},
+isbn = {9780470685853},
+url = {http://dx.doi.org/10.1002/9780470685853.ch2},
+doi = {10.1002/9780470685853.ch2},
+pages = {9--32},
+keywords = {primer of frequentist and Bayesian inference - in inverse problems, inverse problems, learning about the world - from indirect, noisy data, Bayesian and frequentist methods - and stochastic model for data, constraints on possible states of the world, frequentist and Bayesian approaches - in estimation and inference, state of the world, measurement model, parameters and likelihoods, estimators, measurable mappings - set Y of possible observations and other sets, estimator performance - what it means for estimator to be ‘good,’ or ‘better’ than another, loss and risk - comparing estimators through loss function, decision theory, framework for selecting estimators, Bayes/minimax duality - Bayes risk, and parameter estimated and loss function},
+booktitle = {Large-Scale Inverse Problems and Quantification of Uncertainty},
+year = {2010},
+}
+
+@article{0266-5611-30-11-110301,
+  author={D. Calvetti and J. Kaipio and E. Somersalo},
+  title={Inverse problems in the {B}ayesian framework},
+  journal={Inverse Problems},
+  volume={30},
+  number={11},
+  pages={110301},
+  url={http://stacks.iop.org/0266-5611/30/i=11/a=110301},
+  year={2014},
+  abstract={}
+}
+
+@article{AlexanderianPetraStadlerEtAl14,
+  Title                    = {A-optimal design of experiments for infinite-dimensional {B}ayesian linear inverse problems with regularized $\ell_0$-sparsification},
+  Author                   = {A. Alexanderian and N. Petra and G. Stadler and O. Ghattas},
+  Journal                  = {SIAM Journal on Scientific Computing},
+  Year                     = {2014},
+  Number                   = {5},
+  Pages                    = {A2122--A2148},
+  Volume                   = {36},
+  Doi                      = {10.1137/130933381},
+  Owner                    = {ccgo},
+  Timestamp                = {2013.09.02}
+}
+
+@Article{Bui-ThanhWillcoxGhattasEtAl07,
+  Title                    = {Goal-Oriented Model-Constrained Optimization for Reduction of Large-Scale Systems},
+  Author                   = {T. Bui-Thanh and K. Willcox and O. Ghattas and B. van Bloemen Waanders},
+  Journal                  = {Journal of Computational Physics},
+  Year                     = {2007},
+  Pages                    = {880-896},
+  Volume                   = {224},
+
+  Owner                    = {ccgo},
+  Timestamp                = {2008.12.26}
+}
+
+@Article{Bui-ThanhGhattas14,
+  Title                    = {An analysis of infinite dimensional {B}ayesian inverse shape acoustic scattering and its numerical approximation},
+  Author                   = {T. Bui-Thanh and O. Ghattas},
+  Journal                  = {SIAM Journal of Uncertainty Quantification},
+  Year                     = {2014},
+  Number                   = {1},
+  Pages                    = {203-222},
+  Volume                   = {2},
+
+  Doi                      = {http://dx.doi.org/10.1137/120894877},
+  Owner                    = {ccgo},
+  Timestamp                = {2012.05.23}
+}
+
+@Inbook{Ernst2014,
+author="Ernst, O.
+and Sprungk, B.
+and Starkloff, H.",
+title="Bayesian Inverse Problems and {K}alman Filters",
+bookTitle="Extraction of Quantifiable Information from Complex Systems",
+year="2014",
+publisher="Springer International Publishing",
+address="Cham",
+pages="133--159",
+abstract="We provide a brief introduction to Bayesian inverse problems and Bayesian estimators emphasizing their similarities and differences to the classical regularized least-squares approach to inverse problems. We then analyze Kalman filtering techniques for nonlinear systems, specifically the well-known Ensemble Kalman Filter (EnKF) and the recently proposed Polynomial Chaos Expansion Kalman Filter (PCE-KF), in this Bayesian framework and show how they relate to the solution of Bayesian inverse problems.",
+isbn="978-3-319-08159-5",
+doi="10.1007/978-3-319-08159-5_7",
+url="https://doi.org/10.1007/978-3-319-08159-5_7"
+}
+
+@book{idier,
+editor = {J. Idier},
+title = {Bayesian Approach to Inverse Problems},
+year={2010},
+publisher={Wiley},
+address={New York}
+}
+
+@ARTICLE{ROM:CMW_2016,
+  author = {T.~Cui and Y.~M.~Marzouk and K.~E.~Willcox},
+  title = {Scalable posterior approximations for large-scale {B}ayesian inverse problems via likelihood-informed parameter and state reduction},
+  journal = {Journal of Computational Physics},
+  year = {2016},
+  volume = {315},
+  pages = {363--387},
+  owner = {tcui},
+  timestamp = {2014.01.26}
+}
+
+@inbook{cockayneoatessullivangirolami,
+author = {J. Cockayne and C. Oates and T. Sullivan and M. Girolami},
+title = {Probabilistic numerical methods for PDE-constrained Bayesian inverse problems},
+booktitle = {AIP Conference Proceedings 1853},
+publisher={AIP Publishing},
+year = {2017},
+pages = {060001},
+doi = {10.1063/1.4985359}
+}
+
+@Article{Wikle1998,
+author="Wikle, CHRISTOPHER K.
+and Berliner, L. Mark
+and Cressie, Noel",
+title="Hierarchical Bayesian space-time models",
+journal="Environmental and Ecological Statistics",
+year="1998",
+month="Jun",
+day="01",
+volume="5",
+number="2",
+pages="117--154",
+abstract="Space-time data are ubiquitous in the environmental sciences. Often, as is the case with atmo- spheric and oceanographic processes, these data contain many different scales of spatial and temporal variability. Such data are often non-stationary in space and time and may involve many observation/prediction locations. These factors can limit the effectiveness of traditional space- time statistical models and methods. In this article, we propose the use of hierarchical space-time models to achieve more flexible models and methods for the analysis of environmental data distributed in space and time. The first stage of the hierarchical model specifies a measurement- error process for the observational data in terms of some 'state' process. The second stage allows for site-specific time series models for this state variable. This stage includes large-scale (e.g. seasonal) variability plus a space-time dynamic process for the 'anomalies'. Much of our interest is with this anomaly proc ess. In the third stage, the parameters of these time series models, which are distributed in space, are themselves given a joint distribution with spatial dependence (Markov random fields). The Bayesian formulation is completed in the last two stages by speci- fying priors on parameters. We implement the model in a Markov chain Monte Carlo framework and apply it to an atmospheric data set of monthly maximum temperature.",
+issn="1573-3009",
+doi="10.1023/A:1009662704779",
+url="https://doi.org/10.1023/A:1009662704779"
+}
+
+@article{BayesianBrittleness,
+  author    = {Houman Owhadi and
+               Clint Scovel and
+               Timothy John Sullivan},
+  title     = {On the Brittleness of Bayesian Inference},
+  journal   = {{SIAM} Review},
+  volume    = {57},
+  number    = {4},
+  pages     = {566--582},
+  year      = {2015},
+  url       = {https://doi.org/10.1137/130938633},
+  doi       = {10.1137/130938633},
+  timestamp = {Wed, 17 May 2017 14:25:30 +0200},
+  biburl    = {http://dblp2.uni-trier.de/rec/bib/journals/siamrev/OwhadiSS15},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@article {Kennedy_O_JRSSSB_2001,
+author = {Kennedy, Marc C. and O'Hagan, Anthony},
+title = {Bayesian calibration of computer models},
+journal = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+volume = {63},
+number = {3},
+publisher = {Blackwell Publishers Ltd.},
+issn = {1467-9868},
+url = {http://dx.doi.org/10.1111/1467-9868.00294},
+doi = {10.1111/1467-9868.00294},
+pages = {425--464},
+keywords = {Calibration, Computer experiments, Deterministic models, Gaussian process, Interpolation, Model inadequacy, Sensitivity analysis, Uncertainty analysis},
+year = {2001},
+}
+
+
+@article{pyMC3,
+
+author={Salvatier,John and Wiecki,Thomas V. and Fonnesbeck,Christopher},
+
+year={2016},
+
+title={Probabilistic programming in Python using PyMC3},
+
+journal={PeerJ Computer Science},
+
+volume={2},
+
+pages={e55},
+
+abstract={Probabilistic programming allows for automatic Bayesian inference on user-defined probabilistic models. Recent advances in Markov chain Monte Carlo (MCMC) sampling allow inference on increasingly complex models. This class of MCMC, known as Hamiltonian Monte Carlo, requires gradient information which is often not readily available. PyMC3 is a new open source probabilistic programming framework written in Python that uses Theano to compute gradients via automatic differentiation as well as compile probabilistic programs on-the-fly to C for increased speed. Contrary to other probabilistic programming languages, PyMC3 allows model specification directly in Python code. The lack of a domain specific language allows for great flexibility and direct interaction with the model. This paper is a tutorial-style introduction to this software package.},
+
+keywords={Computer simulation; C plus plus; Advantages; Probability theory; Markov chains; Probabilistic models; Regression analysis; Markov analysis; Probabilistic inference; Programming languages; Generalized linear models; Domain specific languages; Freeware; Algorithms; Language; Software; Statistical inference; Syntax; Bayesian analysis; Monte Carlo simulation; Statistical modeling; Markov chain Monte Carlo; Bayesian statistic; Probabilistic Programming; Python},
+
+isbn={2376-5992},
+
+language={English},
+
+}
+
+%---------- start of data assimilation references --------
+@ARTICLE{Kalman1960,
+  author = {Kalman, Rudolph Emil and others},
+  title = {A new approach to linear filtering and prediction problems},
+  journal = {Journal of basic Engineering},
+  year = {1960},
+  volume = {82},
+  pages = {35--45},
+  number = {1}
+}
+
+@ARTICLE{Evensen03,
+  author = {Geir Evensen},
+  title = {The Ensemble {K}alman Filter: theoretical formulation and practical implementation},
+  journal = {Ocean Dynamics},
+  year = {2003},
+  volume = {53},
+  pages = {343--367}
+}
+
+@ARTICLE{Evensen94,
+  author = {Evensen, Geir},
+  title = {Sequential data assimilation with a nonlinear quasi-geostrophic model
+	using Monte Carlo methods to forecast error statistics},
+  journal = {Journal of Geophysical Research: Oceans (1978--2012)},
+  year = {1994},
+  volume = {99},
+  pages = {10143--10162},
+  number = {C5},
+  publisher = {Wiley Online Library}
+}
+%---------- end of data assimilation references --------
+
+
+%---------- start of surrogate modeling references ---------
+@article{Xiu_2007,
+title = "Efficient collocational approach for parametric uncertainty analysis",
+abstract = "A numerical algorithm for effective incorporation of parametric uncertainty into mathematical models is presented. The uncertain parameters are modeled as random variables, and the governing equations are treated as stochastic. The solutions, or quantities of interests, are expressed as convergent series of orthogonal polynomial expansions in terms of the input random parameters. A high-order stochastic collocation method is employed to solve the solution statistics, and more importantly, to reconstruct the polynomial expansion. While retaining the high accuracy by polynomial expansion, the resulting {"}pseudo-spectral{"} type algorithm is straightforward to implement as it requires only repetitive deterministic simulations. An estimate on error bounded is presented, along with numerical examples for problems with relatively complicated forms of governing equations.",
+keywords = "Collocation methods, Pseudo-spectral methods, Random differential equations, Stochastic inputs, Uncertainty quantification",
+author = "Dongbin Xiu",
+year = "2007",
+month = "4",
+language = "English (US)",
+volume = "2",
+pages = "293--309",
+journal = "Communications in Computational Physics",
+issn = "1815-2406",
+publisher = "Global Science Press",
+number = "2",
+}
+
+@article{XK_PC_2002,
+	author = {Dongbin Xiu and George Em Karniadakis},
+	title = {The {Wiener--Askey} Polynomial Chaos for Stochastic Differential Equations},
+	journal = {SIAM Journal on Scientific Computing},
+	volume = {24},
+	number = {2},
+	pages = {619-644},
+	year = {2002},
+	doi = {10.1137/S1064827501387826},
+	URL = {
+        http://dx.doi.org/10.1137/S1064827501387826
+},
+	eprint = {
+        http://dx.doi.org/10.1137/S1064827501387826
+}
+}
+
+@article{Wiener_1938,
+ ISSN = {00029327, 10806377},
+ URL = {http://www.jstor.org/stable/2371268},
+ author = {Norbert Wiener},
+ journal = {American Journal of Mathematics},
+ number = {4},
+ pages = {897-936},
+ publisher = {Johns Hopkins University Press},
+ title = {The Homogeneous Chaos},
+ volume = {60},
+ year = {1938}
+}
+
+@article{CM_1947,
+ ISSN = {0003486X},
+ URL = {http://www.jstor.org/stable/1969178},
+ author = {R. H. Cameron, W. T. Martin},
+ journal = {Annals of Mathematics},
+ number = {2},
+ pages = {385-392},
+ publisher = {Annals of Mathematics},
+ title = {The Orthogonal Development of Non-Linear Functionals in Series of Fourier-Hermite Functionals},
+ volume = {48},
+ year = {1947}
+}
+
+
+
+@article{WK_PC_2006,
+ author = {Wan, Xiaoliang and Karniadakis, George Em},
+ title = {Beyond Wiener---Askey Expansions: Handling Arbitrary PDFs},
+ journal = {J. Sci. Comput.},
+ issue_date = {June      2006},
+ volume = {27},
+ number = {1-3},
+ month = jun,
+ year = {2006},
+ issn = {0885-7474},
+ pages = {455--464},
+ numpages = {10},
+ url = {http://dx.doi.org/10.1007/s10915-005-9038-8},
+ doi = {10.1007/s10915-005-9038-8},
+ acmid = {1140007},
+ publisher = {Plenum Press},
+ address = {New York, NY, USA},
+ keywords = {Uncertainty, polynomial chaos, stochastic differential equation},
+}
+
+@book{Ghanem_Spanos_book,
+	author = {R. Ghanem and P. Spanos},
+	title = {Stochastic Finite Elements: A Spectral Approach},
+	publisher = {Springer New York},
+	year = {1991}
+}
+
+@article{MNR07,
+ author = {Marzouk, Youssef M. and Najm, Habib N. and Rahn, Larry A.},
+ title = {Stochastic Spectral Methods for Efficient {Bayesian} Solution of Inverse Problems},
+ journal = {J. Comput. Phys.},
+ issue_date = {June, 2007},
+ volume = {224},
+ number = {2},
+ month = jun,
+ year = {2007},
+ issn = {0021-9991},
+ pages = {560--586},
+ numpages = {27},
+ url = {http://dx.doi.org/10.1016/j.jcp.2006.10.010},
+ doi = {10.1016/j.jcp.2006.10.010},
+ acmid = {1248357},
+ publisher = {Academic Press Professional, Inc.},
+ address = {San Diego, CA, USA},
+ keywords = {{Bayesian} inference, Diffusive transport, Galerkin projection, Inverse problems, Markov chain Monte Carlo, Monte Carlo, Polynomial chaos, Spectral methods},
+}
+
+@article{LeMaitre_UQ_04a,
+ author = {Le Ma\^{\i}tre, O. P. and Knio, O. M. and Najm, H. N. and Ghanem, R. G.},
+ title = {Uncertainty Propagation Using Wiener-Haar Expansions},
+ journal = {J. Comput. Phys.},
+ issue_date = {10 June 2004},
+ volume = {197},
+ number = {1},
+ month = jun,
+ year = {2004},
+ issn = {0021-9991},
+ pages = {28--57},
+ numpages = {30},
+ url = {http://dx.doi.org/10.1016/j.jcp.2003.11.033},
+ doi = {10.1016/j.jcp.2003.11.033},
+ acmid = {1016239},
+ publisher = {Academic Press Professional, Inc.},
+ address = {San Diego, CA, USA},
+ keywords = {polynomial chaos, stochastic process, uncertainty quantification, wavelets},
+}
+
+@article{LeMaitre_UQ_04b,
+ author = {Le Ma\^{\i}tre, O. P. and Najm, H. N. and Ghanem, R. G. and Knio, O. M.},
+ title = {Multi-resolution Analysis of Wiener-type Uncertainty Propagation Schemes},
+ journal = {J. Comput. Phys.},
+ issue_date = {1 July 2004},
+ volume = {197},
+ number = {2},
+ month = jul,
+ year = {2004},
+ issn = {0021-9991},
+ pages = {502--531},
+ numpages = {30},
+ url = {http://dx.doi.org/10.1016/j.jcp.2003.12.020},
+ doi = {10.1016/j.jcp.2003.12.020},
+ acmid = {1017259},
+ publisher = {Academic Press Professional, Inc.},
+ address = {San Diego, CA, USA},
+ keywords = {adaptive scheme, multi-resolution analysis, multi-wavelets, polynomial chaos, uncertainty quantification},
+}
+
+@article{Ghanem_RedHorse_99,
+ author = {Ghanem, Roger and Red-Horse, John},
+ title = {Propagation of Probabilistic Uncertainty in Complex Physical Systems Using a Stochastic Finite Element Approach},
+ journal = {Phys. D},
+ issue_date = {Sept. 10, 1999},
+ volume = {133},
+ number = {1-4},
+ month = sep,
+ year = {1999},
+ issn = {0167-2789},
+ pages = {137--144},
+ numpages = {8},
+ url = {http://dx.doi.org/10.1016/S0167-2789(99)00102-5},
+ doi = {10.1016/S0167-2789(99)00102-5},
+ acmid = {334298},
+ publisher = {Elsevier Science Publishers B. V.},
+ address = {Amsterdam, The Netherlands, The Netherlands},
+ keywords = {Karhunen-Lo\`{e}ve, computational mechanics, finite elements, polynomial chaos, random media, stochastic processes},
+}
+
+@article{Prudhomme_Bryant_2015,
+	author="Prudhomme, Serge
+	and Bryant, Corey M.",
+	title="Adaptive surrogate modeling for response surface approximations with application to {Bayesian} inference",
+	journal="Advanced Modeling and Simulation in Engineering Sciences",
+	year="2015",
+	volume="2",
+	number="1",
+	pages="1--21",
+	issn="2213-7467",
+	doi="10.1186/s40323-015-0045-5",
+	url="http://dx.doi.org/10.1186/s40323-015-0045-5"
+}
+
+@article{BPW_2015,
+	author = {C. M. Bryant and S. Prudhomme and T. Wildey},
+	title = {Error Decomposition and Adaptivity for Response Surface Approximations from PDEs with Parametric Uncertainty},
+	journal = {SIAM/ASA Journal on Uncertainty Quantification},
+	volume = {3},
+	number = {1},
+	pages = {1020-1045},
+	year = {2015},
+	doi = {10.1137/140962632},
+	URL = {
+        http://dx.doi.org/10.1137/140962632
+	},
+	eprint = {
+        http://dx.doi.org/10.1137/140962632
+	}
+}
+
+@article{Estep_Neckels_2006,
+	title = "Fast and reliable methods for determining the evolution of uncertain parameters in differential equations ",
+	journal = "Journal of Computational Physics ",
+	volume = "213",
+	number = "2",
+	pages = "530 - 556",
+	year = "2006",
+	note = "",
+	issn = "0021-9991",
+	doi = "http://dx.doi.org/10.1016/j.jcp.2005.08.024",
+	url = "http://www.sciencedirect.com/science/article/pii/S0021999105003918",
+	author = "D. Estep and D. Neckels"
+}
+
+@article{Marzouk_Xiu_2009,
+	title = "A Stochastic Collocation Approach to {Bayesian} Inference in Inverse Problems",
+	author = "Youssef Marzouk and Dongbin Xiu",
+	year = "2009",
+	month = "10",
+	doi = "10.4208/cicp.2009.v6.p826",
+	language = "English (US)",
+	volume = "6",
+	pages = "826--847",
+	journal = "Communications in Computational Physics",
+	issn = "1815-2406",
+	publisher = "Global Science Press",
+	number = "4",
+}
+%---------- end of surrogate modeling references -----------
+
+
+%---------- start of dimension reduction references --------
+@article{CDW_ActiveSubspace_2014,
+	author = {Paul G. Constantine and Eric Dow and Qiqi Wang},
+	title = {Active Subspace Methods in Theory and Practice: Applications to Kriging Surfaces},
+	journal = {SIAM Journal on Scientific Computing},
+	volume = {36},
+	number = {4},
+	pages = {A1500-A1524},
+	year = {2014},
+	doi = {10.1137/130916138},
+	URL = {
+        http://dx.doi.org/10.1137/130916138
+    },
+	eprint = {
+        http://dx.doi.org/10.1137/130916138
+	}
+}
+%---------- end of dimension reduction references ----------
+
+
+
+%---------- start of sparse grid references ----------------
+@article{Almeida_Oden_2010,
+	author = {R. C. Almeida and J. T. Oden},
+	title = {Solution verification, goal-oriented adaptive methods for stochastic advection-diffusion problems},
+	journal = {Comput. Methods Appl. Mech. Engrg.},
+	volume = {199},
+	year = {2010},
+	pages = {2472--2486}
+}
+
+@article{NTW_SparseGrid_2008,
+	author = {F. Nobile and R. Tempone and C. G. Webster},
+	title = {A Sparse Grid Stochastic Collocation Method for Partial Differential Equations with Random Input Data},
+	journal = {SIAM Journal on Numerical Analysis},
+	volume = {46},
+	number = {5},
+	pages = {2309-2345},
+	year = {2008},
+	doi = {10.1137/060663660},
+	URL = {
+        http://dx.doi.org/10.1137/060663660
+
+	},
+	eprint = {
+        http://dx.doi.org/10.1137/060663660
+	}
+}
+%---------- end of sparse grid references ------------------
+
+
+
+%---------- start of a posteriori error analysis references ---------
+@article{CET09,
+	author = {V. Carey and D. Estep and S. Tavener},
+	title = {A Posteriori Analysis and Adaptive Error Control for Multiscale Operator Decomposition Solution of Elliptic Systems I: Triangular Systems},
+	journal = {SIAM Journal on Numerical Analysis},
+	volume = {47},
+	number = {1},
+	pages = {740-761},
+	year = {2009},
+	doi = {10.1137/070689917},
+	URL = {
+        http://dx.doi.org/10.1137/070689917
+	},
+	eprint = {
+        http://dx.doi.org/10.1137/070689917
+	}
+}
+
+@article{ETW08,
+	author = {D. Estep and S. Tavener and T. Wildey},
+	title = {A Posteriori Analysis and Improved Accuracy for an Operator Decomposition Solution of a Conjugate Heat Transfer Problem},
+	journal = {SIAM Journal on Numerical Analysis},
+	volume = {46},
+	number = {4},
+	pages = {2068-2089},
+	year = {2008},
+	doi = {10.1137/060678737},
+	URL = {
+        http://dx.doi.org/10.1137/060678737
+	},
+	eprint = {
+        http://dx.doi.org/10.1137/060678737
+    }
+}
+
+@article{Estep95,
+	author = {Donald Estep},
+	title = {A Posteriori Error Bounds and Global Error Control for Approximation of Ordinary Differential Equations},
+	journal = {SIAM Journal on Numerical Analysis},
+	volume = {32},
+	number = {1},
+	pages = {1-48},
+	year = {1995},
+	doi = {10.1137/0732001},
+	URL = {
+        http://dx.doi.org/10.1137/0732001
+    },
+	eprint = {
+        http://dx.doi.org/10.1137/0732001
+    }
+}
+
+@article{Ainsworth_Oden_1997,
+	title = "A posteriori error estimation in finite element analysis",
+	journal = "Computer Methods in Applied Mechanics and Engineering",
+	volume = "142",
+	number = "1",
+	pages = "1 - 88",
+	year = "1997",
+	note = "",
+	issn = "0045-7825",
+	doi = "http://dx.doi.org/10.1016/S0045-7825(96)01107-3",
+	url = "http://www.sciencedirect.com/science/article/pii/S0045782596011073",
+	author = "Mark Ainsworth and J.Tinsley Oden"
+}
+
+@article {Babuska_Rheinboldt_1978,
+	author = {Babuska, I. and Rheinboldt, W. C.},
+	title = {A-posteriori error estimates for the finite element method},
+	journal = {International Journal for Numerical Methods in Engineering},
+	volume = {12},
+	number = {10},
+	publisher = {John Wiley & Sons, Ltd},
+	issn = {1097-0207},
+	url = {http://dx.doi.org/10.1002/nme.1620121010},
+	doi = {10.1002/nme.1620121010},
+	pages = {1597--1615},
+	year = {1978}
+}
+
+@article {WTE08,
+	author = {Wildey, T. and Tavener, S. and Estep, D.},
+	title = {A posteriori error estimation of approximate boundary fluxes},
+	journal = {Communications in Numerical Methods in Engineering},
+	volume = {24},
+	number = {6},
+	publisher = {John Wiley & Sons, Ltd.},
+	issn = {1099-0887},
+	url = {http://dx.doi.org/10.1002/cnm.1014},
+	doi = {10.1002/cnm.1014},
+	pages = {421--434},
+	keywords = {a posteriori error estimate, adjoint, boundary flux, effective domain of influence, extraction function, generalized Green's function, goal-oriented error estimate},
+	year = {2008}
+}
+
+@book{Bangerth_book,
+	author    = {Bangerth, W. and Rannacher, R.},
+	title     = {Adaptive Finite Element Methods for Differential Equations},
+	publisher = {Birkhauser Verlag},
+	year      = {2003},
+}
+
+@article{Becker_Rannacher_2001,
+    AUTHOR = {Becker, Roland and Rannacher, Rolf},
+     TITLE = {An optimal control approach to a posteriori error estimation
+              in finite element methods},
+   JOURNAL = {Acta Numer.},
+  FJOURNAL = {Acta Numerica},
+    VOLUME = {10},
+      YEAR = {2001},
+     PAGES = {1--102},
+      ISSN = {0962-4929},
+   MRCLASS = {65N15 (49M25 65N30)},
+  MRNUMBER = {MR2009692 (2004g:65147)},
+MRREVIEWER = {Wen Bin Liu},
+}
+%---------- end of a posteriori error analysis references ---------
+
+
+%---------- start of general adjoint references -------------------
+@book{Marchuk_book2,
+   AUTHOR = {Marchuk, G. I. and Agoshkov, V. I. and Shutyaev, V.
+             P.},
+    TITLE = {Adjoint Equations and Perturbation Algorithms in
+    Nonlinear
+             Problems},
+PUBLISHER = {CRC Press},
+  ADDRESS = {Boca Raton, FL},
+     YEAR = {1996},
+    PAGES = {xii+275},
+     ISBN = {0-8493-2871-3},
+}
+
+@book{Marchuk_book1,
+	author = {G. I. Marchuk},
+	title = {Adjoint equations and analysis of complex systems},
+	publisher = {Kluwer},
+	year = {1995}
+}
+
+@book{Lanczos_book,
+	author = {C. Lanczos},
+	title = {Linear Differential Operators},
+	publisher = {Dover Publications},
+	year = {1997}
+}
+
+@book{Cacuci_book,
+	author = {D. Cacuci},
+	title = {Sensitivity and Uncertainty Analysis: Theory},
+	volume = {I},
+	publisher = {Chapman \& Hall/CRC},
+	year = {1997}
+}
+%---------- end of general adjoint refrences ----------------------
+
+
+
+%---------- start of probability/measure theory references --------
+@book{Dellacherie_Meyer_book,
 	AUTHOR = {C. Dellacherie and P.A. Meyer},
 	TITLE = {Probabilities and Potential},
 	YEAR = {1978},
 	Publisher = {North-Holland Publishing Co., Amsterdam}
 }
 
-@article{AlnaesBlechta2015a,
-  title = {The FEniCS Project Version 1.5},
-  author = {Martin S. Aln{\ae}s and Jan Blechta and Johan Hake and August Johansson and Benjamin Kehlet and Anders Logg and Chris Richardson and Johannes Ring and Marie E. Rognes and Garth N. Wells},
-  year = {2015},
-  journal = {Archive of Numerical Software},
-  volume = {3},
-  number = {100},
-  doi = {10.11588/ans.2015.100.20553},
-  page = {9-23}
+@article{Chang_Pollard,
+	AUTHOR = {J.T. Change and D. Pollard},
+	TITLE = {Conditioning as disintegration},
+	JOURNAL = {Statistica Neerlandica},
+	VOLUME = {51},
+	PAGES = {287-317},
+	YEAR = {1997}
 }
 
-@PHDTHESIS{Lindleysthesis,
-        AUTHOR             = {L. Graham},
-        SCHOOL             = {Institute for Computational Engineering ans Sciences, The University of Texas at Austin, Austin, TX 78712},
-        TITLE              = {Adpative Measure-Theoretic Parameter Estimation for Coastal Ocean Modeling},
-        YEAR               = {2015}
+@book{Folland_book,
+  AUTHOR = {G.B. Folland},
+  TITLE = {Real Analysis Modern Techniques and Their Applications, second edition},
+  publisher = {John Wiley \& Sons},
+  address={New York},
+  YEAR = {2008}
+  }
+
+@book{Billingsly_book,
+	author = {P. Billingsley},
+	title = {Probability and Measure},
+	publisher = {John Wiley \& Sons, Inc.},
+	year = {1995}
+}
+%---------- end of probability/measure theory references ----------
+
+
+%---------- start of stochastic sampling references ---------------
+@book{Robert_Casella_book,
+author = {C.P. Robert and George Casella},
+title = {Monte Carlo Statistical Methods},
+publisher = {Springer},
+year = {2004}
 }
 
-@article{Adaptive,
-	AUTHOR = {Butler, T. and Graham, L. and Mattis, S. and Walsh, S.},
-	TITLE = {A Measure-Theoretic Interpretation of Sample Based Numerical Integration with Applications to Inverse and Prediction Problems Under Uncertainty},
-        note = {In preparation}
+@book{Stoyan_book,
+  AUTHOR = {D. Stoyan and W.S. Kendall and J. Mecke},
+  TITLE = {Stochastic Geometry and its Applications},
+  publisher = {John Wiley \& Sons},
+  address={New York},
+  YEAR = {1999}
 }
 
+@book{Gentle_book,
+	author = {J.E. Gentle},
+	title = {Random Number Generation and Monte Carlo Methods},
+	publisher = {Springer},
+year = {2003}
+}
 
+@book{Gilks_book,
+  Author = {W.R. Gilks and S. Richardson and D.J. Spiegelhalter},
+  Title = {Markov Chain Monte Carlo in Practice},
+  Publisher = {Chapman \% Hall},
+  Year = {1996}
+}
+
+@article{Geyer92,
+     title = {Practical Markov Chain Monte Carlo},
+     author = {Geyer, C. J.},
+     journal = {Statistical Science},
+     volume = {7},
+     number = {4},
+     pages = {473-483},
+     year = {1992}
+}
+%---------- end of stochastic sampling references -----------------
+
+
+%---------- start of scientific computing references --------------
+
+@book{FEniCS_book,
+	editor = {Anders Logg and Kent-Andre Mardal and Garth Wells},
+	title = {{Automated Solution of Differential Equations by the Finite Element Method}},
+	year = {2012},
+	publisher = {Springer Berlin Heidelberg},
+	doi = {10.1007/978-3-642-23099-8}
+}
+
+@article{ans20553,
+	author = {Martin Alnæs and Jan Blechta and Johan Hake and August Johansson and Benjamin Kehlet and Anders Logg and Chris Richardson and Johannes Ring and Marie Rognes and Garth Wells},
+	title = {{The FEniCS Project Version 1.5}},
+	journal = {Archive of Numerical Software},
+	volume = {3},
+	number = {100},
+	year = {2015},
+	keywords = {},
+	abstract = {The FEniCS Project is a collaborative project for the development of innovative concepts and tools for automated scientific computing, with a particular focus on the solution of differential equations by finite element methods. The FEniCS Projects software consists of a collection of interoperable software components, including DOLFIN, FFC, FIAT, Instant, UFC, UFL, and mshr. This note describes the new features and changes introduced in the release of FEniCS version 1.5.},
+	issn = {2197-8263},	doi = {10.11588/ans.2015.100.20553},
+	url = {http://journals.ub.uni-heidelberg.de/index.php/ans/article/view/20553}
+}
+
+@Inbook{Bartlett_AD_2006,
+	author="Bartlett, Roscoe A.
+		and Gay, David M.
+		and Phipps, Eric T.",
+	title="Automatic Differentiation of C++ Codes for Large-Scale Scientific Computing",
+	bookTitle="Computational Science -- ICCS 2006: 6th International Conference, Reading, UK, May 28-31, 2006, Proceedings, Part IV",
+	year="2006",
+	publisher="Springer Berlin Heidelberg",
+	address="Berlin, Heidelberg",
+	pages="525--532",
+	isbn="978-3-540-34386-8",
+	doi="10.1007/11758549_73",
+	url="http://dx.doi.org/10.1007/11758549_73"
+}
+
+%----------- end of scientific computing references --------------
