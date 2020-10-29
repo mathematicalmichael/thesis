@@ -4,18 +4,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\centering
+\vskip 24pt
+We formally define the maximal updated density (MUD) point as
+\begin{equation}\label{eq:mudpt_inital_defn}
+	\mudpt := \argmax {\updated}(\param).
+\end{equation}
+
+\vskip 24pt
+We motivate the use of the MUD point as an alternative to the MAP point for parameter estimation problems.
+
+\end{frame}
+
+\begin{frame}[t]
+
+Let $\norm{\mathbf{x}}_C^2 := (\mathbf{x}, \mathbf{x})_C = \mathbf{x}^T C \mathbf{x}$. \\
+
+Inverse covariances associated with non-degenerative multivariate Gaussian distributions will play the role of $C$. \\
+
+Suppose that the initial and prior densities are both given by the same $\mathcal{N}(\param_0, \initialCov)$ distribution.
+
+\vskip 12pt
+Additionally, suppose the map $Q$ is linear and that the data-likelihood and observed densities are both given by the same $\mathcal{N}(\observedMean, \observedCov)$ distribution.
+
+\vskip 12pt
+The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times p}$, and that the predicted density follows a $\mathcal{N}(Q(\param_0), \predictedCov)$ distribution where
+\begin{equation}\label{eq:predictCov}
+	\predictedCov := A\initialCov A^\top.
+\end{equation}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Theory of Regularization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
+\begin{frame}[t]{\it The one with the regularization equations.}
 %\vskip 25pt
 \centering
 \begin{figure}
 \centering
-
-\emph{The one with the regularization equations.}
 
 \begin{table}[htbp]
 \centering
@@ -26,7 +56,7 @@
   $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}$
 &
   $\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}$
-\\ 
+\\
 \hline
   & \\
   Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
@@ -50,10 +80,33 @@ The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from t
 
 \end{frame}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Linear Example}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where an example highlights a key difference.}
+
+\centering
+Consider a linear QoI map is defined by $A=\mat{cc}{1 & 1}$. \\
+2-D input, 1-D output $\implies$ rank-deficient
+
+\vskip 12pt
+
+Parameters in the initial and observed densities are given by
+\begin{equation*}
+\begin{split}
+	\initialMean = \mat{cc}{0.25 & 0.25}^\top, \\
+  \initialCov = \mat{cc}{1 & -0.25 \\ -0.25 & 0.5}, \\
+  \observedMean=1, \text{ and } \observedCov = \mat{c}{0.25}
+\end{split}
+\end{equation*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 %\vskip 25pt
 \centering
@@ -96,18 +149,123 @@ The $J(\param)$ has an additional term subtracted from $T(\param)$ coming from t
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact of Information Content}
+\subsection{Closed-Form Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[t]
 %\vskip 25pt
 \centering
-\begin{figure}
+
+The posterior covariance is formally given by
+
+\begin{equation}\label{eq:map_cov}
+\Sigma_\text{post} := ( A^\top {\Sigma}_\text{obs}^{-1} A + \initialCov^{-1} )^{-1}.
+\end{equation}
+
+Applying Woodbury identity and~\eqref{eq:predictCov}, we rewrite the posterior covariance:
+
+\begin{equation}\label{eq:map_cov_analytical}
+\Sigma_\text{post} = \initialCov - \initialCov A^\top \left[\predictedCov + \observedCov\right]^{-1} A \initialCov
+\end{equation}
+
+Can now interpret $\Sigma_\text{post}$ as a rank $d$ correction (or update) of $\initialCov$. \\
+$\predictedCov + \observedCov$ is invertible because it is the sum of two s.p.d matrices. \\
+We rewrite the closed form expression for the MAP poing given in \cite{Tarantola_book} as
+
+\begin{equation}\label{eq:map-point-analytical}
+\param^{\text{MAP}} = \param_0 + \Sigma_\text{post} A^\top \observedCov^{-1} (\observedMean - b - A\param_0).
+\end{equation}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+We define
+\begin{equation}\label{eq:eff_reg}
+	R := \nolinebreak \initialCov^{-1} - \nolinebreak A^\top \predictedCov^{-1} A.
+\end{equation}
+
+Using this $R$, rewrite $J(\param)$ as
+
+\begin{equation}\label{eq:dci-objective-alt}
+J(\param):= \norm{\observedMean - Q(\param)}_{\observedCov^{-1}}^2 + \norm{\param - \param_0}_{R}^2.
+\end{equation}
+
+\vskip 12pt
+In this form, we identify $R$ as the {\em effective regularization} in $J(\param)$ due to the formulation in the data-consistent framework.
+\begin{equation}
+	\updatedCov := \left(A^\top \observedCov^{-1} A + R\right)^{-1}.
+\end{equation}
+
+Since $R$ is not invertible, Woodbury's identity cannot be applied (yet).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+%\vskip 25pt
 \centering
+We derive using several identities
+\begin{equation}\label{eq:updatedCov_final}
+	\updatedCov = \initialCov - \initialCov A^\top \predictedCov^{-1}\left[\predictedCov-\observedCov\right]\predictedCov^{-1}A\initialCov.
+\end{equation}
 
-The one where we show how rank and dimension impact our solutions.
+\vskip 12pt
+Substitute $\updatedCov$ for $\Sigma_\text{post}$ in \eqref{eq:map-point-analytical} to write the point that minimizes $J$ as:
 
+\begin{equation}\label{eq:mud-point-analytical-alt}
+\param^{\text{MUD}} = \param_0 + \updatedCov A^\top \observedCov^{-1} (\observedMean - b - A\param_0).
+\end{equation}
+
+\vskip 12pt
+Substituting~\eqref{eq:updatedCov_final} into~\eqref{eq:mud-point-analytical-alt} and simplifying, we have
+\begin{equation}\label{eq:mud-point-analytical-final}
+	\mudpt = \param_0 + \initialCov A^\top \predictedCov^{-1}(\observedMean - b - A\param_0).
+\end{equation}
+
+\end{frame}
+
+\begin{frame}[t]
+
+\centering
+Predictability assumption:\\
+smallest predicted > largest observed (eigenvalues of covariances)
+
+\vskip 12pt
+\begin{thm}\label{thm:MUD_existence_uniqueness}
+Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
+If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
+\begin{enumerate}[(a)]
+\item There exists a unique parameter, denoted by $\mudpt$, that maximizes $\updated$.
+\item $Q(\mudpt) = \observedMean$.
+\item If $d=p$, $\mudpt$ is given by $A^{-1}$. If $d<p$, $\mudpt$ is given by~\eqref{eq:mud-point-analytical-final} and the covariance associated with this point is given by~\eqref{eq:updatedCov_final}.
+\end{enumerate}
+\end{thm}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Impact of Information Content}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{\it The one where we show how rank and dimension impact our solutions.}
+%\vskip 25pt
+\centering
+\centering
+Example: scaling random diagonal initial covariances
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.475\linewidth]{figures/lin/lin-dim-cov-convergence}
+  \includegraphics[width=0.475\linewidth]{figures/lin/lin-rank-cov-convergence}
+\caption{
+	Relative errors between $\paramref$ and (i) the least squares solution obtained through {\tt numpy}'s {\tt linalg.pinv} module, (ii) the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}, and (iii) the MAP point.
+  (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map.
+  (Right): Error for increasing row-rank of $A$, generated with Gaussian vectors and a SVD.
+}
+\label{fig:lin-error}
 \end{figure}
 
 \end{frame}
@@ -117,6 +275,7 @@ The one where we show how rank and dimension impact our solutions.
 \subsection{Data-Driven QoI Maps}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
 %\vskip 25pt
 \centering
@@ -129,6 +288,78 @@ The one where we show how to leverage this framework for general streams of data
 
 \end{frame}
 
+\begin{frame}[t]
+\centering
+Suppose $\exists \; d$ measurement devices generating repeated noisy data. \\
+\vskip 12pt
+For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device. \\
+
+Denote by $N_j$ the number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
+\vskip 12pt
+Let $d_{j,i}$ denote the $i$th noisy datum obtained for the $j$th measurement where $1\leq i\leq N_j$.
+
+\vskip 12pt
+Assume an unbiased additive error model for the measurement noise,
+with independent identically distributed (i.i.d.) Gaussian errors so that
+\begin{equation}\label{eq:obs_data_error}
+	d_{j,i} = M_j(\param^\star) + \xi_i, \ \xi_i\sim N(0,\sigma_j^2), \ \ 1\leq i\leq N_j.
+\end{equation}
+
+\vskip 12pt
+We now construct a $d$-dimensional vector-valued map from data obtained on the $d$ measurement devices.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map.}
+\centering
+
+The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
+
+\begin{equation}\label{eq:qoi_WME}
+	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
+\end{equation}
+
+\vskip 12pt
+$Q_{\text{WME},j}(\paramref)$ is the sample avg of $N_j$ random draws from an i.i.d.~$N(0,N_j)$.\\
+By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\paramref$ in \eqref{eq:obs_data_error}.
+
+\vskip 12pt
+Subsequently, each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.\\
+Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ distribution.
+
+\end{frame}
+
+
+\begin{frame}[t]{\it The one where measurements impact the predictability assumption.}
+\centering
+The $j$th diagonal component of the predicted covariance matrix is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
+
+Then, the associated predicted variance is given by
+\begin{equation}
+	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top
+\end{equation}
+
+Since $\initialCov$ is assumed to be non-degenerative and $M_j$ is a non-trivial row vector, this predicted variance grows linearly with $N_j$.\\
+\vskip 12pt
+In other words, the $j$th diagonal component of the predicted covariance has the form $\beta_j N_j$ for some $\beta_j>0$.
+\end{frame}
+
+
+\begin{frame}[t]
+\centering
+Let $N_{\text{min},j}$ denote the minimum $N_j$ for $1\leq j\leq N$ necessary to make the $j$th diagonal components sufficiently large so that the smallest eigenvalue of the predicted covariance is larger than $1$.
+
+\vskip 12pt
+The following result is now an immediate consequence of Theorem~\ref{thm:MUD_existence_uniqueness}:\\
+
+\begin{corollary}\label{cor:MUD_wme}
+If $\initial \sim N(\param_0,\initialCov)$ and data are obtained for $d$ linearly independent measurements on $\pspace$ with an additive noise model with i.i.d. Gaussian noise for each measurement, then {\bf there exists a minimum number of data points obtained for each of the measurements} such that there exists a unique $\mudpt$ and $Q_\text{WME}(\mudpt) = 0$.
+\end{corollary}
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nonlinear Examples}
@@ -145,4 +376,3 @@ The one where we show that our approach works even when some assumptions are vio
 \end{figure}
 
 \end{frame}
-

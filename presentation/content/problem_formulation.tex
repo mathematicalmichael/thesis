@@ -87,235 +87,185 @@ We now have all of the definitions required to summarize the density-based solut
 
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
-
-Bayesian approach: modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, $\paramref$.
-
-\vskip 10pt
-
-\begin{defn}[Deterministic Forward Problem (DFP)]
-  Given a space $\pspace$, and QoI map $\qoi$, the \emph{deterministic forward problem} is to determine the values, $\q \in \dspace$ that satisfy
-  \begin{equation}
-    \q = \qlam, \; \forall \; \param \in \pspace.
-  \end{equation}
-\end{defn}
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{defn}[Deterministic Inverse Problem (DIP) Under Uncertainty]
-  Given a noisy datum (or data-vector) $d = \q + \xi$, $\q \in \dspace$, the \emph{deterministic inverse problem} is to determine the parameter $\param \in \pspace$ which minimizes
-  \begin{equation}
-    \norm{\qoi(\param) - d}
-  \end{equation}
-  where $\xi$ is a random variable (or vector) drawn from a distribution characterizing the uncertainty in observations due to measurement errors.
-\end{defn}
-
-In the above definition, $\xi$ is some unobservable perturbation to the true output, arising from epistemic uncertainty (e.g. the precision of available measurement equipment).
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Perspectives}
-\begin{itemize}
-	\item We seek the $\updatedP$ whose push-forward measure matches $\observedP$
-	\item In measure-theoretic terms, $\updatedP$ is a pull-back measure of $\observedP$
-
-	\begin{defn}[Observed Density]\label{defn:obsden}
-		The density $\observed$ in \eqref{eq:inv} represents the uncertainty in QoI data.
-	\end{defn}
-
-	\begin{defn}[Initial Density]\label{defn:initialden}
-		$\initial$ encodes prior beliefs about $\param$'s (before evidence is accounted for)
-	\end{defn}
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Summarizing}
-\begin{itemize}
-	\item ``Push-forward'' \textbf{initial} beliefs using $\qoi$ to \textbf{compare} to \textbf{observed} (data)
-	\item Solve forward problem to construct solution to inverse problem
-	\item The push-forward density of $\initial$ under the map $\qoi$ is denoted by $\predicted$
-
-	\begin{defn}[Predicted Density]\label{defn:predicted}
-		$\predicted$ is given as the Radon-Nikodym derivative (with respect to $\mu_\dspace$) of the push-forward probability measure defined by:
-		\begin{equation}\label{eq:pred}
-			\predictedP (E)  = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
-		\end{equation}
-	\end{defn}
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{The Updated Density solves the SIP}
-These definitions are combined to form the \textbf{updated density}:
-\begin{equation}\label{eq:up}
-\updated \lam = \initial \lam \frac{\observed \qlam }{\predicted \qlam }, \; \param, \in \pspace.
-\end{equation}
-
-\begin{itemize}
-	\item $\observed$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
-	\item The map $\qoi$ impacts the structure of the update
-	\item $\dspace$ itself depends on $\qoi$
-	\item Primary effort in solving for $\updated$ (in \eqref{eq:up}) requires constructing $\predicted$
-	\item This is because $\initial$ and $\observed$ are given \emph{a priori} (often parametric)
-	\item Updated derived through use of Disintegration Theorem in \cite{BJW18}
-	\item Existence and Uniqueness given a predictability assumption
-\end{itemize}
-\end{frame}
-
-
-
-\subsection{Properties and Assumptions of the Update}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{assumption}[Predictability Assumption]\label{as:pred}
-	The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
-\end{assumption}
-
-
-The requirement is guaranteed if the following is satisfied:
-
-\begin{equation}\label{eq:pred}
-	\exists \; C>0 \text{ s.t. } \observed (d) \leq C \predicted (d) \text{ for a.e. } d\in \dspace,
-\end{equation}
-
-where $d = \qlam$ for some $\param \in \pspace$.
-By \cite{BJW18}, if \eqref{as:pred} holds, we have: 
-
-\begin{theorem}[Existence and Uniqueness]
-	For any set $A\in \pborel$, the solution $\updatedP$ given defined by
-	\begin{equation}\label{eq:cb_sol}
-		\updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\param \frac{\observed(d)}{\predicted(d)} \, d\mu_{\pspace, d} \param \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
-	\end{equation}
-
-	is a consistent solution, and is unique up to choice of $\initialP$ on $(\pspace, \pborel)$.
-\end{theorem}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Stability}
-
-All the stability and convergence results presented are with respect to:
-\vspace{0.5in}
-
-\begin{defn}{Total Variation / Statistical Distance}
-	\begin{equation}\label{eq:tv}
-		d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
-	\end{equation}
-where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $\PP_f, \PP_g$, respectively.
-\end{defn}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-
-\begin{defn}[Stability of Updates I]\label{defn:stableobs}
-	We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
-	\begin{equation}
-		d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
-	\end{equation}
-\end{defn}
-
-\vspace{0.5in}
-In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, implying that:
-\vspace{0.5in}
-
-\begin{theorem}
-	$\updatedP$ is stable with respect to perturbations in $\observedP$.
-\end{theorem}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{defn}[Stability of Updates II]\label{defn:stableinitial}
-Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
-
-We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observed)$,
-\begin{equation}\label{eq:stableinitial}
-d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
-\end{equation}
-\end{defn}
-
-\begin{theorem}
-$\updatedP$ is stable with respect to perturbations in the initial.
-\label{thm:stableinitial}
-\end{theorem}
-
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{Properties of the Updated Density}
-\begin{itemize}
-
-	\item Taken together, these stability results provide assurances that the updated we obtain is accurate up to the level of experimental error polluting $\observed$ and error in incorrectly specifying initial assumptions.
-	\item Given that specifying the definition of a ``true'' initial is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
-	\item Generating samples from $\predicted$ requires a numerical approximation to $\predicted$, which introduces \textbf{additional errors} in $\predicted$.
-
-\end{itemize}
-
-\end{frame}
-
-
-\subsection{Numerical Approximation and Sampling}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{itemize}
-	\item Let $\widehat{\predicted}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated $\updated$
-	\item The conditional densities from the Disintegration theorem are 
-\[
-\frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted (d)} }
-\]
-\vspace{0.25in}
-	\item To approximate the push-forward of the initial density, we require:
-\begin{assumption}\label{as:predx}
-There exists some $C>0$ such that
-\[
-\observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
-\]
-\end{assumption}
-
-\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{assumption}\label{as:predx}
-There exists some $C>0$ such that
-\[
-\observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
-\]
-\end{assumption}
-
-If this assumption is satisfied, we can prove the following cite{BJW18}:
-
-\begin{theorem}
-The error in the approximate updated is:
-\begin{equation}\label{eq:pred_bound}
-d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
-\end{equation}
-where the $C$ is the constant taken from \eqref{as:predx}.
-\end{theorem}
-
-\end{frame}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]{Summarizing}
+% \begin{itemize}
+% 	\item ``Push-forward'' \textbf{initial} beliefs using $\qoi$ to \textbf{compare} to \textbf{observed} (data)
+% 	\item Solve forward problem to construct solution to inverse problem
+% 	\item The push-forward density of $\initial$ under the map $\qoi$ is denoted by $\predicted$
+%
+% 	\begin{defn}[Predicted Density]\label{defn:predicted}
+% 		$\predicted$ is given as the Radon-Nikodym derivative (with respect to $\mu_\dspace$) of the push-forward probability measure defined by:
+% 		\begin{equation}\label{eq:pred}
+% 			\predictedP (E)  = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
+% 		\end{equation}
+% 	\end{defn}
+%
+% \end{itemize}
+%
+% \end{frame}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]{The Updated Density solves the SIP}
+% These definitions are combined to form the \textbf{updated density}:
+% \begin{equation}\label{eq:up}
+% \updated \lam = \initial \lam \frac{\observed \qlam }{\predicted \qlam }, \; \param, \in \pspace.
+% \end{equation}
+%
+% \begin{itemize}
+% 	\item $\observed$ and $\predicted$ defined on $(\dspace, \dborel)$ are evaluated at $\qlam$
+% 	\item The map $\qoi$ impacts the structure of the update
+% 	\item $\dspace$ itself depends on $\qoi$
+% 	\item Primary effort in solving for $\updated$ (in \eqref{eq:up}) requires constructing $\predicted$
+% 	\item This is because $\initial$ and $\observed$ are given \emph{a priori} (often parametric)
+% 	\item Updated derived through use of Disintegration Theorem in \cite{BJW18a}
+% 	\item Existence and Uniqueness given a \emph{predictability assumption}
+% \end{itemize}
+% \end{frame}
+%
+%
+%
+% \subsection{Properties and Assumptions of the Update}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]
+% \begin{assumption}[Predictability Assumption]\label{as:pred}
+% 	The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
+% \end{assumption}
+%
+%
+% The requirement is guaranteed if the following is satisfied:
+%
+% \begin{equation}\label{eq:pred}
+% 	\exists \; C>0 \text{ s.t. } \observed (d) \leq C \predicted (d) \text{ for a.e. } d\in \dspace,
+% \end{equation}
+%
+% where $d = \qlam$ for some $\param \in \pspace$.
+% By \cite{BJW18}, if \eqref{as:pred} holds, we have:
+%
+% \begin{theorem}[Existence and Uniqueness]
+% 	For any set $A\in \pborel$, the solution $\updatedP$ given defined by
+% 	\begin{equation}\label{eq:cb_sol}
+% 		\updatedP (A) = \int_\dspace \left (  \int_{\pspace \in \qoi^{-1}(d)}  \initial\param \frac{\observed(d)}{\predicted(d)} \, d\mu_{\pspace, d} \param \right ) \, d\mu_\dspace(d), \; \forall \; A \in \pborel
+% 	\end{equation}
+%
+% 	is a consistent solution, and is unique up to choice of $\initialP$ on $(\pspace, \pborel)$.
+% \end{theorem}
+%
+% \end{frame}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]{Stability}
+%
+% All the stability and convergence results presented are with respect to:
+% \vspace{0.5in}
+%
+% \begin{defn}{Total Variation / Statistical Distance}
+% 	\begin{equation}\label{eq:tv}
+% 		d_{\text{TV}} (\PP_f, \PP_g) := \int \abs{f - g} \, d\mu,
+% 	\end{equation}
+% where $f,g$ are the densities (Radon-Nikodym derivatives with respect to $\mu$) associated with measures $\PP_f, \PP_g$, respectively.
+% \end{defn}
+%
+% \end{frame}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]
+%
+% \begin{defn}[Stability of Updates I]\label{defn:stableobs}
+% 	We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
+% 	\begin{equation}
+% 		d_{\text{TV}} (\observedP, \widehat{\observedP}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+% 	\end{equation}
+% \end{defn}
+%
+% \vspace{0.5in}
+% In \cite{BJW18}, it is shown that $d_{\text{TV}} (\widehat{\updatedP}, \updatedP) = d_{\text{TV}} (\widehat{\observedP}, \observedP)$, implying that:
+% \vspace{0.5in}
+%
+% \begin{theorem}
+% 	$\updatedP$ is stable with respect to perturbations in $\observedP$.
+% \end{theorem}
+%
+% \end{frame}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]
+% \begin{defn}[Stability of Updates II]\label{defn:stableinitial}
+% Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
+%
+% We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\initialP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that for almost every $d\in\supp(\observed)$,
+% \begin{equation}\label{eq:stableinitial}
+% d_{\text{TV}} (\PP_{\pspace, d}, \widehat{\PP_{\pspace, d}}) < \delta \implies d_{\text{TV}} (\updatedP, \widehat{\updatedP}) < \eps.
+% \end{equation}
+% \end{defn}
+%
+% \begin{theorem}
+% $\updatedP$ is stable with respect to perturbations in the initial.
+% \label{thm:stableinitial}
+% \end{theorem}
+%
+%
+% \end{frame}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]{Properties of the Updated Density}
+% \begin{itemize}
+%
+% 	\item Taken together, these stability results provide assurances that the updated we obtain is accurate up to the level of experimental error polluting $\observed$ and error in incorrectly specifying initial assumptions.
+% 	\item Given that specifying the definition of a ``true'' initial is somewhat nebulous, we are less interested in the consequences of the latter conclusion.
+% 	\item Generating samples from $\predicted$ requires a numerical approximation to $\predicted$, which introduces \textbf{additional errors} in $\predicted$.
+%
+% \end{itemize}
+%
+% \end{frame}
+%
+%
+% \subsection{Numerical Approximation and Sampling}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]
+% \begin{itemize}
+% 	\item Let $\widehat{\predicted}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated $\updated$
+% 	\item The conditional densities from the Disintegration theorem are
+% \[
+% \frac{\widehat{d\PP_{\pspace, d}}}{d\mu_{\pspace, d}\lam} = \frac{\initial\lam}{ \widehat{\predicted (d)} }
+% \]
+% \vspace{0.25in}
+% 	\item To approximate the push-forward of the initial density, we require:
+% \begin{assumption}\label{as:predx}
+% There exists some $C>0$ such that
+% \[
+% \observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
+% \]
+% \end{assumption}
+%
+% \end{itemize}
+%
+% \end{frame}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}[t]
+% \begin{assumption}\label{as:predx}
+% There exists some $C>0$ such that
+% \[
+% \observed (d) \leq C \widehat{\predicted(d)} \text{ for a.e. } d\in \dspace.
+% \]
+% \end{assumption}
+%
+% If this assumption is satisfied, we can prove the following cite{BJW18}:
+%
+% \begin{theorem}
+% The error in the approximate updated is:
+% \begin{equation}\label{eq:pred_bound}
+% d_{\text{TV}} (\updatedP, \widehat{\updatedP}) \leq C d_{\text{TV}} (\predictedP, \widehat{\predictedP}),
+% \end{equation}
+% where the $C$ is the constant taken from \eqref{as:predx}.
+% \end{theorem}
+%
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -328,7 +278,7 @@ where the $C$ is the constant taken from \eqref{as:predx}.
 	\item We (currently) use Gaussian KDE
 	\begin{itemize}
 			\item Let $\dimD$ be the dimension of $\dspace$
-			\item Let $\nsamps$ is the number of samples from $\initial$ propagated through $\qoi$
+			\item Let $\nsamps$ be the number of samples from $\initial$ propagated through $\qoi$
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-4/(4+\dimD)})$ in mean-squared error
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error
 	\end{itemize}
