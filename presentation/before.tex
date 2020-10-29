@@ -149,11 +149,61 @@ C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
 \]
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we provide an illustrative example.}
+
+\begin{itemize}
+\item Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
+\item $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$
+\item $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$
+\item We then construct $\pi_{\text{post}}(\param \, |\, d)$ for this example assuming a uniform prior (to match the initial density) with an assumed observed value of $d=0.25$ so that the data-likelihood function matches the observed density.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we provide an illustrative example.}
+
 \begin{figure}
 \centering
-
-The one where we distinguish ourselves from the Bayesians.
-
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-1.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-1.png}
+ \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
+ (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
+ \label{fig:bayes-comparison}
 \end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we provide an illustrative example.}
+
+\centering
+\emph{What happens as we collect more data?}
+\vskip 10pt
+One approach: \\
+SIP: Use $N$ to estimate mean of observed \\
+DIP: likelihood function incorporates more data
+
+\begin{figure}
+\centering
+   \only<1>{
+	 \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-5.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-5.png}
+	 }
+	 \only<2>{
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-10.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-10.png}
+	 }
+	 \only<3>{
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-20.png}
+   \includegraphics[width=0.49\linewidth]{figures/bip-vs-sip-pf-20.png}
+	 }
+ \label{fig:bayes-comparison-convergence}
+\end{figure}
+
+SIP and DIP solutions for varying $N$ for comparison.
 
 \end{frame}
