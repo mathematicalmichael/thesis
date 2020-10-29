@@ -10,23 +10,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[t]
-%\vskip 25pt
-\centering
-\begin{figure}
-\centering
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.25\linewidth]{figures/pde-highd_sensors_D2.png}
-  \includegraphics[width=0.25\linewidth]{figures/pde-highd_sensors-alt_D2.png}
-  \includegraphics[width=0.5\linewidth]{figures/pde-highd_geom_D2.png}
+\includegraphics[width=0.25\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
+\includegraphics[width=0.25\linewidth]{figures/pde-highd/pde-highd_sensors-alt_D2.png}
+\includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_geom_D2.png}
 \caption{
 $N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
 }
 \label{fig:pde-highd-2d-geometry}
 \end{figure}
 
+\end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+\begin{figure}
+  \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D2_m100.png}
+\caption{
+Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$ (left) compared to using $\qoi_\text{2D}^\prime$, juxtaposed against a plot of $g$.
+}
+\label{fig:pde-highd-2d-scalar-vs-alt}
 \end{figure}
 
 \end{frame}
@@ -39,6 +46,8 @@ $N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
 \begin{frame}[t]
 
 The one with the small problems in many batches.
+
+QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants
 
 \begin{figure}
   \centering
@@ -139,4 +148,3 @@ You don't. But I enabled you to check for yourself.
 \end{figure}
 
 \end{frame}
-

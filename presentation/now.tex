@@ -352,14 +352,119 @@ If $\initial \sim N(\param_0,\initialCov)$ and data are obtained for $d$ linearl
 \subsection{Nonlinear Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we violate some assumptions.}
 %\vskip 25pt
 \centering
-\begin{figure}
-\centering
+Consider the exponential decay problem with uncertain decay rate $\param$:
+$$
+\begin{cases}
+\frac{\partial u}{\partial t} & = \param u(t), \ 0<t\leq 3, \\ u(0) &= 0.75,
+\end{cases}
+$$
+with solution
+\begin{equation}
+u(t;\param) = u_0\exp(-\param t), \; u_0 = 0.75 ,
+\end{equation}
+and measurements begin at $t=1$.
+\end{frame}
 
-The one where we show that our approach works even when some assumptions are violated.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\only<1>{
+\begin{figure}[htb]
+  \includegraphics[width=0.8\linewidth]{figures/ode/ode_20_reference_solution.png}
+  \includegraphics[width=0.8\linewidth]{figures/ode/ode_200_reference_solution.png}
+  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
+ Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
+ Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
+ The light red curves are almost indistinguishable in the bottom plot as they all lie nearly on the true signal which demonstrates the overall reduction in variance in MUD estimates around the true signal when using $N=200$ data points.
+  }
+  \label{fig:ode-reference}
 \end{figure}
+}
 
+\only<2>{
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
+  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
+  \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
+  }
+  \label{fig:ode-convergence}
+\end{figure}
+}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\it The one where we violate some assumptions.}
+
+Consider the Poisson problem:
+\begin{equation}\label{eq:pde-equation}
+\begin{cases}
+\hfill -\nabla \cdot \nabla u &= f(x), \quad\text{on } x\in \Omega, \\
+\hfill u &= 0, \quad\text{ on } \Gamma_T \cup \Gamma_B, \\
+\hfill \frac{\partial u}{\partial \mathbf{n}} &= g(x_2), \quad\text{ on } \Gamma_L, \\
+\hfill \frac{\partial u}{\partial \mathbf{n}} &= 0, \quad\text{ on } \Gamma_R,
+\end{cases}
+\end{equation}
+where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
+
+\begin{itemize}
+\item $\Gamma_T$, $\Gamma_B$, $\Gamma_L$, and $\Gamma_R$, denote the top, bottom, left, and right boundaries of this domain
+\item $\frac{\partial u}{\partial \mathbf{n}}$ denotes the usual outward normal derivative.
+\item The forcing function $f$ is taken to be $10\exp\left ( \norm{x - 0.5}^2 / 0.02 \right )$.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+
+\begin{itemize}
+\item $g(x_2)$ is unknown, and the goal is to use noisy data to estimate this unknown boundary data.
+\item In other words, the parameter $\param$ now represents an uncertain function.
+\item To generate the noisy data, we use $g(x_2)\propto x_2^2(x_2-1)^5$
+\item Constant of proportionality chosen so $\min{g}=-3$ at $x_2=\frac{2}{7}$.
+\item Piecewise-linear finite elements on a triangulation of a $36\times36$ mesh.
+\item 100 randomly placed sensors in the subdomain $(0.05, 0.95)^2 \subset \Omega$.
+\item Repeated $20$ times to study the subsequent variation in MUD points due to different realizations of noisy data.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{figure}[htbp]
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
+\caption{
+A representative noisy perturbation of the reference response surface. Locations of the randomly chosen spatial data used to construct both $Q_{1D}$ and $Q_{2D}$ are shown as black and red dots.
+}
+\label{fig:pde-Q}
+\end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]
+\begin{figure}[htbp]
+\centering
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
+    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+\caption{
+In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
+The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
+The purple curves in the center and right plots show the variability in MUD estimates of $g(x_2)$ for the 20 different realizations of noisy data.
+The center plot uses $Q_{1D}$ and the right plot uses $Q_{2D}$ to construct the MUD estimates.
+}
+\label{fig:pde-MUD}
+\end{figure}
 \end{frame}
