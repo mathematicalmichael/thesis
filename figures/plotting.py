@@ -217,7 +217,7 @@ def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=
         plt.legend(fontsize=fsize*0.8)
         # plt.ylabel('Absolute Error in MUD', fontsize=fsize)
         plt.title("$\mathrm{\mathbb{E}}(|\lambda^\mathrm{MUD} - \lambda^\dagger|)$", fontsize=1.25*fsize)
-        if not test: plt.savefig(f'{prefix}_convergence_mud_obs_mean_comp.png', bbox_inches='tight')
+        if not test: plt.savefig(f'{prefix}_convergence_mud_obs_mean.png', bbox_inches='tight')
         #plt.show()
         
         plt.figure(figsize=(10,10))
@@ -235,5 +235,5 @@ def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=
         plt.legend(fontsize=fsize*0.8)
         # plt.ylabel('Absolute Error in MUD', fontsize=fsize)
         plt.title("$\mathrm{Var}(|\lambda^\mathrm{MUD} - \lambda^\dagger|)$", fontsize=1.25*fsize)
-        if not test: plt.savefig(f'{prefix}_convergence_mud_obs_var_comp.png', bbox_inches='tight')
+        if not test: plt.savefig(f'{prefix}_convergence_mud_obs_var.png', bbox_inches='tight')
         #plt.show()
