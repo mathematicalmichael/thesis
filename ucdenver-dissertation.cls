@@ -426,7 +426,7 @@
 \newcommand{\ucdsubsubsec}[2][default]{%
   \refstepcounter{subsubsection}%
   \addcontentsline{toc}{subsubsection}{\hspace{7em}\thesubsubsection\space #1}
-  {\@afterindentfalse\@afterheading\singlespacing\normalsize\textbf{\thesubsubsection\space #2}} \nopagebreak
+  {\@afterindentfalse\@afterheading\singlespacing\normalsize\textit{\thesubsubsection\space #2}} \nopagebreak
   \vskip \postSskip \nopagebreak}
 \newcommand{\ucdsubsubsecnn}[1]{%
   {\@afterindentfalse\@afterheading\singlespacing{\normalsize\textbf #1}} \nopagebreak
