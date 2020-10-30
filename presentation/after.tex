@@ -9,16 +9,16 @@
 \subsection{Geometry Makes a Comeback}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
+\begin{frame}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.25\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
 \includegraphics[width=0.25\linewidth]{figures/pde-highd/pde-highd_sensors-alt_D2.png}
 \includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_geom_D2.png}
-\caption{
-$N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
-}
+% \caption{
+% $N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
+% }
 \label{fig:pde-highd-2d-geometry}
 \end{figure}
 
@@ -26,45 +26,44 @@ $N=1000$ parameter evaluations for both methods of partitioning $\Omega$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{figure}
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D2_m100.png}
-\caption{
-Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$ (left) compared to using $\qoi_\text{2D}^\prime$, juxtaposed against a plot of $g$.
-}
+% \caption{
+% Side-by-side comparison of an example solution to the SIP using $\qoi_\text{1D}$ (left) compared to using $\qoi_\text{2D}^\prime$, juxtaposed against a plot of $g$.
+% }
 \label{fig:pde-highd-2d-scalar-vs-alt}
 \end{figure}
 
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%n
 \subsection{Iterating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
-
-The one with the small problems in many batches.
-
-QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants
-
+\begin{frame}{\it The one with the small problems in many batches.}
+\centering
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs.png}
-
-  \caption{
-  Dotted lines show the solution contours for each row of the operator $A$.
-  (Left): First epoch for iterating through 10 QoI.
-  (Right): Three more epochs allows our estimate to get much closer to the true value.
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs.png}
   }
+  % \caption{
+  % Dotted lines show the solution contours for each row of the operator $A$.
+  % (Left): First epoch for iterating through 10 QoI.
+  % (Right): Three more epochs allows our estimate to get much closer to the true value.
+  % }
   \label{fig:iterative-linear-demo}
 \end{figure}
 
+QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
 \end{frame}
 
-\begin{frame}[t]
+
+\begin{frame}
 %\vskip 25pt
 \begin{figure}
 \centering
@@ -72,12 +71,14 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<1>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair-alt.png}
-  \caption{
-  Iterating through five epochs of two QoI, each formed by picking two of the ten available rows of $A$ at random.
-  The random directions chosen on the left exhibit more redundancy than those on the right, so the same amount of iteration results in less accuracy.
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs-pair.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs-pair-alt.png}
   }
+  % \caption{
+  % Iterating through five epochs of two QoI, each formed by picking two of the ten available rows of $A$ at random.
+  % The random directions chosen on the left exhibit more redundancy than those on the right, so the same amount of iteration results in less accuracy.
+  % }
   \label{fig:iterative-linear-demo-pair}
 \end{figure}
 }
@@ -85,12 +86,14 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<2>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-rand.png}
-  \caption{
-  (Left): Subsets of available QoI components can be chosen to exhibit minimal redudancy and lead to expedited convergence.
-  (Right): Random components of the QoI map used for each iterative step. This leads to an overall similar level of precision in this example, without the need to use gradients.
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch-rand.png}
   }
+  % \caption{
+  % (Left): Subsets of available QoI components can be chosen to exhibit minimal redudancy and lead to expedited convergence.
+  % (Right): Random components of the QoI map used for each iterative step. This leads to an overall similar level of precision in this example, without the need to use gradients.
+  % }
   \label{fig:iterative-linear-demo-smart}
 \end{figure}
 }
@@ -98,11 +101,11 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<3>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/iterative/10D-convergence-comparison.png}
-  \caption{
-  20 initial means are chosen and iterated on for three approaches for ordering QoI.
-  Individual experiments are transparent and the mean error is shown as a solid line for each approach.
-  }
+  \includegraphics[width=\linewidth]{figures/iterative/10D-convergence-comparison.png}
+  % \caption{
+  % 20 initial means are chosen and iterated on for three approaches for ordering QoI.
+  % Individual experiments are transparent and the mean error is shown as a solid line for each approach.
+  % }
   \label{fig:iterative-convergence-comparison}
 \end{figure}
 }
@@ -116,19 +119,7 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \subsection{Software}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
-%\vskip 25pt
-\centering
-\begin{figure}
-\centering
-
-\emph{How do I know I can trust you?}
-
-\vspace{0.25in}
-
-You don't. But I enabled you to check for yourself.
-
-\vspace{0.25in}
+\begin{frame}{\it The one where we convince you to trust our numerics.}
 
 \begin{itemize}
 	\item Public repository hosted on Github.com ({\tt github.com/mathematicalmichael/thesis})
@@ -145,6 +136,5 @@ You don't. But I enabled you to check for yourself.
 	\item Docker guarantees software runtime (ran on {\tt x86} and {\tt arm}) \\ {\tt docker pull mathematicalmichael/python:thesis}({\tt latex:thesis})
 \end{itemize}
 
-\end{figure}
 
 \end{frame}
