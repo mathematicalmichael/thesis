@@ -9,7 +9,7 @@
 \subsection{Geometry Makes a Comeback}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
+\begin{frame}
 
 \begin{figure}
 \centering
@@ -26,7 +26,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{figure}
   \includegraphics[width=0.95\linewidth]{figures/pde-highd/pde-highd_comp_exmud_D2_m100.png}
@@ -43,16 +43,14 @@
 \subsection{Iterating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]
-
-The one with the small problems in many batches.
-
-QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants
-
+\begin{frame}{\it The one with the small problems in many batches.}
+\centering
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs.png}
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs.png}
+  }
   % \caption{
   % Dotted lines show the solution contours for each row of the operator $A$.
   % (Left): First epoch for iterating through 10 QoI.
@@ -61,9 +59,11 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
   \label{fig:iterative-linear-demo}
 \end{figure}
 
+QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the first two Euclidean quadrants.
 \end{frame}
 
-\begin{frame}[t]
+
+\begin{frame}
 %\vskip 25pt
 \begin{figure}
 \centering
@@ -71,8 +71,10 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<1>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-fewepochs-pair-alt.png}
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs-pair.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-fewepochs-pair-alt.png}
+  }
   % \caption{
   % Iterating through five epochs of two QoI, each formed by picking two of the ten available rows of $A$ at random.
   % The random directions chosen on the left exhibit more redundancy than those on the right, so the same amount of iteration results in less accuracy.
@@ -84,8 +86,10 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<2>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
-  \includegraphics[width=0.475\linewidth]{figures/iterative/10D-firstepoch-rand.png}
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch-pair-smart.png}
+  \includegraphics[width=0.5\linewidth]{figures/iterative/10D-firstepoch-rand.png}
+  }
   % \caption{
   % (Left): Subsets of available QoI components can be chosen to exhibit minimal redudancy and lead to expedited convergence.
   % (Right): Random components of the QoI map used for each iterative step. This leads to an overall similar level of precision in this example, without the need to use gradients.
@@ -97,7 +101,7 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \only<3>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/iterative/10D-convergence-comparison.png}
+  \includegraphics[width=\linewidth]{figures/iterative/10D-convergence-comparison.png}
   % \caption{
   % 20 initial means are chosen and iterated on for three approaches for ordering QoI.
   % Individual experiments are transparent and the mean error is shown as a solid line for each approach.
@@ -115,10 +119,8 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 \subsection{Software}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]{\it The one where we convince you to trust our numerics.}
-%\vskip 25pt
-\centering
-\begin{figure}
+\begin{frame}{\it The one where we convince you to trust our numerics.}
+
 \begin{itemize}
 	\item Public repository hosted on Github.com ({\tt github.com/mathematicalmichael/thesis})
 	\item Github Actions implements Continuous Integration / Deployment
@@ -134,6 +136,5 @@ QoI defined by $10$ equispaced rotations of the unit vector $[0, 1]$ through the
 	\item Docker guarantees software runtime (ran on {\tt x86} and {\tt arm}) \\ {\tt docker pull mathematicalmichael/python:thesis}({\tt latex:thesis})
 \end{itemize}
 
-\end{figure}
 
 \end{frame}

@@ -23,10 +23,10 @@ Inverse covariances associated with non-degenerative multivariate Gaussian distr
 
 Suppose that the initial and prior densities are both given by the same $\mathcal{N}(\param_0, \initialCov)$ distribution.
 
-\vskip 12pt
+\bigskip
 Additionally, suppose the map $Q$ is linear and that the data-likelihood and observed densities are both given by the same $\mathcal{N}(\observedMean, \observedCov)$ distribution.
 
-\vskip 12pt
+\bigskip
 The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times p}$, and that the predicted density follows a $\mathcal{N}(Q(\param_0), \predictedCov)$ distribution where
 \begin{equation}\label{eq:predictCov}
 	\predictedCov := A\initialCov A^\top.
@@ -38,11 +38,7 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 \subsection{Theory of Regularization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]{\it The one with the regularization equations.}
-%\vskip 25pt
-\centering
-\begin{figure}
-\centering
+\begin{frame}{\it The one with the regularization equations.}
 
 \begin{table}[htbp]
 \centering
@@ -73,8 +69,6 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 \end{table}
 
 
-\end{figure}
-
 \end{frame}
 
 
@@ -84,13 +78,16 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where an example highlights a key difference.}
+\begin{frame}{\it The one where an example highlights a key difference.}
 
 \begin{itemize}
 \item $A=\mat{cc}{1 & 1}$
-\item 2-D input, 1-D output $\implies$ rank-deficient
-\end{itemize}
+
 \bigskip
+\item 2-D input, 1-D output $\implies$ rank-deficient
+
+\bigskip
+\item Details:
 
 \begin{equation*}
 \begin{split}
@@ -100,10 +97,11 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 \end{split}
 \end{equation*}
 
+\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}{\it The one that kind of says it all.}
 %\vskip 25pt
 \centering
 \begin{figure}
@@ -177,59 +175,70 @@ We rewrite the closed form expression for the MAP poing given in \cite{Tarantola
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
+\begin{itemize}
+\item Let
 
-We define
 \begin{equation}\label{eq:eff_reg}
 	R := \nolinebreak \initialCov^{-1} - \nolinebreak A^\top \predictedCov^{-1} A.
 \end{equation}
 
-Using this $R$, rewrite $J(\param)$ as
+\bigskip
+\item Using this $R$, rewrite $J(\param)$ as
 
 \begin{equation}\label{eq:dci-objective-alt}
 J(\param):= \norm{\observedMean - Q(\param)}_{\observedCov^{-1}}^2 + \norm{\param - \param_0}_{R}^2.
 \end{equation}
 
-\vskip 12pt
-In this form, we identify $R$ as the {\em effective regularization} in $J(\param)$ due to the formulation in the data-consistent framework.
+\bigskip
+\item $R$ is the {\em effective regularization} in $J(\param)$ in the DCI framework:
+
 \begin{equation}
 	\updatedCov := \left(A^\top \observedCov^{-1} A + R\right)^{-1}.
 \end{equation}
 
-Since $R$ is not invertible, Woodbury's identity cannot be applied (yet).
+\bigskip
+\item Since $R$ is not invertible, Woodbury's identity cannot be applied (yet).
+
+\end{itemize}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-%\vskip 25pt
-\centering
-We derive using several identities
+\begin{frame}
+\begin{itemize}
+\item \emph{Using linear algebra ...}
+
 \begin{equation}\label{eq:updatedCov_final}
 	\updatedCov = \initialCov - \initialCov A^\top \predictedCov^{-1}\left[\predictedCov-\observedCov\right]\predictedCov^{-1}A\initialCov.
 \end{equation}
 
-\vskip 12pt
-Substitute $\updatedCov$ for $\Sigma_\text{post}$ in \eqref{eq:map-point-analytical} to write the point that minimizes $J$ as:
+\bigskip
+\item Substitute $\updatedCov$ for $\Sigma_\text{post}$ in \eqref{eq:map-point-analytical}:
 
 \begin{equation}\label{eq:mud-point-analytical-alt}
 \param^{\text{MUD}} = \param_0 + \updatedCov A^\top \observedCov^{-1} (\observedMean - b - A\param_0).
 \end{equation}
 
-\vskip 12pt
-Substituting~\eqref{eq:updatedCov_final} into~\eqref{eq:mud-point-analytical-alt} and simplifying, we have
+\bigskip
+\item Substituting~\eqref{eq:updatedCov_final} into~\eqref{eq:mud-point-analytical-alt} and simplifying, we have
+
 \begin{equation}\label{eq:mud-point-analytical-final}
 	\mudpt = \param_0 + \initialCov A^\top \predictedCov^{-1}(\observedMean - b - A\param_0).
 \end{equation}
+
+\end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 
-
-\vskip 12pt
 \begin{thm}\label{thm:MUD_existence_uniqueness}
+
 Suppose  $Q(\param)=A\param+b$ for some full rank $A\in\RR^{d\times p}$ with $d\leq p$ and $b\in\RR^d$.
+
 If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\observedCov)$, and the predictability assumption holds, then
+
 \begin{enumerate}[(a)]
 \item There exists a unique $\mudpt$.
 \item $Q(\mudpt) = \observedMean$.
@@ -254,14 +263,14 @@ If $\initial \sim N(\param_0,\initialCov)$, $\observed\sim N(\observedMean,\obse
 \subsection{Impact of Information Content}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]{\it The one where we show how rank and dimension impact our solutions.}
-%\vskip 25pt
+\begin{frame}{\it The one where we show how rank and dimension impact our solutions.}
 \centering
-Example: scaling random diagonal initial covariances
 
 \begin{figure}[htbp]
-  \includegraphics[width=0.475\linewidth]{figures/lin/lin-dim-cov-convergence}
-  \includegraphics[width=0.475\linewidth]{figures/lin/lin-rank-cov-convergence}
+\hbox{
+  \includegraphics[width=0.5\linewidth]{figures/lin/lin-dim-cov-convergence}
+  \includegraphics[width=0.5\linewidth]{figures/lin/lin-rank-cov-convergence}
+}
 % \caption{
 % 	Relative errors between $\paramref$ and (i) the least squares solution obtained through {\tt numpy}'s {\tt linalg.pinv} module, (ii) the closed-form solution for the MUD point given in Eq~\eqref{eq:mud-point-analytical-final}, and (iii) the MAP point.
 %   (Left): Error for increasing dimensions of $D$ for $A$ taken to be a Gaussian Random Map.
@@ -270,6 +279,8 @@ Example: scaling random diagonal initial covariances
 \label{fig:lin-error}
 \end{figure}
 
+Example: scaling random diagonal initial covariances
+
 \end{frame}
 
 
@@ -277,7 +288,7 @@ Example: scaling random diagonal initial covariances
 \subsection{Data-Driven QoI Maps}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[t]{\it The one where we leverage this framework for general streams of data.}
+\begin{frame}{\it The one where we leverage this framework for general streams of data.}
 
 Suppose $\exists \; d$ measurement devices generating repeated noisy data. \\
 \vskip 12pt
@@ -301,7 +312,7 @@ We now construct a $d$-dimensional vector-valued map from data obtained on the $
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map.}
+\begin{frame}{\it The one with the Weighted Mean Error (WME) map.}
 
 
 The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
@@ -320,8 +331,8 @@ Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a
 
 \end{frame}
 
-
-\begin{frame}[t]{\it The one where measurements impact the predictability assumption.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\it The one where measurements impact the predictability assumption.}
 
 The $j$th diagonal component of the predicted covariance matrix is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
 
@@ -330,33 +341,29 @@ Then, the associated predicted variance is given by
 	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top
 \end{equation}
 
-Since $\initialCov$ is assumed to be non-degenerative and $M_j$ is a non-trivial row vector, this predicted variance grows linearly with $N_j$.\\
-\vskip 12pt
-In other words, the $j$th diagonal component of the predicted covariance has the form $\beta_j N_j$ for some $\beta_j>0$.
+Since $\initialCov$ is assumed to be non-degenerative and $M_j$ is a non-trivial row vector, this {\it \bf predicted variance grows linearly} with $N_j$.\\
+
+\bigskip
+The following result is now an immediate consequence of Theorem~\ref{thm:MUD_existence_uniqueness}.
 \end{frame}
 
-
-\begin{frame}[t]
-\centering
-Let $N_{\text{min},j}$ denote the minimum $N_j$ for $1\leq j\leq N$ necessary to make the $j$th diagonal components sufficiently large so that the smallest eigenvalue of the predicted covariance is larger than $1$.
-
-\vskip 12pt
-The following result is now an immediate consequence of Theorem~\ref{thm:MUD_existence_uniqueness}:\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
 
 \begin{corollary}\label{cor:MUD_wme}
 If $\initial \sim N(\param_0,\initialCov)$ and data are obtained for $d$ linearly independent measurements on $\pspace$ with an additive noise model with i.i.d. Gaussian noise for each measurement, then {\bf there exists a minimum number of data points obtained for each of the measurements} such that there exists a unique $\mudpt$ and $Q_\text{WME}(\mudpt) = 0$.
 \end{corollary}
 
-
 \end{frame}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nonlinear Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we violate some assumptions.}
+\begin{frame}{\it The one where we violate some assumptions (and see what happens).}
 %\vskip 25pt
 \centering
 Consider the exponential decay problem with uncertain decay rate $\param$:
@@ -374,11 +381,11 @@ and measurements begin at $t=1$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 \only<1>{
 \begin{figure}[htb]
-  \includegraphics[width=0.8\linewidth]{figures/ode/ode_20_reference_solution.png}
-  \includegraphics[width=0.8\linewidth]{figures/ode/ode_200_reference_solution.png}
+  \includegraphics[width=0.85\linewidth]{figures/ode/ode_20_reference_solution.png}
+  \includegraphics[width=0.85\linewidth]{figures/ode/ode_200_reference_solution.png}
  %  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
  % Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
  % Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
@@ -390,9 +397,11 @@ and measurements begin at $t=1$.
 
 \only<2>{
 \begin{figure}[htb]
-  \centering
-  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
-  \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
+\centering
+  \hbox{
+  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
+  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
+  }
   % \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   % }
   \label{fig:ode-convergence}
@@ -403,7 +412,7 @@ and measurements begin at $t=1$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we violate some assumptions.}
+\begin{frame}{\it The one where we violate some assumptions (and see what happens).}
 
 Consider the Poisson problem:
 \begin{equation}\label{eq:pde-equation}
@@ -416,10 +425,13 @@ Consider the Poisson problem:
 \end{equation}
 where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 
+\bigskip
 \begin{itemize}
-\item $\Gamma_T$, $\Gamma_B$, $\Gamma_L$, and $\Gamma_R$, denote the top, bottom, left, and right boundaries of this domain
-\item $\frac{\partial u}{\partial \mathbf{n}}$ denotes the usual outward normal derivative.
-\item The forcing function $f$ is taken to be $10\exp\left ( \norm{x - 0.5}^2 / 0.02 \right )$.
+\item $\Gamma_T$, $\Gamma_B$, $\Gamma_L$, and $\Gamma_R$, denote the top, bottom, left, and right boundaries.
+\bigskip
+\item The outward normal derivative is denoted by $\frac{\partial u}{\partial \mathbf{n}}$.
+\bigskip
+\item The forcing function is $f = 10\exp\left ( \norm{x - 0.5}^2 / 0.02 \right )$.
 \end{itemize}
 
 \end{frame}
@@ -448,8 +460,8 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{figure}[htbp]
+\begin{frame}
+\begin{figure}
 \centering
     \includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
 % \caption{
@@ -461,8 +473,8 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-\begin{figure}[htbp]
+\begin{frame}
+\begin{figure}
 \centering
     \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
     \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
