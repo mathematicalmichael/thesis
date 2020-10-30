@@ -1,6 +1,6 @@
 \subsection{Problem Formulation and Solution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{defn}[Stochastic Forward Problem (SFP)]\label{defn:forward-problem}
   Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and QoI map $\qoi$, the \emph{stochastic forward problem} is to determine a measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that satisfies
@@ -11,7 +11,7 @@
 
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}
 
 \begin{defn}[Stochastic Forward Problem (SFP)]\label{defn:forward-problem}
   Given a probability measure $\PP_\pspace$ on $(\pspace, \pborel)$, and QoI map $\qoi$, the \emph{stochastic forward problem} is to determine a measure, $\PP_\dspace$, on $(\dspace, \dborel)$ that satisfies
@@ -108,7 +108,7 @@ We now have all of the definitions required to summarize the density-based solut
 %
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]{Summarizing}
+% \begin{frame}{Summarizing}
 % \begin{itemize}
 % 	\item ``Push-forward'' \textbf{initial} beliefs using $\qoi$ to \textbf{compare} to \textbf{observed} (data)
 % 	\item Solve forward problem to construct solution to inverse problem
@@ -126,7 +126,7 @@ We now have all of the definitions required to summarize the density-based solut
 % \end{frame}
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]{The Updated Density solves the SIP}
+% \begin{frame}{The Updated Density solves the SIP}
 % These definitions are combined to form the \textbf{updated density}:
 % \begin{equation}\label{eq:up}
 % \updated \lam = \initial \lam \frac{\observed \qlam }{\predicted \qlam }, \; \param, \in \pspace.
@@ -147,7 +147,7 @@ We now have all of the definitions required to summarize the density-based solut
 %
 % \subsection{Properties and Assumptions of the Update}
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
+% \begin{frame}
 % \begin{assumption}[Predictability Assumption]\label{as:pred}
 % 	The measure associated with $\observed$ is absolutely continuous with respect to the measure associated with $\predicted$.
 % \end{assumption}
@@ -175,7 +175,7 @@ We now have all of the definitions required to summarize the density-based solut
 %
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]{Stability}
+% \begin{frame}{Stability}
 %
 % All the stability and convergence results presented are with respect to:
 % \vspace{0.5in}
@@ -190,7 +190,7 @@ We now have all of the definitions required to summarize the density-based solut
 % \end{frame}
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
+% \begin{frame}
 %
 % \begin{defn}[Stability of Updates I]\label{defn:stableobs}
 % 	We say that $\updatedP$ is \emph{stable} with respect to perturbations in $\observedP$ if for all $\eps > 0$, there exists a $\delta > 0$ such that
@@ -210,7 +210,7 @@ We now have all of the definitions required to summarize the density-based solut
 % \end{frame}
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
+% \begin{frame}
 % \begin{defn}[Stability of Updates II]\label{defn:stableinitial}
 % Let $\sett{\PP_{\pspace, d}}{d\in\dspace}{}$ and $\sett{\widehat{\PP_{\pspace, d}}}{d\in\dspace}{}$ be the conditional probabilities defined by the disintegration of $\initialP$ and $\widehat{\initialP}$, respectively.
 %
@@ -229,7 +229,7 @@ We now have all of the definitions required to summarize the density-based solut
 % \end{frame}
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]{Properties of the Updated Density}
+% \begin{frame}{Properties of the Updated Density}
 % \begin{itemize}
 %
 % 	\item Taken together, these stability results provide assurances that the updated we obtain is accurate up to the level of experimental error polluting $\observed$ and error in incorrectly specifying initial assumptions.
@@ -243,7 +243,7 @@ We now have all of the definitions required to summarize the density-based solut
 %
 % \subsection{Numerical Approximation and Sampling}
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
+% \begin{frame}
 % \begin{itemize}
 % 	\item Let $\widehat{\predicted}$ be a computational approximation to $\predicted$ and $\widehat{\updated}$ the associated approximate updated $\updated$
 % 	\item The conditional densities from the Disintegration theorem are
@@ -265,7 +265,7 @@ We now have all of the definitions required to summarize the density-based solut
 %
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
+% \begin{frame}
 % \begin{assumption}\label{as:predx}
 % There exists some $C>0$ such that
 % \[
@@ -287,7 +287,7 @@ We now have all of the definitions required to summarize the density-based solut
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Practical Considerations}
+\begin{frame}[t]{The one with some practical considerations.}
 
 \begin{itemize}
 	\item We approximate $\predicted$ using density estimation on forward propagation of samples from $\initial$

@@ -9,18 +9,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{\it The one where we describe why any of this matters.}
-\centering
-	Broad Goals of Uncertainty Quantification:
-	\vskip 10pt
+
+{\bf Broad Goals of Uncertainty Quantification}
+
+\bigskip
     \begin{itemize}
 	    \item Make inferences and predictions
-	    \vskip 20pt
+
+			\bigskip
         \item Quantify and reduce uncertainties (aleotoric, epistemic)
-	    \vskip 20pt
+
+			\bigskip
 	    \item Be \emph{accurate} and \emph{precise}
-	    \vskip 20pt
+
+			\bigskip
 	    \item Design ``efficient'' experiments
-	    \vskip 20pt
+
+			\bigskip
 	    \item Collect and use data ``intelligently''
     \end{itemize}
 
@@ -30,23 +35,27 @@
 \begin{frame}[t]{\it The one where we define the letters we use and what they mean.}
 \begin{itemize}
 	\item State variable: $u$ {\color{gray}(e.g. heat, energy, pressure, deflection)}
-	\vskip 10pt
+
+	\bigskip
 	\item<.-> Parameters: $\lambda$ {\color{gray}(e.g. source term, diffusion, boundary data)}
-	\vskip 10pt
+
+	\bigskip
 		\item Model: $\mathcal{M} (u, \lambda) = 0$, so $u(\param)$
 
-	\item Quantity of Interest \tdeepred{(QoI)} map, (piecewise smooth) \vskip 5pt
+	\bigskip
+	\item Quantity of Interest \tdeepred{(QoI)} map, (piecewise smooth):
+
 		$$Q = \mat{c}{q_1\\ q_2\\ \vdots \\ q_\dimD}, \; \text{ where } \; q_i: u(\lambda) \to \RR$$
 
-We write $Q(\lambda) := Q(u(\lambda))$ to make the dependence on $\param$ explicit
-
+	\bigskip
+	\item We write $Q(\lambda) := Q(u(\lambda))$ to make the dependence on $\param$ explicit.
 \end{itemize}
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we illustrate how a QoI map relates inputs to outputs.}
+\begin{frame}{\it The one where we illustrate how a QoI map relates inputs to outputs.}
 %\vskip 25pt
 \centering
 \begin{figure}
@@ -77,19 +86,6 @@ We write $Q(\lambda) := Q(u(\lambda))$ to make the dependence on $\param$ explic
 \subsection{Measure Theory 101}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}[t]
-% %\vskip 25pt
-% \centering
-% \begin{figure}
-% \centering
-%
-% The one with the background on inverse problems.
-%
-% \end{figure}
-%
-% \end{frame}
-
-%\input{content/intro_slides.tex}
 \input{content/problem_formulation.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,8 +97,7 @@ We write $Q(\lambda) := Q(u(\lambda))$ to make the dependence on $\param$ explic
 
 Bayesian approach: modeling epistemic uncertainties in data on a QoI obtained from a true, but unknown, parameter value, $\paramref$.
 
-\vskip 10pt
-
+\bigskip
 \begin{defn}[Deterministic Forward Problem (DFP)]
   Given a space $\pspace$, and QoI map $\qoi$, the \emph{deterministic forward problem} is to determine the values, $\q \in \dspace$ that satisfy
   \begin{equation}
@@ -137,9 +132,9 @@ The \emph{posterior} is a conditional density, denoted by $\pi_\text{post}(\para
     \posterior\lam := \prior\lam \frac{L_\dspace (\q | \param)}{ C },
 \end{equation}
 
-\noindent where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:updated-pdf}.
-\bigskip
+where we emphasize the use of $\posterior$ to distinguish the \emph{posterior} from the updated density $\updated$ in \eqref{eq:updated-pdf}.
 
+\bigskip
 The \emph{evidence} term $C$ ensures the posterior density integrates to one:
 \[
 C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param.
