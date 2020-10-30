@@ -288,19 +288,28 @@ We now have all of the definitions required to summarize the density-based solut
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{The one with some practical considerations.}
+\begin{frame}[t]{\it The one with some practical considerations.}
 
 \begin{itemize}
-	\item We approximate $\predicted$ using density estimation on forward propagation of samples from $\initial$
-	\item May evaluate $\updated$ directly for any sample of $\pspace$ (one model solve)
-	\item Accuracy of the computed updated density is proportional to accuracy of approximation of the predicted density
-	\item We (currently) use Gaussian KDE
+	\item Approximate $\predicted$ using density estimation using samples from $\initial$.
+
+  \bigskip
+  \item May evaluate $\updated$ directly for any sample of $\pspace$ (one model solve).
+
+  \bigskip
+  \item Accuracy proportional to that of approximation to the predicted density.
+
+  \bigskip
+  \item We (currently) use Gaussian KDE:
 	\begin{itemize}
 			\item Let $\dimD$ be the dimension of $\dspace$
-			\item Let $\nsamps$ be the number of samples from $\initial$ propagated through $\qoi$
-			\item Converges at a rate of $\mathcal{O}(\nsamps^{-4/(4+\dimD)})$ in mean-squared error
-			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error
+			\item Let $\nsamps$ be the number of samples from $\initial$ propagated through $\qoi$.
+			\item Converges at a rate of $\mathcal{O}(\nsamps^{-4/(4+\dimD)})$ in mean-squared error.
+			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error.
 	\end{itemize}
-  \item Stable w.r.t. perturbations in the Total Variation metric
+
+  \bigskip
+  \item Stable w.r.t. perturbations in the Total Variation metric.
 \end{itemize}
+
 \end{frame}
