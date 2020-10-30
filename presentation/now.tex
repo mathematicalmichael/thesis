@@ -379,11 +379,11 @@ and measurements begin at $t=1$.
 \begin{figure}[htb]
   \includegraphics[width=0.8\linewidth]{figures/ode/ode_20_reference_solution.png}
   \includegraphics[width=0.8\linewidth]{figures/ode/ode_200_reference_solution.png}
-  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
- Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
- Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
- The light red curves are almost indistinguishable in the bottom plot as they all lie nearly on the true signal which demonstrates the overall reduction in variance in MUD estimates around the true signal when using $N=200$ data points.
-  }
+ %  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
+ % Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
+ % Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
+ % The light red curves are almost indistinguishable in the bottom plot as they all lie nearly on the true signal which demonstrates the overall reduction in variance in MUD estimates around the true signal when using $N=200$ data points.
+ %  }
   \label{fig:ode-reference}
 \end{figure}
 }
@@ -393,8 +393,8 @@ and measurements begin at $t=1$.
   \centering
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
   \includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
-  \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
-  }
+  % \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
+  % }
   \label{fig:ode-convergence}
 \end{figure}
 }
@@ -452,9 +452,9 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
-\caption{
-A representative noisy perturbation of the reference response surface. Locations of the randomly chosen spatial data used to construct both $Q_{1D}$ and $Q_{2D}$ are shown as black and red dots.
-}
+% \caption{
+% A representative noisy perturbation of the reference response surface. Locations of the randomly chosen spatial data used to construct both $Q_{1D}$ and $Q_{2D}$ are shown as black and red dots.
+% }
 \label{fig:pde-Q}
 \end{figure}
 \end{frame}
@@ -467,12 +467,12 @@ A representative noisy perturbation of the reference response surface. Locations
     \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
     \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
     \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
-\caption{
-In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
-The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
-The purple curves in the center and right plots show the variability in MUD estimates of $g(x_2)$ for the 20 different realizations of noisy data.
-The center plot uses $Q_{1D}$ and the right plot uses $Q_{2D}$ to construct the MUD estimates.
-}
+% \caption{
+% In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
+% The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
+% The purple curves in the center and right plots show the variability in MUD estimates of $g(x_2)$ for the 20 different realizations of noisy data.
+% The center plot uses $Q_{1D}$ and the right plot uses $Q_{2D}$ to construct the MUD estimates.
+% }
 \label{fig:pde-MUD}
 \end{figure}
 \end{frame}
