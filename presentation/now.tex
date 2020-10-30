@@ -5,10 +5,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}{\it The one where we define the Maximal Updated Density (MUD) point.}
 
-\centering
-We formally define the maximal updated density (MUD) point as
 \begin{equation}\label{eq:mudpt_inital_defn}
 	\mudpt := \argmax {\updated}(\param).
 \end{equation}
@@ -42,21 +40,23 @@ The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times
 
 \begin{table}[htbp]
 \centering
+\begin{equation*}
+\begin{split}
+\updated(\param) &= \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))} \\
+ & \\
+\posterior(\param\,|\,d) &= \frac{\prior(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\pspace} \pi_\text{like}(d\, |\, \param)  \prior(\param) d\pmeas}
+\end{split}
+\end{equation*}
 
+\bigskip
 \begin{tabular}{|c|c|}
 \hline
-  & \\
-  $\displaystyle \updated(\param) = \initial(\param) \frac{\observed(Q(\param))}{\predicted(Q(\param))}$
-&
-  $\displaystyle \pi_{\text{post}}(\param\,|\,d) = \frac{\pi_{\text{prior}}(\param)\pi_\text{like}(d\,|\,\param)}{\int_{\Lambda} \pi_\text{like}(d\, |\, \param)  \pi_{\text{prior}}(\param) d\pmeas}$
-\\ \\
-\hline
-  & \\
+& \\
   Tikhonov & $T(\param):=\norm{Q(\param)-\observedMean}_{\observedCov^{-1}}^2 +
-      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$
-  \\ & \\ \hline & \\
-  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$
-\\
+      \norm{\param-\initialMean}_{\initialCov^{-1}}^2$ \\
+& \\
+\hline & \\
+  Data-Consistent & $J(\param):=T(\param) - \norm{Q(\param)-Q(\initialMean)}_{\predictedCov^{-1}}^2$ \\
 & \\
   \hline
 \end{tabular}
@@ -303,25 +303,32 @@ Example: scaling random diagonal initial covariances
 \subsection{Data-Driven QoI Maps}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{\it The one where we leverage this framework for general streams of data.}
+\begin{frame}[t]{\it The one where we leverage this framework for general streams of data.}
 
-Suppose $\exists \; d$ measurement devices generating repeated noisy data. \\
-\vskip 12pt
-For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device. \\
+\begin{itemize}
+  \item Suppose $\exists \; d$ measurement devices generating repeated noisy data.
 
-$N_j$ is number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
-\vskip 12pt
-$d_{j,i}$ is the $i$th noisy datum for the $j$th measurement, where $1\leq i\leq N_j$.
+  \bigskip
+  \item For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device.
 
-\vskip 12pt
-Assume an unbiased additive error model for the measurement noise,
-with independent identically distributed (i.i.d.) Gaussian errors so that
-\begin{equation}\label{eq:obs_data_error}
-	d_{j,i} = M_j(\param^\star) + \xi_i, \ \xi_i\sim N(0,\sigma_j^2), \ \ 1\leq i\leq N_j.
-\end{equation}
+  \bigskip
+  \item $N_j$ is number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
+  \item $d_{j,i}$ is the $i$th noisy datum for the $j$th measurement, where $1\leq i\leq N_j$.
 
-\vskip 12pt
-We now construct a $d$-dimensional vector-valued map from data obtained on the $d$ measurement devices.
+  \bigskip
+  \item Unbiased additive error model for the measurement noise.
+  \item Noise is independent identically distributed (i.i.d.) Gaussian errors, so
+
+  \begin{equation}\label{eq:obs_data_error}
+  	d_{j,i} = M_j(\param^\star) + \xi_i, \ \xi_i\sim N(0,\sigma_j^2), \ \ 1\leq i\leq N_j.
+  \end{equation}
+
+\end{itemize}
+
+\bigskip
+\bigskip
+\centering
+{\it We now construct a $d$-dimensional vector-valued map from data obtained on the $d$ measurement devices.}
 
 \end{frame}
 
@@ -349,17 +356,24 @@ Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{\it The one where measurements impact the predictability assumption.}
 
-The $j$th diagonal component of the predicted covariance matrix is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
+\begin{itemize}
+  \item The $j$th diagonal component of $\predictedCov$ is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
 
-Then, the associated predicted variance is given by
-\begin{equation}
-	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top
-\end{equation}
+  \bigskip
+  \item The associated predicted variance is given by
+  \begin{equation}
+  	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top.
+  \end{equation}
 
-Since $\initialCov$ is assumed to be non-degenerative and $M_j$ is a non-trivial row vector, this {\it \bf predicted variance grows linearly} with $N_j$.\\
+  \bigskip
+  \item $\initialCov$ non-degenerative and $M_j$ non-trivial row vector, which implies that the {\it \bf predicted variance grows linearly} with $N_j$.\\
+
+\end{itemize}
 
 \bigskip
-The following result is now an immediate consequence of Theorem~\ref{thm:MUD_existence_uniqueness}.
+\bigskip
+\centering
+{\it The following result is now an immediate consequence of Theorem~\ref{thm:MUD_existence_uniqueness}.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
