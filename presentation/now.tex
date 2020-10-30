@@ -15,20 +15,29 @@
 
 \begin{frame}[t]{\it The one where we create a unifying framework.}
 
-Let $\norm{\mathbf{x}}_C^2 := (\mathbf{x}, \mathbf{x})_C = \mathbf{x}^T C \mathbf{x}$. \\
+\begin{itemize}
+  \item Recall $\norm{\mathbf{x}}_C^2 := (\mathbf{x}, \mathbf{x})_C = \mathbf{x}^T C \mathbf{x}$. \\
 
-Inverse covariances associated with non-degenerative multivariate Gaussian distributions will play the role of $C$. \\
+  \bigskip
+  \item Non-degenerative $\predictedCov^{-1}$, $\observedCov^{-1}$, $\initialCov^{-1}$ play the role of $C$. \\
 
-Suppose that the initial and prior densities are both given by the same $\mathcal{N}(\param_0, \initialCov)$ distribution.
+  \bigskip
+  \bigskip
+  \item Suppose that $\initial = \prior \sim \mathcal{N}(\param_0, \initialCov)$.
 
-\bigskip
-Additionally, suppose the map $Q$ is linear and that the data-likelihood and observed densities are both given by the same $\mathcal{N}(\observedMean, \observedCov)$ distribution.
+  \bigskip
+  \item Suppose $\qoi$ is linear and that $\observed = \pi_\text{like} \sim \mathcal{N}(\observedMean, \observedCov)$.
 
-\bigskip
-The linearity of $Q$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times p}$, and that the predicted density follows a $\mathcal{N}(Q(\param_0), \predictedCov)$ distribution where
-\begin{equation}\label{eq:predictCov}
-	\predictedCov := A\initialCov A^\top.
-\end{equation}
+  \bigskip
+  \bigskip
+  \item Linearity of $\qoi$ implies that $Q(\param)=A\param$ for some $A\in\RR^{d\times p}$, and that $\predicted \sim \mathcal{N}(Q(\param_0), \predictedCov)$, where
+
+  \begin{equation}\label{eq:predictCov}
+  	\predictedCov := A\initialCov A^\top.
+  \end{equation}
+
+\end{itemize}
+
 
 \end{frame}
 
@@ -334,22 +343,29 @@ Example: scaling random diagonal initial covariances
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{\it The one with the Weighted Mean Error (WME) map.}
+\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map.}
 
+\begin{itemize}
+  \item The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
 
-The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
+  \begin{equation}\label{eq:qoi_WME}
+  	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
+  \end{equation}
 
-\begin{equation}\label{eq:qoi_WME}
-	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
-\end{equation}
+  \bigskip
+  \item $Q_{\text{WME},j}(\paramref)$ is the sample avg of $N_j$ draws from an i.i.d.~$N(0,N_j)$.
 
-\vskip 12pt
-$Q_{\text{WME},j}(\paramref)$ is the sample avg of $N_j$ random draws from an i.i.d.~$N(0,N_j)$.\\
-By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\paramref$ in \eqref{eq:obs_data_error}.
+  \bigskip
+  \item By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\paramref$ in \eqref{eq:obs_data_error}.
 
-\vskip 12pt
-Subsequently, each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.\\
-Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ distribution.
+  \bigskip
+  \item Subsequently, each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.
+
+  \bigskip
+  \item Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ distribution.
+
+\end{itemize}
+
 
 \end{frame}
 
