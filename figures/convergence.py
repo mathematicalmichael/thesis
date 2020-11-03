@@ -1,6 +1,7 @@
 import numpy as np
-from mud import make_map_sol, make_mud_sol
-from mud import transform_linear_map, mud_sol, map_sol
+from mud.funs import map_sol as make_map_sol, mud_sol as make_mud_sol
+from mud.funs import mud_sol, map_sol
+from mud.util import transform_linear_map
 
 def wrap_problem(dim_input = 2,
                  dim_output = 1,
@@ -40,9 +41,8 @@ def wrap_problem(dim_input = 2,
 #                                        A=A, data=observed_mean, b=b)
 
 
-
     A, b = transform_linear_map(M, data_list, std_of_data)
-    mud_pt = mud_sol(A, b, initial_mean, initial_cov)
+    mud_pt = mud_sol(A, b, mean=initial_mean, cov=initial_cov)
 #     map_pt = np.linalg.solve(map_array.T@map_array + np.linalg.inv(initial_cov), map_array.T@data)
 #     map_pt = map_sol(A, b, initial_mean, initial_cov,w=1)
     # regularization keeps solution from being accurate in predictions.
