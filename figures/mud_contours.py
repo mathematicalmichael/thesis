@@ -16,7 +16,7 @@ def plot_full(A=np.array([[1, 1]]), b=np.zeros((1,1)),
               cov_11=0, cov_01=1,
               initial_mean=np.zeros((1,2)), wt=1, wp=1,
               show_full=True, show_data=True, show_num=False,
-              obs_std=1, figname='latest_figure.png', fsize=42):
+              obs_std=1, figname='latest_figure.png', fsize=48):
     
     std_of_data = [obs_std]
     obs_cov = np.diag(std_of_data)
