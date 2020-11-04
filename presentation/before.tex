@@ -148,7 +148,7 @@
 	\item $\posterior$ proportional to the product of $\prior$ and $L_\dspace$ \cite{Walpole, Berger, Complete, Smith}:
 
 \begin{equation}\label{eq:sb_post}
-    \posterior\lam := \prior\lam \frac{L_\dspace (\q | \param)}{ C }.
+    \posterior(\param\, | \, d) := \prior\lam \frac{L_\dspace (\q | \param)}{ C }.
 \end{equation}
 
 	\bigskip
@@ -169,6 +169,7 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 \bigskip
 \item $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$
 
+\bigskip
 \bigskip
 \item $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$
 
@@ -204,10 +205,10 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 \bigskip
 
 \bigskip
-SIP: Use $N$ to estimate mean of observed
+SIP: Use $N$ to estimate mean of observed.
 
 \bigskip
-DIP: likelihood function incorporates more data
+DIP: Likelihood function incorporates more terms.
 
 \end{frame}
 
