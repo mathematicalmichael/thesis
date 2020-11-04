@@ -93,7 +93,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
+\begin{frame}[t]
 
 {\bf Bayesian approach:}
 
@@ -121,7 +121,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
+\begin{frame}
 \begin{defn}[Deterministic Inverse Problem (DIP) Under Uncertainty]
   Given a noisy datum (or data-vector) $d = \q + \xi$, $\q \in \dspace$, the \emph{deterministic inverse problem} is to determine the parameter $\param \in \pspace$ which minimizes
   \begin{equation}
@@ -142,13 +142,13 @@
 \begin{frame}{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
 
 \begin{itemize}
-	\item The \emph{posterior} is a conditional density, denoted by $\posterior(\param\, | \, d)$.
+	\item The \emph{posterior} is a conditional density: $$\posterior(\param\, | \, d)$$
 
 	\bigskip
 	\item $\posterior$ proportional to the product of $\prior$ and $L_\dspace$ \cite{Walpole, Berger, Complete, Smith}:
 
 \begin{equation}\label{eq:sb_post}
-    \posterior(\param\, | \, d) := \prior\lam \frac{L_\dspace (\q | \param)}{ C }.
+    \posterior(\param\, | \, d) := \prior\lam \frac{L_\dspace (\q | \param)}{ C }
 \end{equation}
 
 	\bigskip
@@ -164,10 +164,13 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 \begin{frame}{\it The one where we provide an illustrative example.}
 
 \begin{itemize}
-\item Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
+\item Suppose $\pspace = [-1,1] \subset \RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
 
 \bigskip
-\item $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$
+\item $\initial \sim \mathcal{U}([-1,1])$
+
+\bigskip
+\item $\observed \sim N(0.25,0.1^2)$
 
 \bigskip
 \bigskip
