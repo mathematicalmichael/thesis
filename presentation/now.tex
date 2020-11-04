@@ -315,21 +315,16 @@ Example: scaling random diagonal initial covariances
 \begin{frame}[t]{\it The one where we leverage this framework for general streams of data.}
 
 \begin{itemize}
-  \item Suppose $\exists \; d$ measurement devices generating repeated noisy data.
+  \item Measurement devices $M_j$ generating repeated noisy data, $1\leq j\leq d$.
 
   \bigskip
-  \item For each $1\leq j\leq d$, denote by $\mathcal{M}_j(\paramref)$ the $j$th measurement device.
-
-  \bigskip
-  \item $N_j$ is number of noisy data obtained for $\mathcal{M}_j(\paramref)$.
   \item $d_{j,i}$ is the $i$th noisy datum for the $j$th measurement, where $1\leq i\leq N_j$.
 
   \bigskip
-  \item Unbiased additive error model for the measurement noise.
-  \item Noise is independent identically distributed (i.i.d.) Gaussian errors, so
+  \item Unbiased additive error model for the measurement noise:
 
   \begin{equation}\label{eq:obs_data_error}
-  	d_{j,i} = M_j(\param^\star) + \xi_i, \ \xi_i\sim N(0,\sigma_j^2), \ \ 1\leq i\leq N_j.
+  	d_{j,i} = M_j(\paramref) + \xi_i, \ \xi_i\sim N(0,\sigma_j^2), \ \ 1\leq i\leq N_j.
   \end{equation}
 
 \end{itemize}
@@ -343,26 +338,24 @@ Example: scaling random diagonal initial covariances
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map.}
+\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map $Q_\text{WME}(\param)$.}
 
+\begin{equation}\label{eq:qoi_WME}
+	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
+\end{equation}
+
+\bigskip
 \begin{itemize}
-  \item The weighted mean error (WME) map, denoted by $Q_\text{WME}(\param)$ has $j$th component, denoted by $Q_{\text{WME},j}(\param)$, given by
-
-  \begin{equation}\label{eq:qoi_WME}
-  	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
-  \end{equation}
-
-  \bigskip
   \item $Q_{\text{WME},j}(\paramref)$ is the sample avg of $N_j$ draws from an i.i.d.~$N(0,N_j)$.
 
   \bigskip
-  \item By assumption, the observed data are generated according to the fixed true physical parameter vector given by $\paramref$ in \eqref{eq:obs_data_error}.
+  \item Observed data are generated according to fixed (truth) $\paramref$ in \eqref{eq:obs_data_error}.
 
   \bigskip
-  \item Subsequently, each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.
+  \item Each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.
 
   \bigskip
-  \item Therefore, with this choice of data-defined QoI map, we specify $\observed$ as a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ distribution.
+  \item $\observed$ is a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ due to the structure of $Q_\text{WME}(\param)$.
 
 \end{itemize}
 
