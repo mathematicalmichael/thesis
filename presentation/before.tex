@@ -93,7 +93,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
+\begin{frame}[t]
 
 {\bf Bayesian approach:}
 
@@ -121,7 +121,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
+\begin{frame}
 \begin{defn}[Deterministic Inverse Problem (DIP) Under Uncertainty]
   Given a noisy datum (or data-vector) $d = \q + \xi$, $\q \in \dspace$, the \emph{deterministic inverse problem} is to determine the parameter $\param \in \pspace$ which minimizes
   \begin{equation}
@@ -142,13 +142,13 @@
 \begin{frame}{\it The one where we distinguish ourselves from the Bayesian Inverse Problem.}
 
 \begin{itemize}
-	\item The \emph{posterior} is a conditional density, denoted by $\posterior(\param\, | \, d)$.
+	\item The \emph{posterior} is a conditional density: $$\posterior(\param\, | \, d)$$
 
 	\bigskip
 	\item $\posterior$ proportional to the product of $\prior$ and $L_\dspace$ \cite{Walpole, Berger, Complete, Smith}:
 
 \begin{equation}\label{eq:sb_post}
-    \posterior\lam := \prior\lam \frac{L_\dspace (\q | \param)}{ C }.
+    \posterior(\param\, | \, d) := \prior\lam \frac{L_\dspace (\q | \param)}{ C }
 \end{equation}
 
 	\bigskip
@@ -164,11 +164,15 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 \begin{frame}{\it The one where we provide an illustrative example.}
 
 \begin{itemize}
-\item Suppose $\pspace = [-1,1]\subset\RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
+\item Suppose $\pspace = [-1,1] \subset \RR$ and $Q(\param)=\param^5$ so that $\dspace = [-1,1]$
 
 \bigskip
-\item $\initial\sim \mathcal{U}([-1,1])$ and $\observed\sim N(0.25,0.1^2)$
+\item $\initial \sim \mathcal{U}([-1,1])$
 
+\bigskip
+\item $\observed \sim N(0.25,0.1^2)$
+
+\bigskip
 \bigskip
 \item $d\in \dspace$ with $d=Q(\paramref)+\xi$ where $\xi\sim N(0,0.1^2)$
 
@@ -184,8 +188,10 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 
 \begin{figure}
 \centering
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-1.png}
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-1.png}
+\vbox{
+   \includegraphics[width=0.6\linewidth]{figures/bip-vs-sip-1.png}
+   \includegraphics[width=0.6\linewidth]{figures/bip-vs-sip-pf-1.png}
+}
  % \caption{(Left) The initial/prior PDF $\initial$ (blue solid curve), updated PDF $\updated$ (black dashed curve), and posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) on $\Lambda$.
  % (Right) The push-forward (PF) of the initial/prior PDF $\predicted$ (blue solid curve), observed/likelihood PDF (red solid curve), PF of the updated PDF $\updated$ (black dashed curve), and the PF of the posterior PDF $\pi_\text{post}$ (green dashed-dotted curve) for the QoI.}
  \label{fig:bayes-comparison}
@@ -202,10 +208,10 @@ $$C = \int_\pspace \prior\lam L_\dspace(\q | \param) \, d\param$$
 \bigskip
 
 \bigskip
-SIP: Use $N$ to estimate mean of observed
+SIP: Use $N$ to estimate mean of observed.
 
 \bigskip
-DIP: likelihood function incorporates more data
+DIP: Likelihood function incorporates more terms.
 
 \end{frame}
 
@@ -215,16 +221,16 @@ DIP: likelihood function incorporates more data
 \begin{figure}
 \centering
    \only<1>{\vbox{
-	 \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-5.png}
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-5.png}
+	 \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-5.png}
+   \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-pf-5.png}
 	 }}
 	 \only<2>{\vbox{
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-10.png}
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-10.png}
+   \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-10.png}
+   \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-pf-10.png}
 	 }}
 	 \only<3>{\vbox{
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-20.png}
-   \includegraphics[width=0.65\linewidth]{figures/bip-vs-sip-pf-20.png}
+   \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-20.png}
+   \includegraphics[width=0.55\linewidth]{figures/bip-vs-sip-pf-20.png}
 	 }}
  \label{fig:bayes-comparison-convergence}
 \end{figure}

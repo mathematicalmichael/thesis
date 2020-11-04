@@ -61,7 +61,9 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
 \begin{defn}[Initial Distribution]\label{defn:initial}
   When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the \emph{initial measure} $\initialP$.
 
-  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ w.r.t the measure $\pmeas$.
+  \bigskip
+  Given a dominating $\mu_\pspace$ on $(\pspace, \pborel)$, the Radon-Nikodym derivative $\initial$ w.r.t $\pmeas$ is referred to as the \emph{initial distribution}.
+
 \end{defn}
 
 \end{frame}
@@ -70,14 +72,16 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
- The \emph{predicted distribution} (or density) is the push-forward density of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
+ The \emph{predicted distribution} is the push-forward of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
 
-  Given as the Radon-Nikodym derivative (w.r.t $\dmeas$) of the pushforward measure
+ \bigskip
+  Given as Radon-Nikodym derivative (w.r.t $\dmeas$) of pushforward measure:
+
  \begin{equation}\label{eq:predicted}
     \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
   \end{equation}
-\end{defn}
 
+\end{defn}
 
 \end{frame}
 
@@ -87,9 +91,10 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
 
 \begin{defn}[Observed Distribution]\label{defn:observed}
 When $\PP_\dspace$ in \eqref{eq:inverse-problem} quantifies the characterization of uncertainty in the QoI data, it is referred to as the \emph{observed measure}, $\observedP$.
-\bigskip
 
-Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym derivative $\observedP$ w.r.t. $\dmeas$ is referred to as the  \emph{observed density} $\observed$.
+\bigskip
+Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym derivative $\observedP$ w.r.t. $\dmeas$ is referred to as the  \emph{observed distribution} $\observed$.
+
 \end{defn}
 
 \end{frame}
@@ -98,8 +103,9 @@ Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym deri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{\it The one where we define the solution to the Stochastic Inverse Problem.}
 
-We now have all of the definitions required to summarize the density-based solution to the SIP, known as the \emph{updated density} as:
-\vskip 10pt
+We now have all of the definitions required for the \emph{updated distribution} which solves the SIP:
+
+\bigskip
 \begin{equation}\label{eq:updated-pdf}
 	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
 \end{equation}
@@ -291,13 +297,18 @@ We now have all of the definitions required to summarize the density-based solut
 \begin{frame}[t]{\it The one with some practical considerations.}
 
 \begin{itemize}
-	\item Approximate $\predicted$ using density estimation using samples from $\initial$.
 
-  \bigskip
   \item May evaluate $\updated$ directly for any sample of $\pspace$ (one model solve).
 
   \bigskip
-  \item Accuracy proportional to that of approximation to the predicted density.
+  \item Stable w.r.t. perturbations in the Total Variation metric.
+
+  \bigskip
+  \item Accuracy proportional approximation error of the predicted density.
+
+  \bigskip
+  \item Approximate $\predicted$ with density estimation using samples from $\initial$.
+
 
   \bigskip
   \item We (currently) use Gaussian KDE:
@@ -308,8 +319,6 @@ We now have all of the definitions required to summarize the density-based solut
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error.
 	\end{itemize}
 
-  \bigskip
-  \item Stable w.r.t. perturbations in the Total Variation metric.
 \end{itemize}
 
 \end{frame}
