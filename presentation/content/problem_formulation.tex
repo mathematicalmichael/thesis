@@ -292,13 +292,18 @@ We now have all of the definitions required to summarize the density-based solut
 \begin{frame}[t]{\it The one with some practical considerations.}
 
 \begin{itemize}
-	\item Approximate $\predicted$ using density estimation using samples from $\initial$.
 
-  \bigskip
   \item May evaluate $\updated$ directly for any sample of $\pspace$ (one model solve).
 
   \bigskip
-  \item Accuracy proportional to that of approximation to the predicted density.
+  \item Stable w.r.t. perturbations in the Total Variation metric.
+
+  \bigskip
+  \item Accuracy proportional approximation error of the predicted density.
+
+  \bigskip
+  \item Approximate $\predicted$ with density estimation using samples from $\initial$.
+
 
   \bigskip
   \item We (currently) use Gaussian KDE:
@@ -309,8 +314,6 @@ We now have all of the definitions required to summarize the density-based solut
 			\item Converges at a rate of $\mathcal{O}(\nsamps^{-2/(4+\dimD)})$ in $L^1$-error.
 	\end{itemize}
 
-  \bigskip
-  \item Stable w.r.t. perturbations in the Total Variation metric.
 \end{itemize}
 
 \end{frame}
