@@ -338,7 +338,7 @@ Example: scaling random diagonal initial covariances
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{\it The one with the Weighted Mean Error (WME) map $Q_\text{WME}(\param)$.}
+\begin{frame}{\it The one with the Weighted Mean Error (WME) map $Q_\text{WME}(\param)$.}
 
 \begin{equation}\label{eq:qoi_WME}
 	Q_{\text{WME},j}(\param) := \frac{1}{\sqrt{N_j}} \sum_{i=1}^{N_j} \frac{M_j(\param)-d_{j,i}}{\sigma_j}.
@@ -352,7 +352,7 @@ Example: scaling random diagonal initial covariances
   \item Observed data are generated according to fixed (truth) $\paramref$ in \eqref{eq:obs_data_error}.
 
   \bigskip
-  \item Each component of $Q_\text{WME}(\paramref)$ is a random draw from an $N(0,1)$ distribution.
+  \item For each component, $Q_{\text{WME},j}(\paramref) \sim N(0, 1)$.
 
   \bigskip
   \item $\observed$ is a $N(\mathbf{0}_{d\times 1},\mathbf{I}_{d\times d})$ due to the structure of $Q_\text{WME}(\param)$.
@@ -366,10 +366,13 @@ Example: scaling random diagonal initial covariances
 \begin{frame}{\it The one where measurements impact the predictability assumption.}
 
 \begin{itemize}
-  \item The $j$th diagonal component of $\predictedCov$ is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
 
-  \bigskip
-  \item The associated predicted variance is given by
+	\item The $j$th diagonal component of $\predictedCov$ is given by the predicted variance associated with using the scalar-valued $Q_{\text{WME},j}$.
+
+	\bigskip
+  \item The associated predicted variance for the $j$th component is given by:
+
+	\bigskip
   \begin{equation}
   	\frac{N_j}{\sigma_j^2} M_j\initialCov M_j^\top.
   \end{equation}
@@ -414,6 +417,7 @@ $$
 $$
 
 \bigskip
+\bigskip
 with solution
 
 \begin{equation}
@@ -421,7 +425,7 @@ u(t;\param) = u_0\exp(-\param t), \; u_0 = 0.75 ,
 \end{equation}
 
 \bigskip
-and measurements begin at $t=1$, continuing until $t=3$.
+and measurements occur from $t=1$ until $t=3$ at rate of $100$Hz.
 \end{frame}
 
 
