@@ -62,7 +62,8 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
   When $\PP_\pspace$ in \eqref{eq:forward-problem} quantifies the characterization of uncertainty in parameter variability before observations on QoI are taken into account, it is referred to as the \emph{initial measure} $\initialP$.
 
   \bigskip
-  If a dominating measure $\mu_\pspace$ exists on $(\pspace, \pborel)$, the \emph{initial distribution} $\initial$ is given by the Radon-Nikodym derivative of $\initialP$ w.r.t the measure $\pmeas$.
+  Given a dominating $\mu_\pspace$ on $(\pspace, \pborel)$, the Radon-Nikodym derivative $\initial$ w.r.t $\pmeas$ is referred to as the \emph{initial distribution}.
+
 \end{defn}
 
 \end{frame}
@@ -71,16 +72,16 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \begin{defn}[Predicted Distribution]\label{defn:predicted}
- The \emph{predicted distribution} (or density) is the push-forward density of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
+ The \emph{predicted distribution} is the push-forward of $\initial$ under the map $\qoi$, and is denoted as $\predicted$.
 
-\bigskip
+ \bigskip
   Given as Radon-Nikodym derivative (w.r.t $\dmeas$) of pushforward measure:
 
  \begin{equation}\label{eq:predicted}
     \predictedP (E) = \initialP \left ( \qoi^{-1}(E) \right ), \; \forall \; E \in \dborel.
   \end{equation}
-\end{defn}
 
+\end{defn}
 
 \end{frame}
 
@@ -92,7 +93,8 @@ Equation~\eqref{eq:inverse-problem} is referred to as the \emph{consistency cond
 When $\PP_\dspace$ in \eqref{eq:inverse-problem} quantifies the characterization of uncertainty in the QoI data, it is referred to as the \emph{observed measure}, $\observedP$.
 
 \bigskip
-Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym derivative $\observedP$ w.r.t. $\dmeas$ is referred to as the  \emph{observed density} $\observed$.
+Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym derivative $\observedP$ w.r.t. $\dmeas$ is referred to as the  \emph{observed distribution} $\observed$.
+
 \end{defn}
 
 \end{frame}
@@ -101,8 +103,9 @@ Given a dominating $\mu_\dspace$ on $(\dspace, \dborel)$, the Radon-Nikodym deri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{\it The one where we define the solution to the Stochastic Inverse Problem.}
 
-We now have all of the definitions required to summarize the density-based solution to the SIP, known as the \emph{updated density} as:
-\vskip 10pt
+We now have all of the definitions required for the \emph{updated distribution} which solves the SIP:
+
+\bigskip
 \begin{equation}\label{eq:updated-pdf}
 	\updated(\param) := \initial(\param)\frac{\observed(Q(\param))}{\predicted(Q(\param))}.
 \end{equation}
