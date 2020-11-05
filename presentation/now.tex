@@ -431,10 +431,13 @@ and measurements occur from $t=1$ until $t=3$ at rate of $100$Hz.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
+\centering
 \only<1>{
 \begin{figure}[htb]
-  \includegraphics[width=0.85\linewidth]{figures/ode/ode_20_reference_solution.png}
-  \includegraphics[width=0.85\linewidth]{figures/ode/ode_200_reference_solution.png}
+  \hbox{
+		\includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
+			\includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
+	}
  %  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
  % Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
  % Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
@@ -446,11 +449,8 @@ and measurements occur from $t=1$ until $t=3$ at rate of $100$Hz.
 
 \only<2>{
 \begin{figure}[htb]
-\centering
-  \hbox{
-  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
-  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
-  }
+	\includegraphics[width=0.85\linewidth]{figures/ode/ode_20_reference_solution.png}
+	\includegraphics[width=0.85\linewidth]{figures/ode/ode_200_reference_solution.png}
   % \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   % }
   \label{fig:ode-convergence}
