@@ -1,11 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-import matplotlib
-matplotlib.rcParams['mathtext.fontset'] = 'stix'
-matplotlib.rcParams['font.family'] = 'STIXGeneral'
-matplotlib.backend = 'Agg' 
-from fenics import plot as _plot
-from poisson import poissonModel # function evaluation (full response surface)
+
+# from fenics import plot as _plot
+# from poisson import poissonModel # function evaluation (full response surface)
 
 import numpy as np
 plt.rcParams['figure.figsize'] = 10,10
@@ -18,8 +15,11 @@ def log_linear_regression(input_values, output_values):
     regression_line = 10**(slope*x + intercept)
     return regression_line, slope
 
-        
+
 def plot_surface(res, measurements, prefix, lam_true, fsize=32, test=False):
+    from fenics import plot as _plot
+    from poisson import poissonModel # function evaluation (full response surface)
+
     print("Plotting surface...")
     for _res in res:
         _prefix, _in, _rm, _re = _res
@@ -127,7 +127,9 @@ def plot_decay_solution(solutions, model_generator, sigma, prefix,
         num_sample_signals  = 100
         alpha_signal_sample = 0.05
         alpha_signal_mudpts = 0.2
-        for i in range(num_sample_signals):
+        _true_response = plot_model(np.random.rand()) # uniform(0,1) draws from parameter space
+        plt.plot(plotting_mesh, _true_response, lw=1, c='k', alpha=alpha_signal_sample, label='Initial Samples')
+        for i in range(1, num_sample_signals):
             _true_response = plot_model(np.random.rand()) # uniform(0,1) draws from parameter space
             plt.plot(plotting_mesh, _true_response, lw=1, c='k', alpha=alpha_signal_sample)
 
@@ -200,7 +202,7 @@ def plot_experiment_equipment(tolerances, res, prefix, fsize=32, linewidth=5,
         if not test: plt.savefig(f'{prefix}_convergence_mud_std_var.png', bbox_inches='tight')
         #plt.show()
 
-def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=5, xlabel='Number of Measurements', test=False):
+def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=5, xlabel='Number of Measurements', test=False, legend=False):
         print("Plotting measurement experiments.")
         plt.figure(figsize=(10,10))
         for _res in res:
@@ -214,7 +216,7 @@ def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=
         plt.ylim(0.9*min(means), 1.3*max(means))
         plt.ylim(2E-3, 2E-1)
         plt.xlabel(xlabel, fontsize=fsize)
-        plt.legend(fontsize=fsize*0.8)
+        if legend: plt.legend(fontsize=fsize*0.8)
         # plt.ylabel('Absolute Error in MUD', fontsize=fsize)
         plt.title("$\mathrm{\mathbb{E}}(|\lambda^\mathrm{MUD} - \lambda^\dagger|)$", fontsize=1.25*fsize)
         if not test: plt.savefig(f'{prefix}_convergence_mud_obs_mean.png', bbox_inches='tight')
@@ -232,7 +234,7 @@ def plot_experiment_measurements(measurements, res, prefix, fsize=32, linewidth=
         plt.ylim(0.9*min(variances), 1.3*max(variances))
         plt.ylim(1E-5, 1E-3)
         plt.xlabel(xlabel, fontsize=fsize)
-        plt.legend(fontsize=fsize*0.8)
+        if legend: plt.legend(fontsize=fsize*0.8)
         # plt.ylabel('Absolute Error in MUD', fontsize=fsize)
         plt.title("$\mathrm{Var}(|\lambda^\mathrm{MUD} - \lambda^\dagger|)$", fontsize=1.25*fsize)
         if not test: plt.savefig(f'{prefix}_convergence_mud_obs_var.png', bbox_inches='tight')
