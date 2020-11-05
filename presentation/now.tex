@@ -534,9 +534,16 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 \begin{frame}
 \begin{figure}
 \centering
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+\only<1>{
+    \includegraphics[width=0.7\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
+}
+\only<2>{
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_updated_D2_scalar.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_updated_D2_vector.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+
+}
 % \caption{
 % In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
 % The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
