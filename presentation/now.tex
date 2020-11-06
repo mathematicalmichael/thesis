@@ -431,10 +431,13 @@ and measurements occur from $t=1$ until $t=3$ at rate of $100$Hz.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
+\centering
 \only<1>{
 \begin{figure}[htb]
-  \includegraphics[width=0.85\linewidth]{figures/ode/ode_20_reference_solution.png}
-  \includegraphics[width=0.85\linewidth]{figures/ode/ode_200_reference_solution.png}
+  \hbox{
+		\includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
+			\includegraphics[width=0.45\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
+	}
  %  \caption{Curves for exponential decay model with various decay coefficients. Dashed curves denote 99\% probability intervals for noise. The true signal is shown in solid black.
  % Curves associated with the MUD estimates for the decay coefficient computed from 20 trials are shown in light red.
  % Both sets of these curves encompass the true signal for $N=20$ (top plot) and $N=200$ (bottom plot) data points.
@@ -446,11 +449,8 @@ and measurements occur from $t=1$ until $t=3$ at rate of $100$Hz.
 
 \only<2>{
 \begin{figure}[htb]
-\centering
-  \hbox{
-  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_mean.png}
-  \includegraphics[width=0.5\linewidth]{figures/ode/ode_convergence_mud_obs_var.png}
-  }
+	\includegraphics[width=0.85\linewidth]{figures/ode/ode_20_reference_solution.png}
+	\includegraphics[width=0.85\linewidth]{figures/ode/ode_200_reference_solution.png}
   % \caption{The mean (left) and variance (right) of absolute errors in MUD estimates as a function of the number of data points used. These statistics are computed over 20 trials.
   % }
   \label{fig:ode-convergence}
@@ -487,7 +487,7 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
+\begin{frame}
 
 \begin{itemize}
 
@@ -504,7 +504,7 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 \item Piecewise-linear finite elements on a triangulation of a $36\times36$ mesh.
 
 \bigskip
-\item 100 randomly placed sensors in the subdomain $(0.05, 0.95)^2 \subset \Omega$.
+\item $S=100$ randomly placed sensors in subdomain $(0.05, 0.95)^2 \subset \Omega$.
 
 \bigskip
 \bigskip
@@ -521,7 +521,7 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 \begin{frame}
 \begin{figure}
 \centering
-    \includegraphics[width=0.5\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
+	\includegraphics[width=0.7\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
 % \caption{
 % A representative noisy perturbation of the reference response surface. Locations of the randomly chosen spatial data used to construct both $Q_{1D}$ and $Q_{2D}$ are shown as black and red dots.
 % }
@@ -534,9 +534,16 @@ where $x=(x_1, x_2) \in \Omega = (0,1)^2$ is the spatial domain.
 \begin{frame}
 \begin{figure}
 \centering
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_init_D2.png}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
-    \includegraphics[width=0.325\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+\only<1>{
+		\includegraphics[width=0.6\linewidth]{figures/pde-highd/pde-highd_sensors_D2.png}
+}
+\only<2>{
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_updated_D2_scalar.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_updated_D2_vector.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_pair_D2-1_m100.png}
+		\includegraphics[width=0.35\linewidth]{figures/pde-highd/pde-highd_pair_D2-2_m100.png}
+
+}
 % \caption{
 % In the left plot, the reference $g(x_2)$ is shown as the solid black curve with its interpolant onto the spline basis shown as a dotted red curve.
 % The dashed blue line represents the sample from parameter space which most closely predicts noiseless data, which we refer to as the projection of $g$.
