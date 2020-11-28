@@ -134,7 +134,7 @@ def poissonModel(gamma, mesh=None, nx=36, ny=36, width=1):
     return u
 
 
-def poisson_sensor_model(sensors, gamma, nx, ny, mesh=None):
+def poisson_sensor_model(sensors, gamma, nx=36, ny=36, mesh=None):
     """
     Convenience function wrapper to just return a qoi given a parameter.
     """

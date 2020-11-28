@@ -22,7 +22,7 @@ def generate_sensors_pde(num_measure, xmin=0.05, ymin=0.05, xmax=0.95, ymax=0.95
 
 def load_poisson(sensors, l, nx=36, ny=36):
     num_samples = len(l)
-    print(f"Loaded {num_samples} evaluations of parameter space.")
+    print(f"Loading {num_samples} evaluations of parameter space.")
 
     mesh = RectangleMesh(Point(0,0), Point(1,1), nx, ny)
     V = FunctionSpace(mesh, 'Lagrange', 1)
