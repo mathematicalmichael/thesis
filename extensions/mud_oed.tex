@@ -33,8 +33,10 @@ Consider the following Poisson problem defined on a unit domain $\Omega$:
 \end{equation}
 where $(x_1, x_2) \in \Omega = (0,1)^2$, $\Gamma_T$ is the top, $\Gamma_B$ is the bottom, $\Gamma_L$ and $\Gamma_R$ left and right, respectively.
 $\frac{\partial u}{\partial \mathbf{n}}$ denotes the outward normal direction.
-We select $g=\param \sin(\pi x_2)$, and show the response surface for $\param = 3$ in the left of Figure~\ref{fig:pde-response}, with darker colors representing more negative values.
-The initial density is chosen to be uniform over the interval $\Lambda = (1,5)$, and $f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$.
+We select $g$ as before in \ref{subsec:pde-example}, and show the response surface for $\paramref$ in the left of Figure~\ref{fig:pde-response}, with darker colors representing more negative values.
+Now, $g$ will be parameterized by a scalar instead of a vector, representing the leading coefficient in the polynomial.
+In other words, we presume knowledge of the structure of $g$ but not its exact values.
+The initial density is again chosen to be uniform over the interval $\Lambda = (-4, 0)$, and $f$ is chosen to be $10\exp\{-\frac{(x_1-0.5)^2 + (x_2 - 0.5)^2}{0.02}\}$.
 
 
 We demonstrate the impact of incorporating more measurements on the ability to estimate $\paramref$.
@@ -115,7 +117,7 @@ The original design exhibited a strong decay in its distribution of measurement 
 \subsubsection{Comparison of SIP Solutions with Different QoI Maps}
 
 We are interested in knowing how the uncertainty around the parameter estimate (the MUD point) changes as we incorporate more (noisy) data.
-To generate convergence plots, we solve the problem repeatedly for $S = 5, 10, 15, 20, 25, 50, 100, 250, 500, \text{ and } 1000$ and take the mean and variance of the twenty trials for each value of $S$.
+To generate convergence plots, we solve the problem repeatedly for $S = 10, 50, 100, 250, 500, \text{ and } 1000$ and take the mean and variance of the twenty trials for each value of $S$.
 Consider the convergence plots in Figure~\ref{fig:pde-convergence-obs}, which demonstrates the impact of increasing $S$ on our ability to resolve $\paramref$.
 
 \begin{figure}
@@ -128,12 +130,11 @@ Consider the convergence plots in Figure~\ref{fig:pde-convergence-obs}, which de
   \label{fig:pde-convergence-obs}
 \end{figure}
 
-We show the mean absolute error in the left half of Figure~\ref{fig:pde-convergence-obs} and remark that two decimal places of accuracy can be achieved with approximately $250$ samples instead of the $1000$ required in the left-half.
-In Appendix~\ref{ext:pde-tolerance}, we show these results for an experiment conducted with equipment of varying precision.
+We show the mean absolute error in the left half of Figure~\ref{fig:pde-convergence-obs} and remark that two decimal places of accuracy can be achieved with approximately $250$ measurements instead of the $1000$ required in the left-half.
 
 The convergence results for the original experimental design demonstrate that even randomly placed sensors in the interior of $\Omega$ are suitable for parameter estimation.
 However, when we considered sensors that are placed with knowledge about the physical system being studied, more information is learned from the measurement equipment by placing sensors in different locations.
-Using the alternative experimental design, we see a reduction of uncertainty in both Figures~\ref{fig:pde-convergence-obs} and \ref{fig:pde-convergence-std}, represented by the persistent vertical displacement between the regression lines for convergence.
+Using the alternative experimental design, we see a reduction of uncertainty in the panels of Figure~\ref{fig:pde-convergence-obs}, represented by the persistent vertical displacement between the regression lines for convergence.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
