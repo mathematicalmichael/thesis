@@ -32,13 +32,14 @@
 % FRONT MATTER
 
 \makeatletter
-\title{Computational Advances in Data-Consistent Inversion: Measure-Theoretic Methods for Improving Predictions}
+\title{Computational Advances in Data-Consistent Inversion: Measure-Theoretic Methods for Parameter Estimation}
 \authorLast{Pilosov}
 \authorFirst{Michael}
 \authorMiddle{}
 \education{
 B.A., State University of New York: College at Geneseo, 2014 \\
 M.S., University of Colorado: Denver, 2017
+Ph.D., University of Colorado: Denver, 2020
 }
 \school{University of Colorado: Denver, College of Liberal Arts and Sciences}
 \program{Applied Mathematics}
@@ -65,13 +66,26 @@ Dr.~Jimmy Kim
 
 % acknowledgement - this is optional
 \acknowledgements{
-  Thank you to Troy Butler, who was motivated to get all this finished even when I was not.
+\setlength{\parindent}{0.5in}
 
-Caroline Haddad
-Olympia Nicodemi
-Gary Towsley
+I am indebted to Dr. Caroline Haddad, who first put the idea of pursuing graduate studies into my mind.
+Without her initial encouragement, I would have never started on this path.
+Jim Napolitano was the first mathematics teacher to seriously challenge and engage my skills, and did so at a time when my relationship with the subject was particularly fragile.
+I owe a thank you to Troy Butler, who was motivated to get all this finished even when I was not.
+If it were not his insistence on perfect not being the enemy of good, I would have kept refining this document indefinitely and never completed the program.
 
+Thank you to Dr. Olympia Nicodemi for not giving up on me when I failed my first Real Analysis exam and spent every subsequent office hour patiently helping me compensate for my lack of proof-writing skills.
+Those sessions built a foundation that I desperately needed, and I will never forget the feeling of feeling frustrated outside your office while I did homework.
+Thank you to Dr. Gary Towsley, who bent some rules to ensure there was no lapse in my education, meeting with me at the town coffee shop every week to teach me Algebraic Geometry.
 
+Thank you to the friends who have been by my side through too many late evenings to count.
+Making sure I would not let you down was a larger motivation at times than my own desire to finish.
+I have relied on y'all for perspective when I needed it most and am absolutely blessed to have you in my life.
+We're doing this in alphabetical order:
+Andrew, Christina, Daniel, Elliott, Gabriela, George, Govinda, Jordan, Joseph, Marta, Michael, Ron, Scott, Stephanie, Vincent.
+
+And obviously, a very special thank you is reserved for my wonderful parents\--Anna and Emil\--for their love, support, and defintitely for the grit that drove them to emigrate.
+\vfill
 }
 
 \usepackage{mathtools} % for \xmapsto
@@ -109,11 +123,11 @@ Gary Towsley
 \input{chapter06}
 \pagebreak
 \FloatBarrier
----------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
 \renewcommand\bibname{REFERENCES}
 \singlespacing
 
-\nocite{*}
+% \nocite{*}
 \bibliographystyle{ref/ucdDissertation}
 \bibliography{ref/references,ref/references-code}
 
