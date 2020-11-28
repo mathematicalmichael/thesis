@@ -8,6 +8,7 @@
 %% Author: Sarah Kreidler
 %%         Peter DeWitt
 %%         Michael Pilosov
+%%         Jordan Hall
 %%
 %%
 %% Package 'ucdenver-dissertation' to use with LaTeX2e
@@ -15,11 +16,19 @@
 %% Copyright: (C) University of Colorado Denver
 %% Author: Sarah Kreidler
 %% Please report errors to sarah.kreidler@ucdenver.edu, and/or
-%% peter.dewitt@ucdenver.edu
+%% peter.dewitt@ucdenver.edu, and/or (more likely to get a response) open an issue at
+%% github.com/mathematicalmichael/dissertation-template
 %%
 %% Change log
 %% 13 Apr 2014 - added vspace*{\fill} to the listofigures to center vertically
 %% 26 Jan 2016 - commented out the vspace*{\fill} from listtofigures
+%% 21 Nov 2020 - updated for 2020 Graduate Student Handbook: ragged edges, different numbering / spacing
+%% Table of Contents - added in hspace{7em}, changed depth to 3 for subsubsection to appear
+%% Subsubsection - changed from boldfaced to italicized font, % added vspace, which was missing and made 7.0 into 4.5 for em to make indents equal throughout
+%% \postSskip and \preSskip set to 0cm, and removed hyperindex = {true} from hypersetup
+%% Roman numerals should only appear in chapter headings and chapter number in TOC -- Arabic used otherwise
+%% Removed a few lines that were commented out and made a few comments clearer
+
 \def\fileversion{1.0}
 \def\filename{ucdenver-dissertation}
 \def\filedate{2012/09/24}
@@ -32,7 +41,7 @@
 \LoadClass[10pt]{report}
 
 %% required packages
-\RequirePackage[left=1in,top=1in,right=1in,bottom=1in,bindingoffset=0.25in]{geometry}
+\RequirePackage[total={6.5in,9in}, margin=1in, bindingoffset=0in]{geometry}
 \RequirePackage[font=singlespacing]{caption}
 \RequirePackage[raggedright]{titlesec}
 
@@ -57,6 +66,8 @@
 \newcommand{\program}[1]{\def\@program{#1}}
 \newcommand{\advisor}[1]{\def\@advisor{#1}}
 \newcommand{\advisorTitle}[1]{\def\@advisorTitle{#1}}
+\newcommand{\coadvisor}[1]{\def\@coadvisor{#1}}
+\newcommand{\coadvisorTitle}[1]{\def\@coadvisorTitle{#1}}
 \newcommand{\committeeChair}[1]{\def\@committeeChair{#1}}
 \newcommand{\committeeMembers}[1]{\def\@committeeMembers{#1}}
 \newcommand{\submitDate}[1]{\def\@submitDate{#1}}
@@ -65,12 +76,15 @@
 \newcommand{\preface}[1]{\def\@preface{#1}}
 
 
+
+
 %% numbering for theorems
 \newcounter{theorem}
 \newcounter{lemma}
 
 %% set margins
 \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
 
 \pagestyle{fancy} %
 \fancyhf{} %
@@ -143,37 +157,35 @@
   \vspace*{\fill}
 }
 
-%% formatting committee page
+%% formatting abstract page
 \newcommand{\makeprefacepage}{
   \newpage
   \begin{flushleft}
   \@authorLast{}, \@authorFirst{} \@authorMiddle{} (Ph.D., \@program) \\
-  { \doublespacing \@title \par Thesis directed by \@advisorTitle{} \@advisor \par }
+  { \doublespacing \@title \par  Thesis directed by \@advisorTitle{} \@advisor\ \par}
   \end{flushleft}
-  \medskip
+  %\medskip
   \begin{center}
   {\bf ABSTRACT}\\
   \end{center}
-  \hskip \parindent
-  \raggedright   %% ragged right edges in abstract
   {\doublespacing \@preface \par }
   \vfill
   \begin{flushright}
   The form and content of this abstract are approved. We recommend its publication.
   \end{flushright}
   \begin{flushright}
-  \hfill Approved: \@advisor
+  \hfill Approved: \@advisor\
   \end{flushright}
 }
 
-%% formatting committee page
+%% formatting acknowledgements page
 \newcommand{\makeacknowledgementspage}{
 \ifdefined\@acknowledgements
   \newpage
   \begin{center}
   {\bf ACKNOWLEDGEMENTS} \\
   \end{center}
-  \hskip \parindent { \doublespacing \@acknowledgements }
+  { \doublespacing \@acknowledgements }
 \fi
 }
 
@@ -183,7 +195,7 @@
   \newpage
   \vspace*{\fill}
   %\hskip \parindent \@dedication \\  % For a dedication of one or more sentences
-  \begin{center} \@dedication \end{center}          % for a dedication less than one sentence
+  \begin{center} \@dedication \end{center}  % for a dedication less than one sentence
   \vspace*{\fill}
 \fi
 }
@@ -214,7 +226,6 @@
 
 %% hyperlink formatting
 \hypersetup{%
-    % hyperindex = {true}, % unecessary
     colorlinks = {true},
     linktocpage = {true},
     plainpages = {false},
@@ -228,8 +239,9 @@
 \urlstyle{same}
 
 %% table of contents
-\setcounter{tocdepth}{3} % subsubsection level
+\setcounter{tocdepth}{3}
 \renewcommand{\@tocrmarg}{2.55em plus1fil}
+
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -250,10 +262,9 @@
     \endgroup
   \fi}
 
-
 \renewcommand*\l@section{\vspace{12pt}\@dottedtocline{1}{1.5em}{2.3em}}
 \renewcommand*\l@subsection{\vspace{12pt}\@dottedtocline{2}{3.0em}{3.2em}}
-\renewcommand*\l@subsubsection{\vspace{12pt}\@dottedtocline{3}{4.5em}{4.1em}} % added vspace, which was missing and made 7.0 into 4.5 for em to make indents equal throughout (JH)
+\renewcommand*\l@subsubsection{\vspace{12pt}\@dottedtocline{3}{4.5em}{4.1em}}
 \renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
 \renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
 
@@ -365,9 +376,9 @@
 \setlength{\preXLskip}{1.8\baselineskip plus 0.5ex minus 0ex}
 \setlength{\preLskip}{1.5\baselineskip plus 0.3ex minus 0ex}
 \setlength{\preMskip}{1\baselineskip plus 0.2ex minus 0ex}
-\setlength{\preSskip}{.8\baselineskip plus 0.2ex minus 0ex}
+\setlength{\preSskip}{0cm}
 \setlength{\postMskip}{.5\baselineskip plus 0ex minus 0.1ex}
-\setlength{\postSskip}{.3\baselineskip plus 0ex minus 0.1ex}
+\setlength{\postSskip}{0cm}
 
 \newcounter {chapternn}
 \renewcommand \thechapternn {\@arabic\c@chapternn}
@@ -399,9 +410,11 @@
 \newcommand{\ucdpartnn}[1]{\newpage%
   \addcontentsline{toc}{part}{#1}
   {\@afterindentfalse\@afterheading\singlespacing\textbf{\Huge #1}} \nopagebreak
-  \vskip \postMskip \nopagebreak}
+  \vskip \postMskip \nopagebreak
+}
 
 % section
+
 \newcommand{\ucdsec}[2][default]{%
   \refstepcounter{section}%
   \addcontentsline{toc}{section}{\hspace{3em}\thesection\space #1}
@@ -410,7 +423,11 @@
   }
 \newcommand{\ucdsecnn}[1]{%
   {\@afterindentfalse\@afterheading\singlespacing\textbf{#1}} \nopagebreak
-  \vskip \postSskip \nopagebreak}
+  \vskip \postSskip \nopagebreak
+}
+
+\renewcommand \thesection {\arabic{chapter}.\arabic{section}}
+
 
 % subsection
 \newcommand{\ucdsubsec}[2][default]{%
@@ -420,7 +437,8 @@
   \vskip \postSskip \nopagebreak}
 \newcommand{\ucdsubsecnn}[1]{%
   {\@afterindentfalse\@afterheading\singlespacing\textbf{#1}} \nopagebreak
-  \vskip \postSskip \nopagebreak}
+  \vskip \postSskip \nopagebreak
+}
 
 % subsubsection
 \newcommand{\ucdsubsubsec}[2][default]{%
@@ -430,13 +448,18 @@
   \vskip \postSskip \nopagebreak}
 \newcommand{\ucdsubsubsecnn}[1]{%
   {\@afterindentfalse\@afterheading\singlespacing{\normalsize\textbf #1}} \nopagebreak
-  \vskip \postSskip \nopagebreak}
+  \vskip \postSskip \nopagebreak
+}
 
 \renewcommand{\chapter}{\secdef \ucdchapter \ucdchapternn}
 \renewcommand{\part}{\secdef \ucdpart \ucdpartnn}
 \renewcommand{\section}{\secdef \ucdsec \ucdsecnn}
 \renewcommand{\subsection}{\secdef \ucdsubsec \ucdsubsecnn}
 \renewcommand{\subsubsection}{\secdef \ucdsubsubsec \ucdsubsubsecnn}
+
+
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
 
 
 %%
