@@ -32,7 +32,7 @@ jobs:
         docker tag mathematicalmichael/python:thesis python:thesis
 
     - name: Set up PATH for binaries
-      run: echo "::add-path::$(pwd)/bin"
+      run: echo "PATH=$(pwd)/bin:$PATH" >> $GITHUB_ENV
 
     - name: Generate figures with python
       run: cd examples && make clean && make
