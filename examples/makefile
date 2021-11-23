@@ -15,7 +15,7 @@ clean-heat: \
 # ch 2+3 heatrod example for fifty and five-hundred parameter samples
 # ch2 has dependence on size
 # ch3 has the introduction of a second set of QoI (measurement locations)
-heatrod: heatrod-a heatrod-b models.py Dockerfile
+heatrod: heatrod-a heatrod-b models.py
 # not sure the Dockerfile symlink depenency works. maybe swap them?
 
 heatrod-a: \
