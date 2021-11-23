@@ -9,8 +9,7 @@ ode: mud_problem.py
 	mkdir -p ode/
 	mv ode*.png ode/
 
-# m is for measurements
-pde: res1u.pkl res2u.pkl res5u.pkl $(DEPS)
+pde: $(DATA) $(DEPS)
 	./run_poisson.sh
 
 $(DATA): generate_pde_data.sh pp.py $(DEPS)

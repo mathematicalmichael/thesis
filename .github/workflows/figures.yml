@@ -1,4 +1,4 @@
-name: Validate Examples
+name: Validate Figures
 
 on:
   push:
@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    steps:
     - uses: actions/checkout@v2
 
     # Use docker to handle dependencies and prepend executables to PATH
@@ -24,8 +25,9 @@ jobs:
     - name: Set up PATH for binaries
       run: echo "PATH=$(pwd)/bin:$PATH" >> $GITHUB_ENV
 
-    - name: Generate examples with python
+    - name: Generate figures with python
       run: |
-        cd examples
-        make clean
+        cd figures
+        echo "setting NUM_SAMPLES to 10 for expedited testing purposes"
+        sed -i 's|NUM_SAMPLES=1000|NUM_SAMPLES=10|g' generate_pde_data.sh
         make
