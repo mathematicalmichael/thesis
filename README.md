@@ -90,7 +90,7 @@ texlive-science \
 ```
 
 
-### Arhcitectures
+### Architectures
 Everything has been validated on `AMD64` laptops, desktops, and servers extensively, and the CI pipelines run on this architecture.
 Furthermore, some testing has validated that everything (including the actual physics simulations) can be successfully reproduced on hardware such as the Raspberry Pi 4 running a 64-bit operating system, which is an `ARM64` device.
 
