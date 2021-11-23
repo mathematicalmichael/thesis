@@ -7,14 +7,14 @@ There has been an extensive effort made to ensure the reproducibility of all com
 
 The title of the work is _Computational Advances in Data-Consistent Inversion: Measure-Theoretic Methods for Parameter Estimation_.
 
-The focus of the work is the extension of a framework designed to solve aleotoric (irreducible) uncertainty quantification problems to the solution of epistemic (reducible) uncertainty problems.
+The focus of the work is the extension of a framework designed to solve aleatoric (irreducible) uncertainty quantification problems to the solution of epistemic (reducible) uncertainty problems.
 It is concerned with framing a problem such that as more data is collected, uncertainty is reduced.
 
 In other words: the question _How does one construct and solve a parameter-estimation problem as a density-estimation problem?_ is posed and addressed in the context of measure-theoretic solutions to stochastic inverse problems_
 
 
 ## TL;DR
-We define the notion of Maximal Updated Density (MUD) points, which are the values that maximize an updated density, analogous to how a MAP (Maximum A-Posteriori) point maximizes a posterior density from Bayesian inversion.
+We define the notion of Maximal Updated Density (MUD) points, which are the values that maximize an updated density, analogous to how a MAP (Maximum a posteriori) point maximizes a posterior density from Bayesian inversion.
 Updated densities (measure-theoretic solutions) differ from posteriors in that they are the solution to a different problem which seeks to match the push-forward of the updated density to a specified observed distribution.
 It is the selection of a single point from a density that provides the solution to the parameter estimation problem, but the construction of this density is novel.
 A QoI map is defined such that when used in the existing framework, the resulting densities exhibit decreasing variance as more data is incorporated into the solution.
@@ -60,7 +60,7 @@ Similarly, this repository also checks the validity of the LaTeX compilation thr
 
 
 ### Docker
-A `Dockerfile` can be found in `bin/` as well as executable shell scripts which use emphemeral docker containers to perform the compilation, so by extending your `$PATH` to include `$(pwd)/bin`, you can "trick" your computer into thinking it has all the requisite `TeX`-related software.
+A `Dockerfile` can be found in `bin/` as well as executable shell scripts which use ephemeral docker containers to perform the compilation, so by extending your `$PATH` to include `$(pwd)/bin`, you can "trick" your computer into thinking it has all the requisite `TeX`-related software.
 If your system is also missing `make`, you can rename `bin/dmake` ("docker make") to `bin/make` or just invoke `dmake` in place of `make`.
 
 Extending your `PATH` and building with `docker`:
@@ -94,5 +94,5 @@ texlive-science \
 Everything has been validated on `AMD64` laptops, desktops, and servers extensively, and the CI pipelines run on this architecture.
 Furthermore, some testing has validated that everything (including the actual physics simulations) can be successfully reproduced on hardware such as the Raspberry Pi 4 running a 64-bit operating system, which is an `ARM64` device.
 
-`mud_run_all` has been tested on the new `M1` macbooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
+`mud_run_all` has been tested on the new `M1` MacBooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
 Please open an issue if you would like help compiling or reproducing results on such machines. It is possible, just less convenient.
