@@ -12,6 +12,7 @@ It is concerned with framing a problem such that as more data is collected, unce
 
 In other words: the question _How does one construct and solve a parameter-estimation problem as a density-estimation problem?_ is posed and addressed in the context of measure-theoretic solutions to stochastic inverse problems_
 
+
 ## TL;DR
 We define the notion of Maximal Updated Density (MUD) points, which are the values that maximize an updated density, analogous to how a MAP (Maximum A-Posteriori) point maximizes a posterior density from Bayesian inversion.
 Updated densities (measure-theoretic solutions) differ from posteriors in that they are the solution to a different problem which seeks to match the push-forward of the updated density to a specified observed distribution.
@@ -47,6 +48,7 @@ $ pip install mud-examples
 $ mud_run_all
 ```
 
+
 ## Reproducibility
 The author went to great lengths to ensure that there would be as little friction as possible to recreate the results presented in this dissertation.
 
@@ -54,6 +56,7 @@ Continuous Integration and Deployment pipelines have been set up for the [MUD](h
 You will find unit tests and code coverage reports at both of those projects.
 
 Similarly, this repository also checks the validity of the LaTeX compilation through the use of Github Actions (see `.github/workflows/`).
+
 
 ### Docker
 A `Dockerfile` can be found in `bin/` as well as executable shell scripts which use emphemeral docker containers to perform the compilation, so by extending your `$PATH` to include `$(pwd)/bin`, you can "trick" your computer into thinking it has all the requisite `TeX`-related software.
@@ -69,6 +72,7 @@ The docker image to build the document is
 `docker.io/mathematicalmichael/latex`
 and all the software used to create the simulation results and figures can be found inside of
 `docker.io/mathematicalmichael/python:thesis`, which is built from 
+
 
 ### Debian-based distributions
 You can find a list of the relevant `apt` packages in `bin/Dockerfile` but at the time of writing, here are the names that were used for builds based on `ubuntu:20.04`:
