@@ -6,7 +6,7 @@ name: Validate Examples
 # events but only for the master branch
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ main, develop ]
   pull_request:
     branches: 
       - master
@@ -35,4 +35,6 @@ jobs:
       run: echo "PATH=$(pwd)/bin:$PATH" >> $GITHUB_ENV
 
     - name: Generate figures with python
-      run: cd examples && make clean && make
+      run: |
+        cd examples && make clean && make
+        # cd figures && make clean && make

@@ -10,7 +10,7 @@ The title of the work is _Computational Advances in Data-Consistent Inversion: M
 The focus of the work is the extension of a framework designed to solve aleatoric (irreducible) uncertainty quantification problems to the solution of epistemic (reducible) uncertainty problems.
 It is concerned with framing a problem such that as more data is collected, uncertainty is reduced.
 
-In other words: the question _How does one construct and solve a parameter-estimation problem as a density-estimation problem?_ is posed and addressed in the context of measure-theoretic solutions to stochastic inverse problems_
+In other words: the question _How does one construct and solve a parameter-estimation problem as a density-estimation problem?_ is posed and addressed in the context of measure-theoretic solutions to stochastic inverse problems.
 
 
 ## TL;DR
@@ -44,10 +44,14 @@ $ ./docker_make clean
 If you want to recreate all the figures, you can run:
 
 ```sh
-$ rm -rf figures/ # (optionally wipe figures directory)
-$ pip install mud-examples
-$ mud_run_all
+$ cd examples
+$ make
+$ make clean
 ```
+
+(some figures persist in `figures` and the scripts to generate them are there but not as organized as the author would like them to be)
+
+NOTE: `pip install mud-examples && mud_run_all` will create figures for the paper that is being written from this dissertation. As such, the directory structures differ, and there is some duplicate code in this repository that has been migrated to `mud-examples` and further improved. The author will gradually reduce this duplication and ensure that the only code that remains in this repository will be that associated with experiment orchestration (since some figures will differ).
 
 
 ## Reproducibility
@@ -96,3 +100,11 @@ Furthermore, some testing has validated that everything (including the actual ph
 
 `mud_run_all` has been tested on the new `M1` MacBooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
 Please open an issue if you would like help compiling or reproducing results on such machines. It is possible, just less convenient.
+
+For the M1 (make sure brew / python are running as `ARM64`, you can check using `file $(which python)` and `file $(which brew)`):
+
+```sh
+brew install scipy numpy
+pip3 install mud-examples
+```
+
