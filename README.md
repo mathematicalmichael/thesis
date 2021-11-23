@@ -31,7 +31,7 @@ $ make
 $ make clean # (optional cleanup of build files)
 ```
 
-Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex:
+Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex`:
 
 ```sh
 $ git clone https://github.com/mathematicalmichael/thesis
