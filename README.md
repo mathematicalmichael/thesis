@@ -32,12 +32,13 @@ $ make
 $ make clean # (optional cleanup of build files)
 ```
 
-Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex`:
+Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex` (see below for more options involving files in `/bin` or if you want to build the image yourself):
 
 ```sh
 $ git clone https://github.com/mathematicalmichael/thesis
 $ cd thesis
-$ ./docker_command
+$ ./docker_make
+$ ./docker_make clean
 ```
 
 If you want to recreate all the figures, you can run:
