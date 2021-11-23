@@ -30,6 +30,9 @@ TEXFILES := \
 	set-based/set_error \
 	env/newcommands \
 	env/usepackages \
+	extensions/* \
+	ch02/* \
+	ch03/* \
 
 # adds .tex to path name
 TEXS = $(patsubst %, %.tex, $(TEXFILES))

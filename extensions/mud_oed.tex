@@ -23,7 +23,7 @@ We make a slight modification to the Poisson problem from \ref{subsec:pde-exampl
 This choice is primarily motivated by the goal of using visual aids to demonstrate slopes corresponding to different measurement locations.
 We briefly summarize the experimental set-up again for the reader's convenience.
 Consider the following Poisson problem defined on a unit domain $\Omega$:
-\begin{equation}\label{eq:pde-equation}
+\begin{equation}\label{eq:pde-equation-1d}
 \begin{cases}
 \hfill -\nabla \cdot \nabla u &= f \quad\text{on } \Omega \\
 \hfill u &= 0 \quad\text{ on } \Gamma_T \cup \Gamma_B \\
@@ -66,7 +66,7 @@ In the rightmost histogram of Figure~\ref{fig:pde-response}, we plot the data ge
   \includegraphics[width=0.25\linewidth]{figures/pde/pde_reference_solution}
   \includegraphics[width=0.25\linewidth]{figures/pde/pde_sensitivity_qoi}
   \includegraphics[width=0.45\linewidth]{figures/pde/pde_qoi_response}
-\caption{(Left): The function response surface for $u$ solving \eqref{eq:pde-equation} with $S=100$ measurement locations highlighted in white.
+\caption{(Left): The function response surface for $u$ solving \eqref{eq:pde-equation-1d} with $S=100$ measurement locations highlighted in white.
 The twenty most sensitive location markers are filled.
 (Right): The derivative $\partial M_i / \partial \param$ is computed for the $100$ measurement locations and the distribution of the resulting collection of slopes is plotted.
 (Center): The values of the response surface at the measurements is shown. The true parameter value $\paramref$ is highlighted with a vertical line, and the values of the response surface conditioned on $\paramref$ are used to form the histogram plotted vertically on the right. Many measurements are near zero.

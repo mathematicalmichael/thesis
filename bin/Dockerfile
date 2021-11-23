@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+FROM docker.io/ubuntu:focal-20201106
+# FROM docker.io/ubuntu:impish-20211102
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=America/Denver
 RUN apt-get update && \
