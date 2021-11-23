@@ -25,12 +25,14 @@ TEXFILES := \
 	abstract \
 	notation \
 	body \
+	intro/* \
 	set-based/set_derivation \
 	set-based/set_algorithm \
 	set-based/set_error \
 	env/newcommands \
 	env/usepackages \
 	extensions/* \
+	software/* \
 	ch02/* \
 	ch03/* \
 

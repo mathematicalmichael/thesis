@@ -59,6 +59,16 @@ Similarly, this repository also checks the validity of the LaTeX compilation thr
 A `Dockerfile` can be found in `bin/` as well as executable shell scripts which use emphemeral docker containers to perform the compilation, so by extending your `$PATH` to include `$(pwd)/bin`, you can "trick" your computer into thinking it has all the requisite `TeX`-related software.
 If your system is also missing `make`, you can rename `bin/dmake` ("docker make") to `bin/make` or just invoke `dmake` in place of `make`.
 
+Extending your `PATH` and building with `docker`:
+```sh
+$ export PATH=$(pwd)/bin:$PATH
+$ dmake
+```
+
+The docker image to build the document is 
+`docker.io/mathematicalmichael/latex`
+and all the software used to create the simulation results and figures can be found inside of
+`docker.io/mathematicalmichael/python:thesis`, which is built from 
 
 ### Debian-based distributions
 You can find a list of the relevant `apt` packages in `bin/Dockerfile` but at the time of writing, here are the names that were used for builds based on `ubuntu:20.04`:
@@ -78,3 +88,6 @@ texlive-science \
 ### Arhcitectures
 Everything has been validated on `AMD64` laptops, desktops, and servers extensively, and the CI pipelines run on this architecture.
 Furthermore, some testing has validated that everything (including the actual physics simulations) can be successfully reproduced on hardware such as the Raspberry Pi 4 running a 64-bit operating system, which is an `ARM64` device.
+
+`mud_run_all` has been tested on the new `M1` macbooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
+Please open an issue if you would like help compiling or reproducing results on such machines. It is possible, just less convenient.
