@@ -101,6 +101,7 @@ Furthermore, some testing has validated that everything (including the actual ph
 `mud_run_all` has been tested on the new `M1` MacBooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
 Please open an issue if you would like help compiling or reproducing results on such machines. It is possible, just less convenient.
 
+
 For the M1 (make sure brew / python are running as `ARM64`, you can check using `file $(which python)` and `file $(which brew)`):
 
 ```sh
