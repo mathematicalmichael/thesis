@@ -38,7 +38,7 @@ $ make
 $ make clean # (optional cleanup of build files)
 ```
 
-Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex` (see below for more options involving files in `/bin` or if you want to build the image yourself):
+Or if you have `docker`, this will pull `docker.io/mathematicalmichael/latex-thesis` (see below for more options involving files in `/bin` or if you want to build the image yourself):
 
 ```sh
 $ git clone https://github.com/mathematicalmichael/thesis
@@ -79,10 +79,20 @@ $ export PATH=$(pwd)/bin:$PATH
 $ dmake
 ```
 
-The docker image to build the document is 
-`docker.io/mathematicalmichael/latex`
-and all the software used to create the simulation results and figures can be found inside of
-`docker.io/mathematicalmichael/python:thesis`, which is built from 
+The docker image to build the document is created from `./bin/Dockerfile` and pushed automatically by Github Actions to
+`docker.io/mathematicalmichael/latex-thesis`.
+
+All the software used to create the simulation results and figures can be used by pulling
+`docker.io/mathematicalmichael/python-thesis`, which is built from `./bin/Dockerfile-conda` and also published continuously.
+This image relies on Fenics, a physics simulation software suite which is no longer supported, and so the python image is based on Python 3.7.6.
+In reality, only data-generation really needs to be tied to this requirement, and in the future the data-generation image may be separated from all
+the other python script dependencies in order to validate that newer versions of Python still work.
+
+Note: There is another compatible image with `./bin/Dockerfile-python` which relies on the official `current` image from the maintainers of Fenics, but that uses Python 3.6.7.
+It is published at `docker.io/mathematicalmichael/python:thesis` (before the author understood how to properly use image tags).
+
+
+For what it is worth, MUD and MUD-Examples both (at the time of writing, a year after defense), test Python versions up to 3.9.7, so with the exception of data-generation with Fenics for the PDE-based examples, everything else appears to be compatible with newer versions of python (and other architectures, which are discussed below).
 
 
 ### Debian-based distributions
@@ -100,18 +110,32 @@ texlive-science \
 ```
 
 
-### Architectures
+### Supported Architectures
+We are living in a transitional time where low-power ARM devices are starting to become widely used.
+During the writing of this dissertation, the author experimented with reproducing his results on some such machines and has made an effort to support their adoption into the reproducibility considerations.
 Everything has been validated on `AMD64` laptops, desktops, and servers extensively, and the CI pipelines run on this architecture.
+This was the platform that was primarily used for the development of this work.
 Furthermore, some testing has validated that everything (including the actual physics simulations) can be successfully reproduced on hardware such as the Raspberry Pi 4 running a 64-bit operating system, which is an `ARM64` device.
 
-`mud_run_all` has been tested on the new `M1` MacBooks (also `ARM64`), and the docker images worked under Rosetta emulation but have not been built as native multi-arch images at the time of writing.
+
+Using Rosetta Emulation, the docker image for the physics simulation was able to run on a first-generation M1 Macbook Mini, and all other results were reproduced using `ARM64` builds of Python 3.9.6.
+That is more or less the the extent of testing that has been conducted as of December 2021.
+`mud_run_all` has been tested on several `M1` MacBooks (also `ARM64`), and it is the author's intent to eventually build an ARM64 docker image capable of running the physics simulations, so despite the `LaTeX` images supporting both platforms, the `python` images have not been built as native multi-arch images at the time of writing.
 Please open an issue if you would like help compiling or reproducing results on such machines. It is possible, just less convenient.
 
+Docker buildx is being used with Github Actions to publish multi-arch images for the LaTeX dependencies.
+Eventually the plan is to have three images:
+- One for data-generation
+- One for demonstration of work
+- One for compilation of PDF / Presentation
 
-For the M1 (make sure brew / python are running as `ARM64`, you can check using `file $(which python)` and `file $(which brew)`):
+
+Note:
+Most examples/figures-related testing on the M1 occurred using native Python (no emulation), and the following would have served as helpful information:
+
+For the M1, make sure brew / python are running as `ARM64`, (you can check using `file $(which python)` and `file $(which brew)`), and then install dependencies in this order to avoid unecessarily building major scientific python libraries from source.
 
 ```sh
 brew install scipy numpy
 pip3 install mud-examples
 ```
-
