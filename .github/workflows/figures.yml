@@ -25,8 +25,8 @@ jobs:
     # Use docker to handle dependencies and prepend executables to PATH
     - name: Pull + retag docker image for Python (3.6) dependencies (quay.io/fenics)
       run: |
-        docker pull mathematicalmichael/python:thesis
-        docker tag mathematicalmichael/python:thesis python:thesis
+        docker pull mathematicalmichael/python-thesis
+        docker tag mathematicalmichael/python-thesis python:thesis
 
     - name: Set up PATH for binaries
       run: echo "PATH=$(pwd)/bin:$PATH" >> $GITHUB_ENV
