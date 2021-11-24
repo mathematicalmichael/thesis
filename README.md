@@ -1,3 +1,9 @@
+![docker](https://github.com/mathematicalmichael/thesis/actions/workflows/docker.yml/badge.svg)
+![latex](https://github.com/mathematicalmichael/thesis/actions/workflows/main.yml/badge.svg)
+![figures](https://github.com/mathematicalmichael/thesis/actions/workflows/figures.yml/badge.svg)
+![examples](https://github.com/mathematicalmichael/thesis/actions/workflows/examples.yml/badge.svg)
+
+
 # Doctoral Dissertation of Michael Pilosov
 
 
