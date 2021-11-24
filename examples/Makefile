@@ -58,10 +58,10 @@ fig_heatrod_q1/HeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.p
 	LOC_1=0.25 && \
 	LOC_2=0.51 && \
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
-    	--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
-    	--mc_points $${NUM_MC_SAMPLES}  \
-    	--t0 $${LOC_1} --t1 $${LOC_2} \
-    	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
+		--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
+		--mc_points $${NUM_MC_SAMPLES} \
+		--t0 $${LOC_1} --t1 $${LOC_2} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
@@ -83,10 +83,10 @@ fig_heatrod_q1/HeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
 	LOC_1=0.25 && \
 	LOC_2=0.51 && \
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
-    	--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
-    	--mc_points $${NUM_MC_SAMPLES}  \
-    	--t0 $${LOC_1} --t1 $${LOC_2} \
-    	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
+		--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
+		--mc_points $${NUM_MC_SAMPLES} \
+		--t0 $${LOC_1} --t1 $${LOC_2} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q1/
 	echo "figure generated"
 
@@ -110,10 +110,10 @@ fig_heatrod_q2/HeatrodModel--set_N500_em.png: heatrod_example.sh solve_problem.p
 	LOC_1=0.67 && \
 	LOC_2=0.98 && \
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
-    	--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
-    	--mc_points $${NUM_MC_SAMPLES}  \
-    	--t0 $${LOC_1} --t1 $${LOC_2} \
-    	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
+		--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
+		--mc_points $${NUM_MC_SAMPLES} \
+		--t0 $${LOC_1} --t1 $${LOC_2} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
@@ -135,10 +135,10 @@ fig_heatrod_q2/HeatrodModel--set_N50_em.png: heatrod_example.sh solve_problem.py
 	LOC_1=0.67 && \
 	LOC_2=0.98 && \
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
-    	--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
-    	--mc_points $${NUM_MC_SAMPLES}  \
-    	--t0 $${LOC_1} --t1 $${LOC_2} \
-    	--lam1 $${LAM_1} --lam2 $${LAM_2} || true
+		--set --seed $${SEED} -o $${M} -n $${NUM_SAMPLES} \
+		--mc_points $${NUM_MC_SAMPLES}  \
+		--t0 $${LOC_1} --t1 $${LOC_2} \
+		--lam1 $${LAM_1} --lam2 $${LAM_2} || true
 	mv HeatrodModel*N$${NUM_SAMPLES}* fig_heatrod_q2/
 	echo "figure generated"
 
@@ -194,7 +194,7 @@ fig_decay_q1/DecayModel--set_N50_em.png: decay_example.sh solve_problem.py
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
 		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${TIME_0} --t1 $${TIME_1} \
-  	--mc_points $${NUM_MC_SAMPLES}  \
+		--mc_points $${NUM_MC_SAMPLES} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2}
 	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
 	echo "figure generated"
@@ -219,7 +219,7 @@ fig_decay_q2/DecayModel--set_N50_em.png: decay_example.sh solve_problem.py
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
 		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${TIME_0} --t1 $${TIME_1} \
-  	--mc_points $${NUM_MC_SAMPLES}  \
+		--mc_points $${NUM_MC_SAMPLES} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2}
 	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
 	echo "figure generated"
@@ -245,7 +245,7 @@ fig_decay_q1/DecayModel--set_N500_em.png: decay_example.sh solve_problem.py
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
 		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${TIME_0} --t1 $${TIME_1} \
-  	--mc_points $${NUM_MC_SAMPLES}  \
+		--mc_points $${NUM_MC_SAMPLES} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2}
 	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q1/
 	echo "figure generated"
@@ -270,7 +270,7 @@ fig_decay_q2/DecayModel--set_N500_em.png: decay_example.sh solve_problem.py
 	python solve_problem.py -m $${MODEL} --fontsize $${FONTSIZE} --figsize $${FIGSIZE} \
 		--noeval --set --seed $${SEED} -n $${NUM_SAMPLES} \
 		--t0 $${TIME_0} --t1 $${TIME_1} \
-  	--mc_points $${NUM_MC_SAMPLES}  \
+		--mc_points $${NUM_MC_SAMPLES} \
 		--lam1 $${LAM_1} --lam2 $${LAM_2}
 	mv DecayModel*N$${NUM_SAMPLES}* fig_decay_q2/
 	echo "figure generated"
