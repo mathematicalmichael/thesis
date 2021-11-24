@@ -5,11 +5,13 @@ on:
     branches: [ main, develop ]
     paths:
       - "examples/**"
+      - ".github/workflows/examples.yml"
   pull_request:
     branches: 
       - main
     paths:
       - "examples/**"
+      - ".github/workflows/examples.yml"
   schedule:
     - cron: "0 0 * * *"
 

@@ -5,11 +5,13 @@ on:
     branches: [ main, develop ]
     paths:
       - "figures/**"
+      - ".github/workflows/figures.yml"
   pull_request:
     branches: 
       - main
     paths:
       - "figures/**"
+      - ".github/workflows/figures.yml"
   schedule:
       - cron: "0 0 * * *"
 
