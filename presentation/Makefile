@@ -31,8 +31,7 @@ TEXFILES := \
 TEXS = $(patsubst %, %.tex, $(TEXFILES))
 
 # style-file dependendencies (unlikely to change these, but just in case)
-DEPS := \
-	../ref/ucdDissertation.bst
+#DEPS := \
 
 # targets that are labeled as PHONY are treated as always needing an update
 # a file doesn't actually need to exist for it to run
@@ -43,7 +42,7 @@ DEPS := \
 all: $(FILENAME).pdf
 
 # our main target
-$(FILENAME).pdf: $(TEXS) $(FILES) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(DEPS) $(THEME)
+$(FILENAME).pdf: $(TEXS) $(FILES) $(APPENDIX) $(REFS) $(IMAGES) $(FIGURES) $(ENVS) $(THEME)
 	latexmk -gg -pdf -bibtex $(FILENAME).tex
 
 clean:

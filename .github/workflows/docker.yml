@@ -131,7 +131,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ./bin
-          file: ./bin/Dockerfile-python
+          file: ./bin/Dockerfile-conda
           push: true
           tags: ${{ steps.prep.outputs.tags }}
           build-args: |

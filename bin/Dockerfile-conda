@@ -7,7 +7,7 @@ COPY install_bet.sh /tmp/
 
 # need git to install from source
 # tree allows printing directories in command-line
-RUN apt-get update && \
+RUN apt-get --allow-releaseinfo-change update && \
 	apt-get install -y \
  	build-essential \
 	git \
