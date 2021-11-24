@@ -5,6 +5,12 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [published, created, edited]
+  paths:
+      - bin/Dockerfile
+      - bin/Dockerfile-python
+      - .github/workflows/docker.yml
 
 jobs:
   build_latex:
