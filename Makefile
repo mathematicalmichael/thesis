@@ -1,3 +1,4 @@
+# Copyright 2019-2021 Michael Pilosov
 # check for required binaries, fail gracefully with helpful error message.
 REQUIRED_BINS := latexmk python
 $(foreach bin,$(REQUIRED_BINS),\
