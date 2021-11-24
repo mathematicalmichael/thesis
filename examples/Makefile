@@ -39,9 +39,7 @@ clean-heat-b:
 .PHONY: \
 	all clean \
 	identity linear heatrod \
-	heatrod-50 heatrod-500 \
 	clean-heat clean-heat-a clean-heat-b \
-	decay decay-a decay-b \
 	clean-decay clean-decay-a clean-decay-b \
 
 # Note: for fenics-based examples, need to add `|| true` to end of python statement.
