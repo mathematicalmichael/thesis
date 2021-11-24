@@ -29,9 +29,7 @@ jobs:
       run: |
         cd examples
         echo "setting NUM_SAMPLES to 10 for expedited testing purposes"
-        sed -i 's|NUM_SAMPLES=500|NUM_SAMPLES=10|g' Makefile
-        sed -i 's|NUM_SAMPLES=50|NUM_SAMPLES=10|g' Makefile
-        sed -i 's|_N500_|_N10_|g' Makefile
-        sed -i 's|_N50_|_N10_|g' Makefile
+        sed -i 's|NUM_SAMPLES=500|NUM_SAMPLES=49|g' Makefile
+        sed -i 's|_N500_|_N49_|g' Makefile
         make clean
         make
