@@ -3,13 +3,15 @@ name: Validate Figures
 on:
   push:
     branches: [ main, develop ]
+    paths:
+      - "figures/**"
   pull_request:
     branches: 
-      - master
+      - main
+    paths:
+      - "figures/**"
   schedule:
       - cron: "0 0 * * *"
-  paths:
-      - "figures/**"
 
 jobs:
   build:

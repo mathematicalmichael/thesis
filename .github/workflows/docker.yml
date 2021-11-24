@@ -3,13 +3,16 @@ name: Docker
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  release:
-    types: [published, created, edited]
-  paths:
+    paths:
       - "bin/Dockerfile"
       - "bin/Dockerfile-python"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "bin/Dockerfile"
+      - "bin/Dockerfile-python"
+  release:
+    types: [published, created, edited]
       - ".github/workflows/docker.yml"
 
 jobs:
