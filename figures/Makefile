@@ -17,6 +17,4 @@ $(DATA): generate_pde_data.sh pp.py $(DEPS)
 
 data: $(DATA)
 
-
-
 .PHONY: ode pde deps data
