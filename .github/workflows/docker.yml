@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: .
+          context: ./bin
           file: ./bin/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
@@ -84,7 +84,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/latex-python
+          DOCKER_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/python-thesis
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
@@ -115,7 +115,7 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./bin
           file: ./bin/Dockerfile-python
           push: true
           tags: ${{ steps.prep.outputs.tags }}
