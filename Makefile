@@ -1,6 +1,6 @@
 # Copyright 2019-2021 Michael Pilosov
 # check for required binaries, fail gracefully with helpful error message.
-REQUIRED_BINS := latexmk python
+REQUIRED_BINS := latexmk
 $(foreach bin,$(REQUIRED_BINS),\
     $(if $(shell command -v $(bin) 2> /dev/null),$(info Found `$(bin)`),$(error Please install `$(bin)`)))
 
