@@ -33,9 +33,12 @@ jobs:
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
-          # If this is git tag, use the tag name as a docker tag
+          # If this is git tag, use the tag name as a docker tag, strip "v" if present.
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
+            if [[ $GITHUB_REF == refs/tags/v* ]]; then
+              VERSION=${GITHUB_REF#refs/tags/v}; else
+              VERSION=${GITHUB_REF#refs/tags/}
+            fi
           fi
           TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${SHORTREF}"
 
@@ -98,9 +101,12 @@ jobs:
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
-          # If this is git tag, use the tag name as a docker tag
+          # If this is git tag, use the tag name as a docker tag, strip "v" if present.
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
+            if [[ $GITHUB_REF == refs/tags/v* ]]; then
+              VERSION=${GITHUB_REF#refs/tags/v}; else
+              VERSION=${GITHUB_REF#refs/tags/}
+            fi
           fi
           TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${SHORTREF}"
 
