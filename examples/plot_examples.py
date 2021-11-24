@@ -48,7 +48,7 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     axes.axis('equal')
 #
 #     plt.colorbar(C, cax=cbar_ax, format='%2.1f')
-    colorbar = clippedcolorbar(C, extend='both')
+    colorbar = clippedcolorbar(fig, C, extend='both')
 
 
     # plt.tight_layout()
@@ -67,10 +67,9 @@ def plot_2d(xi, yi, disc, label='approx', num_levels=10, max_ht=None,
     if preview: plt.show()
 
 
-def clippedcolorbar(CS, **kwargs):
+def clippedcolorbar(fig, CS, **kwargs):
     from matplotlib.cm import ScalarMappable
     from numpy import arange, floor, ceil
-    fig = CS.ax.get_figure()
     cbar_ax = fig.add_axes([0.8125, 0.2, 0.075, 0.675])
     vmin = CS.get_clim()[0]
     vmax = CS.get_clim()[1]
