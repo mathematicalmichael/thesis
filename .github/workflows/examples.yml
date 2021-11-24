@@ -8,6 +8,8 @@ on:
       - master
   schedule:
       - cron: "0 0 * * *"
+  paths:
+      - examples/**
 
 jobs:
   build:
