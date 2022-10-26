@@ -19,7 +19,7 @@ RUN apt-get --allow-releaseinfo-change update && \
 # formatting tools for scripts, notebooks
 RUN pip install \
 	nbconvert \
-	mud>=0.0.6
+	mud~=0.0.6
 	#pyprind  \
 	#autopep8 \
 	#black \
