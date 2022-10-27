@@ -2,6 +2,9 @@
 FROM mambaorg/micromamba:0.27.0-bullseye
 USER root
 
+# 3.10 seems to be the latest supported Python as of 2022-10
+RUN mamba install -c conda-forge -y python=3.10
+
 ### Install package from source
 # bet - dependencies for inverse problem
 COPY install_bet.sh /tmp/
@@ -18,7 +21,7 @@ RUN apt-get --allow-releaseinfo-change update && \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 	&& apt-get autoremove -y
 
-RUN mamba install -c conda-forge fenics
+RUN mamba install -c conda-forge -y fenics
 # formatting tools for scripts, notebooks
 RUN pip install \
 	nbconvert \
@@ -30,4 +33,4 @@ RUN pip install \
 WORKDIR /temp
 ENV LD_LIBRARY_PATH /opt/conda/lib:$LD_LIBRARY_PATH
 
-CMD ["python3"]
+CMD ["python"]
