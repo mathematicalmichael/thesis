@@ -5,13 +5,13 @@ on:
     branches: [ main ]
     paths:
       - "bin/Dockerfile"
-      - "bin/Dockerfile-python"
+      - "bin/Dockerfile-conda"
       - ".github/workflows/docker.yml"
   pull_request:
     branches: [ main ]
     paths:
       - "bin/Dockerfile"
-      - "bin/Dockerfile-python"
+      - "bin/Dockerfile-conda"
       - ".github/workflows/docker.yml"
   release:
     types: [published, created, edited]
