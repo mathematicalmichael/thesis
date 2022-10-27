@@ -1,4 +1,5 @@
-FROM continuumio/miniconda3:4.8.2
+#FROM continuumio/miniconda3:4.8.2
+FROM mambaorg/micromamba:0.27.0-bullseye
 USER root
 
 ### Install package from source
@@ -17,11 +18,11 @@ RUN apt-get --allow-releaseinfo-change update && \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 	&& apt-get autoremove -y
 
-RUN conda install -c conda-forge fenics
+RUN mamba install -c conda-forge fenics
 # formatting tools for scripts, notebooks
 RUN pip install \
 	nbconvert \
-	mud>=0.0.6
+	mud~=0.0.6
 	#pyprind  \
 	#autopep8 \
 	#black \
