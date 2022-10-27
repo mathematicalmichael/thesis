@@ -1,0 +1,61 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '*'
+    paths-ignore:
+      - '.github/workflows/main.yml'
+      - '.github/workflows/examples.yml'
+      - '.github/workflows/figures.yml'
+      - '.github/workflows/docker.yml'
+
+jobs:
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: set name
+        run: |
+          if [[ ${{ github.ref_name }} == "main" ]]; then echo "::set-output name=rel_name::$(date '+%Y-%m-%d %H.%M')"; else echo "::set-output name=rel_name::$GITHUB_REF_NAME"; fi
+          if [[ ${{ github.ref_name }} == "main" ]]; then echo "::set-output name=tag_name::$(date '+%Y.%m.%d-%H.%M')"; else echo "::set-output name=tag_name::$GITHUB_REF_NAME"; fi
+        id: names
+
+      - name: set body
+        run: echo "# Automated Release from Github Actions" > body.md && echo "_Add release notes here._" >> body.md
+
+      - name: install
+        run: sudo apt-get install -yqq texlive-base texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra latexmk
+
+      - name: compile
+        run: make 
+
+      - name: release
+        uses: actions/create-release@v1.1.4
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.names.outputs.rel_name }}
+          tag_name: ${{ steps.names.outputs.tag_name }}
+          body_path: body.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload pdf
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dissertation.pdf
+          asset_name: dissertation.pdf
+          asset_content_type: pdf
+
