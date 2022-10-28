@@ -85,9 +85,11 @@ The docker image to build the document is created from `./bin/Dockerfile` and pu
 All the software used to create the simulation results and figures can be used by pulling
 `docker.io/mathematicalmichael/python-thesis` ([link][python-thesis-hub]), which is built from `./bin/Dockerfile-conda` and also published continuously.
 This image relies on Fenics, a physics simulation software suite which is no longer supported, and so the Python image was based on Python 3.7.6 originally as this was the last supported installation by `conda` as of late 2021.
-In late 2022, thanks to the adoption of `micromamba`[mamba-site], the image was able to be updated to include `fenics` with Python 3.10.6 based on a [mamba image][mamba-hub].
+
+In late 2022, thanks to the adoption of `micromamba` ([homepage][mamba-site]), the image was able to be updated to include `fenics` with Python 3.10.6 based on a [mamba image][mamba-hub].
 In reality, only data-generation really needs to be tied to this requirement, and in the future the data-generation image may be separated from all
 the other python script dependencies in order to validate that newer versions of Python still work (assuming that conda-based options eventually stop working).
+
 To prepare for this eventuality, the author put together a [repo](https://github.com/mindthemath/fenics) to build Fenics from source for many Python versions using the [official Docker Python images][python-hub] for debian base-images supporting both ARM and AMD64 architectures.
 The images can be found at [docker hub][fenics-hub].
 
