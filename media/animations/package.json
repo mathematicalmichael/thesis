@@ -1,0 +1,28 @@
+{
+  "name": "thesis-animations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Remotion (React) animations for disseminating the dissertation as YouTube Shorts and long-form videos",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "render:aleatoric": "remotion render AleatoricVsEpistemic out/aleatoric-vs-epistemic.mp4",
+    "render:more-data": "remotion render MoreDataLessUncertainty out/more-data-less-uncertainty.mp4",
+    "render:contributions": "remotion render KeyContributions out/key-contributions.mp4",
+    "render:all": "npm run render:aleatoric && npm run render:more-data && npm run render:contributions",
+    "still": "remotion still",
+    "typecheck": "tsc --noEmit",
+    "scripts:export": "node --experimental-strip-types tools/generate-scripts.mts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.519",
+    "@remotion/cli": "^4.0.519",
+    "@remotion/renderer": "^4.0.519",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.519",
+    "typescript": "^7.0.2"
+  }
+}
